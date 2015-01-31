@@ -1,7 +1,7 @@
 object F_Transaksi: TF_Transaksi
-  Left = 166
-  Top = 23
-  Width = 1100
+  Left = -4
+  Top = 33
+  Width = 1040
   Height = 666
   Caption = 'transaksi'
   Color = clBtnFace
@@ -25,7 +25,7 @@ object F_Transaksi: TF_Transaksi
   object Sb: TsStatusBar
     Left = 0
     Top = 605
-    Width = 1084
+    Width = 1024
     Height = 22
     Panels = <
       item
@@ -84,7 +84,7 @@ object F_Transaksi: TF_Transaksi
   object p_pesan: TsPanel
     Left = 0
     Top = 437
-    Width = 1084
+    Width = 1024
     Height = 22
     Align = alBottom
     BevelOuter = bvNone
@@ -100,7 +100,7 @@ object F_Transaksi: TF_Transaksi
     SkinData.CustomFont = True
     SkinData.SkinSection = 'LABEL'
     DesignSize = (
-      1084
+      1024
       22)
     object l_pesan: TsLabel
       Left = 65
@@ -127,7 +127,7 @@ object F_Transaksi: TF_Transaksi
   object sPanel3: TsPanel
     Left = 0
     Top = 129
-    Width = 1084
+    Width = 1024
     Height = 38
     Align = alTop
     TabOrder = 0
@@ -183,7 +183,7 @@ object F_Transaksi: TF_Transaksi
     object Ed_Code: TsEdit
       Left = 228
       Top = 1
-      Width = 855
+      Width = 795
       Height = 36
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -212,13 +212,13 @@ object F_Transaksi: TF_Transaksi
   object p4: TsPanel
     Left = 0
     Top = 459
-    Width = 1084
+    Width = 1024
     Height = 146
     Align = alBottom
     TabOrder = 3
     SkinData.SkinSection = 'PANEL'
     DesignSize = (
-      1084
+      1024
       146)
     object sLabel9: TsLabel
       Left = 272
@@ -426,6 +426,7 @@ object F_Transaksi: TF_Transaksi
       Font.Name = 'Rockwell'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 6
       Visible = False
       OnChange = Ed_PelangganChange
@@ -752,7 +753,7 @@ object F_Transaksi: TF_Transaksi
   object Grid: TcxGrid
     Left = 0
     Top = 167
-    Width = 1084
+    Width = 1024
     Height = 240
     Align = alClient
     BevelInner = bvNone
@@ -1012,7 +1013,7 @@ object F_Transaksi: TF_Transaksi
   object rb1: TAdvToolBarPager
     Left = 0
     Top = 0
-    Width = 1084
+    Width = 1024
     Height = 129
     ActivePage = tb_pilihan
     Caption.Visible = False
@@ -1112,13 +1113,13 @@ object F_Transaksi: TF_Transaksi
     object tb_transaksi: TAdvPage
       Left = 0
       Top = 26
-      Width = 1084
+      Width = 1024
       Height = 102
       Caption = 'Transaksi Penjualan'
       object mm_nama: TsMemo
         Left = 0
         Top = 0
-        Width = 683
+        Width = 623
         Height = 102
         Align = alClient
         Alignment = taCenter
@@ -1142,7 +1143,7 @@ object F_Transaksi: TF_Transaksi
         SkinData.SkinSection = 'EDIT'
       end
       object ed_Harga: TsCurrencyEdit
-        Left = 683
+        Left = 623
         Top = 0
         Width = 401
         Height = 102
@@ -1174,7 +1175,7 @@ object F_Transaksi: TF_Transaksi
     object tb_pilihan: TAdvPage
       Left = 0
       Top = 26
-      Width = 1084
+      Width = 1024
       Height = 102
       Caption = 'Pilihan'
       object tbp_pilihan: TAdvToolBar
@@ -1798,7 +1799,7 @@ object F_Transaksi: TF_Transaksi
     object tb_pengaturan: TAdvPage
       Left = 0
       Top = 26
-      Width = 1084
+      Width = 1024
       Height = 102
       Caption = 'Pengaturan'
       object advtlbr1: TAdvToolBar
@@ -2437,7 +2438,7 @@ object F_Transaksi: TF_Transaksi
   object p_keterangan: TsPanel
     Left = 0
     Top = 407
-    Width = 1084
+    Width = 1024
     Height = 30
     Align = alBottom
     TabOrder = 9
@@ -2461,7 +2462,7 @@ object F_Transaksi: TF_Transaksi
     object ed_keterangan: TsEdit
       Left = 224
       Top = 1
-      Width = 859
+      Width = 799
       Height = 28
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

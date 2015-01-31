@@ -1210,7 +1210,8 @@ mm_nama.Text:= isi_sql;
   QuotedStr(_get(x,1,3))+','+QuotedStr(_get(x,2,3))+','+QuotedStr(_get(x,18,3))+','+QuotedStr(_get(x,16,3))+','+
   QuotedStr(_get(x,14,3))+','+QuotedStr(_get(x,5,3))+','+fungsi.caridanganti(QuotedStr(_get(x,6,3)),',','.')+','+QuotedStr(_get(x,7,3))+','+
   QuotedStr(_get(x,8,3))+','+QuotedStr(_get(x,9,3))+','+QuotedStr(_get(x,15,3))+','+QuotedStr(_get(x,17,3))+','+
-  QuotedStr(sb.Panels[2].Text)+',date(now()),'+QuotedStr(_get(x,3,3))+','+QuotedStr(_get(x,19,3))+','+QuotedStr(_get(x,13,3))+'),';
+  QuotedStr(sb.Panels[2].Text)+',date(now()),'+QuotedStr(_get(x,3,3))+','+
+  QuotedStr(_get(x,19,3))+','+QuotedStr(_get(x,13,3))+','+QuotedStr(_get(x,12,3))+',date(now())),';
   end;
   delete(isi_sql,length(isi_sql),1);
 
@@ -1218,16 +1219,17 @@ dm.My_Conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_global(kd_perusahaan,kd_transaksi,tgl_transaksi,'+
 'jam_transaksi,kd_customers,tunai,jatuh_tempo,kd_macam_harga,sub_total,discountGP,'+
-'discountGRP,HPP,grand_total,bayar,Laba,kembali,kd_user,kd_pengawas,cetak,void,komp,ket) values ("'+sb.Panels[1].Text+'","'+sb.Panels[9].Text
+'discountGRP,HPP,grand_total,bayar,Laba,kembali,kd_user,kd_pengawas,cetak,void,komp,ket,simpan_pada) values ("'+sb.Panels[1].Text+'","'+sb.Panels[9].Text
 +'",date(now()),time(now()),"'+ed_pelanggan.Text+'","'+tk+'",ADDDATE(date(now()),INTERVAL '+ed_lama.Text+' DAY),"'+
 macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'","'+ed_discRp.Text+'",'+
 QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand.Text
 +'","'+ed_bayar.Text+'","'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","'+sb.Panels[4].Text
-+'",1,'+QUotedStr(TableView.DataController.Summary.FooterSummaryValues[9])+',"'+ip_kasir+'",'+quotedstr(ed_keterangan.Text)+')',false);
++'",1,'+QUotedStr(TableView.DataController.Summary.FooterSummaryValues[9])
++',"'+ip_kasir+'",'+quotedstr(ed_keterangan.Text)+',now())',false);
 
   fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_rinci(kd_perusahaan,no_transaksi,urut, '+
   'kd_barang,n_barang,Qty,kd_satuan,harga_pokok,harga_jual,discountP,discountRp, '+
-  'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp) values '+isi_sql, false);
+  'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp,barcode,tgl_simpan) values '+isi_sql, false);
 
   if tk='0'then
   begin
