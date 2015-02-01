@@ -15,10 +15,11 @@ uses
   U_Login in 'U_Login.pas' {F_Login},
   u_jual_kasir in 'u_jual_kasir.pas' {F_Jual_Kasir},
   U_Return_Jual in 'U_Return_Jual.pas' {F_Return_Jual},
-  u_cari in 'u_cari.pas' {f_cari},
   u_list_jual in 'u_list_jual.pas' {f_list_sales},
   u_hari in 'u_hari.pas' {f_hari},
-  u_ReturnJual in 'u_ReturnJual.pas' {f_return_kirim};
+  u_cariBarang in 'u_cariBarang.pas' {f_cariBarang},
+  u_cari in 'u_cari.pas' {f_cari},
+  u_returnJual in 'u_ReturnJual.pas' {f_returnJual};
 
 {$R *.res}
 
@@ -27,6 +28,5 @@ begin
   Application.Title := 'Point Of Sales';
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TF_Transaksi, F_Transaksi);
-  Application.CreateForm(Tf_return_kirim, f_return_kirim);
   Application.Run;
 end.

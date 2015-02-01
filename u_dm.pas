@@ -4,7 +4,8 @@ interface
 
 uses
   SysUtils, Classes, sSkinManager, DB, mySQLDbTables,dialogs,forms,inifiles,
-  frxClass, frxDBSet, ScktComp, frxDesgn;
+  frxClass, frxDBSet, ScktComp, frxDesgn, ImgList, Controls,
+  acAlphaImageList;
 
 type
   Tdm = class(TDataModule)
@@ -25,6 +26,7 @@ type
     Q_jual_rinci: TmySQLQuery;
     ds_jual_global: TDataSource;
     ds_jual_rinci: TDataSource;
+    gambar: TsAlphaImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
   private

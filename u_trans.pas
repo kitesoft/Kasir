@@ -24,7 +24,6 @@ const
 type
   TF_Transaksi = class(TForm)
     Timer1: TTimer;
-    gambar: TsAlphaImageList;
     Sb: TsStatusBar;
     p_pesan: TsPanel;
     sPanel3: TsPanel;
@@ -285,7 +284,8 @@ var
 implementation
 
 uses u_dm, U_Cari_pel,acselectskin, U_ubah_satuan, U_Login,
-  u_jual_kasir, U_Return_Jual, u_cari, u_list_jual, u_hari;
+  u_jual_kasir, u_cariBarang, u_list_jual, u_hari,
+  u_returnJual;
 
 {$R *.dfm}
 
@@ -703,7 +703,7 @@ end;
 procedure TF_Transaksi.input_kode;
 var kode_temp: string;
 begin
-  if (Ed_Code.Text = '') and (f_cari = nil) then kode_barang := '';
+  if (Ed_Code.Text = '') and (f_cariBarang = nil) then kode_barang := '';
 
   if kode_barang=''then
   begin
@@ -727,10 +727,10 @@ begin
   Exit;
   end;
 
-  if f_cari<>nil then
+  if f_cariBarang<>nil then
   begin
    //TableView.OptionsView.Header:= True;
-   f_cari.Close;
+   f_cariBarang.Close;
   end;
 
   if MM_nama.Text = 'TERKUNCI' then
@@ -756,9 +756,9 @@ begin
   quotedstr(kode_temp)+' and kd_perusahaan='+quotedstr(sb.Panels[1].Text)+'',True);
   if dm.Q_temp.RecordCount<> 0 then
   begin
-   if f_cari<>nil then
+   if f_cariBarang<>nil then
    begin
-   f_cari.Close;
+   f_cariBarang.Close;
    end;
   Ed_Code.Clear;
 
@@ -793,7 +793,7 @@ begin
 sb_cari_barangClick(Self);
 end;
 
-if f_cari <> nil then
+if f_cariBarang <> nil then
 begin
   if key=vk_up then
   begin
@@ -918,9 +918,9 @@ ac_skinExecute(Self);
 //untuk keluar dari form
 if key=vk_escape then
 begin
-  if f_cari<>nil then
+  if f_cariBarang<>nil then
   begin
-  f_cari.Close;
+  f_cariBarang.Close;
   Ed_Code.Clear;
   Exit;
   end;  
@@ -929,7 +929,7 @@ begin
   ac_closeExecute(Self);
 end;
 
-if f_cari=nil then
+if f_cariBarang=nil then
 begin
 if (TableView.DataController.FocusedRecordIndex < TableView.DataController.RecordCount-1) and (key=vk_down)then
 begin
@@ -1154,13 +1154,13 @@ end;
 
 procedure TF_Transaksi.sb_cari_barangClick(Sender: TObject);
 begin
- if f_cari = nil then
+ if f_cariBarang = nil then
  begin
 //  TableView.OptionsView.Header:= False;
-  application.CreateForm(TF_cari,F_cari);
-  with f_cari do SetWindowPos(Handle,HWND_TOPMOST, Ed_Code.Left,
+  application.CreateForm(Tf_cariBarang,f_cariBarang);
+  with f_cariBarang do SetWindowPos(Handle,HWND_TOPMOST, Ed_Code.Left,
     rb1.Height + ed_code.Height, Ed_Code.Width - tv_total_harga.Width , Grid.Height - 40,SWP_DRAWFRAME);
-  f_cari.Show;
+  f_cariBarang.Show;
   Ed_Code.Clear;
   Ed_Code.SetFocus;
  end;
@@ -1444,7 +1444,7 @@ end;
 procedure TF_Transaksi.Ed_CodeKeyPress(Sender: TObject; var Key: Char);
 var kode: string;
 begin
-if f_cari=nil then
+if f_cariBarang=nil then
 begin
 //if not ((key>='0')and(key<='9')or(key=#8) or(key=#43) or(key=#45) or(key=#42) or (Key=#46) or (Key=#47)) then key:=#0;
 
@@ -1579,7 +1579,7 @@ procedure TF_Transaksi.Ed_CodeChange(Sender: TObject);
 begin
 ed_Bayar.Clear;
 
-if f_cari<>nil then
+if f_cariBarang<>nil then
 begin
 fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN tb_barang_harga ON '+
@@ -1596,10 +1596,10 @@ end;
 
 procedure TF_Transaksi.Ed_CodeExit(Sender: TObject);
 begin
-if f_cari<>nil then
+if f_cariBarang<>nil then
 begin
 //TableView.OptionsView.Header:= True;
-f_cari.Close;
+f_cariBarang.Close;
 Ed_Code.Clear;
 end;
 end;
@@ -1960,8 +1960,8 @@ passs:=dm.Q_temp.fieldbyname('passs').AsString;
 
 if passs=dm.Q_show.FieldByName('password').AsString then
     begin
-      application.CreateForm(TF_Return_jual,F_Return_Jual);
-      f_return_jual.ShowModal;
+      application.CreateForm(TF_Returnjual,F_ReturnJual);
+      f_returnjual.ShowModal;
     end else
     begin
     if InputString<>'' then showmessage('password Operator SERVER salah');

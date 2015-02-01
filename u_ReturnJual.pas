@@ -12,37 +12,22 @@ uses
   cxControls, cxGridCustomView, cxGrid, sPanel,U_fungsi;
 
 type
-  Tf_return_kirim = class(TForm)
+  Tf_returnJual = class(TForm)
     sPanel1: TsPanel;
-    panel1: TsPanel;
-    Mm_nama: TsMemo;
-    ce_harga: TsCurrencyEdit;
     panel2: TsPanel;
-    sLabel6: TsLabel;
     sBevel1: TsBevel;
     sLabel1: TsLabel;
-    sLabel3: TsLabel;
     sLabel4: TsLabel;
     sb_pelanggan: TsSpeedButton;
     sb_cari: TsSpeedButton;
     l_toko: TsLabel;
     sLabel5: TsLabel;
     ed_no_faktur: TsEdit;
-    ed_tgl: TsDateEdit;
     ed_pelanggan: TsEdit;
     ed_code: TsEdit;
-    ed_fak_kirim: TsEdit;
+    ed_fak_jual: TsEdit;
     panel3: TsPanel;
     ed_nilai_faktur: TsCurrencyEdit;
-    panel4: TsPanel;
-    sSpeedButton18: TsSpeedButton;
-    sPanel2: TsPanel;
-    b_simpan_file: TsButton;
-    b_load: TsButton;
-    spnl1: TsPanel;
-    b_print: TsButton;
-    b_new: TsButton;
-    b_simpan: TsButton;
     od: TsOpenDialog;
     sd: TsSaveDialog;
     sSkinProvider1: TsSkinProvider;
@@ -55,26 +40,17 @@ type
     t_view_total: TcxGridColumn;
     Level: TcxGridLevel;
     b_auto: TsButton;
-    l_1: TsLabel;
-    l_2: TsLabel;
-    l_3: TsLabel;
-    l_4: TsLabel;
     t_view_barcode: TcxGridColumn;
+    spnl1: TsPanel;
+    b_print: TsButton;
+    b_simpan: TsButton;
     procedure bersih;
     procedure tampil_data;
     procedure CreateRows;
-    procedure WMMDIACTIVATE(var msg : TWMMDIACTIVATE) ; message WM_MDIACTIVATE;
-    procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormShow(Sender: TObject);
     procedure ed_codeKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure TableViewFocusedRecordChanged(Sender: TcxCustomGridTableView;
-      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
-      ANewItemRecordFocusingChanged: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure b_newClick(Sender: TObject);
     procedure sb_pelangganClick(Sender: TObject);
     procedure ed_pelangganKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -83,19 +59,16 @@ type
       Sender: TcxDataSummaryItem; const AValue: Variant;
       AIsFooter: Boolean; var AText: String);
     procedure b_autoClick(Sender: TObject);
-    procedure sSpeedButton18Click(Sender: TObject);
     procedure ed_no_fakturChange(Sender: TObject);
     procedure b_printClick(Sender: TObject);
     procedure b_simpanClick(Sender: TObject);
-    procedure ed_fak_kirimChange(Sender: TObject);
-    procedure b_simpan_fileClick(Sender: TObject);
-    procedure b_loadClick(Sender: TObject);
+    procedure ed_fak_jualChange(Sender: TObject);
     procedure ed_codeKeyPress(Sender: TObject; var Key: Char);
     procedure ed_no_fakturKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure ed_fak_kirimKeyPress(Sender: TObject; var Key: Char);
+    procedure ed_fak_jualKeyPress(Sender: TObject; var Key: Char);
     procedure ed_pelangganChange(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure cekPiutang();
   private
     { Private declarations }
   public
@@ -103,7 +76,7 @@ type
   end;
 
 var
-  f_return_kirim: Tf_return_kirim;
+  f_returnJual: Tf_returnJual;
   fungsi:tfungsi;
   sub_sub_total,diskon:integer;
 
@@ -113,68 +86,21 @@ uses u_dm, u_cari, u_trans;
 
 {$R *.dfm}
 
-procedure Tf_return_kirim.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
-var
-  active: TWinControl;
-  idx: Integer;
-begin
-  active := FindControl(msg.ActiveWnd) ;
-if not(metu_kabeh) then
-begin
-  if Assigned(active) then
-  begin
-    idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
-    f_utama.tc_child.Tag := -1;
-    f_utama.tc_child.TabIndex := idx;
-    f_utama.tc_child.Tag := 0;
-  end;
-end;
-end;
-
-procedure Tf_return_kirim.FormCreate(Sender: TObject);
-begin
-  f_utama.MDIChildCreated(self.Handle);
-  ed_code.width:= panel2.width - 260;
-end;
-
-procedure Tf_return_kirim.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-f_utama.MDIChildDestroyed(Self.Handle);
-Action:=cafree;
-f_return_kirim:= nil;
-end;
-
-procedure Tf_return_kirim.FormShow(Sender: TObject);
-begin
-  if (f_utama.sb.Panels[8].Text='PUSAT') and (f_utama.HakAkses('gdTrReturnKirim')) then
-  begin
-  b_new.Enabled:=True;
-  ed_no_faktur.Enabled:= True;
-  end else
-  begin
-  b_new.Enabled:=false;
-  ed_no_faktur.Enabled:= False;
-  end;
-end;
-
-procedure Tf_return_kirim.bersih;
+procedure Tf_returnJual.bersih;
 begin
 l_toko.Caption:= '';
-ed_tgl.Date:= now();
-mm_nama.Clear;
-ce_harga.Clear;
 ed_pelanggan.Clear;                                 
 ed_no_faktur.Clear;
-ed_fak_kirim.Clear;
+ed_fak_jual.Clear;
 tableview.DataController.RecordCount:=0;
 ed_nilai_faktur.Clear;
 end;
 
-procedure Tf_return_kirim.tampil_data;
+procedure Tf_returnJual.tampil_data;
 Var h : Integer;
     x_hpp: Real;
 begin
+{
 ed_pelanggan.Text:= dm.Q_list_return_kirim.fieldbyname('kd_pelanggan').AsString;
 l_toko.Caption:= dm.Q_list_return_kirim.fieldbyname('n_pelanggan').AsString;
 ed_no_faktur.Text:= dm.Q_list_return_kirim.fieldbyname('kd_return_kirim').AsString;
@@ -201,10 +127,10 @@ begin
   end;
   tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount+1);
 end;
-
+}
 end;
 
-procedure Tf_return_kirim.CreateRows;
+procedure Tf_returnJual.CreateRows;
 var baris_baru: integer;
 f: integer;
 begin
@@ -234,11 +160,9 @@ end;
   TableView.DataController.SetValue(baris_baru-1, 4, dm.Q_temp.fieldbyname('hpp_aktif').AsString);
   TableView.DataController.SetValue(baris_baru-1, 5, dm.Q_temp.fieldbyname('barcode3').AsString);
   tableview.DataController.ChangeFocusedRowIndex(baris_baru);
-  mm_nama.Text:= tableView.DataController.GetValue(baris_baru-1,1);
-  ce_harga.Text:= tableView.DataController.GetValue(baris_baru-1,3);
 end;
 
-procedure Tf_return_kirim.ed_codeKeyDown(Sender: TObject; var Key: Word;
+procedure Tf_returnJual.ed_codeKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 if key=vk_return then
@@ -248,7 +172,7 @@ PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
   fungsi.sqlExec(dm.Q_temp,'SELECT kd_barang,n_barang,barcode3, '+
   'hpp_aktif,kd_sat3 FROM tb_barang WHERE ((kd_barang = "'+
   ed_code.Text+'" OR barcode3 = "'+ed_code.Text+'" OR barcode2 = "'+
-  ed_code.Text+'" OR barcode1 = "'+ed_code.Text+'") AND kd_perusahaan="'+f_utama.sb.Panels[3].Text+'")', true);
+  ed_code.Text+'" OR barcode1 = "'+ed_code.Text+'") AND kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'")', true);
   if dm.Q_temp.RecordCount<>0 then
    begin
    createrows;
@@ -273,26 +197,7 @@ tableview.DataController.FocusedRowIndex:= tableview.DataController.FocusedRowIn
 
 end;
 
-procedure Tf_return_kirim.TableViewFocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord;
-  ANewItemRecordFocusingChanged: Boolean);
-begin
-if tableview.DataController.RecordCount=0 then
-begin
-mm_nama.Clear;
-ce_harga.Clear;
-exit;
-end;
-
-try
-mm_nama.Text:= AfocusedRecord.Values[1];
-ce_harga.Value:= StrToIntDef(AfocusedRecord.Values[3],0);
-except
-end;
-end;
-
-procedure Tf_return_kirim.FormKeyDown(Sender: TObject; var Key: Word;
+procedure Tf_returnJual.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 if (Shift=[ssctrl]) and (Key= vk_delete) then
@@ -305,12 +210,7 @@ if key=vk_f4 then sb_pelangganClick(Sender);
 if key=vk_f5 then b_autoClick(Sender);
 end;
 
-procedure Tf_return_kirim.b_newClick(Sender: TObject);
-begin
-bersih;
-end;
-
-procedure Tf_return_kirim.sb_pelangganClick(Sender: TObject);
+procedure Tf_returnJual.sb_pelangganClick(Sender: TObject);
 var sebelum:string;
 begin
 sebelum:= ed_pelanggan.Text;
@@ -320,8 +220,7 @@ ed_pelanggan.SetFocus;
   with F_cari do
   try
     _SQLi:= 'select kd_pelanggan,n_pelanggan from '+
-            'tb_pelanggan where kd_pelanggan IN (SELECT kd_perusahaan from tb_company) and kd_perusahaan="'+
-            f_utama.sb.Panels[3].Text+'"';
+            'tb_pelanggan where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'"';
     tblcap[0]:= 'Kode';
     tblCap[1]:= 'Nama Pelanggan';
     CariT := 11;
@@ -335,11 +234,10 @@ ed_pelanggan.SetFocus;
   close;
   end;
 if CompareStr(ed_pelanggan.Text,sebelum)<>0  then
-ed_no_faktur.Clear;
-
+ed_no_faktur.Clear; 
 end;
 
-procedure Tf_return_kirim.ed_pelangganKeyDown(Sender: TObject;
+procedure Tf_returnJual.ed_pelangganKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
 if (key=vk_return) and (sb_pelanggan.Enabled = True) then
@@ -349,13 +247,13 @@ sb_pelangganClick(Sender);
 end;
 end;
 
-procedure Tf_return_kirim.sb_cariClick(Sender: TObject);
+procedure Tf_returnJual.sb_cariClick(Sender: TObject);
 begin
   ed_code.SetFocus;
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
-    _SQLi:= 'select kd_barang, n_barang from tb_barang where kd_perusahaan="'+f_utama.sb.Panels[3].Text+'"';
+    _SQLi:= 'select kd_barang, n_barang from tb_barang where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'"';
     tblcap[0]:= 'PID';
     tblCap[1]:= 'Deskripsi Barang';
     tampil_button(False,True);
@@ -368,7 +266,7 @@ begin
   end;
 end;
 
-procedure Tf_return_kirim.TableViewTcxGridDataControllerTcxDataSummaryFooterSummaryItems4GetText(
+procedure Tf_returnJual.TableViewTcxGridDataControllerTcxDataSummaryFooterSummaryItems4GetText(
   Sender: TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean;
   var AText: String);
 begin
@@ -377,53 +275,44 @@ ed_nilai_faktur.Value:= aVALUE
 else ed_nilai_faktur.Clear;
 end;
 
-procedure Tf_return_kirim.b_autoClick(Sender: TObject);
-var w:Integer;
-x,pid,pid_temp,sekarang:string;
+procedure Tf_returnJual.b_autoClick(Sender: TObject);
+var a:integer;
+kd_return,tgl,y: string;
 begin
   if ed_pelanggan.Text='' then
   begin
-    ShowMessage('untuk auto kode, data Toko harus diisi terlebih dahulu');
+    ShowMessage('untuk auto kode, data pelanggan harus diisi terlebih dahulu');
     ed_pelanggan.SetFocus;
     Exit;
   end;
 
-  sekarang:= formatdatetime('yyyyMMdd', waktu_sekarang);
+tgl:=formatdatetime('yyyyMMdd', date());
+fungsi.SQLExec(dm.Q_temp,'select count(kd_return_jual) as jumlah from '+
+'tb_return_jual_global where tgl_return_jual=date(now()) and kd_perusahaan="'+
+f_transaksi.sb.Panels[1].Text+'"',true);
+  a:=dm.Q_temp.fieldbyname('jumlah').AsInteger+1;
 
-  fungsi.SQLExec(dm.Q_temp,'select Count(kd_return_kirim) as jumlah from '+
-  'tb_return_kirim_global where kd_tk_return_kirim="'+ed_pelanggan.text+'" and kd_perusahaan = "'+
-  f_utama.sb.Panels[3].Text+'" and date(simpan_pada)=date(now())',true);
+  if a<10     then y:= 'RT-'+tgl+'-00' else
+  if a<100    then y:= 'RT-'+tgl+'-0'else
+  if a<1000   then y:= 'RT-'+tgl+'-';
+  kd_return:=y+inttostr(a);
 
-  w:= dm.Q_temp.fieldbyname('jumlah').AsInteger + 1;
-
-  if w<10  then x:= '0'+ inttostr(w) else
-  if w<100 then x:= '' + inttostr(w);
-
-  ed_no_faktur.Text:= 'RK-'+ed_pelanggan.text+'-'+sekarang+x;
+ed_no_faktur.Text := kd_return;
 
 end;
 
-procedure Tf_return_kirim.sSpeedButton18Click(Sender: TObject);
-begin
-close;
-end;
-
-procedure Tf_return_kirim.ed_no_fakturChange(Sender: TObject);
+procedure Tf_returnJual.ed_no_fakturChange(Sender: TObject);
 var urip : Boolean;
 begin
-fungsi.SQLExec(dm.Q_temp,'select kd_return_kirim from tb_return_kirim_global where kd_return_kirim="'+
-ed_no_faktur.Text+'" and kd_perusahaan="'+f_utama.sb.Panels[3].Text+'"',true);
+fungsi.SQLExec(dm.Q_temp,'select kd_return_jual from tb_return_jual_global where kd_return_jual="'+
+ed_no_faktur.Text+'" and kd_perusahaan="'+F_Transaksi.sb.Panels[1].Text+'"',true);
 if not(dm.Q_temp.Eof) then
 begin
 ed_no_faktur.Color:=clblue;
-Caption:= 'R. Kirim ('+ed_no_faktur.Text+')';
-f_utama.tc_child.Tabs.Strings[f_utama.tc_child.TabIndex] :=Caption;
 urip := True;
 end else
 begin
 ed_no_faktur.Color:=clwhite;
-Caption:= 'R. Kirim (New)';
-f_utama.tc_child.Tabs.Strings[f_utama.tc_child.TabIndex] :=Caption;
 urip:= False;
 end;
 
@@ -433,32 +322,27 @@ sb_cari.Enabled:=not(urip);
 b_simpan.Enabled:=not(urip);
 b_print.Enabled:= urip;
 
-ed_tgl.ReadOnly:=urip;
 ed_code.ReadOnly:=urip;
 end;
 
-procedure Tf_return_kirim.b_printClick(Sender: TObject);
+procedure Tf_returnJual.b_printClick(Sender: TObject);
 begin
+{
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_cetak_return_kirim where kd_perusahaan="'+
 f_utama.sb.Panels[3].Text+'" and kd_return_kirim="'+ed_no_faktur.Text+'"',true);
 dm.laporan.LoadFromFile(dm.WPath + 'laporan\gp_return_kirim_rinci.fr3');
 dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
 dm.laporan.ShowReport;
+}
 end;
 
-procedure Tf_return_kirim.b_simpanClick(Sender: TObject);
+procedure Tf_returnJual.b_simpanClick(Sender: TObject);
 var x: integer;
 isi_sql,kd_faktur:string;
 begin
-if (ed_pelanggan.Text=f_utama.sb.Panels[3].Text) then
+if (ed_pelanggan.Text='') or (ed_no_faktur.Text='') or (ed_fak_jual.Text='') then
 begin
-showmessage('data tidak dapat disimpan karena toko pegirim dan penerima sama...');
-exit;
-end;
-
-if (ed_pelanggan.Text='') or (ed_no_faktur.Text='') or (ed_fak_kirim.Text='') then
-begin
-showmessage('Data Toko dan no faktur harus di isi terlebih dahulu...');
+showmessage('Data Pelanggan dan no faktur harus di isi terlebih dahulu...');
 exit;
 end;
 
@@ -468,9 +352,9 @@ showmessage('no faktur ini sudah ada dalam database....');
 exit;
 end;
 
-if (ed_fak_kirim.Color=clblue) then
+if (ed_fak_jual.Color=clblue) then
 begin
-showmessage('no faktur kirim ini tidak ada dalam database....');
+showmessage('no faktur Jual ini tidak ada dalam database....');
 exit;
 end;
 
@@ -484,8 +368,8 @@ kd_faktur:= ed_no_faktur.Text;
 
   for x:=0 to tableview.DataController.RecordCount-1 do
   begin
-  isi_sql:=isi_sql +'("'+f_utama.sb.Panels[3].Text+'","'+ed_no_faktur.Text
-  +'","'+formatdatetime('yyyy-MM-dd',ed_tgl.Date)+'","'+TableView.DataController.GetDisplayText(x,0)+'","'+
+  isi_sql:=isi_sql +'("'+F_Transaksi.sb.Panels[1].Text+'","'+ed_no_faktur.Text
+  +'",date(now()),"'+TableView.DataController.GetDisplayText(x,0)+'","'+
   TableView.DataController.GetDisplayText(x,1)+'","'+floattostr(TableView.DataController.GetValue(x,2))+'","'+
   floattostr(TableView.DataController.GetValue(x,4))+'","'+
   TableView.DataController.GetDisplayText(x,5)+'",date(now())),';
@@ -494,20 +378,20 @@ kd_faktur:= ed_no_faktur.Text;
 
 dm.My_Conn.StartTransaction;
 try
-fungsi.SQLExec(dm.Q_exe,'insert into tb_return_kirim_global(kd_perusahaan,kd_return_kirim, '+
-'kd_kirim,tgl_return_kirim,kd_tk_return_kirim,nilai_faktur,pengguna,simpan_pada) values ("'+f_utama.sb.Panels[3].Text+'","'+ed_no_faktur.Text
-+'","'+ed_fak_kirim.Text+'","'+formatdatetime('yyyy-MM-dd',ed_tgl.Date)+'","'+ed_pelanggan.Text+'","'+
-ed_nilai_faktur.Text+'","'+f_utama.Sb.Panels[0].Text+'",now())',false);
+fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_global(kd_perusahaan,kd_return_jual, '+
+'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada) values ("'+
+F_Transaksi.sb.Panels[1].Text+'","'+ed_no_faktur.Text
++'","'+ed_fak_jual.Text+'",date(now()),"'+ed_pelanggan.Text+'","'+
+ed_nilai_faktur.Text+'","'+F_Transaksi.sb.Panels[1].Text+'",now())',false);
 
-  fungsi.SQLExec(dm.Q_exe,'insert into tb_return_kirim_rinci(kd_perusahaan,kd_return_kirim,tgl_return_kirim,'+
-  'kd_barang,n_barang,qty_return_kirim,harga_pokok,barcode,tgl_simpan) values  '+isi_sql, false);
+  fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_rinci(kd_perusahaan, '+
+  'kd_return_jual,tgl_return_jual,kd_barang,n_barang,qty_return_jual, '+
+  'harga_pokok,barcode,tgl_simpan) values  '+isi_sql, false);
 
 
 dm.My_Conn.Commit;
 
 showmessage('penyimpanan data berhasil...');
-
-b_simpan_fileClick(Self);
 
 ed_no_faktur.Clear;
 ed_no_faktur.Text:= kd_faktur;
@@ -523,110 +407,32 @@ end;
 end;
 end;
 
-procedure Tf_return_kirim.ed_fak_kirimChange(Sender: TObject);
+procedure Tf_returnJual.cekPiutang;
+var awal,bayar,return,sisaHutang:integer;
 begin
-fungsi.SQLExec(dm.Q_temp,'select faktur from _vw_piutang where `status`= "belum lunas" and faktur="'+
-ed_fak_kirim.Text+'" and kd_perusahaan="'+f_utama.sb.Panels[3].Text+'" and pelanggan = "'+ed_pelanggan.Text+'"',true);
-if dm.Q_temp.Eof then
-ed_fak_kirim.Color:=clblue
-else ed_fak_kirim.Color:=clwhite;
+ed_fak_jual.Color:=clblue;
+
+fungsi.SQLExec(dm.Q_temp,'select * from tb_piutang where faktur="'+
+ed_fak_jual.Text+'" and kd_perusahaan="'+F_Transaksi.sb.Panels[1].Text+'" and pelanggan = "'+ed_pelanggan.Text+'"',true);
+
+awal        := dm.Q_temp.fieldbyname('piutang_awal').AsInteger;
+bayar     := dm.Q_temp.fieldbyname('dibayar').AsInteger;
+return      := dm.Q_temp.fieldbyname('return_jual').AsInteger;
+sisaHutang  := awal - bayar - return;
+
+if sisaHutang > 0 then ed_fak_jual.Color:=clwhite;
 end;
 
-procedure Tf_return_kirim.b_simpan_fileClick(Sender: TObject);
-var
-  F: TextFile;
-  x: Integer;
+procedure Tf_returnJual.ed_fak_jualChange(Sender: TObject);
 begin
-  sd.FileName:= ed_no_faktur.Text +sd.DefaultExt;
-  sd.InitialDir:= dm.WPath;
-
-if sd.Execute then
-begin
-  AssignFile(F, sd.FileName);
-  Rewrite(F);
-  Writeln(F, ed_no_faktur.text);
-  Writeln(F, ed_fak_kirim.text);
-  Writeln(F, ed_pelanggan.text);
-  Writeln(F, L_toko.caption);
-  Writeln(F, ed_tgl.text);
-  Writeln(F, tableview.DataController.RecordCount);
-  for x:=0 to tableview.DataController.RecordCount-1 do
-    begin
-      Writeln(F, TableView.DataController.GetValue(x,0));
-      Writeln(F, TableView.DataController.GetValue(x,1));
-      Writeln(F, TableView.DataController.GetValue(x,2));
-      Writeln(F, TableView.DataController.GetValue(x,3));
-      Writeln(F, TableView.DataController.GetValue(x,4));
-      Writeln(F, TableView.DataController.GetValue(x,5));
-    end;
-  CloseFile(F);
-  fungsi.amankan(sd.FileName,sd.FileName,159);
-end;
+cekPiutang;
 end;
 
-procedure Tf_return_kirim.b_loadClick(Sender: TObject);
-var
-  F: TextFile;
-  Tmp, x: Integer;
-  TmpStr: string;
-begin
-if od.Execute then
-begin
-  try
-  fungsi.amankan(od.FileName,od.FileName,159);
-  AssignFile(F, od.FileName);
-  Reset(F);
-  Readln(F, TmpStr);
-  ed_no_faktur.Text:=TmpStr;
-  Readln(F, TmpStr);
-  ed_fak_kirim.Text:=TmpStr;
-  Readln(F, TmpStr);
-  ed_pelanggan.Text:=TmpStr;
-  Readln(F, TmpStr);
-  L_toko.Caption:=TmpStr;
-  Readln(F, TmpStr);
-  ed_tgl.Text:=TmpStr;
-
-  Readln(F, Tmp);
-  tableview.DataController.RecordCount:=Tmp;
-  for x:=0 to tableview.DataController.RecordCount-1 do
-    begin
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 0, TmpStr);
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 1, TmpStr);
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 2, TmpStr);
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 3, TmpStr);
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 4, TmpStr);
-      Readln(F, TmpStr);
-      TableView.DataController.SetValue(x, 5, TmpStr);
-    end;
-  CloseFile(F);
-  tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
-  mm_nama.Text:= tableView.DataController.GetValue(tableview.DataController.RecordCount-1,1);
-  ce_harga.Text:= tableView.DataController.GetValue(tableview.DataController.RecordCount-1,3);
-  fungsi.amankan(od.FileName,od.FileName,159);
-
-  except
-  ShowMessage('proses load data gagal...');
-  end;
-end;
-end;
-
-procedure Tf_return_kirim.ed_codeKeyPress(Sender: TObject; var Key: Char);
+procedure Tf_returnJual.ed_codeKeyPress(Sender: TObject; var Key: Char);
 var harga,qty:real;
 kode: string;
 b:Integer;
 begin
-{if not ((key>='0')and(key<='9')or(key=#8) or(key=#43)) then
-begin
-key:=#0;
-Exit;
-end;
-}
 if TableView.DataController.RecordCount=0 then Exit;
 
 harga  := TableView.DataController.GetValue(tableview.DataController.FocusedRecordIndex,3);
@@ -662,7 +468,7 @@ b:= TableView.DataController.GetFocusedRecordIndex;
 
 end;
 
-procedure Tf_return_kirim.ed_no_fakturKeyDown(Sender: TObject;
+procedure Tf_returnJual.ed_no_fakturKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
 if (Key= vk_return) and (b_auto.Enabled= True) then
@@ -672,51 +478,22 @@ b_autoClick(self);
 end;
 end;
 
-procedure Tf_return_kirim.ed_fak_kirimKeyPress(Sender: TObject;
+procedure Tf_returnJual.ed_fak_jualKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if ed_pelanggan.Text='' then
   begin
     Key := #0;
-    ShowMessage('data Toko harus diisi terlebih dahulu');
+    ShowMessage('data Pelanggan harus diisi terlebih dahulu');
     ed_pelanggan.SetFocus;
     Exit;
   end;
 end;
 
-procedure Tf_return_kirim.ed_pelangganChange(Sender: TObject);
+procedure Tf_returnJual.ed_pelangganChange(Sender: TObject);
 begin
-ed_fak_kirimChange(Self);
+ed_fak_jualChange(Self);
 end;
 
-procedure Tf_return_kirim.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
-begin
-if (ed_pelanggan.Text=f_utama.sb.Panels[3].Text) then
-begin
-CanClose:=True;
-Exit;
-end;
-
-if (ed_no_faktur.Color <> clblue) and (tableview.DataController.RecordCount>=1) then
-begin
-case MessageBox(0, 'Data Belum disimpan, '+#13+#10+'apakah anda akan menyimpan data ini???',
-'Central of Profit', MB_ICONWARNING or MB_YESNOCANCEL) of
-  idYes:
-  begin
-    b_simpanClick(Self);
-    CanClose:= False;
-  end;
-  idNo:CanClose:= True;
-  IDCANCEL:
-  begin
-    ed_code.SetFocus;
-    CanClose:= False;
-  end;  
-end;
-
-end;  
-
-end;
 
 end.
