@@ -119,6 +119,7 @@ object f_returnJual: Tf_returnJual
         Top = 8
         Width = 201
         Height = 21
+        CharCase = ecUpperCase
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -201,6 +202,7 @@ object f_returnJual: Tf_returnJual
         Top = 32
         Width = 201
         Height = 21
+        CharCase = ecUpperCase
         Color = clBlue
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack

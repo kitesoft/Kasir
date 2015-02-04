@@ -29,6 +29,8 @@ type
     gambar: TsAlphaImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
+    function FRObject(FastReport: TfrxReport; ObjectName: String): TObject;
+    function FRMemo (FastReport: TfrxReport; ObjectName: String): TfrxMemoView;
   private
     { Private declarations }
   public
@@ -115,6 +117,32 @@ begin
  finally
  appINI.Free;
  end;
+end;
+
+function Tdm.FRObject(FastReport: TfrxReport; ObjectName: String): TObject;
+var
+  i: Integer;
+  AFound: Boolean;
+begin
+  AFound:=False;
+  for I := 0 to FastReport.ComponentCount - 1 do
+  begin
+    if LowerCase(FastReport.Components[i].Name) = LowerCase(ObjectName) then
+    begin
+      Result:=TObject(FastReport.Components[i]);
+      AFound:=True;
+      Break;
+    end;
+  end;
+  if not AFound then
+  begin
+    Result:=nil;
+  end;
+end;
+ 
+function Tdm.FRMemo (FastReport: TfrxReport; ObjectName: String): TfrxMemoView;
+begin
+  Result := TfrxMemoView(FRObject(FastReport, ObjectName));
 end;
 
 end.

@@ -327,13 +327,11 @@ end;
 
 procedure Tf_returnJual.b_printClick(Sender: TObject);
 begin
-{
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_cetak_return_kirim where kd_perusahaan="'+
-f_utama.sb.Panels[3].Text+'" and kd_return_kirim="'+ed_no_faktur.Text+'"',true);
-dm.laporan.LoadFromFile(dm.WPath + 'laporan\gp_return_kirim_rinci.fr3');
-dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
+fungsi.SQLExec(dm.Q_print,'select * from vw_cetak_return_jual where kd_perusahaan="'+
+F_Transaksi.sb.Panels[1].Text+'" and kd_return_jual="'+ed_no_faktur.Text+'"',true);
+dm.laporan.LoadFromFile(a_path + 'laporan\gp_return_kirim_jual.fr3');
+dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
 dm.laporan.ShowReport;
-}
 end;
 
 procedure Tf_returnJual.b_simpanClick(Sender: TObject);

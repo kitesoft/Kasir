@@ -14,7 +14,6 @@ uses
   U_ubah_satuan in 'U_ubah_satuan.pas' {F_Ubah_Satuan},
   U_Login in 'U_Login.pas' {F_Login},
   u_jual_kasir in 'u_jual_kasir.pas' {F_Jual_Kasir},
-  U_Return_Jual in 'U_Return_Jual.pas' {F_Return_Jual},
   u_list_jual in 'u_list_jual.pas' {f_list_sales},
   u_hari in 'u_hari.pas' {f_hari},
   u_cariBarang in 'u_cariBarang.pas' {f_cariBarang},

@@ -453,32 +453,6 @@ f_login.ShowModal;
 //cek_login;
 end;
 
-function FRObject(FastReport: TfrxReport; ObjectName: String): TObject;
-var
-  i: Integer;
-  AFound: Boolean;
-begin
-  AFound:=False;
-  for I := 0 to FastReport.ComponentCount - 1 do
-  begin
-    if LowerCase(FastReport.Components[i].Name) = LowerCase(ObjectName) then
-    begin
-      Result:=TObject(FastReport.Components[i]);
-      AFound:=True;
-      Break;
-    end;
-  end;
-  if not AFound then
-  begin
-    Result:=nil;
-  end;
-end;
- 
-function FRMemo (FastReport: TfrxReport; ObjectName: String): TfrxMemoView;
-begin
-  Result := TfrxMemoView(FRObject(FastReport, ObjectName));
-end;
-
 procedure TF_transaksi._set(baris,kolom,tipe:Integer; _isi:variant);
 begin
 case tipe of
@@ -1388,7 +1362,7 @@ begin
   if jenis='besar' then
    begin
    dm.laporan.LoadFromFile(a_Path + 'laporan/k_struk_retail.fr3');
-   FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('grand_total').AsFloat)+'Rupiah';
+   dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('grand_total').AsFloat)+'Rupiah';
 {   dm.laporan.PrintOptions.ShowDialog:=false;
    dm.laporan.PrepareReport;
    dm.laporan.Print;
