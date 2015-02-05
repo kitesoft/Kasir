@@ -166,6 +166,7 @@ type
     ed_keterangan: TsEdit;
     l_7: TsLabel;
     Q_time: TmySQLQuery;
+    ac_cek_update: TAction;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris:Integer; kolom:array of Integer; _isi:array of Variant);
     procedure tampil_gambar(kode:string);
@@ -255,6 +256,8 @@ type
       Shift: TShiftState);
     procedure Cb_lamaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure cek_update;
+    procedure ac_cek_updateExecute(Sender: TObject);
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
@@ -1646,6 +1649,7 @@ begin
 
 F_Transaksi.BorderStyle:=bsNone;
 F_Transaksi.WindowState:=wsMaximized;
+cek_update;
 end;
 
 procedure TF_Transaksi.Ed_discRpKeyDown(Sender: TObject; var Key: Word;
@@ -2176,6 +2180,17 @@ begin
    b_simpan.SetFocus;
 end;
 
+end;
+
+procedure TF_Transaksi.cek_update;
+begin
+  WinExec(PAnsiChar('tools/cekVersi.exe '+
+  fungsi.program_versi+' kasir'),SW_SHOWNOACTIVATE);
+end;
+
+procedure TF_Transaksi.ac_cek_updateExecute(Sender: TObject);
+begin
+cek_update;
 end;
 
 end.

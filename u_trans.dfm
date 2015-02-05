@@ -1215,7 +1215,7 @@ object F_Transaksi: TF_Transaksi
         object l_3: TsLabel
           Left = 128
           Top = 40
-          Width = 73
+          Width = 71
           Height = 26
           Alignment = taCenter
           Caption = 'Ubah Diskon %'#13#10'ex. (2.5*)'
@@ -2874,6 +2874,14 @@ object F_Transaksi: TF_Transaksi
         Visible = True
       end
       item
+        Action = ac_cek_update
+        CanSelect = False
+        SubItems = <>
+        SubMenuCaption = 'SubMenuCaption'
+        Separator = False
+        SubMenuItemSpacing = 4
+      end
+      item
         Action = ac_close
         CanSelect = False
         SubItems = <>
@@ -3182,6 +3190,10 @@ object F_Transaksi: TF_Transaksi
     object ac_jual_global: TAction
       Caption = 'Penjualan Toko'
       OnExecute = ac_jual_globalExecute
+    end
+    object ac_cek_update: TAction
+      Caption = 'Cek Update'
+      OnExecute = ac_cek_updateExecute
     end
   end
   object sd: TsSaveDialog
