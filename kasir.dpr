@@ -1,11 +1,6 @@
 program kasir;
 
 uses
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   u_trans in 'u_trans.pas' {F_Transaksi},
   u_dm in 'u_dm.pas' {dm: TDataModule},

@@ -1215,7 +1215,7 @@ object F_Transaksi: TF_Transaksi
         object l_3: TsLabel
           Left = 128
           Top = 40
-          Width = 71
+          Width = 73
           Height = 26
           Alignment = taCenter
           Caption = 'Ubah Diskon %'#13#10'ex. (2.5*)'
@@ -2490,10 +2490,6 @@ object F_Transaksi: TF_Transaksi
     OnTimer = Timer1Timer
     Left = 48
     Top = 328
-  end
-  object MadExceptionHandler1: TMadExceptionHandler
-    Left = 96
-    Top = 273
   end
   object alert: TAdvAlertWindow
     AlertMessages = <

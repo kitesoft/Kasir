@@ -9,7 +9,7 @@ uses
   sSkinProvider, sMemo, ExtCtrls, sGroupBox, sComboBox, Buttons,
   sSpeedButton, ImgList, acAlphaImageList,sPanel, sButton,
   sListBox, sSplitter,printers, frxClass, sRichEdit, sScrollBox,
-  madExceptVcl,shellapi, AdvAlertWindow, cxStyles, cxCustomData,
+  shellapi, AdvAlertWindow, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxCurrencyEdit,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, cxTextEdit,IniFiles,uTerbilang,
@@ -31,7 +31,6 @@ type
     sb_cari_barang: TsSpeedButton;
     sb_tunai: TsSpeedButton;
     sb_retail: TsSpeedButton;
-    MadExceptionHandler1: TMadExceptionHandler;
     p4: TsPanel;
     sLabel9: TsLabel;
     sLabel8: TsLabel;
