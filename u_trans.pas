@@ -433,10 +433,10 @@ procedure TF_transaksi.WmAfterShow(var Msg: TMessage);
 begin
 dm.sm.Active:= true;
 
-fungsi.SQLExec(dm.Q_temp,'select n_perusahaan,ket from tb_company where kd_perusahaan ='+quotedstr(sb.Panels[1].Text)+'',true);
+fungsi.SQLExec(dm.Q_temp,'select * from tb_company where kd_perusahaan ='+quotedstr(sb.Panels[1].Text)+'',true);
 cek_pusat:= dm.Q_temp.fieldbyname('ket').AsString;
 
-if cek_pusat <> 'PUSAT' then
+if (cek_pusat <> 'PUSAT') and (dm.Q_temp.fieldbyname('onserver').AsString='N') then
 begin
   fungsi.SQLExec(dm.Q_exe,'select `data` from tb_export_import where `data` = "PC_'+
   sb.Panels[1].text+'_'+formatdatetime('yyyy-MM-dd',Date())+'.zip" and ket = "terima"',True);
