@@ -16,6 +16,7 @@ uses
      procedure amankan(pathin, pathout: string; Chave: Word);
      procedure SQLExec(aQuery:TmySQLQuery; _SQL:string; isSearch: boolean);
      procedure Cetakfile(const sFileName: String);
+     procedure openCashDrawer;
      function ambil_ini(nama_file,Section, Ident: string; def: string = ''):string;
      procedure simpan_ini(nama_file,Section, Ident,value: string);
      function tulisP(Text: string; lebar: integer; Alignment: TAlignment=taleftjustify):string;
@@ -245,6 +246,50 @@ begin
     WinSpool.ClosePrinter(hPrinter);
   finally
     System.CloseFile(f);
+  end;
+end;
+
+procedure Tfungsi.openCashDrawer;
+Const
+  cBUFSIZE = 16384;
+Type
+  TDoc_Info_1 = record
+  pDocName: pChar;
+  pOutputFile: pChar;
+  pDataType: pChar;
+end;
+Var
+  Count : Cardinal;
+  BytesWritten: Cardinal;
+  hPrinter : THandle;
+  hDeviceMode : THandle;
+  Device : Array[0..255] Of Char;
+  Driver : Array[0..255] Of Char;
+  Port : Array[0..255] Of Char;
+  DocInfo : TDoc_Info_1;
+  f : File;
+  Buffer : Pointer;
+  Code: AnsiString;
+begin
+  try
+    Code := AnsiChar(27) + AnsiChar(112) + AnsiChar(0) + AnsiChar(64) + AnsiChar(240);
+
+    Printer.PrinterIndex := -1;
+    Printer.GetPrinter(Device, Driver, Port, hDeviceMode);
+    If Not WinSpool.OpenPrinter(@Device, hPrinter, Nil) Then
+      Exit;
+    DocInfo.pDocName := 'Report';
+    DocInfo.pOutputFile := Nil;
+    DocInfo.pDatatype := 'RAW';
+
+    WinSpool.StartDocPrinter(hPrinter, 1, @DocInfo);
+    WinSpool.StartPagePrinter(hPrinter);
+    WinSpool.WritePrinter(hPrinter, PAnsiChar(Code), Length(Code), BytesWritten);
+    WinSpool.EndPagePrinter(hPrinter);
+    WinSpool.EndDocPrinter(hPrinter);
+    WinSpool.ClosePrinter(hPrinter);
+  except
+    // do nothing
   end;
 end;
 
