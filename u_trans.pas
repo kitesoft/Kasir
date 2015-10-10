@@ -255,7 +255,7 @@ type
       Shift: TShiftState);
     procedure Cb_lamaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure cek_update;
+    function cek_update:Boolean;
     procedure ac_cek_updateExecute(Sender: TObject);
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
@@ -694,7 +694,19 @@ begin
 
   kode_temp:= dm.Q_temp.fieldbyname('kd_barang').AsString;
 
-  fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+macam_harga+'","'+kode_temp+'","'+sb.Panels[1].Text+'")', true);
+  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+macam_harga+'","'+kode_temp+'","'+sb.Panels[1].Text+'")', true);
+
+  fungsi.sqlExec(dm.Q_Show,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
+  'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, '+
+  'tb_barang_harga.harga_jual1,tb_barang_harga.harga_jual2,tb_barang_harga.harga_jual3, '+
+  'tb_barang_harga.diskon,tb_barang_harga.diskonP,tb_barang_harga.awal, '+
+  'tb_barang_harga.ahir,tb_barang.kd_sat1,tb_barang.kd_sat2, '+
+  'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2 '+
+  'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang '+
+  'AND tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan WHERE tb_barang.kd_barang = "'+kode_temp+'" '+
+  'AND tb_barang_harga.kd_macam_harga = "'+macam_harga+'" AND tb_barang.aktif="Y" '+
+  'AND tb_barang.kd_perusahaan= "'+sb.Panels[1].Text+'"', true);
+
   if dm.Q_show.Eof then
   begin
   MessageDlg('Data ini tidak terdaftar dalam program'+#13+#10+'Mungkin barang '+
@@ -876,6 +888,12 @@ end;
 procedure TF_Transaksi.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  //berfungsi untuk open cash drawer ctrl + o
+if ((shift=[ssctrl]) and (key=79)) then
+begin
+  fungsi.openCashDrawer;
+end;
+
   //berfungsi untuk void barang
 if ((shift=[ssctrl]) and (key=vk_delete)) then
 begin
@@ -1216,10 +1234,12 @@ QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand
   end;
                                
 dm.My_Conn.Commit;
+fungsi.openCashDrawer;
 except on E:exception do
 begin
 dm.My_Conn.Rollback;
 messagedlg('proses penyimpanan gagal,ulangi lagi!!! '#10#13''+e.Message, mterror, [mbOk],0);
+Exit;
 end;
 end;
 
@@ -2181,15 +2201,44 @@ end;
 
 end;
 
-procedure TF_Transaksi.cek_update;
+function TF_Transaksi.cek_update:Boolean;
+var
+  versiDB,versiAPP,URLDownload:string;
+  fileName, UrlDownloadLocal:string;
+  hasil : Boolean;
 begin
-  WinExec(PAnsiChar('tools/cekVersi.exe '+
-  fungsi.program_versi+' kasir'),SW_SHOWNOACTIVATE);
+  hasil:=False;
+  
+  versiAPP := fungsi.program_versi;
+
+  fungsi.SQLExec(dm.Q_Show,'select versi_terbaru, URLdownload from  app_versi where kode="kasir.exe"',true);
+  versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
+  URLDownload       := dm.Q_Show.FieldByName('URLdownload').AsString;
+  fileName          := Copy(URLDownload,LastDelimiter('/',URLDownload) + 1,Length(URLDownload));
+  UrlDownloadLocal  := dm.My_conn.Host + '/GainProfit/' + fileName;
+
+  if versiAPP < versiDB then
+  begin
+    ShowMessage('APLIKASI GUDANG TIDAK DAPAT DIJALANKAN' + #13#10 +
+    'aplikasi terbaru dengan versi : '+ versiDB + #13#10 +
+    'SUDAH DIRILIS...'+ #13#10#13#10 +
+    'Download Applikasi Terbaru!!!' );
+
+    WinExec(PChar('rundll32 url.dll,FileProtocolHandler '+ URLDownload),
+    SW_MAXIMIZE);
+    Application.Terminate;
+    Exit;
+  end;
+
+  hasil:= True;
+
+  Result := hasil;
 end;
 
 procedure TF_Transaksi.ac_cek_updateExecute(Sender: TObject);
 begin
-cek_update;
+if cek_update then
+ShowMessage('applikasi ini adalah applikasi terbaru...');
 end;
 
 end.
