@@ -48,8 +48,8 @@ var
   F_Login: TF_Login;
   fungsi:Tfungsi;
   Mgs : TMsg;
+  userPassword,userRealName:string;
 
-//  sop:boolean;
 implementation
 
 uses u_dm, u_trans;
@@ -107,7 +107,8 @@ procedure TF_Login.FormShow(Sender: TObject);
 var x:integer;
 begin
 sop:= True;
-fungsi.SQLExec(dm.Q_show,'select * from tb_login_jaga where status="jaga" and mode="online" and kd_perusahaan="'+kd_comp+'" order by user', true);
+fungsi.SQLExec(dm.Q_show,'select * from tb_login_jaga where status="jaga" '+
+'and mode="online" and kd_perusahaan="'+kd_comp+'" order by user', true);
 if dm.Q_show.Eof then
 begin
 showmessage('untuk menjalankan program ini'#10#13'Program Server harus aktif terlebih dahulu');
@@ -128,21 +129,41 @@ end;
 
 procedure TF_Login.Ed_Kd_UserKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
+var
+  sql : string;
 begin
 if key=vk_return then
 begin
   PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
-  FUNGSI.SQLExec(DM.Q_Show,'select * from tb_user where kd_perusahaan="'+sb.Panels[0].Text+'" and kd_user="'+ed_kd_user.Text+'" and kasir=''Y''',true);
+  sql:= 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN ' +
+        'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
+        'tb_user.kd_user="'+ed_kd_user.Text+'" AND tb_user_company.kasir="Y" ' +
+        'AND tb_user_company.kd_perusahaan="'+sb.Panels[0].Text+'"';
+  fungsi.SQLExec(DM.Q_Show,sql,true);
   if dm.Q_show.Eof then
-    Begin
-    messagedlg('Kode ini tidak terdaftar...',mtError,[mbOk],0);
-    ed_kd_user.SetFocus;
-    End else
+  Begin
+  messagedlg('Kode ini tidak terdaftar...',mtError,[mbOk],0);
+  ed_kd_user.SetFocus;
+  End else
+  begin
+    userRealName:= dm.Q_show.FieldByName('n_user').AsString;
+    userPassword:= dm.Q_show.FieldByName('password').AsString;
+
+    sql:= 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) ' +
+          'AND user_id="'+ed_kd_user.Text+'"';
+    fungsi.SQLExec(DM.Q_Show,sql,true);
+    if dm.Q_show.Eof then
     begin
-      ed_password.Enabled:= true;
-      Ed_Password.SetFocus;
-      Ed_N_User.Text:= dm.Q_show.fieldbyname('n_user').AsString;
-    end;
+      messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',mtError,[mbOk],0);
+      ed_kd_user.SetFocus;
+    end
+    else
+    begin
+    ed_password.Enabled:= true;
+    Ed_Password.SetFocus;
+    Ed_N_User.Text:= userRealName;
+    end;                          
+  end;
 end;
 
 if key=vk_escape then close;
@@ -159,7 +180,7 @@ if ed_n_user.Text<>'' then
 begin
 fungsi.SQLExec(dm.Q_temp,'select md5("'+ed_password.Text+'")as passs',true);
 passs:=dm.Q_temp.fieldbyname('passs').AsString;
-if compareText(dm.Q_show.FieldByName('password').AsString,passs)<>0 then
+if compareText(userPassword,passs)<>0 then
 begin
 messagedlg('Password salah..',mtError,[mbOk],0);
 ed_password.Clear;
