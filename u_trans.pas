@@ -2219,7 +2219,7 @@ begin
 
   if versiAPP < versiDB then
   begin
-    ShowMessage('APLIKASI GUDANG TIDAK DAPAT DIJALANKAN' + #13#10 +
+    ShowMessage('APLIKASI KASIR TIDAK DAPAT DIJALANKAN' + #13#10 +
     'aplikasi terbaru dengan versi : '+ versiDB + #13#10 +
     'SUDAH DIRILIS...'+ #13#10#13#10 +
     'Download Applikasi Terbaru!!!' );
