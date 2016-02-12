@@ -1861,7 +1861,7 @@ begin
 // void
 if TableView.DataController.RecordCount<>0 then
  begin
-  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
   PostMessage(Handle, InputBoxMessage, 0, 0);
   InputString := InputBox('Void Barang', 'Masukkan Password Operator SERVER untuk memvoid barang ini', '');
 
@@ -1894,7 +1894,7 @@ begin
 //batalkan transaksi
 if TableView.DataController.RecordCount<>0 then
   begin
-  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
   PostMessage(Handle, InputBoxMessage, 0, 0);
   InputString := InputBox('Batalkan Transaksi', 'Masukkan Password Operator SERVER untuk membatalkan transaksi ini', '');
 
@@ -1948,7 +1948,7 @@ end;
 procedure TF_Transaksi.ac_ReturnExecute(Sender: TObject);
 begin
 //return Penjualan
-fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
 PostMessage(Handle, InputBoxMessage, 0, 0);
 InputString := InputBox('Return Jual', 'Masukkan Password Operator SERVER untuk melakukan return jual', '');
 
