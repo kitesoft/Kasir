@@ -418,9 +418,9 @@ begin
 with alert do
   begin
    if alert.IsVisible then alert.Hide;
-   if FileExists(a_path+'image\'+kode+'.jpg') then
+   if FileExists(AppPath+'image\'+kode+'.jpg') then
     begin
-       Background.LoadFromFile(a_path+'image\'+kode+'.jpg');
+       Background.LoadFromFile(AppPath+'image\'+kode+'.jpg');
        alert.AlertMessages[0].Text.Clear;
        alert.WindowPosition:=wpRightBottom;
        alert.AutoSize:= false;
@@ -725,8 +725,8 @@ begin
   begin
      if kode_barang = '' then Exit;
      if alert.IsVisible then alert.Hide;
-     if FileExists(a_path+'image\bg.jpg') then
-       alert.Background.LoadFromFile(a_path+'image\bg.jpg');
+     if FileExists(AppPath+'image\bg.jpg') then
+       alert.Background.LoadFromFile(AppPath+'image\bg.jpg');
      alert.AlertMessages[0].Text.Text:='<P align="left"><FONT size="10">'+
      'PID<IND x="60">: '+dm.Q_show.fieldbyname('kd_barang').asstring
      +'<BR>Deskripsi<IND x="60">: '+dm.Q_show.fieldbyname('n_barang').asstring
