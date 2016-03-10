@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, sSkinManager, DB, mySQLDbTables, dialogs, forms, inifiles,
   frxClass, frxDBSet, ScktComp, frxDesgn, ImgList, Controls, acAlphaImageList,
-  SHFolder;
+  SHFolder, Windows;
 
 type
   Tdm = class(TDataModule)
@@ -40,7 +40,7 @@ type
 var
   dm: Tdm;
   kd_comp, ip_kasir, macam_harga: string;
-  a_path, file_ini, cek_pusat: string;
+  a_path, AppPath, file_ini, cek_pusat: string;
   sop: Boolean;
 
 implementation
@@ -50,6 +50,16 @@ uses
 
 
 {$R *.dfm}
+
+function GetAppData(Folder: Integer): string;
+var
+  path: array[0..MAX_PATH] of Char;
+begin
+  if Succeeded(SHGetFolderPath(0, Folder, 0, 0, @Path[0])) then
+    Result := path + '\Gain Profit\'
+  else
+    Result := '';
+end;
 
 function krupuk(const s: string; CryptInt: Integer): string;
 var
@@ -69,9 +79,13 @@ var
   appINI: TIniFile;
 begin
   a_path := extractfilepath(application.ExeName);
-  sm.SkinDirectory := a_path + '\tools\skins';
+  AppPath := GetAppData(CSIDL_COMMON_APPDATA);
+  if not (DirectoryExists(AppPath)) then
+    CreateDir(AppPath);
 
-  file_ini := a_path + '\tools\gain.ini';
+  sm.SkinDirectory := AppPath + 'skins';
+
+  file_ini := AppPath + 'gain.ini';
 
   appINI := TIniFile.Create(file_ini);
   try
