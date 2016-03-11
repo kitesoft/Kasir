@@ -344,19 +344,7 @@ begin
 //untuk load form
 
 // pesan berjalan
-   if not(FileExists('tools\promo.psn')) then
-   begin
-   assignfile(X,'tools\promo.psn');
-   Rewrite(X);
-   write(X,'Promosi harus dilakukan untuk mempercepat penjualan barang...');
-   closefile(X);
-   end;
-
-   assignfile(X,'tools\promo.psn');
-   reset(X);
-   read(X,pesan);
-   closefile(X);
-
+  pesan := fungsi.ambil_ini(file_ini,'kasir','pesan','Promosi harus dilakukan untuk mempercepat penjualan barang...');
   p_pesan.Height:=0;
 
   cbFontName.Items.Assign(Screen.Fonts);
@@ -1754,10 +1742,7 @@ var X:TextFile;
 begin
 if M_pesan.Modified then
 begin
-   assignfile(X,'tools\promo.psn');
-   Rewrite(X);
-   write(X,m_pesan.text);
-   closefile(X);
+  fungsi.simpan_ini(file_ini,'kasir','pesan',m_pesan.text);
 
 pesan:=M_pesan.Text;
 if cb_aktif.ItemIndex = 1 then
