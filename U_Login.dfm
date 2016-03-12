@@ -19,6 +19,19 @@ object F_Login: TF_Login
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object l_1: TsLabel
+    Left = 8
+    Top = 256
+    Width = 216
+    Height = 16
+    Caption = 'Tekan F2 untuk merubah Perusahaan'
+    ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+  end
   object sGroupBox1: TsGroupBox
     Left = 256
     Top = 8
@@ -323,6 +336,7 @@ object F_Login: TF_Login
       item
         Width = 50
       end>
+    OnClick = sbClick
     SkinData.SkinSection = 'STATUSBAR'
   end
 end
