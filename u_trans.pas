@@ -1257,7 +1257,7 @@ begin
       tgl_trans:= FormatDateTime('dd mmm yyyy',dm.Q_print.fieldbyname('tgl_transaksi').AsDateTime);
       waktu:= fungsi.tulisP({days[DayOfWeek(StrToDate(tgl_trans))]+', '+}tgl_trans+' '+dm.Q_print.fieldbyname('jam_transaksi').AsString, panjang, taLeftJustify);
 
-  AssignFile(F, 'laporan/k_struk.prn');
+  AssignFile(F, AppPath + 'k_struk.prn');
   Rewrite(F);
 
   for i:=1 to panjang do write(F,'=');
@@ -1360,7 +1360,7 @@ end;
   Writeln(F, telp);
   CloseFile(F);
 
-fungsi.Cetakfile(extractfilepath(application.ExeName)+'laporan/k_struk.prn');
+fungsi.Cetakfile(AppPath + 'k_struk.prn');
 end;
 
 
