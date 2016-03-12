@@ -1963,10 +1963,11 @@ try
   cb_pending.Visible:= true;
   cb_pending.Items.Add(no_pending);
   cb_pending.ItemIndex:=cb_pending.Items.Count-1;
-  if not (DirectoryExists(ExtractFilePath (Application.ExeName)+'\Hold')) then
-  MkDir(ExtractFilePath (Application.ExeName)+'\Hold');
-  Tb2File(TableView.DataController,'Hold\'+no_pending+'.pd');
-  fungsi.amankan('Hold\'+no_pending+'.pd','Hold\'+no_pending+'.pd',753);
+  if not(DirectoryExists(AppPath + 'Hold')) then
+    CreateDir(AppPath + 'Hold');
+  Tb2File(TableView.DataController,AppPath + 'Hold\'+no_pending+'.pd');
+  fungsi.amankan(AppPath + 'Hold\'+no_pending+'.pd',
+      AppPath + 'Hold\'+no_pending+'.pd',753);
   awal;
   showmessage('Transaksi berhasil ditahan');
   end;
@@ -1989,12 +1990,14 @@ try
     if messagedlg('Benarkah Anda akan mempilkan transaksi ini???', mtconfirmation, [mbyes,mbNo],0)=mryes then
     begin
 
-    if fileexists('Hold\'+cb_pending.Text+'.pd') then
+    if fileexists(AppPath + 'Hold\'+cb_pending.Text+'.pd') then
     begin
-    fungsi.amankan('Hold\'+cb_pending.Text+'.pd','Hold\'+cb_pending.Text+'.pd',753);
-    file2tb(TableView.DataController,'Hold\'+cb_pending.Text+'.pd');
-    fungsi.amankan('Hold\'+cb_pending.Text+'.pd','Hold\'+cb_pending.Text+'.pd',753);
-    deletefile('Hold\'+cb_pending.Text+'.pd');
+    fungsi.amankan(AppPath + 'Hold\'+cb_pending.Text+'.pd',
+        AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
+    file2tb(TableView.DataController,AppPath + 'Hold\'+cb_pending.Text+'.pd');
+    fungsi.amankan(AppPath + 'Hold\'+cb_pending.Text+'.pd',
+        AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
+    deletefile(AppPath + 'Hold\'+cb_pending.Text+'.pd');
     cb_pending.Items.Delete(cb_pending.ItemIndex);
 
     ed_code.SetFocus;
