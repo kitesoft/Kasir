@@ -421,26 +421,10 @@ procedure TF_transaksi.WmAfterShow(var Msg: TMessage);
 begin
 dm.sm.Active:= true;
 
-fungsi.SQLExec(dm.Q_temp,'select * from tb_company where kd_perusahaan ='+quotedstr(sb.Panels[1].Text)+'',true);
-cek_pusat:= dm.Q_temp.fieldbyname('ket').AsString;
-
-if (cek_pusat <> 'PUSAT') and (dm.Q_temp.fieldbyname('onserver').AsString='N') then
-begin
-  fungsi.SQLExec(dm.Q_exe,'select `data` from tb_export_import where `data` = "PC_'+
-  sb.Panels[1].text+'_'+formatdatetime('yyyy-MM-dd',Date())+'.zip" and ket = "terima"',True);
-
-  if dm.Q_exe.Eof then
-  begin
-    ShowMessage('DATA UNTUK HARI INI BELUM DILOAD '#10#13'tidak dapat melakukan transaksi...');
-    Application.Terminate;
-  end;
-end;
+ambil_form;
 
 application.CreateForm(tF_login, f_login);
-f_login.sb.Panels[0].Text:=sb.Panels[1].Text;
-f_login.sb.Panels[1].Text:=dm.Q_temp.fieldbyname('n_perusahaan').AsString;
 f_login.ShowModal;
-//cek_login;
 end;
 
 procedure TF_transaksi._set(baris,kolom,tipe:Integer; _isi:variant);
@@ -528,11 +512,6 @@ begin
 sb.Panels[0].Text:= 'Versi: '+fungsi.program_versi;
 
 sb.Panels[10].Text:= dm.My_conn.DatabaseName +'@'+ dm.My_conn.Host;
-sb.Panels[1].Text:=kd_comp;
-
-ambil_form;
-
-kode_transaksi_terbaru;
 
 panel_auto_width;
 
