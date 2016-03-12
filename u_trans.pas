@@ -655,6 +655,11 @@ begin
   Exit;
   end;
 
+  if f_cariBarang<>nil then
+  begin
+   f_cariBarang.Close;
+  end;
+
   if KasirOffline then
   begin
     ShowMessage('Tidak Dapat Menambah Data Barang...'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
@@ -689,12 +694,6 @@ begin
   Exit;
   end;
 
-  if f_cariBarang<>nil then
-  begin
-   //TableView.OptionsView.Header:= True;
-   f_cariBarang.Close;
-  end;
-
   if MM_nama.Text = 'TERKUNCI' then
   begin
      if kode_barang = '' then Exit;
@@ -718,10 +717,6 @@ begin
   quotedstr(kode_temp)+' and kd_perusahaan='+quotedstr(sb.Panels[1].Text)+'',True);
   if dm.Q_temp.RecordCount<> 0 then
   begin
-   if f_cariBarang<>nil then
-   begin
-   f_cariBarang.Close;
-   end;
   Ed_Code.Clear;
 
   MessageBox(0, 'BARANG INI BELUM BISA DI TRANSAKSIKAN, '+#13+#10+'karena masih '+
