@@ -257,6 +257,7 @@ type
       Shift: TShiftState);
     function cek_update:Boolean;
     procedure ac_cek_updateExecute(Sender: TObject);
+    function KasirOffline: Boolean;
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
@@ -652,6 +653,12 @@ begin
   begin
   Ed_Discp.SetFocus;
   Exit;
+  end;
+
+  if KasirOffline then
+  begin
+    ShowMessage('Tidak Dapat Menambah Data Barang...'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
+    Exit;
   end;
 
   fungsi.sqlExec(dm.Q_temp,'SELECT kd_barang FROM tb_barang '+
@@ -1158,6 +1165,12 @@ var tk,laba: string;
 x,dicetak: integer;
 isi_sql: string;
 begin
+  if KasirOffline then
+  begin
+    ShowMessage('TRANSAKSI TIDAK DAPAT DISIMPAN'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
+    Exit;
+  end;
+
 kode_transaksi_terbaru;
 
 if sb_tunai.Caption= 'Tunai' then tk:='1' else tk:='0';
@@ -2206,6 +2219,21 @@ procedure TF_Transaksi.ac_cek_updateExecute(Sender: TObject);
 begin
 if cek_update then
 ShowMessage('applikasi ini adalah applikasi terbaru...');
+end;
+
+function TF_Transaksi.KasirOffline: Boolean;
+var
+  sql : string;
+begin
+  Result := False;
+
+  sql := Format('SELECT `status` from tb_login_kasir WHERE kd_perusahaan = "%s" '
+  +' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"',[Sb.Panels[1].Text, Sb.Panels[4].Text,
+  Sb.Panels[2].Text]);
+
+  fungsi.SQLExec(dm.Q_temp,sql,True);
+  if dm.Q_temp.Eof then
+    Result := True;
 end;
 
 end.
