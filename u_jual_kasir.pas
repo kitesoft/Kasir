@@ -52,75 +52,7 @@ uses u_dm, u_trans;
 {$R *.dfm}
 
 procedure TF_Jual_Kasir.FormShow(Sender: TObject);
-//var laba,TOTAL,diskGlob: integer;
 begin
-{fungsi.SQLExec(dm.Q_show,'SELECT no_transaksi,kd_barang,n_barang,Qty,discountRp,harga_netto,total_harga,void_barang '+
-'from `tb_jual_rinci` INNER JOIN `tb_jual_global` on`tb_jual_global`.`kd_transaksi` = `tb_jual_rinci`.`no_transaksi` '+
-'where (`tb_jual_global`.`tgl_transaksi` = "'+formatdatetime('yyyy-MM-dd',date())+'" and tb_jual_rinci.`user`="'+
-f_transaksi.Sb.Panels[2].Text+'"  and tb_jual_global.kd_pengawas = "'+F_transaksi.Sb.Panels[4].Text
-+'" and tb_jual_global.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'")',true);
-
-fungsi.SQLExec(dm.Q_temp,'select count(kd_transaksi) as con_transaksi, sum(discountGRp) as sum_disk from tb_jual_global '+
-'where tgl_transaksi=date(now()) and kd_user= "'+f_transaksi.Sb.Panels[2].Text+'"  and kd_pengawas = "'+
-F_transaksi.Sb.Panels[4].Text+'"and kd_perusahaan="'+
-f_transaksi.sb.Panels[1].Text+'"',true);
-Ed_Transaksi.Value:= dm.Q_temp.fieldbyname('con_transaksi').AsInteger;
-diskglob:= dm.Q_temp.fieldbyname('sum_disk').AsInteger;
-
-fungsi.SQLExec(dm.Q_temp,'select count(void) as con_voidT from tb_jual_global '+
-'where tgl_transaksi=date(now()) and kd_user= "'+f_transaksi.Sb.Panels[2].Text+'"  and kd_pengawas = "'+
-F_transaksi.Sb.Panels[4].Text+'" and void>0 and kd_perusahaan="'+
-f_transaksi.sb.Panels[1].Text+'"',true);
-ed_voidT.Value:= dm.Q_temp.fieldbyname('con_voidT').AsInteger;
-
-fungsi.SQLExec(dm.Q_temp,'select tb_jual_rinci.kd_barang from tb_jual_rinci right join '+
-'tb_jual_global on  tb_jual_rinci.no_transaksi=tb_jual_global.kd_transaksi '+
-'where tb_jual_global.tgl_transaksi=date(now()) and tb_jual_global.kd_user= "'+
-f_transaksi.Sb.Panels[2].Text+'"  and tb_jual_global.kd_pengawas = "'+
-F_transaksi.Sb.Panels[4].Text+'" and tb_jual_global.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" '+
-'group by tb_jual_rinci.kd_barang',true);
-ed_barangT.Value:= dm.Q_temp.RecordCount;
-
-fungsi.SQLExec(dm.Q_temp,'select sum(tb_jual_rinci.Qty) as sum_Qty, '+
-'sum(tb_jual_rinci.void_barang) as sum_void, sum(tb_jual_rinci.DiscountRp) as sum_disc, '+
-'sum(tb_jual_rinci.total_harga) as sum_total, '+
-'sum(tb_jual_rinci.laba) as sum_laba from tb_jual_rinci inner join '+
-'tb_jual_global on  tb_jual_rinci.no_transaksi=tb_jual_global.kd_transaksi '+
-'where tb_jual_global.tgl_transaksi=date(now()) and tb_jual_global.kd_user= "'+
-f_transaksi.Sb.Panels[2].Text+'"  and tb_jual_global.kd_pengawas = "'+F_transaksi.Sb.Panels[4].Text+'" and tb_jual_global.kd_perusahaan= "'+f_transaksi.sb.Panels[1].Text+'"',true);
-
-Ed_BarangQ.Value:= dm.Q_temp.fieldbyname('sum_qty').AsInteger;
-Ed_VoidQ.Value:= dm.Q_temp.fieldbyname('sum_void').AsInteger;
-Ed_Disc.Value:= dm.Q_temp.fieldbyname('sum_disc').AsInteger+diskglob;
-TOTAL:= strtointdef(dm.Q_temp.fieldbyname('sum_total').asstring,0);
-laba:= strtointdef(dm.Q_temp.fieldbyname('sum_laba').asstring,0);
-
-if total<>0 then
-Ed_Laba.Value:= (laba/total)*100;
-
-fungsi.SQLExec(dm.Q_temp,'select sum(tb_jual_rinci.total_harga) as sum_total from tb_jual_rinci inner join '+
-'tb_jual_global on  tb_jual_rinci.no_transaksi=tb_jual_global.kd_transaksi '+
-'where tb_jual_global.tgl_transaksi=date(now()) and tb_jual_global.kd_user= "'+
-f_transaksi.Sb.Panels[2].Text+'"  and tb_jual_global.kd_pengawas = "'+F_transaksi.Sb.Panels[4].Text+'" and tb_jual_global.tunai= 0 and tb_jual_global.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" ',true);
-Ed_Kredit.Value:= dm.Q_temp.fieldbyname('sum_total').AsInteger;
-
-fungsi.SQLExec(dm.Q_temp,'select sum(tb_jual_rinci.total_harga) as sum_total from tb_jual_rinci inner join '+
-'tb_jual_global on  tb_jual_rinci.no_transaksi=tb_jual_global.kd_transaksi '+
-'where tb_jual_global.tgl_transaksi=date(now()) and tb_jual_global.kd_user= "'+
-f_transaksi.Sb.Panels[2].Text+'"  and tb_jual_global.kd_pengawas = "'+F_transaksi.Sb.Panels[4].Text+'" and tb_jual_global.kd_perusahaan="'+
-f_transaksi.sb.Panels[1].Text+'" and tb_jual_global.tunai= 1',true);
-Ed_Total.Value:= dm.Q_temp.fieldbyname('sum_total').AsInteger;
-
-fungsi.SQLExec(dm.Q_temp,'select sum(total_return) as sum_return from tb_return_jual where user="'+
-f_transaksi.Sb.Panels[2].Text+'"  and pengawas = "'+F_transaksi.Sb.Panels[4].Text+'" and tgl_return=date(now()) and kd_perusahaan="'+
-f_transaksi.sb.Panels[1].Text+'"',true);
-
-ed_return.Value:= dm.Q_temp.FieldByName('sum_return').AsInteger;
-
-ed_setor.Value:= ed_total.Value-ed_return.Value;
-
-if gb_tutup.visible=true then sbutton1.setfocus;
-}
 dm.My_Conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'call sp_setor_kasir("'+f_transaksi.sb.Panels[1].Text+'","'+
@@ -160,32 +92,6 @@ end;
 procedure TF_Jual_Kasir.sButton1Click(Sender: TObject);
 begin
 Application.Terminate;
-{dm.My_Conn.StartTransaction;
-try
-if (Ed_Total.Value=0) and (Ed_Kredit.Value=0) then
-begin
-  fungsi.SQLExec(dm.Q_exe,'update tb_login_kasir set status=''offline'',transaksi="'+ed_transaksi.Text+'",Tr_barang="'+ed_barangt.Text
-  +'",Qty_barang="'+ed_barangQ.Text+'",return_jual="'+ed_return.Text+'",void="'+ed_voidQ.Text
-  +'",discount="'+ed_disc.Text+'",price_oh="'+ed_total.Text+'", kredit="'+ed_kredit.Text+'", jumlah_setor_oh="'+ed_setor.Text
-  +'" where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" and user="'+F_transaksi.Sb.Panels[2].Text
-  +'"  and kd_jaga = "'+F_transaksi.Sb.Panels[4].Text+'" and tanggal=date(now())',false);
-end else
-begin
-  fungsi.SQLExec(dm.Q_exe,'update tb_login_kasir set transaksi="'+ed_transaksi.Text+'",Tr_barang="'+ed_barangt.Text
-  +'",Qty_barang="'+ed_barangQ.Text+'",return_jual="'+ed_return.Text+'",void="'+ed_voidQ.Text
-  +'",discount="'+ed_disc.Text+'",price_oh="'+ed_total.Text+'", kredit="'+ed_kredit.Text+'", jumlah_setor_oh="'+ed_setor.Text
-  +'" where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" and user="'+F_transaksi.Sb.Panels[2].Text
-  +'"  and kd_jaga = "'+F_transaksi.Sb.Panels[4].Text+'" and status=''online''',false);
-end;
-
-dm.My_Conn.Commit;
-showmessage('proses Penutupan Kasir Berhasil');
-application.Terminate;
-except on e:exception do begin
-  dm.My_conn.Rollback;
-  showmessage('proses tutup kasir gagal '#10#13'' +e.Message);
-  end;
-end;}
 end;
 
 end.
