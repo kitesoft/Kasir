@@ -1920,6 +1920,12 @@ end;
 procedure TF_Transaksi.ac_ReturnExecute(Sender: TObject);
 begin
 //return Penjualan
+  if KasirOffline then
+  begin
+    ShowMessage('TIDAK DAPAT MELAKUKAN RETURN JUAL...'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
+    Exit;
+  end;
+
 fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
 PostMessage(Handle, InputBoxMessage, 0, 0);
 InputString := InputBox('Return Jual', 'Masukkan Password Operator SERVER untuk melakukan return jual', '');
