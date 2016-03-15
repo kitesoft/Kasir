@@ -124,15 +124,15 @@ DLL=0
 Locale=1057
 CodePage=1252
 [Version Info Keys]
-CompanyName=CeBeSoft
+CompanyName=Gain-Profit
 FileDescription=
 FileVersion=2.9.2.0
-InternalName=
+InternalName=Kasir
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
-ProductName=Gain Profit
-ProductVersion=1.0
+ProductName=
+ProductVersion=
 Comments=
 [HistoryLists\hlConditionals]
 Count=1
