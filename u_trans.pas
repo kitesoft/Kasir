@@ -236,7 +236,6 @@ type
     procedure ac_ReturnExecute(Sender: TObject);
     procedure ac_PendingExecute(Sender: TObject);
     procedure ac_LoadExecute(Sender: TObject);
-    procedure ac_PenjualanExecute(Sender: TObject);
     procedure ac_SatuanExecute(Sender: TObject);
     procedure ac_cetakExecute(Sender: TObject);
     procedure ac_skinExecute(Sender: TObject);
@@ -287,8 +286,7 @@ var
 implementation
 
 uses u_dm, U_Cari_pel,acselectskin, U_ubah_satuan, U_Login,
-  u_jual_kasir, u_cariBarang, u_list_jual, u_hari,
-  u_returnJual;
+  u_cariBarang, u_list_jual, u_hari, u_returnJual;
 
 {$R *.dfm}
 
@@ -936,11 +934,6 @@ ac_LoadExecute(Self);
 end;
 
 
-//lihat penjualan kasir
-if key=vk_F7 then
-begin
-ac_PenjualanExecute(Self);
-end;
 //ubah satuan
 if key=vk_f8 then
 begin
@@ -1401,13 +1394,7 @@ end;
 
 if messagedlg('Apakah anda akan melakukan tutup kasir???...', mtconfirmation,[mbYes,mbNo],0)=mryes then
 begin
-  application.CreateForm(TF_jual_kasir,F_jual_kasir);
-//  f_jual_kasir.BorderStyle:=bsnone;
-  f_transaksi.AlphaBlendValue:=150;
-  //f_jual_kasir.gb_tutup.Visible:=true;
-  F_Jual_Kasir.sButton1.Visible:= True;
-  f_jual_kasir.ShowModal;
-  exit;
+  Action:= caFree;
 end else
 action:= caNone;
 end;
@@ -2017,13 +2004,6 @@ try
 except
   showmessage('proses memunculkan transaksi yang ditahan gagal');
 end
-end;
-
-procedure TF_Transaksi.ac_PenjualanExecute(Sender: TObject);
-begin
-//Daftar Penjualan
-application.CreateForm(TF_jual_kasir,F_Jual_Kasir);
-F_Jual_kasir.ShowModal;
 end;
 
 procedure TF_Transaksi.ac_SatuanExecute(Sender: TObject);

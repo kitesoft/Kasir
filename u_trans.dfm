@@ -24,7 +24,7 @@ object F_Transaksi: TF_Transaksi
   TextHeight = 13
   object Sb: TsStatusBar
     Left = 0
-    Top = 605
+    Top = 606
     Width = 1024
     Height = 22
     Panels = <
@@ -83,7 +83,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p_pesan: TsPanel
     Left = 0
-    Top = 437
+    Top = 438
     Width = 1024
     Height = 22
     Align = alBottom
@@ -211,7 +211,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p4: TsPanel
     Left = 0
-    Top = 459
+    Top = 460
     Width = 1024
     Height = 146
     Align = alBottom
@@ -754,7 +754,7 @@ object F_Transaksi: TF_Transaksi
     Left = 0
     Top = 167
     Width = 1024
-    Height = 240
+    Height = 241
     Align = alClient
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -1487,6 +1487,7 @@ object F_Transaksi: TF_Transaksi
           Appearance.GradientDown = ggVertical
           Appearance.GradientMirrorDown = ggVertical
           Appearance.GradientChecked = ggVertical
+          Enabled = False
         end
         object btnSatuan: TAdvGlowButton
           Left = 440
@@ -2437,7 +2438,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p_keterangan: TsPanel
     Left = 0
-    Top = 407
+    Top = 408
     Width = 1024
     Height = 30
     Align = alBottom
@@ -3146,7 +3147,6 @@ object F_Transaksi: TF_Transaksi
     end
     object ac_Penjualan: TAction
       Caption = 'Penjualan Kasir'
-      OnExecute = ac_PenjualanExecute
     end
     object ac_Satuan: TAction
       Caption = 'Ubah Satuan'
