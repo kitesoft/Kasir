@@ -3146,6 +3146,7 @@ object F_Transaksi: TF_Transaksi
     end
     object ac_Group: TAction
       Caption = 'Group Barang (F7)'
+      OnExecute = ac_GroupExecute
     end
     object ac_Satuan: TAction
       Caption = 'Ubah Satuan (F8)'

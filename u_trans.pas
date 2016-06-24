@@ -257,6 +257,7 @@ type
     function cek_update:Boolean;
     procedure ac_cek_updateExecute(Sender: TObject);
     function KasirOffline: Boolean;
+    procedure ac_GroupExecute(Sender: TObject);
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
@@ -286,7 +287,7 @@ var
 implementation
 
 uses u_dm, U_Cari_pel,acselectskin, U_ubah_satuan, U_Login,
-  u_cariBarang, u_list_jual, u_hari, u_returnJual;
+  u_cariBarang, u_list_jual, u_hari, u_returnJual, u_cari;
 
 {$R *.dfm}
 
@@ -933,6 +934,11 @@ begin
 ac_LoadExecute(Self);
 end;
 
+//memunculkan pencarian group barang
+if key=vk_f7 then
+begin
+ac_GroupExecute(Self);
+end;
 
 //ubah satuan
 if key=vk_f8 then
@@ -2212,6 +2218,28 @@ begin
   fungsi.SQLExec(dm.Q_temp,sql,True);
   if dm.Q_temp.Eof then
     Result := True;
+end;
+
+procedure TF_Transaksi.ac_GroupExecute(Sender: TObject);
+var
+  GroupId: string;
+begin
+  Ed_Code.SetFocus;
+  application.CreateForm(tf_cari, f_cari);
+  with F_cari do
+  try
+    _SQLi:= 'select id_group, deskripsi from vw_group_barang';
+    tblcap[0]:= 'Kode Group';
+    tblCap[1]:= 'Deskripsi Group';
+    tampil_button(False,True);
+    if ShowModal = mrOk then
+    begin
+        GroupId:=TblVal[0];
+        ShowMessage(GroupId);
+    end;
+  finally
+  close;
+  end;
 end;
 
 end.
