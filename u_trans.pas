@@ -2249,9 +2249,10 @@ begin
     kode_barang := dm.QGroup.FieldByName('kd_barang').AsString;
     qty := dm.QGroup.FieldByName('Qty').AsString;
 
-    // ShowMessage(Format('kode barang: %s, dan qty:%s', [kode_barang,qty]));
     input_kode;
-    UbahQty(qty);
+
+    if qty <> '1' then
+      UbahQty(qty);
 
     dm.QGroup.Next;
   end;
