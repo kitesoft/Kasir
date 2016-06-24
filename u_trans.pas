@@ -261,6 +261,7 @@ type
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    procedure UbahQty(Qty:string);
     { Private declarations }
   public
     procedure _set(baris,kolom,tipe:Integer; _isi:variant);
@@ -646,7 +647,7 @@ end;
 procedure TF_Transaksi.input_kode;
 var kode_temp: string;
 begin
-  if (Ed_Code.Text = '') and (f_cariBarang = nil) then kode_barang := '';
+  //if (Ed_Code.Text = '') and (f_cariBarang = nil) then kode_barang := '';
 
   if kode_barang=''then
   begin
@@ -1423,13 +1424,8 @@ kode:=Ed_Code.Text;
   if (StrToIntDef(kode,0) = 0) or (Length(kode) =0) or (Length(kode) >3) or
   (TableView.DataController.RecordCount=0) or (_Get(0,17,1) <>0)  then Exit;
 
-          _set(0,19, 1, _Get(0,19) + 'repeat manual '+kode+' X, '); //keterangan ubah manual
-          Qty_real:= _Get(0, 18) / _Get(0 , 3);
-          _Set(0, 3, 1, kode); //QtyH
-          _Set(0, 9, 1, _Get(0, 8) * StrToFloat(kode)); //total harga
-          _Set(0,14, 1, _Get(0,13) * Qty_real  * StrToInt(kode)); //total harga pokok
-          _Set(0,15, 1, _Get(0, 9) - _Get(0,14)); //total laba
-          _Set(0,18, 1, Qty_real * StrToInt(kode)); //Qty_real
+  UbahQty(kode);
+
  end;
 
   if Key=#45 then //tanda -  diskon Rp
@@ -2222,9 +2218,15 @@ end;
 
 procedure TF_Transaksi.ac_GroupExecute(Sender: TObject);
 var
-  GroupId: string;
+  GroupId, qty: string;
 begin
   Ed_Code.SetFocus;
+  if MM_nama.Text = 'TERKUNCI' then
+  begin
+    ShowMessage('Tidak Dapat melakukan Aksi ini, Transaksi sedang TERKUNCI...');
+    Exit;
+  end;
+
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
@@ -2235,11 +2237,37 @@ begin
     if ShowModal = mrOk then
     begin
         GroupId:=TblVal[0];
-        ShowMessage(GroupId);
     end;
   finally
   close;
   end;
+
+  fungsi.SQLExec(dm.QGroup, format('SELECT kd_barang, qty from tb_barang_group_detail '+
+  'WHERE barang_group_id = "%s" ORDER BY kd_barang',[GroupId]), True);
+  while not dm.QGroup.Eof do
+  begin
+    kode_barang := dm.QGroup.FieldByName('kd_barang').AsString;
+    qty := dm.QGroup.FieldByName('Qty').AsString;
+
+    // ShowMessage(Format('kode barang: %s, dan qty:%s', [kode_barang,qty]));
+    input_kode;
+    UbahQty(qty);
+
+    dm.QGroup.Next;
+  end;
+end;
+
+procedure TF_Transaksi.UbahQty(Qty: string);
+var
+  Qty_asli: Integer;
+begin
+  _set(0,19, 1, _Get(0,19) + 'repeat manual '+Qty+' X, '); //keterangan ubah manual
+  Qty_asli:= _Get(0, 18) / _Get(0 , 3);
+  _Set(0, 3, 1, Qty); //QtyH
+  _Set(0, 9, 1, _Get(0, 8) * StrToFloat(Qty)); //total harga
+  _Set(0,14, 1, _Get(0,13) * Qty_asli  * StrToInt(Qty)); //total harga pokok
+  _Set(0,15, 1, _Get(0, 9) - _Get(0,14)); //total laba
+  _Set(0,18, 1, Qty_asli * StrToInt(Qty)); //Qty_real
 end;
 
 end.
