@@ -27,6 +27,7 @@ type
     ds_jual_global: TDataSource;
     ds_jual_rinci: TDataSource;
     gambar: TsAlphaImageList;
+    QGroup: TmySQLQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
     function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;

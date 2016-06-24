@@ -21348,4 +21348,9 @@ object dm: Tdm
     Top = 208
     Bitmap = {}
   end
+  object QGroup: TmySQLQuery
+    Database = My_Conn
+    Left = 176
+    Top = 8
+  end
 end
