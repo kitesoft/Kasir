@@ -24,7 +24,7 @@ object F_Transaksi: TF_Transaksi
   TextHeight = 13
   object Sb: TsStatusBar
     Left = 0
-    Top = 606
+    Top = 605
     Width = 1024
     Height = 22
     Panels = <
@@ -83,7 +83,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p_pesan: TsPanel
     Left = 0
-    Top = 438
+    Top = 437
     Width = 1024
     Height = 22
     Align = alBottom
@@ -211,7 +211,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p4: TsPanel
     Left = 0
-    Top = 460
+    Top = 459
     Width = 1024
     Height = 146
     Align = alBottom
@@ -754,7 +754,7 @@ object F_Transaksi: TF_Transaksi
     Left = 0
     Top = 167
     Width = 1024
-    Height = 241
+    Height = 240
     Align = alClient
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -1451,7 +1451,7 @@ object F_Transaksi: TF_Transaksi
           Top = 8
           Width = 121
           Height = 22
-          Action = ac_Penjualan
+          Action = ac_Group
           FocusType = ftHot
           NotesFont.Charset = DEFAULT_CHARSET
           NotesFont.Color = clWindowText
@@ -1487,7 +1487,6 @@ object F_Transaksi: TF_Transaksi
           Appearance.GradientDown = ggVertical
           Appearance.GradientMirrorDown = ggVertical
           Appearance.GradientChecked = ggVertical
-          Enabled = False
         end
         object btnSatuan: TAdvGlowButton
           Left = 440
@@ -2438,7 +2437,7 @@ object F_Transaksi: TF_Transaksi
   end
   object p_keterangan: TsPanel
     Left = 0
-    Top = 408
+    Top = 407
     Width = 1024
     Height = 30
     Align = alBottom
@@ -3134,26 +3133,26 @@ object F_Transaksi: TF_Transaksi
       OnExecute = ac_KunciExecute
     end
     object ac_Return: TAction
-      Caption = 'Return Jual'
+      Caption = 'Return Jual (F4)'
       OnExecute = ac_ReturnExecute
     end
     object ac_Pending: TAction
-      Caption = 'Pending Transaksi'
+      Caption = 'Pending Trans. (F5)'
       OnExecute = ac_PendingExecute
     end
     object ac_Load: TAction
-      Caption = 'Load Transaksi'
+      Caption = 'Load Trans. (F6)'
       OnExecute = ac_LoadExecute
     end
-    object ac_Penjualan: TAction
-      Caption = 'Penjualan Kasir'
+    object ac_Group: TAction
+      Caption = 'Group Barang (F7)'
     end
     object ac_Satuan: TAction
-      Caption = 'Ubah Satuan'
+      Caption = 'Ubah Satuan (F8)'
       OnExecute = ac_SatuanExecute
     end
     object ac_cetak: TAction
-      Caption = 'Cetak Ulang'
+      Caption = 'Cetak Ulang (F11)'
       OnExecute = ac_cetakExecute
     end
     object ac_skin: TAction

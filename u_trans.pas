@@ -137,7 +137,7 @@ type
     ac_Return: TAction;
     ac_Pending: TAction;
     ac_Load: TAction;
-    ac_Penjualan: TAction;
+    ac_Group: TAction;
     ac_Satuan: TAction;
     ac_cetak: TAction;
     btnInsert: TAdvGlowButton;
