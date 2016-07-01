@@ -916,14 +916,16 @@ begin
 ed_code.SetFocus;
 end;
 
+//merubah Tunai/kredit
+if key=vk_f3 then tunai;
+
 //return jual
 if (key=vk_f4) then
 begin
 ac_ReturnExecute(Self);
 end;
 
-  //pending transaksi
-
+//pending transaksi
 if key=vk_f5 then
   begin
     ac_PendingExecute(Self);
@@ -951,8 +953,6 @@ end;
 //merubah retail dan grosir
 if key=vk_f9 then  retail;
 
-//merubah Tunai/kredit
-if key=vk_f3 then tunai;
 //cetak ulang;
 if key=vk_f11 then
 ac_cetakExecute(Self);
