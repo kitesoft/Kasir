@@ -11,8 +11,10 @@ object F_Bayar: TF_Bayar
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnKeyDown = FormKeyDown
   DesignSize = (
     441
     293)
@@ -79,13 +81,13 @@ object F_Bayar: TF_Bayar
     Font.Style = []
   end
   object sLabel5: TsLabel
-    Left = 116
+    Left = 75
     Top = 192
-    Width = 49
+    Width = 90
     Height = 21
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
-    Caption = 'Tunai'
+    Caption = 'Tunai (RP)'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
@@ -94,13 +96,13 @@ object F_Bayar: TF_Bayar
     Font.Style = []
   end
   object sLabel6: TsLabel
-    Left = 92
+    Left = 50
     Top = 216
-    Width = 73
+    Width = 115
     Height = 21
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
-    Caption = 'Kembali'
+    Caption = 'Kembali (Rp)'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
@@ -108,7 +110,7 @@ object F_Bayar: TF_Bayar
     Font.Name = 'Rockwell'
     Font.Style = []
   end
-  object Ed_Kembali: TsCurrencyEdit
+  object edKembali: TsCurrencyEdit
     Left = 168
     Top = 216
     Width = 265
@@ -158,7 +160,7 @@ object F_Bayar: TF_Bayar
     Style = csDropDownList
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -19
+    Font.Height = -13
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
     ItemHeight = 18
@@ -195,7 +197,7 @@ object F_Bayar: TF_Bayar
     BoundLabel.MaxWidth = 0
     BoundLabel.UseSkinColor = True
   end
-  object edNonTunai: TsCurrencyEdit
+  object edDebit: TsCurrencyEdit
     Left = 168
     Top = 144
     Width = 265
@@ -209,6 +211,7 @@ object F_Bayar: TF_Bayar
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    OnChange = EditChange
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -223,7 +226,7 @@ object F_Bayar: TF_Bayar
     GlyphMode.Grayed = False
     DisplayFormat = '###,###,##0;-###,###,##0;0'
   end
-  object edTarikTunai: TsCurrencyEdit
+  object edTarik: TsCurrencyEdit
     Left = 168
     Top = 168
     Width = 265
@@ -237,6 +240,7 @@ object F_Bayar: TF_Bayar
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    OnChange = EditChange
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -265,6 +269,7 @@ object F_Bayar: TF_Bayar
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    OnChange = EditChange
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -349,6 +354,7 @@ object F_Bayar: TF_Bayar
       Height = 25
       Caption = 'Simpan (F11)'
       TabOrder = 0
+      OnClick = ButtonClick
       SkinData.SkinSection = 'BUTTON'
     end
     object btnBatal: TsButton
@@ -358,6 +364,7 @@ object F_Bayar: TF_Bayar
       Height = 25
       Caption = 'Batal (Esc)'
       TabOrder = 1
+      OnClick = ButtonClick
       SkinData.SkinSection = 'BUTTON'
     end
   end
