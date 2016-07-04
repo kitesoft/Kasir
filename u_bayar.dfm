@@ -363,8 +363,8 @@ object F_Bayar: TF_Bayar
       Width = 75
       Height = 25
       Caption = 'Batal (Esc)'
+      ModalResult = 2
       TabOrder = 1
-      OnClick = ButtonClick
       SkinData.SkinSection = 'BUTTON'
     end
   end

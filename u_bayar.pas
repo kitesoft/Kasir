@@ -64,13 +64,7 @@ end;
 
 procedure TF_Bayar.ButtonClick(Sender: TObject);
 begin
-  if TsButton(Sender) = btnBatal then
-  begin
-    Close;
-  end else
-  begin
     SimpanData;
-  end;
 end;
 
 procedure TF_Bayar.SimpanData;
