@@ -167,7 +167,6 @@ object F_Bayar: TF_Bayar
     Sorted = True
     TabOrder = 1
     Text = 'Bank Central Asia (BCA)'
-    Visible = False
     Items.Strings = (
       'Bank Central Asia (BCA)'
       'Bank Nasional Indonesia (BNI)')
