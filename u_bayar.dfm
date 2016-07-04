@@ -2,7 +2,7 @@ object F_Bayar: TF_Bayar
   Left = 19
   Top = 123
   BorderStyle = bsDialog
-  Caption = 'Pembayaran'
+  Caption = 'Pembayaran Kartu Debit'
   ClientHeight = 293
   ClientWidth = 441
   Color = clBtnFace
