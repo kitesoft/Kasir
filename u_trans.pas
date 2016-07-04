@@ -957,8 +957,14 @@ if key=vk_f9 then  retail;
 // menggunakan F10 sementara Ctrl + P
 if (shift=[ssCTRL]) and (key=80) then
 begin
-  Application.CreateForm(TF_Bayar, F_Bayar);
-  F_Bayar.ShowModal;
+  if Ed_Grand.Value > 0 then
+  begin
+    Application.CreateForm(TF_Bayar, F_Bayar);
+    F_Bayar.TotalHarga := Ed_Grand.value;
+    p4.Visible:= False;
+    F_Bayar.ShowModal;
+    p4.Visible:= True;
+  end;
 end;
 
 //cetak ulang;
