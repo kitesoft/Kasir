@@ -688,8 +688,8 @@ begin
 
   if dm.Q_show.Eof then
   begin
-  MessageDlg('Data ini tidak terdaftar dalam program'+#13+#10+'Mungkin barang '+
-  'belum dimasukkan atau harga belum diset'+#13+#10+'Hubungi Operator gudang untuk meng-set barang ini...', mtError, [mbOK], 0);
+  MessageDlg('Barang dengan kode '+kode_barang+' TIDAK DITEMUKAN'+#13+#10+'Barang '+
+  'belum dimasukkan atau harga belum diatur'+#13+#10+'Hubungi Operator gudang untuk mengatur barang ini...', mtError, [mbOK], 0);
   Ed_Code.Clear;
   Exit;
   end;
