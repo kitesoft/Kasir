@@ -957,12 +957,13 @@ if key=vk_f9 then  retail;
 if key=vk_f11 then
 ac_cetakExecute(Self);
 
-
+// Ctrl + L untuk mengunci transaksi
 if (shift=[ssCTRL]) and (key=76) then
   begin
   ac_KunciExecute(Self);
   end;
 
+// Ctrl + K untuk memasukkan keterangan.
 if (shift=[ssCTRL]) and (key=75) then
   begin
   p_keterangan.Visible:= not(p_keterangan.Visible);
