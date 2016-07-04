@@ -288,7 +288,7 @@ var
 implementation
 
 uses u_dm, U_Cari_pel,acselectskin, U_ubah_satuan, U_Login,
-  u_cariBarang, u_list_jual, u_hari, u_returnJual, u_cari;
+  u_cariBarang, u_list_jual, u_hari, u_returnJual, u_cari, u_bayar;
 
 {$R *.dfm}
 
@@ -952,6 +952,14 @@ end;
 
 //merubah retail dan grosir
 if key=vk_f9 then  retail;
+
+// untuk menampilkan pembayaran kartu debit.
+// menggunakan F10 sementara Ctrl + P
+if (shift=[ssCTRL]) and (key=80) then
+begin
+  Application.CreateForm(TF_Bayar, F_Bayar);
+  F_Bayar.ShowModal;
+end;
 
 //cetak ulang;
 if key=vk_f11 then
