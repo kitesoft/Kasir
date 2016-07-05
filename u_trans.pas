@@ -978,11 +978,12 @@ begin
       begin
          DebitId := cbBank.ItemIndex + 1;
          DebitKode := edNomerKartu.Text;
-         DebitRp:= Integer(edDebit.Text);
-         CashOut:= Integer(edTarik.Text);
+         DebitRp:= edDebit.AsInteger;
+         CashOut:= edTarik.AsInteger;
          Ed_Bayar.Value:= edTunai.Value;
          Ed_Kembali.Value:= edKembali.Value;
-         //simpan;
+         edDebit.AsInteger;
+         simpan;
       end;
     finally
       Close;
@@ -1226,13 +1227,16 @@ mm_nama.Text:= isi_sql;
 
 dm.My_Conn.StartTransaction;
 try
-fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_global(kd_perusahaan,kd_transaksi,tgl_transaksi,'+
-'jam_transaksi,kd_customers,tunai,jatuh_tempo,kd_macam_harga,sub_total,discountGP,'+
-'discountGRP,HPP,grand_total,bayar,Laba,kembali,kd_user,kd_pengawas,cetak,void,komp,ket,simpan_pada) values ("'+sb.Panels[1].Text+'","'+sb.Panels[9].Text
-+'",date(now()),time(now()),"'+ed_pelanggan.Text+'","'+tk+'",ADDDATE(date(now()),INTERVAL '+ed_lama.Text+' DAY),"'+
-macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'","'+ed_discRp.Text+'",'+
+fungsi.SQLExec(dm.Q_exe,'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, '+
+'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '+
+'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '+
+'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '+
+'simpan_pada) VALUES ("'+sb.Panels[1].Text+'" ,"'+sb.Panels[9].Text
++'", date(now()), time(now()), "'+ed_pelanggan.Text+'", "'+tk+'",ADDDATE(date(now()),INTERVAL '+ed_lama.Text+' DAY),"'+
+macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'", "'+ed_discRp.Text+'",'+
 QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand.Text
-+'","'+ed_bayar.Text+'","'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","'+sb.Panels[4].Text
++'","'+ed_bayar.Text+'", '+IntToStr(DebitId)+',"'+DebitKode+'","'+IntToStr(DebitRp)+'","'+
+IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","'+sb.Panels[4].Text
 +'",1,'+QUotedStr(TableView.DataController.Summary.FooterSummaryValues[9])
 +',"'+ip_kasir+'",'+quotedstr(ed_keterangan.Text)+',now())',false);
 
