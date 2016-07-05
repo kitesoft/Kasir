@@ -1056,6 +1056,8 @@ end;
 
 procedure TF_Transaksi.Ed_BayarChange(Sender: TObject);
 begin
+if p4.Visible = False then Exit;
+
 if ed_bayar.Value<>0 then
 begin
 alert.CloseAlert;
