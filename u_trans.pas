@@ -974,12 +974,22 @@ begin
     with F_Bayar do
     try
       TotalHarga := Ed_Grand.value;
-      F_Bayar.ShowModal;
+      if F_Bayar.ShowModal = mrOk then
+      begin
+         DebitId := cbBank.ItemIndex + 1;
+         DebitKode := edNomerKartu.Text;
+         DebitRp:= Integer(edDebit.Text);
+         CashOut:= Integer(edTarik.Text);
+         Ed_Bayar.Value:= edTunai.Value;
+         Ed_Kembali.Value:= edKembali.Value;
+         //simpan;
+      end;
     finally
       Close;
     end;
 
     p4.Visible:= True;
+  end;
 end;
 
 //cetak ulang;
