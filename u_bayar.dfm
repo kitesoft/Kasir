@@ -15,6 +15,7 @@ object F_Bayar: TF_Bayar
   OldCreateOrder = False
   Position = poScreenCenter
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   DesignSize = (
     441
     306)
@@ -179,15 +180,11 @@ object F_Bayar: TF_Bayar
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
     ItemHeight = 18
-    ItemIndex = 0
+    ItemIndex = -1
     ParentFont = False
     Sorted = True
     TabOrder = 1
-    Text = 'Bank Central Asia (BCA)'
     OnEnter = CompEnter
-    Items.Strings = (
-      'Bank Central Asia (BCA)'
-      'Bank Nasional Indonesia (BNI)')
   end
   object edNomerKartu: TsEdit
     Left = 168

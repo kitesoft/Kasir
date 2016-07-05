@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
-  sCurrencyEdit, sLabel, sEdit, sComboBox, ExtCtrls, sPanel, sButton;
+  sCurrencyEdit, sLabel, sEdit, sComboBox, ExtCtrls, sPanel, sButton, U_fungsi;
 
 type
   TF_Bayar = class(TForm)
@@ -33,6 +33,7 @@ type
       Shift: TShiftState);
     procedure EditChange(Sender: TObject);
     procedure CompEnter(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,9 +43,12 @@ type
 
 var
   F_Bayar: TF_Bayar;
+  fungsi: Tfungsi;
   Mgs : TMsg;
 
 implementation
+
+uses u_dm;
 
 {$R *.dfm}
 
@@ -93,6 +97,17 @@ begin
     edBesar.Value:= edKembali.Value;
     sLabel0.Caption:= 'Kembali';
   end;
+end;
+
+procedure TF_Bayar.FormShow(Sender: TObject);
+begin
+  fungsi.SQLExec(dm.Q_temp,'SELECT * FROM tb_debit ORDER BY debit_id',True);
+  while not dm.Q_temp.Eof do
+  begin
+    cbBank.Items.Add(dm.Q_temp.FIeldByName('bank').AsString);
+    dm.Q_temp.Next;
+  end;
+  cbBank.ItemIndex:= 0;
 end;
 
 end.
