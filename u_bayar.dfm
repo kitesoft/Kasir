@@ -3,7 +3,7 @@ object F_Bayar: TF_Bayar
   Top = 137
   BorderStyle = bsDialog
   Caption = 'Pembayaran Kartu Debit'
-  ClientHeight = 279
+  ClientHeight = 306
   ClientWidth = 441
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object F_Bayar: TF_Bayar
   OnKeyDown = FormKeyDown
   DesignSize = (
     441
-    279)
+    306)
   PixelsPerInch = 96
   TextHeight = 13
   object sLabel1: TsLabel
@@ -81,13 +81,13 @@ object F_Bayar: TF_Bayar
     Font.Style = []
   end
   object sLabel5: TsLabel
-    Left = 75
+    Left = 26
     Top = 104
-    Width = 90
+    Width = 139
     Height = 21
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
-    Caption = 'Tunai (RP)'
+    Caption = 'Total Debit (RP)'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
@@ -96,8 +96,23 @@ object F_Bayar: TF_Bayar
     Font.Style = []
   end
   object sLabel6: TsLabel
-    Left = 50
+    Left = 74
     Top = 128
+    Width = 91
+    Height = 21
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Tunai (Rp)'
+    ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 2171169
+    Font.Height = -19
+    Font.Name = 'Rockwell'
+    Font.Style = []
+  end
+  object sLabel7: TsLabel
+    Left = 50
+    Top = 152
     Width = 115
     Height = 21
     Alignment = taRightJustify
@@ -112,7 +127,7 @@ object F_Bayar: TF_Bayar
   end
   object edKembali: TsCurrencyEdit
     Left = 168
-    Top = 128
+    Top = 152
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -125,7 +140,7 @@ object F_Bayar: TF_Bayar
     Font.Style = []
     ParentFont = False
     ReadOnly = True
-    TabOrder = 6
+    TabOrder = 7
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -261,7 +276,7 @@ object F_Bayar: TF_Bayar
   end
   object edTunai: TsCurrencyEdit
     Left = 168
-    Top = 104
+    Top = 128
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -272,7 +287,7 @@ object F_Bayar: TF_Bayar
     Font.Name = 'Rockwell'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 6
     OnChange = EditChange
     OnEnter = CompEnter
     BoundLabel.Indent = 0
@@ -291,7 +306,7 @@ object F_Bayar: TF_Bayar
   end
   object pnlAtas: TsPanel
     Left = 0
-    Top = 157
+    Top = 184
     Width = 441
     Height = 81
     Align = alBottom
@@ -347,11 +362,11 @@ object F_Bayar: TF_Bayar
   end
   object pnlBawah: TsPanel
     Left = 0
-    Top = 238
+    Top = 265
     Width = 441
     Height = 41
     Align = alBottom
-    TabOrder = 7
+    TabOrder = 8
     SkinData.SkinSection = 'PANEL'
     object btnSimpan: TsButton
       Left = 280
@@ -376,5 +391,35 @@ object F_Bayar: TF_Bayar
       OnEnter = CompEnter
       SkinData.SkinSection = 'BUTTON'
     end
+  end
+  object edTotalDebit: TsCurrencyEdit
+    Left = 168
+    Top = 104
+    Width = 265
+    Height = 24
+    Anchors = [akTop, akRight]
+    AutoSize = False
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Rockwell'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 5
+    BoundLabel.Indent = 0
+    BoundLabel.Font.Charset = DEFAULT_CHARSET
+    BoundLabel.Font.Color = clWindowText
+    BoundLabel.Font.Height = -11
+    BoundLabel.Font.Name = 'MS Sans Serif'
+    BoundLabel.Font.Style = []
+    BoundLabel.Layout = sclLeft
+    BoundLabel.MaxWidth = 0
+    BoundLabel.UseSkinColor = True
+    SkinData.SkinSection = 'PANEL'
+    GlyphMode.Blend = 0
+    GlyphMode.Grayed = False
+    DisplayFormat = '###,###,##0;-###,###,##0;0'
   end
 end

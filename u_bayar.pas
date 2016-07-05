@@ -27,6 +27,8 @@ type
     pnlBawah: TsPanel;
     btnSimpan: TsButton;
     btnBatal: TsButton;
+    sLabel7: TsLabel;
+    edTotalDebit: TsCurrencyEdit;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure EditChange(Sender: TObject);
@@ -68,6 +70,7 @@ procedure TF_Bayar.EditChange(Sender: TObject);
 begin
   edBesar.Value := TsCurrencyEdit(Sender).Value;
 
+  edTotalDebit.Value:= edDebit.Value + edTarik.Value;
   edKembali.Value:= edTunai.Value + edDebit.Value - TotalHarga + edTarik.Value;
   if edKembali.AsInteger < 0 then
     btnSimpan.Enabled:= False else
