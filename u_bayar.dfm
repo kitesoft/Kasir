@@ -142,7 +142,7 @@ object F_Bayar: TF_Bayar
   end
   object cbBank: TsComboBox
     Left = 168
-    Top = 92
+    Top = 96
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]

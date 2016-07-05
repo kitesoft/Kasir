@@ -259,6 +259,10 @@ type
     function KasirOffline: Boolean;
     procedure ac_GroupExecute(Sender: TObject);
   private
+    DebitId:Integer;
+    DebitKode: string;
+    DebitRp: Integer;
+    CashOut: Integer;
     procedure InputBoxSetPasswordChar(var Msg: TMessage);message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure UbahQty(Qty:string);
@@ -506,6 +510,11 @@ begin
 sb_tunai.Caption:= 'Kredit';
 tunai;
 end;
+
+DebitId:= 0;
+DebitKode:= '';
+DebitRp:=0;
+CashOut:=0;
 end;
 
 procedure TF_Transaksi.FormShow(Sender: TObject);
@@ -960,11 +969,17 @@ begin
   if Ed_Grand.Value > 0 then
   begin
     Application.CreateForm(TF_Bayar, F_Bayar);
-    F_Bayar.TotalHarga := Ed_Grand.value;
     p4.Visible:= False;
-    F_Bayar.ShowModal;
+
+    with F_Bayar do
+    try
+      TotalHarga := Ed_Grand.value;
+      F_Bayar.ShowModal;
+    finally
+      Close;
+    end;
+
     p4.Visible:= True;
-  end;
 end;
 
 //cetak ulang;
