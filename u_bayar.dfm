@@ -169,6 +169,7 @@ object F_Bayar: TF_Bayar
     Sorted = True
     TabOrder = 1
     Text = 'Bank Central Asia (BCA)'
+    OnEnter = CompEnter
     Items.Strings = (
       'Bank Central Asia (BCA)'
       'Bank Nasional Indonesia (BNI)')
@@ -186,6 +187,7 @@ object F_Bayar: TF_Bayar
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    OnEnter = CompEnter
     SkinData.SkinSection = 'EDIT'
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
@@ -212,6 +214,7 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     TabOrder = 3
     OnChange = EditChange
+    OnEnter = CompEnter
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -241,6 +244,7 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     TabOrder = 4
     OnChange = EditChange
+    OnEnter = CompEnter
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -270,6 +274,7 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     TabOrder = 5
     OnChange = EditChange
+    OnEnter = CompEnter
     BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
@@ -354,8 +359,10 @@ object F_Bayar: TF_Bayar
       Width = 75
       Height = 25
       Caption = 'Simpan'
+      Enabled = False
       ModalResult = 1
       TabOrder = 0
+      OnEnter = CompEnter
       SkinData.SkinSection = 'BUTTON'
     end
     object btnBatal: TsButton
@@ -366,6 +373,7 @@ object F_Bayar: TF_Bayar
       Caption = 'Batal (Esc)'
       ModalResult = 2
       TabOrder = 1
+      OnEnter = CompEnter
       SkinData.SkinSection = 'BUTTON'
     end
   end

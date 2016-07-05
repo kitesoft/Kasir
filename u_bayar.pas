@@ -29,8 +29,8 @@ type
     btnBatal: TsButton;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure TotalKembalian;
     procedure EditChange(Sender: TObject);
+    procedure CompEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,19 +57,39 @@ begin
     if edNomerKartu.Focused then edDebit.SetFocus else
     if edDebit.Focused then edTarik.SetFocus else
     if edTarik.Focused then edTunai.SetFocus else
-    if edTunai.Focused then btnSimpan.SetFocus;
+    if edTunai.Focused then
+    begin
+      if btnSimpan.Enabled then btnSimpan.SetFocus;
+    end;
   end;
-end;
-
-procedure TF_Bayar.TotalKembalian;
-begin
-  edKembali.Value:= edTunai.Value + edDebit.Value - TotalHarga + edTarik.Value;
 end;
 
 procedure TF_Bayar.EditChange(Sender: TObject);
 begin
   edBesar.Value := TsCurrencyEdit(Sender).Value;
-  sLabel0.Caption:= StringReplace(TsCurrencyEdit(Sender).Name,'ed','',[rfReplaceAll]);
+
+  edKembali.Value:= edTunai.Value + edDebit.Value - TotalHarga + edTarik.Value;
+  if edKembali.AsInteger < 0 then
+    btnSimpan.Enabled:= False else
+    btnSimpan.Enabled:= True;
+end;
+
+procedure TF_Bayar.CompEnter(Sender: TObject);
+begin
+  pnlAtas.Visible:= False;
+
+  if Sender is TsCurrencyEdit then
+  begin
+    pnlAtas.Visible:= True;
+    sLabel0.Caption:= StringReplace(TsCurrencyEdit(Sender).Name,'ed','',[rfReplaceAll]);
+    edBesar.Value:= TsCurrencyEdit(Sender).Value;
+  end else
+  if TsButton(Sender) = btnSimpan then
+  begin
+    pnlAtas.Visible:= True;
+    edBesar.Value:= edKembali.Value;
+    sLabel0.Caption:= 'Kembali';
+  end;
 end;
 
 end.
