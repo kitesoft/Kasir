@@ -1279,7 +1279,8 @@ end;
 procedure TF_Transaksi.cetak_struk_kecil;
 Var toko, alamat,telp, kd_transaksi, kasir, cust, waktu,barang, barang2, satuan, har_sat, harga,
     discP,discRp,netto,discGP,discGRp,nettoG,total, bayar, kembali, void, kaki1,kaki2, tgl_trans :string;
-  i,j,x,panjang: integer;
+    NonTunai, TarikTunai,TotalDebit: string;
+  i,j,x,panjang, TotalDebitRp: integer;
   F: TextFile;
 begin
  panjang:=StrToIntDef(cb_lebar_struk.Text,36);
@@ -1357,28 +1358,53 @@ end;
   Writeln(F, void);
   Writeln(F, '');
 
-  Total:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('sub_total').AsFloat,ffNumber,10,0),panjang-9, tarightjustify);
+  Total:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('sub_total').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
 
-  write(F,'Total   :');
+  write(F,'Total       :');
   Writeln(F, total);
 
   if dm.Q_print.FieldByName('discountGRp').AsInteger <>0 then
   begin
-  discGP:= 'DISC    : ('+dm.Q_print.fieldbyname('discountGP').AsString+' %)';
-  discGRp:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('discountGRp').AsFloat,ffNumber,10,0)+' =' , 27 - Length(discGP) ,tarightjustify);
-  nettoG:= fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('grand_total').AsFloat,ffNumber,10,0) , panjang-Length(discGp)-length(discGRp), taRightJustify);
-  write(F, discGP);
-  Write(F,discGRp);
-  Writeln(F,nettoG);
+    discGP:= 'DISKON ('+dm.Q_print.fieldbyname('discountGP').AsString+'%) ';
+    discGRp:= FloatToStrF(dm.Q_print.FieldByName('discountGRp').AsFloat,ffNumber,10,0);
+    nettoG:= fungsi.tulisP('= ' + FloatTostrF(dm.Q_print.fieldbyname('grand_total').AsFloat,ffNumber,10,0) , panjang-Length(discGp)-length(discGRp), taRightJustify);
+    write(F, discGP);
+    Write(F,discGRp);
+    Writeln(F,nettoG);
   end;
 
-      Bayar:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('bayar').AsFloat,ffNumber,10,0),panjang-9, tarightjustify);
-      Kembali:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('kembali').AsFloat,ffNumber,10,0),panjang-9, tarightjustify);
+  if dm.Q_print.FieldByName('debit').AsInteger <> 0 then
+  begin
+    NonTunai:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('debit').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
+    write(F,'Non Tunai   :');
+    Writeln(F, NonTunai);
+    if dm.Q_print.FieldByName('cash_out').AsInteger <> 0 then
+    begin
+      TarikTunai:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('cash_out').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
+      write(F,'Tarik Tunai :');
+      Writeln(F, TarikTunai);
+      TotalDebitRp:= dm.Q_print.FieldByName('debit').AsInteger + dm.Q_print.FieldByName('cash_out').AsInteger;
+      TotalDebit:= fungsi.tulisP(FloatToStrF(TotalDebitRp,ffNumber,10,0),panjang-13,taRightJustify);
+      write(F, 'Total Debit :');
+      Writeln(F, TotalDebit);
+    end;
+  end;
 
-  write(F,'Bayar   :');
-  Writeln(F, bayar);
-  write(F,'Kembali :');
-  Writeln(F, kembali);
+  if dm.Q_print.FieldByName('bayar').AsInteger <> 0 then
+  begin
+    Bayar:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('bayar').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
+    write(F,'Tunai       :');
+    Writeln(F, bayar);
+  end;
+
+  if (dm.Q_print.FieldByName('kembali').AsInteger <> 0) and
+     (dm.Q_print.FieldByName('kembali').AsInteger <> dm.Q_print.FieldByName('cash_out').AsInteger) then
+  begin
+    Kembali:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('kembali').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
+    write(F,'Kembali     :');
+    Writeln(F, kembali);
+  end;
+
   writeln(F,'');
 
       toko:= fungsi.tulisP(dm.Q_print.fieldbyname('n_perusahaan').AsString, panjang, tacenter);
