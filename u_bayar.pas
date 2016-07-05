@@ -50,7 +50,6 @@ procedure TF_Bayar.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then Close else
-//  if Key = VK_F11 then SimpanData else
   if Key = VK_RETURN then
   begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
