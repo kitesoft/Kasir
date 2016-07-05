@@ -21,9 +21,9 @@ object F_Bayar: TF_Bayar
   PixelsPerInch = 96
   TextHeight = 13
   object sLabel1: TsLabel
-    Left = 67
+    Left = 70
     Top = 96
-    Width = 98
+    Width = 95
     Height = 21
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
@@ -317,6 +317,7 @@ object F_Bayar: TF_Bayar
       Width = 265
       Height = 67
       Anchors = [akRight, akBottom]
+      AutoSize = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -53
@@ -352,9 +353,9 @@ object F_Bayar: TF_Bayar
       Top = 8
       Width = 75
       Height = 25
-      Caption = 'Simpan (F11)'
+      Caption = 'Simpan'
+      ModalResult = 1
       TabOrder = 0
-      OnClick = ButtonClick
       SkinData.SkinSection = 'BUTTON'
     end
     object btnBatal: TsButton

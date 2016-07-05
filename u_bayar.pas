@@ -29,8 +29,6 @@ type
     btnBatal: TsButton;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure ButtonClick(Sender: TObject);
-    procedure SimpanData;
     procedure TotalKembalian;
     procedure EditChange(Sender: TObject);
   private
@@ -42,6 +40,7 @@ type
 
 var
   F_Bayar: TF_Bayar;
+  Mgs : TMsg;
 
 implementation
 
@@ -51,25 +50,16 @@ procedure TF_Bayar.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then Close else
-  if Key = VK_F11 then SimpanData else
+//  if Key = VK_F11 then SimpanData else
   if Key = VK_RETURN then
   begin
+    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
     if cbBank.Focused then edNomerKartu.SetFocus else
     if edNomerKartu.Focused then edDebit.SetFocus else
     if edDebit.Focused then edTarik.SetFocus else
     if edTarik.Focused then edTunai.SetFocus else
-    if edTunai.Focused then TotalKembalian;
+    if edTunai.Focused then btnSimpan.SetFocus;
   end;
-end;
-
-procedure TF_Bayar.ButtonClick(Sender: TObject);
-begin
-    SimpanData;
-end;
-
-procedure TF_Bayar.SimpanData;
-begin
-  ShowMessage('Simpan Data...');
 end;
 
 procedure TF_Bayar.TotalKembalian;
