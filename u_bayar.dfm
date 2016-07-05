@@ -1,9 +1,9 @@
 object F_Bayar: TF_Bayar
   Left = 19
-  Top = 123
+  Top = 137
   BorderStyle = bsDialog
   Caption = 'Pembayaran Kartu Debit'
-  ClientHeight = 293
+  ClientHeight = 279
   ClientWidth = 441
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,12 +17,12 @@ object F_Bayar: TF_Bayar
   OnKeyDown = FormKeyDown
   DesignSize = (
     441
-    293)
+    279)
   PixelsPerInch = 96
   TextHeight = 13
   object sLabel1: TsLabel
     Left = 70
-    Top = 96
+    Top = 8
     Width = 95
     Height = 21
     Alignment = taRightJustify
@@ -37,7 +37,7 @@ object F_Bayar: TF_Bayar
   end
   object sLabel2: TsLabel
     Left = 53
-    Top = 120
+    Top = 32
     Width = 112
     Height = 21
     Alignment = taRightJustify
@@ -52,7 +52,7 @@ object F_Bayar: TF_Bayar
   end
   object sLabel3: TsLabel
     Left = 33
-    Top = 144
+    Top = 56
     Width = 132
     Height = 21
     Alignment = taRightJustify
@@ -67,7 +67,7 @@ object F_Bayar: TF_Bayar
   end
   object sLabel4: TsLabel
     Left = 23
-    Top = 168
+    Top = 80
     Width = 142
     Height = 21
     Alignment = taRightJustify
@@ -82,7 +82,7 @@ object F_Bayar: TF_Bayar
   end
   object sLabel5: TsLabel
     Left = 75
-    Top = 192
+    Top = 104
     Width = 90
     Height = 21
     Alignment = taRightJustify
@@ -97,7 +97,7 @@ object F_Bayar: TF_Bayar
   end
   object sLabel6: TsLabel
     Left = 50
-    Top = 216
+    Top = 128
     Width = 115
     Height = 21
     Alignment = taRightJustify
@@ -112,7 +112,7 @@ object F_Bayar: TF_Bayar
   end
   object edKembali: TsCurrencyEdit
     Left = 168
-    Top = 216
+    Top = 128
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -142,7 +142,7 @@ object F_Bayar: TF_Bayar
   end
   object cbBank: TsComboBox
     Left = 168
-    Top = 96
+    Top = 8
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -176,7 +176,7 @@ object F_Bayar: TF_Bayar
   end
   object edNomerKartu: TsEdit
     Left = 168
-    Top = 120
+    Top = 32
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -201,7 +201,7 @@ object F_Bayar: TF_Bayar
   end
   object edDebit: TsCurrencyEdit
     Left = 168
-    Top = 144
+    Top = 56
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -231,7 +231,7 @@ object F_Bayar: TF_Bayar
   end
   object edTarik: TsCurrencyEdit
     Left = 168
-    Top = 168
+    Top = 80
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -261,7 +261,7 @@ object F_Bayar: TF_Bayar
   end
   object edTunai: TsCurrencyEdit
     Left = 168
-    Top = 192
+    Top = 104
     Width = 265
     Height = 24
     Anchors = [akTop, akRight]
@@ -291,10 +291,10 @@ object F_Bayar: TF_Bayar
   end
   object pnlAtas: TsPanel
     Left = 0
-    Top = 0
+    Top = 157
     Width = 441
     Height = 81
-    Align = alTop
+    Align = alBottom
     Enabled = False
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
@@ -347,7 +347,7 @@ object F_Bayar: TF_Bayar
   end
   object pnlBawah: TsPanel
     Left = 0
-    Top = 252
+    Top = 238
     Width = 441
     Height = 41
     Align = alBottom
