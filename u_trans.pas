@@ -962,9 +962,12 @@ end;
 //merubah retail dan grosir
 if key=vk_f9 then  retail;
 
+//cetak ulang;
+if key=vk_f11 then
+ac_cetakExecute(Self);
+
 // untuk menampilkan pembayaran kartu debit.
-// menggunakan F10 sementara Ctrl + P
-if (shift=[ssCTRL]) and (key=80) then
+if key=vk_f12 then
 begin
   if Ed_Grand.Value > 0 then
   begin
@@ -992,10 +995,6 @@ begin
     p4.Visible:= True;
   end;
 end;
-
-//cetak ulang;
-if key=vk_f11 then
-ac_cetakExecute(Self);
 
 // Ctrl + L untuk mengunci transaksi
 if (shift=[ssCTRL]) and (key=76) then
