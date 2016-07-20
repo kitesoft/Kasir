@@ -2289,7 +2289,7 @@ end;
 
 procedure TF_Transaksi.ac_GroupExecute(Sender: TObject);
 var
-  GroupId, qty: string;
+  GroupId, qty, diskon, jenis: string;
 begin
   Ed_Code.SetFocus;
   if MM_nama.Text = 'TERKUNCI' then
@@ -2301,13 +2301,17 @@ begin
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
-    _SQLi:= 'select id_group, deskripsi from vw_group_barang';
+    _SQLi:= 'select id_group, deskripsi, diskon, jenis from tb_barang_group';
     tblcap[0]:= 'Kode Group';
     tblCap[1]:= 'Deskripsi Group';
+    tblCap[2]:= 'Diskon';
+    tblCap[3]:= 'Jenis';
     tampil_button(False,True);
     if ShowModal = mrOk then
     begin
         GroupId:=TblVal[0];
+        diskon:=TblVal[2];
+        jenis:=TblVal[3];
     end;
   finally
   close;
@@ -2326,6 +2330,18 @@ begin
       UbahQty(qty);
 
     dm.QGroup.Next;
+  end;
+  if jenis = '%' then
+  begin
+    ed_discP.Value := StrToFloat(diskon);
+    ed_discP.SetFocus;
+    Ed_Bayar.SetFocus;
+  end
+  else
+  begin
+    Ed_discRp.Value := StrToFloat(diskon);
+    Ed_discRp.SetFocus;
+    Ed_Bayar.SetFocus;
   end;
 end;
 
