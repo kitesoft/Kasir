@@ -361,6 +361,7 @@ begin
   end
   else
   begin
+    cb_kd_op.Clear;
     for x := 1 to dm.Q_show.RecordCount do
     begin
       cb_kd_op.AddItem(dm.Q_show.fieldbyname('user').AsString, nil);
