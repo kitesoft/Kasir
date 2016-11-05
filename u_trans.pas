@@ -1739,17 +1739,20 @@ ed_keterangan.SetFocus;
 exit;
 end;
 
-fungsi.SQLExec(dm.Q_temp,'select * from vw_pelanggan where kd_pelanggan="'+
-ed_pelanggan.Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
-
-batas:= dm.Q_temp.fieldbyname('limit').AsInteger;
-piutang:= dm.Q_temp.fieldbyname('piutang').AsInteger;
-merah:=strtointdef(ed_grand.text,0)+piutang;
-
-    if (batas <> 0) and (merah>batas) then
+    if sb_tunai.Caption='Kredit' then
     begin
-    showmessage('transaksi tidak bisa dilakukan'#10#13'Karena grand total melebihi limit...');
-    exit;
+      fungsi.SQLExec(dm.Q_temp,'select * from vw_pelanggan where kd_pelanggan="'+
+      ed_pelanggan.Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+
+      batas:= dm.Q_temp.fieldbyname('limit').AsInteger;
+      piutang:= dm.Q_temp.fieldbyname('piutang').AsInteger;
+      merah:=strtointdef(ed_grand.text,0)+piutang;
+
+      if (batas <> 0) and (merah>batas) then
+      begin
+        showmessage('transaksi tidak bisa dilakukan'#10#13'Karena grand total melebihi limit...');
+        exit;
+      end;
     end;
 
     if TableView.DataController.RecordCount <>0 then
