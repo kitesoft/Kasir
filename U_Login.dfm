@@ -224,6 +224,7 @@ object F_Login: TF_Login
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      OnChange = Ed_Kd_UserChange
       OnKeyDown = Ed_Kd_UserKeyDown
       SkinData.SkinSection = 'EDIT'
       BoundLabel.Indent = 0
