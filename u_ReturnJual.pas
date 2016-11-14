@@ -72,12 +72,12 @@ type
   private
     { Private declarations }
   public
+    sub_sub_total,diskon:integer;
     { Public declarations }
   end;
 
 var
   f_returnJual: Tf_returnJual;
-  sub_sub_total,diskon:integer;
 
 implementation
 

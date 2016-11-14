@@ -44,12 +44,12 @@ type
   private
     { Private declarations }
   public
+    userPassword, userRealName: string;
     sop: Boolean;
   end;
 
 var
   F_Login: TF_Login;
-  userPassword, userRealName: string;
 
 implementation
 

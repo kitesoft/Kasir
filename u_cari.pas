@@ -48,14 +48,14 @@ type
     TblVal: array [0..3] of string;
     CariT: Integer;
     Fsumber:TForm;
+    kondisi,nm_tabel: string;
     { Public declarations }
   end;
 
 var
   F_cari:TF_cari;
-  kondisi,nm_tabel: string;
   TblTemp : TStringList;
-  
+
 implementation
 
 uses u_dm, u_returnJual;

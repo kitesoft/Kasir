@@ -32,12 +32,12 @@ type
   private
     { Private declarations }
   public
+    sat1,sat2,sat3: string;
     { Public declarations }
   end;
 
 var
   F_Ubah_Satuan: TF_Ubah_Satuan;
-  sat1,sat2,sat3: string;
 
 implementation
 
