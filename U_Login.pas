@@ -50,7 +50,6 @@ type
 var
   F_Login: TF_Login;
   fungsi: Tfungsi;
-  Mgs: TMsg;
   userPassword, userRealName: string;
 
 implementation

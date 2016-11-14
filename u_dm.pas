@@ -40,6 +40,7 @@ type
 
 var
   dm: Tdm;
+  Mgs: TMsg;
   kd_comp, ip_kasir, macam_harga: string;
   a_path, AppPath, file_ini, cek_pusat: string;
   sop: Boolean;

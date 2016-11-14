@@ -281,7 +281,6 @@ var
   pesan,satuan,kode_barang, inputstring,passs,alasan,no_pending,harga_edit:string;
   diskonP:Real;
   fungsi:Tfungsi;
-  Mgs : TMsg;
 
   F_pesan : TForm;
   M_pesan : TMemo;

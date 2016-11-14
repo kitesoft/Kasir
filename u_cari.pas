@@ -56,7 +56,6 @@ var
   kondisi,nm_tabel: string;
   TblTemp : TStringList;
   fungsi:tfungsi;
-  Mgs : TMsg;
   
 implementation
 
