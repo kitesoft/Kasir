@@ -50,8 +50,8 @@ object f_cariBarang: Tf_cariBarang
       OptionsView.ColumnAutoWidth = True
       OptionsView.GroupByBox = False
       OptionsView.Header = False
-      Styles.Inactive = F_Transaksi.cxstyl1
-      Styles.Selection = F_Transaksi.cxstyl1
+      Styles.Inactive = dm.cxstyl1
+      Styles.Selection = dm.cxstyl1
       object clmnColumn1: TcxGridDBColumn
         Caption = 'Kode'
         DataBinding.FieldName = 'kd_barang'

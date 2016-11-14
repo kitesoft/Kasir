@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, sSkinManager, DB, mySQLDbTables, dialogs, forms, inifiles,
   frxClass, frxDBSet, ScktComp, frxDesgn, ImgList, Controls, acAlphaImageList,
-  SHFolder, Windows;
+  SHFolder, Windows, cxStyles;
 
 type
   Tdm = class(TDataModule)
@@ -28,6 +28,8 @@ type
     ds_jual_rinci: TDataSource;
     gambar: TsAlphaImageList;
     QGroup: TmySQLQuery;
+    Style: TcxStyleRepository;
+    cxstyl1: TcxStyle;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
     function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;

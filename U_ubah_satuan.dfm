@@ -115,8 +115,8 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
       OptionsView.GridLines = glNone
       OptionsView.GroupByBox = False
       OptionsView.IndicatorWidth = 10
-      Styles.Inactive = F_Transaksi.cxstyl1
-      Styles.Selection = F_Transaksi.cxstyl1
+      Styles.Inactive = dm.cxstyl1
+      Styles.Selection = dm.cxstyl1
       object tv_barcode: TcxGridColumn
         Caption = 'Barcode'
         Width = 194

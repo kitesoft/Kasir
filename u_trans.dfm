@@ -1,6 +1,6 @@
 object F_Transaksi: TF_Transaksi
-  Left = -4
-  Top = 33
+  Left = 168
+  Top = 45
   Width = 1040
   Height = 666
   Caption = 'transaksi'
@@ -842,8 +842,8 @@ object F_Transaksi: TF_Transaksi
       OptionsView.GridLines = glNone
       OptionsView.GroupByBox = False
       OptionsView.IndicatorWidth = 10
-      Styles.Inactive = cxstyl1
-      Styles.Selection = cxstyl1
+      Styles.Inactive = dm.cxstyl1
+      Styles.Selection = dm.cxstyl1
       object tv_no: TcxGridColumn
         Caption = 'No'
         DataBinding.ValueType = 'Integer'
@@ -2544,14 +2544,6 @@ object F_Transaksi: TF_Transaksi
     Version = '1.8.0.0'
     Left = 128
     Top = 272
-  end
-  object cxstylrpstry1: TcxStyleRepository
-    PixelsPerInch = 96
-    object cxstyl1: TcxStyle
-      AssignedValues = [svColor, svTextColor]
-      Color = clTeal
-      TextColor = clHighlightText
-    end
   end
   object tmr_out: TTimer
     Enabled = False

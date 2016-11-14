@@ -73,8 +73,6 @@ type
     tv_barcode3: TcxGridColumn;
     tv_hpp: TcxGridColumn;
     tv_total_hpp: TcxGridColumn;
-    cxstylrpstry1: TcxStyleRepository;
-    cxstyl1: TcxStyle;
     tv_total_laba: TcxGridColumn;
     tv_kd_satuan: TcxGridColumn;
     tv_void: TcxGridColumn;

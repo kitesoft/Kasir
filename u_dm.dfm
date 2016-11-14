@@ -21353,4 +21353,14 @@ object dm: Tdm
     Left = 176
     Top = 8
   end
+  object Style: TcxStyleRepository
+    Left = 232
+    Top = 144
+    PixelsPerInch = 96
+    object cxstyl1: TcxStyle
+      AssignedValues = [svColor, svTextColor]
+      Color = clTeal
+      TextColor = clHighlightText
+    end
+  end
 end

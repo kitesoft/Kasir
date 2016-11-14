@@ -369,6 +369,7 @@ object f_returnJual: Tf_returnJual
         OptionsView.GroupByBox = False
         OptionsView.Indicator = True
         OptionsView.IndicatorWidth = 10
+        Styles.Inactive = dm.cxstyl1
         object ableViewColumn1: TcxGridColumn
           Caption = 'PID'
           GroupSummaryAlignment = taCenter

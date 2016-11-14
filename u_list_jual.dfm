@@ -44,6 +44,7 @@ object f_list_sales: Tf_list_sales
       OptionsView.NoDataToDisplayInfoText = '[Tidak ada data yang bisa ditampilkan]'
       OptionsView.ColumnAutoWidth = True
       OptionsView.GroupByBox = False
+      Styles.Inactive = dm.cxstyl1
       object clmn_data1kd_transaksi: TcxGridDBColumn
         Caption = 'Kode Transaksi'
         DataBinding.FieldName = 'kd_transaksi'

@@ -66,6 +66,8 @@ object f_cari: Tf_cari
       OptionsView.ColumnAutoWidth = True
       OptionsView.GroupByBox = False
       OptionsView.Indicator = True
+      Styles.Inactive = dm.cxstyl1
+      Styles.Selection = dm.cxstyl1
       object clm1: TcxGridDBColumn
         Tag = 1
         Visible = False
