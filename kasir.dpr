@@ -5,7 +5,6 @@ uses
   u_trans in 'u_trans.pas' {F_Transaksi},
   u_dm in 'u_dm.pas' {dm: TDataModule},
   UFungsi in 'UFungsi.pas',
-  U_Cari_pel in 'U_Cari_pel.pas' {F_Cari_pelanggan},
   U_ubah_satuan in 'U_ubah_satuan.pas' {F_Ubah_Satuan},
   U_Login in 'U_Login.pas' {F_Login},
   u_list_jual in 'u_list_jual.pas' {f_list_sales},
