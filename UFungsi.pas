@@ -33,11 +33,12 @@ type
     procedure SaveToFile(aQuery: TmySQLQuery; _SQL, nm_file: string);
     procedure SQLExec(aQuery: TmySQLQuery; _SQL: string; isSearch: boolean);
     procedure SQLExecT(aQuery: TmySQLQuery; _SQL: string; isSearch: boolean);
-    procedure Cetakfile(const sFileName: string);
-    procedure openCashDrawer;
-    function ambil_ini(nama_file, Section, Ident: string; def: string = ''): string;
-    procedure simpan_ini(nama_file, Section, Ident, value: string);
-    function tulisP(Text: string; lebar: integer; Alignment: TAlignment =
+    procedure CetakFile(const sFileName: string);
+    procedure OpenCashDrawer;
+    function AmbilIniFile(nama_file, Section, Ident: string; def: string = ''): string;
+    procedure SimpanIniFile(nama_file, Section, Ident, value: string);
+    function AddSpace(Count: integer; Text: string; AsTail: boolean = false): string;
+    function TulisFormat(Text: string; lebar: integer; Alignment: TAlignment =
       taleftjustify): string;
   end;
 
@@ -277,7 +278,7 @@ begin
   TQueryTread.Create(aQuery, _SQL, isSearch);
 end;
 
-function Tfungsi.ambil_ini(nama_file, Section, Ident: string; def: string = ''): string;
+function Tfungsi.AmbilIniFile(nama_file, Section, Ident: string; def: string = ''): string;
 var
   a: TIniFile;
 begin
@@ -289,7 +290,7 @@ begin
   end;
 end;
 
-procedure Tfungsi.simpan_ini(nama_file, Section, Ident, value: string);
+procedure Tfungsi.SimpanIniFile(nama_file, Section, Ident, value: string);
 var
   a: TIniFile;
 begin
@@ -301,7 +302,7 @@ begin
   end;
 end;
 
-function AddSpace(Count: integer; Text: string; AsTail: boolean = false): string;
+function Tfungsi.AddSpace(Count: integer; Text: string; AsTail: boolean = false): string;
 var
   i: integer;
   s: string;
@@ -315,7 +316,7 @@ begin
     Result := s + Text;
 end;
 
-function Tfungsi.tulisP(Text: string; lebar: integer; Alignment: TAlignment =
+function Tfungsi.TulisFormat(Text: string; lebar: integer; Alignment: TAlignment =
   taleftjustify): string;
 var
   left, right: integer;
@@ -407,7 +408,7 @@ begin
   end;
 end;
 
-procedure Tfungsi.openCashDrawer;
+procedure Tfungsi.OpenCashDrawer;
 const
   cBUFSIZE = 16384;
 type

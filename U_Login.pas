@@ -173,7 +173,7 @@ begin
       dm.kd_operator := cb_kd_OP.Text;
       f_transaksi.Sb.Panels[5].Text := ed_N_Op.Text;
 
-      fungsi.simpan_ini(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
+      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
       F_Transaksi.awal;
       F_Transaksi.kode_transaksi_terbaru;
       

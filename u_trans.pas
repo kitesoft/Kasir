@@ -347,26 +347,26 @@ begin
 //untuk load form
 
 // pesan berjalan
-  pesan := fungsi.ambil_ini(dm.file_ini,'kasir','pesan','Promosi harus dilakukan untuk mempercepat penjualan barang...');
+  pesan := fungsi.AmbilIniFile(dm.file_ini,'kasir','pesan','Promosi harus dilakukan untuk mempercepat penjualan barang...');
   p_pesan.Height:=0;
 
   cbFontName.Items.Assign(Screen.Fonts);
   CBFontName.Sorted := True;
 
-  CBFontName.ItemIndex := CBFontName.Items.IndexOf(fungsi.ambil_ini(dm.file_ini,'kasir','nama_font','Arial'));
-  crb_bg.selected:= StringToColor(fungsi.ambil_ini(dm.file_ini,'kasir','bg_font','clBlue'));
-  crb_font.selected:= StringToColor(fungsi.ambil_ini(dm.file_ini,'kasir','cl_font','clWhite'));
-  cbsize.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','size_font','20');
-  cbspeed.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','speed','20');
-  cb_aktif.ItemIndex := StrToIntDef(fungsi.ambil_ini(dm.file_ini,'kasir','pesan_aktif'),0);
+  CBFontName.ItemIndex := CBFontName.Items.IndexOf(fungsi.AmbilIniFile(dm.file_ini,'kasir','nama_font','Arial'));
+  crb_bg.selected:= StringToColor(fungsi.AmbilIniFile(dm.file_ini,'kasir','bg_font','clBlue'));
+  crb_font.selected:= StringToColor(fungsi.AmbilIniFile(dm.file_ini,'kasir','cl_font','clWhite'));
+  cbsize.Text:= fungsi.AmbilIniFile(dm.file_ini,'kasir','size_font','20');
+  cbspeed.Text:= fungsi.AmbilIniFile(dm.file_ini,'kasir','speed','20');
+  cb_aktif.ItemIndex := StrToIntDef(fungsi.AmbilIniFile(dm.file_ini,'kasir','pesan_aktif'),0);
 
-  Style_pesan   := TFontStyles(Byte(StrToInt(fungsi.ambil_ini(dm.file_ini,'kasir','style_font','1'))));
+  Style_pesan   := TFontStyles(Byte(StrToInt(fungsi.AmbilIniFile(dm.file_ini,'kasir','style_font','1'))));
   if fsbold in Style_pesan then btn2.Down:=True;
   if fsitalic in Style_pesan then btn3.Down:=True;
   if fsunderline in Style_pesan then btn4.Down:=True;
 
 //(retail grosir) (tunai kredit) dan tambahan
-if fungsi.ambil_ini(dm.file_ini,'kasir','retail','1')='0' then
+if fungsi.AmbilIniFile(dm.file_ini,'kasir','retail','1')='0' then
 begin
 sb_retail.Caption:='Retail';
 retail;
@@ -376,7 +376,7 @@ sb_retail.Caption:='Grosir';
 retail;
 end;
 
-if fungsi.ambil_ini(dm.file_ini,'kasir','tunai','1')='0' then
+if fungsi.AmbilIniFile(dm.file_ini,'kasir','tunai','1')='0' then
 begin
 sb_tunai.Caption:= 'Tunai';
 tunai;
@@ -386,15 +386,15 @@ sb_tunai.Caption:= 'Kredit';
 tunai;
 end;
 
-ed_tambahan.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','tambahan','100');
+ed_tambahan.Text:= fungsi.AmbilIniFile(dm.file_ini,'kasir','tambahan','100');
 
 //ribbon
 rb1.ActivePage:=tb_pilihan;
 tb_transaksi.TabVisible:= False;
 
-cb_jenis_struk.ItemIndex := StrToIntDef(fungsi.ambil_ini(dm.file_ini,'kasir','jenis_struk'),0);
-cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(fungsi.ambil_ini(dm.file_ini,'kasir','lebar_struk','38'));
-ed_footer_struk.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','footer_struk','TERIMA KASIH ATAS KUNJUANGAN ANDA');
+cb_jenis_struk.ItemIndex := StrToIntDef(fungsi.AmbilIniFile(dm.file_ini,'kasir','jenis_struk'),0);
+cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(fungsi.AmbilIniFile(dm.file_ini,'kasir','lebar_struk','38'));
+ed_footer_struk.Text:= fungsi.AmbilIniFile(dm.file_ini,'kasir','footer_struk','TERIMA KASIH ATAS KUNJUANGAN ANDA');
 
 //skin
 ed_skin.Text:=dm.sm.SkinName;
@@ -489,7 +489,7 @@ sb_retail.Enabled:= true;
 ed_bayar.ReadOnly:= true;
 ed_discP.ReadOnly:=true;
 
-if fungsi.ambil_ini(dm.file_ini,'kasir','retail')='0' then
+if fungsi.AmbilIniFile(dm.file_ini,'kasir','retail')='0' then
 begin
 sb_retail.Caption:='Retail';
 retail;
@@ -499,7 +499,7 @@ sb_retail.Caption:='Grosir';
 retail;
 end;
 
-if fungsi.ambil_ini(dm.file_ini,'kasir','tunai')='0' then
+if fungsi.AmbilIniFile(dm.file_ini,'kasir','tunai')='0' then
 begin
 sb_tunai.Caption:= 'Tunai';
 tunai;
@@ -780,7 +780,7 @@ if sb_retail.Enabled<> false then
 begin
    if sb_retail.Caption='Retail' then
    begin
-   fungsi.simpan_ini(dm.file_ini,'kasir','retail','0');
+   fungsi.SimpanIniFile(dm.file_ini,'kasir','retail','0');
    dm.macam_harga:= 'HGTK';
    sb_retail.Caption:='Grosir';
    slabel7.Visible:= true;
@@ -791,7 +791,7 @@ begin
    end else
    if sb_retail.Caption='Grosir' then
    begin
-   fungsi.simpan_ini(dm.file_ini,'kasir','retail','1');
+   fungsi.SimpanIniFile(dm.file_ini,'kasir','retail','1');
    dm.macam_harga:= 'HETK';
    sb_retail.Caption:='Retail';
       if sb_tunai.Caption='Tunai' then
@@ -812,7 +812,7 @@ procedure TF_transaksi.tunai;
 begin
 if sb_tunai.Caption='Tunai' then
    begin
-   fungsi.simpan_ini(dm.file_ini,'kasir','tunai','0');
+   fungsi.SimpanIniFile(dm.file_ini,'kasir','tunai','0');
 
    sb_tunai.Caption:='Kredit';
    sLabel5.Visible:=false;
@@ -835,7 +835,7 @@ if sb_tunai.Caption='Tunai' then
    end else
 if sb_tunai.Caption='Kredit' then
    begin
-   fungsi.simpan_ini(dm.file_ini,'kasir','tunai','1');
+   fungsi.SimpanIniFile(dm.file_ini,'kasir','tunai','1');
    sb_tunai.Caption:='Tunai';
       if sb_retail.Caption= 'Retail' then
       begin
@@ -867,7 +867,7 @@ begin
   //berfungsi untuk open cash drawer ctrl + o
 if ((shift=[ssctrl]) and (key=79)) then
 begin
-  fungsi.openCashDrawer;
+  fungsi.OpenCashDrawer;
 end;
 
   //berfungsi untuk void barang
@@ -1252,7 +1252,7 @@ IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+dm.kd_user+'","'+dm.kd
   end;
                                
 dm.db_conn.Commit;
-fungsi.openCashDrawer;
+fungsi.OpenCashDrawer;
 except on E:exception do
 begin
 dm.db_conn.Rollback;
@@ -1282,11 +1282,11 @@ Var toko, alamat,telp, kd_transaksi, kasir, cust, waktu,barang, barang2, satuan,
 begin
  panjang:=StrToIntDef(cb_lebar_struk.Text,36);
 
-      kd_transaksi:=fungsi.tulisP(dm.Q_print.fieldbyname('no_transaksi').AsString,panjang,taLeftJustify);
-      kasir:= fungsi.tulisP(dm.Q_print.fieldbyname('n_user').AsString,panjang, taLeftJustify);
-      cust:= fungsi.tulisP(dm.Q_print.fieldbyname('n_pelanggan').AsString,panjang, taLeftJustify);
+      kd_transaksi:=fungsi.TulisFormat(dm.Q_print.fieldbyname('no_transaksi').AsString,panjang,taLeftJustify);
+      kasir:= fungsi.TulisFormat(dm.Q_print.fieldbyname('n_user').AsString,panjang, taLeftJustify);
+      cust:= fungsi.TulisFormat(dm.Q_print.fieldbyname('n_pelanggan').AsString,panjang, taLeftJustify);
       tgl_trans:= FormatDateTime('dd mmm yyyy',dm.Q_print.fieldbyname('tgl_transaksi').AsDateTime);
-      waktu:= fungsi.tulisP({days[DayOfWeek(StrToDate(tgl_trans))]+', '+}tgl_trans+' '+dm.Q_print.fieldbyname('jam_transaksi').AsString, panjang, taLeftJustify);
+      waktu:= fungsi.TulisFormat({days[DayOfWeek(StrToDate(tgl_trans))]+', '+}tgl_trans+' '+dm.Q_print.fieldbyname('jam_transaksi').AsString, panjang, taLeftJustify);
 
   AssignFile(F, dm.AppPath + 'k_struk.prn');
   Rewrite(F);
@@ -1310,7 +1310,7 @@ for i:=0 to dm.Q_print.RecordCount-1 do
 begin
   x:= x+ dm.Q_print.fieldbyname('QtyH').AsInteger;
 
-  barang:= fungsi.tulisP(dm.Q_print.fieldbyname('n_barang').AsString, (panjang+1)- Length(inttostr(i+1)+'. '), taLeftJustify);
+  barang:= fungsi.TulisFormat(dm.Q_print.fieldbyname('n_barang').AsString, (panjang+1)- Length(inttostr(i+1)+'. '), taLeftJustify);
   write(F,inttostr(i+1)+'. ');
   writeln(F,barang);
 
@@ -1318,16 +1318,16 @@ begin
   begin
   barang2:= dm.Q_print.fieldbyname('n_barang').AsString;
   Delete(barang2,1,panjang - Length(inttostr(i+1)+'. '));
-  barang2:= fungsi.tulisP(barang2, panjang, taLeftJustify);
+  barang2:= fungsi.TulisFormat(barang2, panjang, taLeftJustify);
   for j:=1 to Length(inttostr(i+1)+'. ') do write(F,' ');
   Writeln(F,barang2)
   end;
 
-  har_sat:= fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('harga_jual').AsFloat,ffNumber,10,0)+' X',17, tarightjustify);
-  satuan:= fungsi.tulisP(dm.Q_print.fieldbyname('QtyH').AsString+' '+dm.Q_print.fieldbyname('n_singkat').AsString+' =',10,tarightjustify);
+  har_sat:= fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('harga_jual').AsFloat,ffNumber,10,0)+' X',17, tarightjustify);
+  satuan:= fungsi.TulisFormat(dm.Q_print.fieldbyname('QtyH').AsString+' '+dm.Q_print.fieldbyname('n_singkat').AsString+' =',10,tarightjustify);
   write(F,har_sat);
   write(F, satuan);
-  harga:= fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('harga_jual').AsFloat *
+  harga:= fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('harga_jual').AsFloat *
   dm.Q_print.fieldbyname('QtyH').AsFloat,ffNumber,10,0) , panjang-Length(har_sat)-length(satuan), taRightJustify);
   writeln(F, harga);
 
@@ -1336,9 +1336,9 @@ begin
   for j:=1 to Length(inttostr(i+1)+'. ') do write(F,' ');
 
   discP:= 'DISC ('+dm.Q_print.fieldbyname('discountP').AsString+' %): ';
-  discRp:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('discountRp').AsFloat *
+  discRp:= fungsi.TulisFormat(FloatToStrF(dm.Q_print.FieldByName('discountRp').AsFloat *
   dm.Q_print.fieldbyname('QtyH').AsFloat,ffNumber,10,0)+' =', 27 - Length(discP) - Length(inttostr(i+1)+'. '),tarightjustify);
-  netto:= fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('total_harga').AsFloat,ffNumber,10,0) , panjang-Length(har_sat)-length(satuan), taRightJustify);
+  netto:= fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('total_harga').AsFloat,ffNumber,10,0) , panjang-Length(har_sat)-length(satuan), taRightJustify);
   write(F, discP);
   Write(F,discRp);
   Writeln(F,netto);
@@ -1350,12 +1350,12 @@ end;
   for i:=1 to panjang do write(F,'-');
   Writeln(F, '');
 
-  void:= fungsi.tulisP('Item: '+inttostr(dm.Q_print.RecordCount)+', Qty: '+
+  void:= fungsi.TulisFormat('Item: '+inttostr(dm.Q_print.RecordCount)+', Qty: '+
   inttostr(x)+', Void: '+dm.Q_print.fieldbyname('void').AsString,panjang,tacenter);
   Writeln(F, void);
   Writeln(F, '');
 
-  Total:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('sub_total').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
+  Total:=fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('sub_total').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
 
   write(F,'Total       :');
   Writeln(F, total);
@@ -1364,7 +1364,7 @@ end;
   begin
     discGP:= 'DISKON ('+dm.Q_print.fieldbyname('discountGP').AsString+'%) ';
     discGRp:= FloatToStrF(dm.Q_print.FieldByName('discountGRp').AsFloat,ffNumber,10,0);
-    nettoG:= fungsi.tulisP('= ' + FloatTostrF(dm.Q_print.fieldbyname('grand_total').AsFloat,ffNumber,10,0) , panjang-Length(discGp)-length(discGRp), taRightJustify);
+    nettoG:= fungsi.TulisFormat('= ' + FloatTostrF(dm.Q_print.fieldbyname('grand_total').AsFloat,ffNumber,10,0) , panjang-Length(discGp)-length(discGRp), taRightJustify);
     write(F, discGP);
     Write(F,discGRp);
     Writeln(F,nettoG);
@@ -1372,16 +1372,16 @@ end;
 
   if dm.Q_print.FieldByName('debit').AsInteger <> 0 then
   begin
-    NonTunai:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('debit').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
+    NonTunai:= fungsi.TulisFormat(FloatToStrF(dm.Q_print.FieldByName('debit').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
     write(F,'Non Tunai   :');
     Writeln(F, NonTunai);
     if dm.Q_print.FieldByName('cash_out').AsInteger <> 0 then
     begin
-      TarikTunai:= fungsi.tulisP(FloatToStrF(dm.Q_print.FieldByName('cash_out').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
+      TarikTunai:= fungsi.TulisFormat(FloatToStrF(dm.Q_print.FieldByName('cash_out').AsFloat,ffNumber,10,0),panjang-13,taRightJustify);
       write(F,'Tarik Tunai :');
       Writeln(F, TarikTunai);
       TotalDebitRp:= dm.Q_print.FieldByName('debit').AsInteger + dm.Q_print.FieldByName('cash_out').AsInteger;
-      TotalDebit:= fungsi.tulisP(FloatToStrF(TotalDebitRp,ffNumber,10,0),panjang-13,taRightJustify);
+      TotalDebit:= fungsi.TulisFormat(FloatToStrF(TotalDebitRp,ffNumber,10,0),panjang-13,taRightJustify);
       write(F, 'Total Debit :');
       Writeln(F, TotalDebit);
     end;
@@ -1389,7 +1389,7 @@ end;
 
   if dm.Q_print.FieldByName('bayar').AsInteger <> 0 then
   begin
-    Bayar:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('bayar').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
+    Bayar:=fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('bayar').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
     write(F,'Tunai       :');
     Writeln(F, bayar);
   end;
@@ -1397,18 +1397,18 @@ end;
   if (dm.Q_print.FieldByName('kembali').AsInteger <> 0) and
      (dm.Q_print.FieldByName('kembali').AsInteger <> dm.Q_print.FieldByName('cash_out').AsInteger) then
   begin
-    Kembali:=fungsi.tulisP(floattostrf(dm.Q_print.fieldbyname('kembali').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
+    Kembali:=fungsi.TulisFormat(floattostrf(dm.Q_print.fieldbyname('kembali').AsFloat,ffNumber,10,0),panjang-13, tarightjustify);
     write(F,'Kembali     :');
     Writeln(F, kembali);
   end;
 
   writeln(F,'');
 
-      toko:= fungsi.tulisP(dm.Q_print.fieldbyname('n_perusahaan').AsString, panjang, tacenter);
-      alamat:= fungsi.tulisP(dm.Q_print.fieldbyname('alamat').AsString, panjang, tacenter);
-      telp:= fungsi.tulisP('Telp. ' +dm.Q_print.fieldbyname('telp').AsString, panjang, tacenter);
+      toko:= fungsi.TulisFormat(dm.Q_print.fieldbyname('n_perusahaan').AsString, panjang, tacenter);
+      alamat:= fungsi.TulisFormat(dm.Q_print.fieldbyname('alamat').AsString, panjang, tacenter);
+      telp:= fungsi.TulisFormat('Telp. ' +dm.Q_print.fieldbyname('telp').AsString, panjang, tacenter);
 
-  kaki1:= fungsi.tulisP(ed_footer_struk.Text,panjang,tacenter);
+  kaki1:= fungsi.TulisFormat(ed_footer_struk.Text,panjang,tacenter);
   Writeln(F, kaki1);
   for i:=1 to 10 do writeln(F,'');
   Writeln(F, toko);
@@ -1790,7 +1790,7 @@ var X:TextFile;
 begin
 if M_pesan.Modified then
 begin
-  fungsi.simpan_ini(dm.file_ini,'kasir','pesan',m_pesan.text);
+  fungsi.SimpanIniFile(dm.file_ini,'kasir','pesan',m_pesan.text);
 
 pesan:=M_pesan.Text;
 if cb_aktif.ItemIndex = 1 then
@@ -1801,29 +1801,29 @@ end;
 
 procedure TF_Transaksi.cb_jenis_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(dm.file_ini,'kasir','jenis_struk',IntToStr(cb_jenis_struk.ItemIndex));
+fungsi.SimpanIniFile(dm.file_ini,'kasir','jenis_struk',IntToStr(cb_jenis_struk.ItemIndex));
 end;
 
 procedure TF_Transaksi.cb_lebar_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(dm.file_ini,'kasir','lebar_struk',cb_lebar_struk.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','lebar_struk',cb_lebar_struk.Text);
 end;
 
 procedure TF_Transaksi.ed_footer_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(dm.file_ini,'kasir','footer_struk',ed_footer_struk.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','footer_struk',ed_footer_struk.Text);
 end;
 
 procedure TF_Transaksi.btn1Click(Sender: TObject);
 begin
 if cb_aktif.ItemIndex = 1 then
 aktifkan_pesan;
-fungsi.simpan_ini(dm.file_ini,'kasir','nama_font',cbFontName.Text);
-fungsi.simpan_ini(dm.file_ini,'kasir','style_font',IntToStr(Byte(l_pesan.Font.Style)));
-fungsi.simpan_ini(dm.file_ini,'kasir','bg_font',ColorToString(crb_bg.Selected));
-fungsi.simpan_ini(dm.file_ini,'kasir','cl_font',ColorToString(crb_font.Selected));
-fungsi.simpan_ini(dm.file_ini,'kasir','size_font',cbsize.Text);
-fungsi.simpan_ini(dm.file_ini,'kasir','speed',cbspeed.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','nama_font',cbFontName.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','style_font',IntToStr(Byte(l_pesan.Font.Style)));
+fungsi.SimpanIniFile(dm.file_ini,'kasir','bg_font',ColorToString(crb_bg.Selected));
+fungsi.SimpanIniFile(dm.file_ini,'kasir','cl_font',ColorToString(crb_font.Selected));
+fungsi.SimpanIniFile(dm.file_ini,'kasir','size_font',cbsize.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','speed',cbspeed.Text);
 end;
 
 procedure TF_Transaksi.btn5Click(Sender: TObject);
@@ -1873,7 +1873,7 @@ end;
 
 procedure TF_Transaksi.ed_tambahanExit(Sender: TObject);
 begin
-fungsi.simpan_ini(dm.file_ini,'kasir','tambahan',ed_tambahan.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','tambahan',ed_tambahan.Text);
 end;
 
 procedure TF_Transaksi.ac_InsertExecute(Sender: TObject);
@@ -2099,7 +2099,7 @@ begin
 if selectskin(dm.sm) then
 begin
 ed_skin.text:= dm.sm.SkinName;
-fungsi.simpan_ini(dm.file_ini,'kasir','nama_skin',ed_skin.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','nama_skin',ed_skin.Text);
 end;
 end;
 
@@ -2107,14 +2107,14 @@ procedure TF_Transaksi.trb_hueChange(Sender: TObject);
 begin
 dm.sm.HueOffset:= trb_hue.Position;
 l_1.Caption:= 'HUE : ' + IntToStr(trb_hue.Position);
-fungsi.simpan_ini(dm.file_ini,'kasir','hue_skin',ed_skin.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','hue_skin',ed_skin.Text);
 end;
 
 procedure TF_Transaksi.trb_satChange(Sender: TObject);
 begin
 dm.sm.Saturation:= trb_sat.Position;
 l_6.Caption:= 'SATURATION : ' + IntToStr(trb_sat.Position);
-fungsi.simpan_ini(dm.file_ini,'kasir','sat_skin',ed_skin.Text);
+fungsi.SimpanIniFile(dm.file_ini,'kasir','sat_skin',ed_skin.Text);
 end;
 
 procedure TF_Transaksi.ac_closeExecute(Sender: TObject);
@@ -2124,7 +2124,7 @@ end;
 
 procedure TF_Transaksi.cb_aktifChange(Sender: TObject);
 begin
-fungsi.simpan_ini(dm.file_ini,'kasir','pesan_aktif',IntToStr(cb_aktif.ItemIndex));
+fungsi.SimpanIniFile(dm.file_ini,'kasir','pesan_aktif',IntToStr(cb_aktif.ItemIndex));
 end;
 
 procedure TF_Transaksi.ac_simpanfileExecute(Sender: TObject);
