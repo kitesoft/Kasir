@@ -268,6 +268,16 @@ type
     procedure UbahQty(Qty:string);
     { Private declarations }
   public
+    tahan,batas,piutang, lebar_layar:integer;
+    harga,harga_pokok,Qty_real,QtyH,diskon:Integer;
+    pesan,satuan,kode_barang, inputstring,passs,alasan,no_pending,harga_edit:string;
+    diskonP:Real;
+
+    F_pesan : TForm;
+    M_pesan : TMemo;
+    Style_pesan:TFontStyles;
+
+    days: array[1..7] of string;
     procedure _set(baris,kolom,tipe:Integer; _isi:variant);
     function _get(baris,kolom:Integer; tipe:Integer=1):variant;
     procedure M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
@@ -276,16 +286,6 @@ type
 
 var
   F_Transaksi: TF_Transaksi;
-  tahan,batas,piutang, lebar_layar:integer;
-  harga,harga_pokok,Qty_real,QtyH,diskon:Integer;
-  pesan,satuan,kode_barang, inputstring,passs,alasan,no_pending,harga_edit:string;
-  diskonP:Real;
-
-  F_pesan : TForm;
-  M_pesan : TMemo;
-  Style_pesan:TFontStyles;
-
-  days: array[1..7] of string;
 
 implementation
 

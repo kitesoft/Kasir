@@ -67,14 +67,14 @@ fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan AND tb_barang.kd_barang = tb_barang_harga.kd_barang '+
 'WHERE tb_barang_harga.kd_macam_harga="'+dm.macam_harga+'" and '+
 'tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by tb_barang.n_barang LIMIT 0,100', true);
-kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
+F_Transaksi.kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
 end;
 
 procedure Tf_cariBarang.tableviewCellDblClick(Sender: TcxCustomGridTableView;
   ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
   AShift: TShiftState; var AHandled: Boolean);
 begin
-kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
+F_Transaksi.kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
 F_Transaksi.input_kode;
 end;
 
