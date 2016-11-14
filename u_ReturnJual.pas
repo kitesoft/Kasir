@@ -379,7 +379,7 @@ fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_global(kd_perusahaan,kd_retu
 'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada,pengawas) values ("'+
 F_Transaksi.sb.Panels[1].Text+'","'+ed_no_faktur.Text
 +'","'+ed_fak_jual.Text+'",date(now()),"'+ed_pelanggan.Text+'","'+
-ed_nilai_faktur.Text+'","'+F_Transaksi.sb.Panels[2].Text+'",now(),"'+F_Transaksi.sb.Panels[4].Text+'")',false);
+ed_nilai_faktur.Text+'","'+dm.kd_user+'",now(),"'+dm.kd_operator+'")',false);
 
   fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_rinci(kd_perusahaan, '+
   'kd_return_jual,tgl_return_jual,kd_barang,n_barang,qty_return_jual, '+

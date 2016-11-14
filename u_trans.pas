@@ -1219,7 +1219,7 @@ mm_nama.Text:= isi_sql;
   QuotedStr(_get(x,1,3))+','+QuotedStr(_get(x,2,3))+','+QuotedStr(_get(x,18,3))+','+QuotedStr(_get(x,16,3))+','+
   QuotedStr(_get(x,14,3))+','+QuotedStr(_get(x,5,3))+','+fungsi.caridanganti(QuotedStr(_get(x,6,3)),',','.')+','+QuotedStr(_get(x,7,3))+','+
   QuotedStr(_get(x,8,3))+','+QuotedStr(_get(x,9,3))+','+QuotedStr(_get(x,15,3))+','+QuotedStr(_get(x,17,3))+','+
-  QuotedStr(sb.Panels[2].Text)+',date(now()),'+QuotedStr(_get(x,3,3))+','+
+  QuotedStr(dm.kd_user)+',date(now()),'+QuotedStr(_get(x,3,3))+','+
   QuotedStr(_get(x,19,3))+','+QuotedStr(_get(x,13,3))+','+QuotedStr(_get(x,12,3))+',date(now())),';
   end;
   delete(isi_sql,length(isi_sql),1);
@@ -1235,7 +1235,7 @@ fungsi.SQLExec(dm.Q_exe,'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi
 dm.macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'", "'+ed_discRp.Text+'",'+
 QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand.Text
 +'","'+ed_bayar.Text+'", '+IntToStr(DebitId)+',"'+DebitKode+'","'+IntToStr(DebitRp)+'","'+
-IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","'+sb.Panels[4].Text
+IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+dm.kd_user+'","'+dm.kd_operator
 +'",1,'+QUotedStr(TableView.DataController.Summary.FooterSummaryValues[9])
 +',"'+dm.ip_kasir+'",'+quotedstr(ed_keterangan.Text)+',now())',false);
 
@@ -1248,7 +1248,7 @@ IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","
   fungsi.SQLExec(dm.Q_exe,'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, '+
   'pelanggan,piutang_awal,dibayar,user) values ("'+sb.Panels[1].Text+'","'+
   sb.Panels[9].Text+'",date(now()),"'+ed_lama.Text+'","'+ed_pelanggan.Text+'","'+ed_grand.Text
-  +'","'+'0'+'","'+sb.Panels[2].Text+'")',false);
+  +'","'+'0'+'","'+dm.kd_user+'")',false);
   end;
                                
 dm.db_conn.Commit;
@@ -1894,7 +1894,7 @@ begin
 // void
 if TableView.DataController.RecordCount<>0 then
  begin
-  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
+  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+dm.kd_operator+'"',true);
   PostMessage(Handle, InputBoxMessage, 0, 0);
   InputString := InputBox('Void Barang', 'Masukkan Password Operator SERVER untuk memvoid barang ini', '');
 
@@ -1927,7 +1927,7 @@ begin
 //batalkan transaksi
 if TableView.DataController.RecordCount<>0 then
   begin
-  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
+  fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+dm.kd_operator+'"',true);
   PostMessage(Handle, InputBoxMessage, 0, 0);
   InputString := InputBox('Batalkan Transaksi', 'Masukkan Password Operator SERVER untuk membatalkan transaksi ini', '');
 
@@ -1941,7 +1941,7 @@ if TableView.DataController.RecordCount<>0 then
     try
       fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_batal(kd_perusahaan,tgl_transaksi,'+
       'jam_transaksi,user,pengawas,alasan) values ("'+sb.Panels[1].Text+'",date(now()),time(now()),"'+
-      sb.Panels[2].Text+'","'+sb.Panels[4].Text+'","'+alasan+'")',false);
+      dm.kd_user+'","'+dm.kd_operator+'","'+alasan+'")',false);
 
       awal;
       dm.db_conn.Commit;
@@ -1987,7 +1987,7 @@ begin
     Exit;
   end;
 
-fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+sb.Panels[4].Text+'"',true);
+fungsi.SQLExec(dm.Q_show,'select * from tb_user where kd_user="'+dm.kd_operator+'"',true);
 PostMessage(Handle, InputBoxMessage, 0, 0);
 InputString := InputBox('Return Jual', 'Masukkan Password Operator SERVER untuk melakukan return jual', '');
 
@@ -2280,8 +2280,8 @@ begin
   Result := False;
 
   sql := Format('SELECT `status` from tb_login_kasir WHERE kd_perusahaan = "%s" '
-  +' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"',[Sb.Panels[1].Text, Sb.Panels[4].Text,
-  Sb.Panels[2].Text]);
+  +' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"',[Sb.Panels[1].Text, dm.kd_operator,
+  dm.kd_user]);
 
   fungsi.SQLExec(dm.Q_temp,sql,True);
   if dm.Q_temp.Eof then
