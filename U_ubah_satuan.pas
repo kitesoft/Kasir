@@ -37,7 +37,6 @@ type
 
 var
   F_Ubah_Satuan: TF_Ubah_Satuan;
-  fungsi:Tfungsi;
   sat1,sat2,sat3: string;
 
 implementation

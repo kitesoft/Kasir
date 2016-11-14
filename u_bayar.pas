@@ -43,7 +43,6 @@ type
 
 var
   F_Bayar: TF_Bayar;
-  fungsi: Tfungsi;
 
 implementation
 

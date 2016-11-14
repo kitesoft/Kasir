@@ -48,7 +48,6 @@ type
 
 var
   f_list_sales: Tf_list_sales;
-  fungsi:Tfungsi;
 
 implementation
 

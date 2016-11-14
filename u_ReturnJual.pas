@@ -77,7 +77,6 @@ type
 
 var
   f_returnJual: Tf_returnJual;
-  fungsi:tfungsi;
   sub_sub_total,diskon:integer;
 
 implementation

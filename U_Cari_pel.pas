@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, StdCtrls, Buttons, sBitBtn, sEdit, Grids, DBGrids,
-  sSkinProvider;
+  sSkinProvider, U_fungsi;
 
 type
   NewControl = class(TControl);

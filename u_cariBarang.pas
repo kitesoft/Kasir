@@ -7,7 +7,7 @@ uses
   Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, DB, cxDBData, cxControls, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxGridLevel, cxGrid, sSkinProvider, cxCurrencyEdit;
+  cxGridLevel, cxGrid, sSkinProvider, cxCurrencyEdit, U_fungsi;
 
 type
   Tf_cariBarang = class(TForm)

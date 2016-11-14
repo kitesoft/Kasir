@@ -23,6 +23,11 @@ uses
      function caridanganti(sSrc, sLookFor, sReplaceWith : string) : string;
      function komadesimal: Boolean;
   end;
+
+var
+  fungsi: Tfungsi;
+
+
 implementation
 
 uses u_dm;

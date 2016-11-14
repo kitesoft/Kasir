@@ -280,7 +280,6 @@ var
   harga,harga_pokok,Qty_real,QtyH,diskon:Integer;
   pesan,satuan,kode_barang, inputstring,passs,alasan,no_pending,harga_edit:string;
   diskonP:Real;
-  fungsi:Tfungsi;
 
   F_pesan : TForm;
   M_pesan : TMemo;
