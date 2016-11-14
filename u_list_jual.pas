@@ -8,7 +8,7 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, cxCurrencyEdit, StdCtrls, sButton,
   ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
-  cxImageComboBox, sEdit,U_fungsi;
+  cxImageComboBox, sEdit,UFungsi;
 
 type
   Tf_list_sales = class(TForm)

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
-  sCurrencyEdit, sLabel, sEdit, sComboBox, ExtCtrls, sPanel, sButton, U_fungsi;
+  sCurrencyEdit, sLabel, sEdit, sComboBox, ExtCtrls, sPanel, sButton, UFungsi;
 
 type
   TF_Bayar = class(TForm)

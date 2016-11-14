@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, U_fungsi, StdCtrls, sEdit, sButton, ExtCtrls, DBCtrls, sSkinProvider,
+  Dialogs, UFungsi, StdCtrls, sEdit, sButton, ExtCtrls, DBCtrls, sSkinProvider,
   cxCustomData, cxGraphics, cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel,
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, cxStyles, cxFilter, cxData,

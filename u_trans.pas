@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, sEdit, Grids, Mask, sMaskEdit, sCustomComboEdit,
-  sCurrEdit, sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, DBGrids, u_fungsi,
+  sCurrEdit, sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, DBGrids, UFungsi,
   sSkinProvider, sMemo, ExtCtrls, sGroupBox, sComboBox, Buttons,
   sSpeedButton, ImgList, acAlphaImageList,sPanel, sButton,
   sListBox, sSplitter,printers, frxClass, sRichEdit, sScrollBox,

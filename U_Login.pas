@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sLabel, U_fungsi, sEdit, sGroupBox, Buttons, sBitBtn,
+  Dialogs, StdCtrls, sLabel, UFungsi, sEdit, sGroupBox, Buttons, sBitBtn,
   sButton, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit, sCurrencyEdit, ComCtrls,
   sRichEdit, sStatusBar, Winsock, sComboBox, sSkinProvider;
 
