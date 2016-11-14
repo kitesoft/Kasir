@@ -57,7 +57,7 @@ uses u_dm, u_trans;
 
 procedure Tf_list_sales.FormShow(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_jual_global,'select * from vw_list_sales where kd_perusahaan = "'+f_transaksi.Sb.Panels[1].Text+'" limit 0,50',True);
+fungsi.SQLExec(dm.Q_jual_global,'select * from vw_list_sales where kd_perusahaan = "'+dm.kd_perusahaan+'" limit 0,50',True);
 end;
 
 procedure Tf_list_sales.b_besarClick(Sender: TObject);
@@ -77,7 +77,7 @@ if key = vk_return then
 begin
 PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
 fungsi.SQLExec(dm.Q_jual_global,'select * from vw_list_sales where kd_perusahaan = "'+
-f_transaksi.Sb.Panels[1].Text+'" and kd_transaksi like "%'+ed_cari.Text+'%"',True);
+dm.kd_perusahaan+'" and kd_transaksi like "%'+ed_cari.Text+'%"',True);
 end;
 end;
 

@@ -331,7 +331,7 @@ begin
 
     if dm.Q_exe.Eof then
     begin
-      case MessageDlg('DATA UNTUK HARI INI UNTUK ' + sb.Panels[1].text +
+      case MessageDlg('DATA UNTUK HARI INI UNTUK ' + dm.kd_perusahaan +
         ' BELUM DILOAD,' + #13#10 + 'Pilih Perusahaan Lain?', mtWarning, mbOKCancel, 0) of
         mrOk:
           begin
@@ -350,7 +350,7 @@ begin
     '" order by user', true);
   if dm.Q_show.Eof then
   begin
-    case MessageDlg('MD/Operator untuk ' + sb.Panels[1].text +
+    case MessageDlg('MD/Operator untuk ' + dm.kd_perusahaan +
       ' belum AKTIF,'#10#13'Pilih Perusahaan Lain?', mtWarning, mbOKCancel, 0) of
       mrOk:
         begin

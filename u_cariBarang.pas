@@ -66,7 +66,7 @@ fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN tb_barang_harga ON '+
 'tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan AND tb_barang.kd_barang = tb_barang_harga.kd_barang '+
 'WHERE tb_barang_harga.kd_macam_harga="'+dm.macam_harga+'" and '+
-'tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by tb_barang.n_barang LIMIT 0,100', true);
+'tb_barang.kd_perusahaan="'+dm.kd_perusahaan+'" order by tb_barang.n_barang LIMIT 0,100', true);
 F_Transaksi.kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
 end;
 

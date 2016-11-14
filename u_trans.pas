@@ -313,7 +313,7 @@ begin
   // memunculkan kode transaksi terbaru...
 
 fungsi.SQLExec(dm.Q_show,'select count(*) as jumlah,date(now()) as tgl from tb_jual_global '+
-'where tgl_transaksi=date(now()) and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+'where tgl_transaksi=date(now()) and kd_perusahaan="'+dm.kd_perusahaan+'"',true);
   a:=dm.Q_show.fieldbyname('jumlah').AsInteger+1;
   tgl:= formatdatetime('yyyyMMdd', dm.Q_show.fieldbyname('tgl').AsDateTime);
   if a<10     then y:= 'PJ-'+tgl+'-000' else
@@ -676,11 +676,11 @@ begin
   fungsi.sqlExec(dm.Q_temp,'SELECT kd_barang FROM tb_barang '+
   'WHERE (kd_barang = "'+kode_barang+'" OR tb_barang.barcode3 = "'+
   kode_barang+'" OR barcode2 = "'+kode_barang+'" OR barcode1 = "'+
-  kode_barang+'") AND kd_perusahaan= "'+f_transaksi.sb.Panels[1].Text+'"', true);
+  kode_barang+'") AND kd_perusahaan= "'+dm.kd_perusahaan+'"', true);
 
   kode_temp:= dm.Q_temp.fieldbyname('kd_barang').AsString;
 
-  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+dm.macam_harga+'","'+kode_temp+'","'+sb.Panels[1].Text+'")', true);
+  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+dm.macam_harga+'","'+kode_temp+'","'+dm.kd_perusahaan+'")', true);
 
   fungsi.sqlExec(dm.Q_Show,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
   'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, '+
@@ -691,7 +691,7 @@ begin
   'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang '+
   'AND tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan WHERE tb_barang.kd_barang = "'+kode_temp+'" '+
   'AND tb_barang_harga.kd_macam_harga = "'+dm.macam_harga+'" AND tb_barang.aktif="Y" '+
-  'AND tb_barang.kd_perusahaan= "'+sb.Panels[1].Text+'"', true);
+  'AND tb_barang.kd_perusahaan= "'+dm.kd_perusahaan+'"', true);
 
   if dm.Q_show.Eof then
   begin
@@ -721,7 +721,7 @@ begin
   end;
 
   fungsi.SQLExec(dm.Q_temp,'select kd_barang from tb_koreksi_temp where kd_barang ='+
-  quotedstr(kode_temp)+' and kd_perusahaan='+quotedstr(sb.Panels[1].Text)+'',True);
+  quotedstr(kode_temp)+' and kd_perusahaan='+quotedstr(dm.kd_perusahaan)+'',True);
   if dm.Q_temp.RecordCount<> 0 then
   begin
   Ed_Code.Clear;
@@ -1215,7 +1215,7 @@ mm_nama.Text:= isi_sql;
 
   for x:=0 to TableView.DataController.RecordCount -1 do
   begin
-  isi_sql:=isi_sql + '('+QuotedStr(sb.Panels[1].Text)+','+QuotedStr(sb.Panels[9].Text)+','+QuotedStr(inttostr(x+1))+','+
+  isi_sql:=isi_sql + '('+QuotedStr(dm.kd_perusahaan)+','+QuotedStr(sb.Panels[9].Text)+','+QuotedStr(inttostr(x+1))+','+
   QuotedStr(_get(x,1,3))+','+QuotedStr(_get(x,2,3))+','+QuotedStr(_get(x,18,3))+','+QuotedStr(_get(x,16,3))+','+
   QuotedStr(_get(x,14,3))+','+QuotedStr(_get(x,5,3))+','+fungsi.caridanganti(QuotedStr(_get(x,6,3)),',','.')+','+QuotedStr(_get(x,7,3))+','+
   QuotedStr(_get(x,8,3))+','+QuotedStr(_get(x,9,3))+','+QuotedStr(_get(x,15,3))+','+QuotedStr(_get(x,17,3))+','+
@@ -1230,7 +1230,7 @@ fungsi.SQLExec(dm.Q_exe,'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi
 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '+
 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '+
 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '+
-'simpan_pada) VALUES ("'+sb.Panels[1].Text+'" ,"'+sb.Panels[9].Text
+'simpan_pada) VALUES ("'+dm.kd_perusahaan+'" ,"'+sb.Panels[9].Text
 +'", date(now()), time(now()), "'+ed_pelanggan.Text+'", "'+tk+'",ADDDATE(date(now()),INTERVAL '+ed_lama.Text+' DAY),"'+
 dm.macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'", "'+ed_discRp.Text+'",'+
 QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand.Text
@@ -1246,7 +1246,7 @@ IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+dm.kd_user+'","'+dm.kd
   if tk='0'then
   begin
   fungsi.SQLExec(dm.Q_exe,'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, '+
-  'pelanggan,piutang_awal,dibayar,user) values ("'+sb.Panels[1].Text+'","'+
+  'pelanggan,piutang_awal,dibayar,user) values ("'+dm.kd_perusahaan+'","'+
   sb.Panels[9].Text+'",date(now()),"'+ed_lama.Text+'","'+ed_pelanggan.Text+'","'+ed_grand.Text
   +'","'+'0'+'","'+dm.kd_user+'")',false);
   end;
@@ -1266,7 +1266,7 @@ begin
 if cb_jenis_struk.ItemIndex = 1 then cetak(sb.Panels[9].Text,'besar') else cetak(sb.Panels[9].Text,'kecil')
 end else
 fungsi.SQLExec(dm.Q_exe,'update tb_jual_global set cetak=0 where kd_transaksi="'+
-sb.Panels[9].Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',false);
+sb.Panels[9].Text+'" and kd_perusahaan="'+dm.kd_perusahaan+'"',false);
 
 AWAL;
 
@@ -1423,7 +1423,7 @@ end;
 procedure TF_Transaksi.cetak(kd_transaksi, jenis:string);
 begin
    fungsi.SQLExec(dm.Q_print,'select * from vw_jual_barang where no_transaksi="'+
-   kd_transaksi+'" and kd_perusahaan='+quotedstr(Sb.Panels[1].Text)+'',true);
+   kd_transaksi+'" and kd_perusahaan='+quotedstr(dm.kd_perusahaan)+'',true);
 
   if jenis='besar' then
    begin
@@ -1614,7 +1614,7 @@ fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN tb_barang_harga ON '+
 'tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan AND tb_barang.kd_barang = tb_barang_harga.kd_barang '+
 'where tb_barang.n_barang like "%'+ed_code.Text+'%" AND tb_barang_harga.kd_macam_harga="'+dm.macam_harga+'" and '+
-'tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by tb_barang.n_barang LIMIT 0,100', true);
+'tb_barang.kd_perusahaan="'+dm.kd_perusahaan+'" order by tb_barang.n_barang LIMIT 0,100', true);
 
 kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
 end else
@@ -1740,7 +1740,7 @@ end;
     if sb_tunai.Caption='Kredit' then
     begin
       fungsi.SQLExec(dm.Q_temp,'select * from vw_pelanggan where kd_pelanggan="'+
-      ed_pelanggan.Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+      ed_pelanggan.Text+'" and kd_perusahaan="'+dm.kd_perusahaan+'"',true);
 
       batas:= dm.Q_temp.fieldbyname('limit').AsInteger;
       piutang:= dm.Q_temp.fieldbyname('piutang').AsInteger;
@@ -1940,7 +1940,7 @@ if TableView.DataController.RecordCount<>0 then
     dm.db_conn.StartTransaction;
     try
       fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_batal(kd_perusahaan,tgl_transaksi,'+
-      'jam_transaksi,user,pengawas,alasan) values ("'+sb.Panels[1].Text+'",date(now()),time(now()),"'+
+      'jam_transaksi,user,pengawas,alasan) values ("'+dm.kd_perusahaan+'",date(now()),time(now()),"'+
       dm.kd_user+'","'+dm.kd_operator+'","'+alasan+'")',false);
 
       awal;
@@ -2201,7 +2201,7 @@ end;
 procedure TF_Transaksi.Ed_PelangganChange(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_temp,'select * from vw_pelanggan where kd_pelanggan="'+
-ed_pelanggan.Text+'" and kd_perusahaan="'+sb.Panels[1].Text+'"',true);
+ed_pelanggan.Text+'" and kd_perusahaan="'+dm.kd_perusahaan+'"',true);
 if dm.Q_temp.Eof then
 begin
   b_simpan.Enabled:= False;
@@ -2280,7 +2280,7 @@ begin
   Result := False;
 
   sql := Format('SELECT `status` from tb_login_kasir WHERE kd_perusahaan = "%s" '
-  +' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"',[Sb.Panels[1].Text, dm.kd_operator,
+  +' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"',[dm.kd_perusahaan, dm.kd_operator,
   dm.kd_user]);
 
   fungsi.SQLExec(dm.Q_temp,sql,True);

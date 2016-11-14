@@ -58,7 +58,7 @@ end;
 
 procedure TF_Cari_pelanggan.FormShow(Sender: TObject);
 begin
-fungsi.sqlExec(dm.Q_Show,'SELECT * FROM vw_pelanggan where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by n_pelanggan LIMIT 0, 14', true);
+fungsi.sqlExec(dm.Q_Show,'SELECT * FROM vw_pelanggan where kd_perusahaan="'+dm.kd_perusahaan+'" order by n_pelanggan LIMIT 0, 14', true);
 end;
 
 procedure TF_Cari_pelanggan.B_pilihClick(Sender: TObject);
@@ -71,7 +71,7 @@ end;
 procedure TF_Cari_pelanggan.ed_cariChange(Sender: TObject);
 begin
 fungsi.sqlExec(dm.Q_Show,'SELECT * FROM vw_pelanggan where (kd_perusahaan="'
-+ f_transaksi.sb.Panels[1].Text +'") and ((kd_pelanggan like "%'+ed_cari.Text
++ dm.kd_perusahaan +'") and ((kd_pelanggan like "%'+ed_cari.Text
 +'%") or (n_pelanggan like "%'+ed_cari.Text+'%")) order by n_pelanggan LIMIT 0, 14', true);
 end;
 

@@ -171,7 +171,7 @@ PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
   fungsi.sqlExec(dm.Q_temp,'SELECT kd_barang,n_barang,barcode3, '+
   'hpp_aktif,kd_sat3 FROM tb_barang WHERE ((kd_barang = "'+
   ed_code.Text+'" OR barcode3 = "'+ed_code.Text+'" OR barcode2 = "'+
-  ed_code.Text+'" OR barcode1 = "'+ed_code.Text+'") AND kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'")', true);
+  ed_code.Text+'" OR barcode1 = "'+ed_code.Text+'") AND kd_perusahaan="'+dm.kd_perusahaan+'")', true);
   if dm.Q_temp.RecordCount<>0 then
    begin
    createrows;
@@ -219,7 +219,7 @@ ed_pelanggan.SetFocus;
   with F_cari do
   try
     _SQLi:= 'select kd_pelanggan,n_pelanggan from '+
-            'tb_pelanggan where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'"';
+            'tb_pelanggan where kd_perusahaan="'+dm.kd_perusahaan+'"';
     tblcap[0]:= 'Kode';
     tblCap[1]:= 'Nama Pelanggan';
     CariT := 11;
@@ -252,7 +252,7 @@ begin
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
-    _SQLi:= 'select kd_barang, n_barang from tb_barang where kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'"';
+    _SQLi:= 'select kd_barang, n_barang from tb_barang where kd_perusahaan="'+dm.kd_perusahaan+'"';
     tblcap[0]:= 'PID';
     tblCap[1]:= 'Deskripsi Barang';
     tampil_button(False,True);
@@ -288,7 +288,7 @@ begin
 tgl:=formatdatetime('yyyyMMdd', date());
 fungsi.SQLExec(dm.Q_temp,'select count(kd_return_jual) as jumlah from '+
 'tb_return_jual_global where tgl_return_jual=date(now()) and kd_perusahaan="'+
-f_transaksi.sb.Panels[1].Text+'"',true);
+dm.kd_perusahaan+'"',true);
   a:=dm.Q_temp.fieldbyname('jumlah').AsInteger+1;
 
   if a<10     then y:= 'RT-'+tgl+'-00' else
@@ -304,7 +304,7 @@ procedure Tf_returnJual.ed_no_fakturChange(Sender: TObject);
 var urip : Boolean;
 begin
 fungsi.SQLExec(dm.Q_temp,'select kd_return_jual from tb_return_jual_global where kd_return_jual="'+
-ed_no_faktur.Text+'" and kd_perusahaan="'+F_Transaksi.sb.Panels[1].Text+'"',true);
+ed_no_faktur.Text+'" and kd_perusahaan="'+dm.kd_perusahaan+'"',true);
 if not(dm.Q_temp.Eof) then
 begin
 ed_no_faktur.Color:=clblue;
@@ -327,7 +327,7 @@ end;
 procedure Tf_returnJual.b_printClick(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_print,'select * from vw_cetak_return_jual where kd_perusahaan="'+
-F_Transaksi.sb.Panels[1].Text+'" and kd_return_jual="'+ed_no_faktur.Text+'"',true);
+dm.kd_perusahaan+'" and kd_return_jual="'+ed_no_faktur.Text+'"',true);
 dm.laporan.LoadFromFile(dm.Path + 'laporan\gp_return_jual_rinci.fr3');
 dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
 dm.laporan.ShowReport;
@@ -365,7 +365,7 @@ kd_faktur:= ed_no_faktur.Text;
 
   for x:=0 to tableview.DataController.RecordCount-1 do
   begin
-  isi_sql:=isi_sql +'("'+F_Transaksi.sb.Panels[1].Text+'","'+ed_no_faktur.Text
+  isi_sql:=isi_sql +'("'+dm.kd_perusahaan+'","'+ed_no_faktur.Text
   +'",date(now()),"'+TableView.DataController.GetDisplayText(x,0)+'","'+
   TableView.DataController.GetDisplayText(x,1)+'","'+floattostr(TableView.DataController.GetValue(x,2))+'","'+
   floattostr(TableView.DataController.GetValue(x,4))+'","'+
@@ -377,7 +377,7 @@ dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_global(kd_perusahaan,kd_return_jual, '+
 'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada,pengawas) values ("'+
-F_Transaksi.sb.Panels[1].Text+'","'+ed_no_faktur.Text
+dm.kd_perusahaan+'","'+ed_no_faktur.Text
 +'","'+ed_fak_jual.Text+'",date(now()),"'+ed_pelanggan.Text+'","'+
 ed_nilai_faktur.Text+'","'+dm.kd_user+'",now(),"'+dm.kd_operator+'")',false);
 
@@ -410,7 +410,7 @@ begin
 ed_fak_jual.Color:=clblue;
 
 fungsi.SQLExec(dm.Q_temp,'select * from tb_piutang where faktur="'+
-ed_fak_jual.Text+'" and kd_perusahaan="'+F_Transaksi.sb.Panels[1].Text+'" and pelanggan = "'+ed_pelanggan.Text+'"',true);
+ed_fak_jual.Text+'" and kd_perusahaan="'+dm.kd_perusahaan+'" and pelanggan = "'+ed_pelanggan.Text+'"',true);
 
 awal        := dm.Q_temp.fieldbyname('piutang_awal').AsInteger;
 bayar     := dm.Q_temp.fieldbyname('dibayar').AsInteger;

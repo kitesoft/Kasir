@@ -53,7 +53,7 @@ fungsi.SQLExec(dm.Q_show,'SELECT tb_barang.n_barang,tb_barang.kd_sat1,tb_barang.
 'tb_barang_harga.harga_jual2,tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN '+
 'tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang and tb_barang.kd_perusahaan=tb_barang_harga.kd_perusahaan '+
 'WHERE kd_macam_harga="'+dm.macam_harga+'" and tb_barang.kd_barang = "'+
-l_kode.Caption+'" and tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'"',true);
+l_kode.Caption+'" and tb_barang.kd_perusahaan="'+dm.kd_perusahaan+'"',true);
 
 l_nama.Caption:= dm.Q_show.fieldbyname('n_barang').AsString;
 
