@@ -137,7 +137,7 @@ begin
     sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
       + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
       'tb_user.kd_user="' + ed_kd_user.Text + '" AND tb_user_company.kasir="Y" '
-      + 'AND tb_user_company.kd_perusahaan="' + sb.Panels[0].Text + '"';
+      + 'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
     fungsi.SQLExec(DM.Q_Show, sql, true);
     if dm.Q_show.Eof then
     begin
@@ -196,8 +196,8 @@ begin
     else
     begin
       fungsi.SQLExec(dm.Q_temp,
-        'select tanggal from tb_login_kasir where kd_perusahaan = ' + quotedStr(sb.Panels
-        [0].text) + ' and user =' + (QuotedStr(Ed_Kd_User.Text)) +
+        'select tanggal from tb_login_kasir where kd_perusahaan = ' +
+        quotedStr(dm.kd_perusahaan) + ' and user =' + (QuotedStr(Ed_Kd_User.Text)) +
         ' and kd_jaga =' + QuotedStr(cb_kd_OP.Text) + ' and status = ''online''', True);
       if dm.Q_temp.Eof then
       begin
@@ -205,7 +205,7 @@ begin
         try
           fungsi.SQLExec(dm.q_exe,
             'insert into tb_login_kasir(kd_perusahaan,user,kd_jaga,tanggal,status,komp)values("' +
-            sb.Panels[0].text + '","' + ed_kd_user.Text + '", "' + cb_kd_op.Text
+            dm.kd_perusahaan + '","' + ed_kd_user.Text + '", "' + cb_kd_op.Text
             + '",now(),''online'',"' + dm.ip_kasir + '")', false);
           dm.db_conn.Commit;
         except
@@ -213,13 +213,15 @@ begin
         end;
       end;
 
-      F_Transaksi.Sb.Panels[1].Text := sb.Panels[0].Text;
+      F_Transaksi.Sb.Panels[1].Text := dm.kd_perusahaan;
       f_transaksi.Sb.Panels[2].Text := ed_kd_user.Text;
+      dm.kd_user := Ed_Kd_User.Text;
       f_transaksi.Sb.Panels[3].Text := ed_N_User.Text;
       f_transaksi.Sb.Panels[4].Text := cb_kd_OP.Text;
+      dm.kd_operator := cb_kd_OP.Text;
       f_transaksi.Sb.Panels[5].Text := ed_N_Op.Text;
 
-      fungsi.simpan_ini(dm.file_ini, 'kasir', 'kd_perusahaan', sb.Panels[0].Text);
+      fungsi.simpan_ini(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
       F_Transaksi.awal;
       F_Transaksi.kode_transaksi_terbaru;
       
@@ -267,7 +269,7 @@ end;
 procedure TF_Login.cb_kd_OPChange(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_show,
-    'select * from tb_login_jaga where `mode`="online" and kd_perusahaan="' + sb.Panels[0].text
+    'select * from tb_login_jaga where `mode`="online" and kd_perusahaan="' + dm.kd_perusahaan
     + '" and user="' + cb_kd_op.Text + '"', true);
 
   ED_N_Op.Text := dm.Q_show.fieldbyname('nama_user').AsString;
@@ -293,11 +295,12 @@ begin
     tblCap[1] := 'Nama Perusahaan';
     if ShowModal = mrOk then
     begin
-      sb.Panels[0].Text := TblVal[0];
+      dm.kd_perusahaan := TblVal[0];
+      sb.Panels[0].Text := dm.kd_perusahaan;
       sb.Panels[1].Text := tblval[1];
     end;
 
-    if sb.Panels[0].Text = '' then
+    if dm.kd_perusahaan = '' then
       Pilih_Perusahaan;
 
     Cek_Perusahaan;
@@ -317,13 +320,13 @@ var
   cek_pusat: string;
 begin
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan =' +
-    quotedstr(sb.Panels[0].text) + '', true);
+    quotedstr(dm.kd_perusahaan) + '', true);
   cek_pusat := dm.Q_temp.fieldbyname('ket').AsString;
 
   if (cek_pusat <> 'PUSAT') and (dm.Q_temp.fieldbyname('onserver').AsString = 'N') then
   begin
     fungsi.SQLExec(dm.Q_exe,
-      'select `data` from tb_export_import where `data` = "PC_' + sb.Panels[0].text
+      'select `data` from tb_export_import where `data` = "PC_' + dm.kd_perusahaan
       + '_' + formatdatetime('yyyy-MM-dd', Date()) + '.zip" and ket = "terima"', True);
 
     if dm.Q_exe.Eof then
@@ -343,7 +346,7 @@ begin
     end;
   end;
 
-  fungsi.SQLExec(dm.Q_show, 'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + sb.Panels[0].text +
+  fungsi.SQLExec(dm.Q_show, 'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + dm.kd_perusahaan +
     '" order by user', true);
   if dm.Q_show.Eof then
   begin
