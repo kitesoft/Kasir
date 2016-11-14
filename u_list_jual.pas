@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
-  cxDataStorage, cxEdit, DB, cxDBData, cxCurrencyEdit, StdCtrls, sButton,
-  ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
-  cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
-  cxImageComboBox, sEdit,UFungsi;
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, cxCurrencyEdit, StdCtrls, sButton, ExtCtrls, sPanel,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxClasses, cxControls, cxGridCustomView, cxGrid, cxImageComboBox, sEdit,
+  UFungsi;
 
 type
   Tf_list_sales = class(TForm)
@@ -35,11 +35,10 @@ type
     procedure FormShow(Sender: TObject);
     procedure b_besarClick(Sender: TObject);
     procedure b_kecilClick(Sender: TObject);
-    procedure ed_cariKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure t_data1CellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure ed_cariKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure t_data1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo:
+      TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState;
+      var AHandled: Boolean);
   private
     { Private declarations }
   public
@@ -51,41 +50,46 @@ var
 
 implementation
 
-uses u_dm, u_trans;
+uses
+  u_dm, u_trans;
 
 {$R *.dfm}
 
 procedure Tf_list_sales.FormShow(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_jual_global,'select * from vw_list_sales where kd_perusahaan = "'+dm.kd_perusahaan+'" limit 0,50',True);
+  fungsi.SQLExec(dm.Q_jual_global,
+    'select * from vw_list_sales where kd_perusahaan = "' + dm.kd_perusahaan +
+    '" limit 0,50', True);
 end;
 
 procedure Tf_list_sales.b_besarClick(Sender: TObject);
 begin
-F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'besar');
+  F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'besar');
 end;
 
 procedure Tf_list_sales.b_kecilClick(Sender: TObject);
 begin
-F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'kecil');
+  F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'kecil');
 end;
 
-procedure Tf_list_sales.ed_cariKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure Tf_list_sales.ed_cariKeyDown(Sender: TObject; var Key: Word; Shift:
+  TShiftState);
 begin
-if key = vk_return then
-begin
-PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
-fungsi.SQLExec(dm.Q_jual_global,'select * from vw_list_sales where kd_perusahaan = "'+
-dm.kd_perusahaan+'" and kd_transaksi like "%'+ed_cari.Text+'%"',True);
-end;
+  if key = vk_return then
+  begin
+    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    fungsi.SQLExec(dm.Q_jual_global,
+      'select * from vw_list_sales where kd_perusahaan = "' + dm.kd_perusahaan +
+      '" and kd_transaksi like "%' + ed_cari.Text + '%"', True);
+  end;
 end;
 
 procedure Tf_list_sales.t_data1CellDblClick(Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift:
+  TShiftState; var AHandled: Boolean);
 begin
-F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'besar');
+  F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'besar');
 end;
 
 end.
+

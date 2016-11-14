@@ -101,16 +101,17 @@ begin
       userRealName := dm.Q_show.FieldByName('n_user').AsString;
       userPassword := dm.Q_show.FieldByName('password').AsString;
 
-      sql:= 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="checkin"';
-      fungsi.SQLExec(DM.Q_Show,sql,true);
+      sql := 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="checkin"';
+      fungsi.SQLExec(DM.Q_Show, sql, true);
       if dm.Q_show.FieldByName('nilai').AsBoolean then
       begin
-        sql:= 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) ' +
-              'AND user_id="'+ed_kd_user.Text+'"';
-        fungsi.SQLExec(DM.Q_Show,sql,true);
+        sql := 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
+          + 'AND user_id="' + ed_kd_user.Text + '"';
+        fungsi.SQLExec(DM.Q_Show, sql, true);
         if dm.Q_show.Eof then
         begin
-          messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',mtError,[mbOk],0);
+          messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',
+            mtError, [mbOk], 0);
           ed_kd_user.SetFocus;
           Exit;
         end;
@@ -148,9 +149,9 @@ begin
     else
     begin
       fungsi.SQLExec(dm.Q_temp,
-        'select tanggal from tb_login_kasir where kd_perusahaan = ' +
-        quotedStr(dm.kd_perusahaan) + ' and user =' + (QuotedStr(Ed_Kd_User.Text)) +
-        ' and kd_jaga =' + QuotedStr(cb_kd_OP.Text) + ' and status = ''online''', True);
+        'select tanggal from tb_login_kasir where kd_perusahaan = ' + quotedStr(dm.kd_perusahaan)
+        + ' and user =' + (QuotedStr(Ed_Kd_User.Text)) + ' and kd_jaga =' +
+        QuotedStr(cb_kd_OP.Text) + ' and status = ''online''', True);
       if dm.Q_temp.Eof then
       begin
         dm.db_conn.StartTransaction;
@@ -176,7 +177,7 @@ begin
       fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
       F_Transaksi.awal;
       F_Transaksi.kode_transaksi_terbaru;
-      
+
       if F_Transaksi.cb_aktif.ItemIndex = 1 then
         F_Transaksi.aktifkan_pesan;
 
@@ -298,8 +299,9 @@ begin
     end;
   end;
 
-  fungsi.SQLExec(dm.Q_show, 'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + dm.kd_perusahaan +
-    '" order by user', true);
+  fungsi.SQLExec(dm.Q_show,
+    'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + dm.kd_perusahaan
+    + '" order by user', true);
   if dm.Q_show.Eof then
   begin
     case MessageDlg('MD/Operator untuk ' + dm.kd_perusahaan +

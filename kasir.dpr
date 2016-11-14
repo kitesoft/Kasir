@@ -16,6 +16,8 @@ uses
 
 {$R *.res}
 
+
+
 begin
   Application.Initialize;
   Application.Title := 'Point Of Sales';
@@ -23,3 +25,4 @@ begin
   Application.CreateForm(TF_Transaksi, F_Transaksi);
   Application.Run;
 end.
+
