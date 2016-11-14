@@ -75,32 +75,6 @@ object f_cari: Tf_cari
       OptionsView.Indicator = True
       Styles.Inactive = dm.cxstyl1
       Styles.Selection = dm.cxstyl1
-      object clm1: TcxGridDBColumn
-        Tag = 1
-        Visible = False
-        Width = 90
-        IsCaptionAssigned = True
-      end
-      object clm2: TcxGridDBColumn
-        Tag = 2
-        Visible = False
-        SortIndex = 0
-        SortOrder = soAscending
-        Width = 283
-        IsCaptionAssigned = True
-      end
-      object clm3: TcxGridDBColumn
-        Tag = 3
-        Visible = False
-        Width = 140
-        IsCaptionAssigned = True
-      end
-      object clm4: TcxGridDBColumn
-        Tag = 4
-        Visible = False
-        Width = 100
-        IsCaptionAssigned = True
-      end
     end
     object l_data: TcxGridLevel
       GridView = t_data
