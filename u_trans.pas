@@ -2307,7 +2307,6 @@ begin
     tblCap[1]:= 'Deskripsi Group';
     tblCap[2]:= 'Diskon';
     tblCap[3]:= 'Jenis';
-    tampil_button(False,True);
     if ShowModal = mrOk then
     begin
         GroupId:=TblVal[0];

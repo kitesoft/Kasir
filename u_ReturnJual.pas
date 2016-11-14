@@ -223,7 +223,6 @@ ed_pelanggan.SetFocus;
     tblcap[0]:= 'Kode';
     tblCap[1]:= 'Nama Pelanggan';
     CariT := 11;
-    tampil_button(False,True);
     if ShowModal = mrOk then
     begin
         ed_pelanggan.Text:=TblVal[0];
@@ -255,7 +254,6 @@ begin
     _SQLi:= 'select kd_barang, n_barang from tb_barang where kd_perusahaan="'+dm.kd_perusahaan+'"';
     tblcap[0]:= 'PID';
     tblCap[1]:= 'Deskripsi Barang';
-    tampil_button(False,True);
     if ShowModal = mrOk then
     begin
         ed_code.Text:=TblVal[0];

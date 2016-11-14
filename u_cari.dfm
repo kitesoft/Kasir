@@ -14,7 +14,6 @@ object f_cari: Tf_cari
   KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
-  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -33,7 +32,6 @@ object f_cari: Tf_cari
     ParentFont = False
     TabOrder = 0
     OnChange = Ed_cariChange
-    OnKeyDown = Ed_cariKeyDown
     SkinData.CustomColor = True
     SkinData.SkinSection = 'EDIT'
     BoundLabel.Indent = 0
@@ -99,7 +97,7 @@ object f_cari: Tf_cari
       GridView = t_data
     end
   end
-  object b_keluar: TsButton
+  object BtnKeluar: TsButton
     Left = 501
     Top = 424
     Width = 75
@@ -109,7 +107,7 @@ object f_cari: Tf_cari
     TabOrder = 2
     SkinData.SkinSection = 'BUTTON'
   end
-  object B_Ambil: TsButton
+  object BtnPilih: TsButton
     Left = 416
     Top = 424
     Width = 75
@@ -117,7 +115,7 @@ object f_cari: Tf_cari
     Caption = '&Ambil'
     ModalResult = 1
     TabOrder = 3
-    OnClick = B_AmbilClick
+    OnClick = BtnPilihClick
     SkinData.SkinSection = 'BUTTON'
   end
   object sSkinProvider1: TsSkinProvider
