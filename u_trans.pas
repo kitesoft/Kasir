@@ -2323,36 +2323,36 @@ begin
         GroupId:=TblVal[0];
         diskon:=TblVal[2];
         jenis:=TblVal[3];
-    end;
+
+        fungsi.SQLExec(dm.QGroup, format('SELECT kd_barang, qty from tb_barang_group_detail '+
+        'WHERE barang_group_id = "%s" ORDER BY kd_barang',[GroupId]), True);
+        while not dm.QGroup.Eof do
+        begin
+          kode_barang := dm.QGroup.FieldByName('kd_barang').AsString;
+          qty := dm.QGroup.FieldByName('Qty').AsString;
+
+          input_kode;
+
+          if qty <> '1' then
+            UbahQty(qty);
+
+          dm.QGroup.Next;
+        end;
+        if jenis = '%' then
+        begin
+          ed_discP.Value := StrToFloat(diskon);
+          ed_discP.SetFocus;
+          Ed_Bayar.SetFocus;
+        end
+        else
+        begin
+          Ed_discRp.Value := StrToFloat(diskon);
+          Ed_discRp.SetFocus;
+          Ed_Bayar.SetFocus;
+        end;
+      end;
   finally
   close;
-  end;
-
-  fungsi.SQLExec(dm.QGroup, format('SELECT kd_barang, qty from tb_barang_group_detail '+
-  'WHERE barang_group_id = "%s" ORDER BY kd_barang',[GroupId]), True);
-  while not dm.QGroup.Eof do
-  begin
-    kode_barang := dm.QGroup.FieldByName('kd_barang').AsString;
-    qty := dm.QGroup.FieldByName('Qty').AsString;
-
-    input_kode;
-
-    if qty <> '1' then
-      UbahQty(qty);
-
-    dm.QGroup.Next;
-  end;
-  if jenis = '%' then
-  begin
-    ed_discP.Value := StrToFloat(diskon);
-    ed_discP.SetFocus;
-    Ed_Bayar.SetFocus;
-  end
-  else
-  begin
-    Ed_discRp.Value := StrToFloat(diskon);
-    Ed_discRp.SetFocus;
-    Ed_Bayar.SetFocus;
   end;
 end;
 
