@@ -269,8 +269,7 @@ end;
 procedure TF_Login.cb_kd_OPChange(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_show,
-    'select * from tb_login_jaga where tanggal=date(now()) and `status`="' +
-    'jaga' + '" and `mode`="' + 'online' + '" and kd_perusahaan="' + sb.Panels[0].text
+    'select * from tb_login_jaga where `mode`="online" and kd_perusahaan="' + sb.Panels[0].text
     + '" and user="' + cb_kd_op.Text + '"', true);
 
   ED_N_Op.Text := dm.Q_show.fieldbyname('nama_user').AsString;
@@ -345,12 +344,11 @@ begin
     end;
   end;
 
-  fungsi.SQLExec(dm.Q_show, 'select * from tb_login_jaga where status="jaga" ' +
-    'and mode="online" and kd_perusahaan="' + sb.Panels[0].text +
+  fungsi.SQLExec(dm.Q_show, 'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + sb.Panels[0].text +
     '" order by user', true);
   if dm.Q_show.Eof then
   begin
-    case MessageDlg('Program Server untuk ' + sb.Panels[1].text +
+    case MessageDlg('MD/Operator untuk ' + sb.Panels[1].text +
       ' belum AKTIF,'#10#13'Pilih Perusahaan Lain?', mtWarning, mbOKCancel, 0) of
       mrOk:
         begin
