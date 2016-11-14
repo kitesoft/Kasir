@@ -517,7 +517,7 @@ end;
 
 procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
-sb.Panels[0].Text:= 'Versi: '+fungsi.program_versi;
+sb.Panels[0].Text:= 'Versi: '+fungsi.GetVersiApp;
 
 sb.Panels[10].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
 
@@ -2244,7 +2244,7 @@ var
 begin
   hasil:=False;
   
-  versiAPP := fungsi.program_versi;
+  versiAPP := fungsi.GetVersiApp;
 
   fungsi.SQLExec(dm.Q_Show,'select versi_terbaru, URLdownload from  app_versi where kode="kasir.exe"',true);
   versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
