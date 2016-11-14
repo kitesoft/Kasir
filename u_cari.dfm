@@ -1,10 +1,10 @@
 object f_cari: Tf_cari
   Left = 306
   Top = 134
-  BorderStyle = bsDialog
+  Width = 600
+  Height = 494
+  BorderIcons = [biSystemMenu]
   Caption = 'Pencarian'
-  ClientHeight = 455
-  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,6 +16,9 @@ object f_cari: Tf_cari
   Position = poOwnerFormCenter
   OnKeyDown = FormKeyDown
   OnShow = FormShow
+  DesignSize = (
+    584
+    455)
   PixelsPerInch = 96
   TextHeight = 13
   object Ed_cari: TsEdit
@@ -23,6 +26,7 @@ object f_cari: Tf_cari
     Top = 8
     Width = 573
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -49,6 +53,7 @@ object f_cari: Tf_cari
     Top = 32
     Width = 573
     Height = 385
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     LookAndFeel.Kind = lfOffice11
     object t_data: TcxGridDBTableView
@@ -61,6 +66,7 @@ object f_cari: Tf_cari
       DataController.Summary.SummaryGroups = <>
       OptionsBehavior.CellHints = True
       OptionsBehavior.IncSearch = True
+      OptionsCustomize.ColumnsQuickCustomization = True
       OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsSelection.CellSelect = False
@@ -105,6 +111,7 @@ object f_cari: Tf_cari
     Top = 424
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = '&Keluar'
     ModalResult = 2
     TabOrder = 2
@@ -115,6 +122,7 @@ object f_cari: Tf_cari
     Top = 424
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = '&Ambil'
     ModalResult = 1
     TabOrder = 3
