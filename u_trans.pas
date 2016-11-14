@@ -287,7 +287,7 @@ var
 
 implementation
 
-uses u_dm, U_Cari_pel,acselectskin, U_ubah_satuan, U_Login,
+uses u_dm, acselectskin, U_ubah_satuan, U_Login,
   u_cariBarang, u_list_jual, u_hari, u_returnJual, u_cari, u_bayar;
 
 {$R *.dfm}
@@ -1169,8 +1169,23 @@ end;
 
 procedure TF_Transaksi.sb_cari_pelClick(Sender: TObject);
 begin
-application.CreateForm(TF_Cari_pelanggan, F_cari_pelanggan);
-F_Cari_Pelanggan.ShowModal;
+  application.CreateForm(tf_cari, f_cari);
+  with F_cari do
+  try
+    _SQLi := 'SELECT kd_pelanggan, n_pelanggan, `limit`, piutang ' +
+          'FROM vw_pelanggan where kd_perusahaan="'+dm.kd_perusahaan+'"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Nama Pelanggan';
+    tblCap[2] := 'Limit';
+    tblCap[3] := 'Piutang';
+    if ShowModal = mrOk then
+    begin
+      Ed_Pelanggan.Text:= TblVal[0];
+      L_nm_pel.Caption:= TblVal[1];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure TF_Transaksi.Ed_PelangganKeyDown(Sender: TObject; var Key: Word;
@@ -1187,9 +1202,7 @@ end;
 if key=vk_insert then
 begin
 PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE );
-
-application.CreateForm(TF_Cari_pelanggan, F_cari_pelanggan);
-F_Cari_Pelanggan.ShowModal;
+sb_cari_pelClick(Sender);
 end;
 end;
 
