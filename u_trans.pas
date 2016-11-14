@@ -691,7 +691,7 @@ begin
   'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2 '+
   'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang '+
   'AND tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan WHERE tb_barang.kd_barang = "'+kode_temp+'" '+
-  'AND tb_barang_harga.kd_dm.macam_harga = "'+dm.macam_harga+'" AND tb_barang.aktif="Y" '+
+  'AND tb_barang_harga.kd_macam_harga = "'+dm.macam_harga+'" AND tb_barang.aktif="Y" '+
   'AND tb_barang.kd_perusahaan= "'+sb.Panels[1].Text+'"', true);
 
   if dm.Q_show.Eof then
@@ -1228,7 +1228,7 @@ mm_nama.Text:= isi_sql;
 dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, '+
-'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_dm.macam_harga, '+
+'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '+
 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '+
 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '+
 'simpan_pada) VALUES ("'+sb.Panels[1].Text+'" ,"'+sb.Panels[9].Text
@@ -1614,7 +1614,7 @@ begin
 fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN tb_barang_harga ON '+
 'tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan AND tb_barang.kd_barang = tb_barang_harga.kd_barang '+
-'where tb_barang.n_barang like "%'+ed_code.Text+'%" AND tb_barang_harga.kd_dm.macam_harga="'+dm.macam_harga+'" and '+
+'where tb_barang.n_barang like "%'+ed_code.Text+'%" AND tb_barang_harga.kd_macam_harga="'+dm.macam_harga+'" and '+
 'tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by tb_barang.n_barang LIMIT 0,100', true);
 
 kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
