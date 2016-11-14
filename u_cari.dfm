@@ -63,6 +63,7 @@ object f_cari: Tf_cari
       OptionsBehavior.IncSearch = True
       OptionsData.Editing = False
       OptionsData.Inserting = False
+      OptionsSelection.CellSelect = False
       OptionsView.ColumnAutoWidth = True
       OptionsView.GroupByBox = False
       OptionsView.Indicator = True
