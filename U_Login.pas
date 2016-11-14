@@ -44,7 +44,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    sop: Boolean;
   end;
 
 var
@@ -113,12 +113,12 @@ begin
   sop := True;
 
   fungsi.SQLExec(dm.Q_temp,
-    'select n_perusahaan from tb_company where kd_perusahaan =' + quotedstr(kd_comp)
+    'select n_perusahaan from tb_company where kd_perusahaan =' + quotedstr(dm.kd_perusahaan)
     + '', true);
 
   if not (dm.Q_temp.Eof) then
   begin
-    sb.Panels[0].Text := kd_comp;
+    sb.Panels[0].Text := dm.kd_perusahaan;
     sb.Panels[1].Text := dm.Q_temp.FieldByName('n_perusahaan').AsString;
     Cek_Perusahaan;
   end
@@ -180,7 +180,7 @@ var
   Host, IP, Err, passs: string;
 begin
   if GetIPFromHost(Host, IP, Err) then
-    ip_kasir := IP //masupin local IP ke edit1
+    dm.ip_kasir := IP //masupin local IP ke edit1
   else
     MessageDlg(Err, mtError, [mbOk], 0);
 
@@ -202,15 +202,15 @@ begin
         ' and kd_jaga =' + QuotedStr(cb_kd_OP.Text) + ' and status = ''online''', True);
       if dm.Q_temp.Eof then
       begin
-        dm.My_Conn.StartTransaction;
+        dm.db_conn.StartTransaction;
         try
           fungsi.SQLExec(dm.q_exe,
             'insert into tb_login_kasir(kd_perusahaan,user,kd_jaga,tanggal,status,komp)values("' +
             sb.Panels[0].text + '","' + ed_kd_user.Text + '", "' + cb_kd_op.Text
-            + '",now(),''online'',"' + ip_kasir + '")', false);
-          dm.My_Conn.Commit;
+            + '",now(),''online'',"' + dm.ip_kasir + '")', false);
+          dm.db_conn.Commit;
         except
-          dm.My_Conn.Rollback;
+          dm.db_conn.Rollback;
         end;
       end;
 
@@ -220,7 +220,7 @@ begin
       f_transaksi.Sb.Panels[4].Text := cb_kd_OP.Text;
       f_transaksi.Sb.Panels[5].Text := ed_N_Op.Text;
 
-      fungsi.simpan_ini(file_ini, 'kasir', 'kd_perusahaan', sb.Panels[0].Text);
+      fungsi.simpan_ini(dm.file_ini, 'kasir', 'kd_perusahaan', sb.Panels[0].Text);
       F_Transaksi.awal;
       F_Transaksi.kode_transaksi_terbaru;
       
@@ -315,6 +315,7 @@ end;
 procedure TF_Login.Cek_Perusahaan;
 var
   x: integer;
+  cek_pusat: string;
 begin
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan =' +
     quotedstr(sb.Panels[0].text) + '', true);

@@ -348,26 +348,26 @@ begin
 //untuk load form
 
 // pesan berjalan
-  pesan := fungsi.ambil_ini(file_ini,'kasir','pesan','Promosi harus dilakukan untuk mempercepat penjualan barang...');
+  pesan := fungsi.ambil_ini(dm.file_ini,'kasir','pesan','Promosi harus dilakukan untuk mempercepat penjualan barang...');
   p_pesan.Height:=0;
 
   cbFontName.Items.Assign(Screen.Fonts);
   CBFontName.Sorted := True;
 
-  CBFontName.ItemIndex := CBFontName.Items.IndexOf(fungsi.ambil_ini(file_ini,'kasir','nama_font','Arial'));
-  crb_bg.selected:= StringToColor(fungsi.ambil_ini(file_ini,'kasir','bg_font','clBlue'));
-  crb_font.selected:= StringToColor(fungsi.ambil_ini(file_ini,'kasir','cl_font','clWhite'));
-  cbsize.Text:= fungsi.ambil_ini(file_ini,'kasir','size_font','20');
-  cbspeed.Text:= fungsi.ambil_ini(file_ini,'kasir','speed','20');
-  cb_aktif.ItemIndex := StrToIntDef(fungsi.ambil_ini(file_ini,'kasir','pesan_aktif'),0);
+  CBFontName.ItemIndex := CBFontName.Items.IndexOf(fungsi.ambil_ini(dm.file_ini,'kasir','nama_font','Arial'));
+  crb_bg.selected:= StringToColor(fungsi.ambil_ini(dm.file_ini,'kasir','bg_font','clBlue'));
+  crb_font.selected:= StringToColor(fungsi.ambil_ini(dm.file_ini,'kasir','cl_font','clWhite'));
+  cbsize.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','size_font','20');
+  cbspeed.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','speed','20');
+  cb_aktif.ItemIndex := StrToIntDef(fungsi.ambil_ini(dm.file_ini,'kasir','pesan_aktif'),0);
 
-  Style_pesan   := TFontStyles(Byte(StrToInt(fungsi.ambil_ini(file_ini,'kasir','style_font','1'))));
+  Style_pesan   := TFontStyles(Byte(StrToInt(fungsi.ambil_ini(dm.file_ini,'kasir','style_font','1'))));
   if fsbold in Style_pesan then btn2.Down:=True;
   if fsitalic in Style_pesan then btn3.Down:=True;
   if fsunderline in Style_pesan then btn4.Down:=True;
 
 //(retail grosir) (tunai kredit) dan tambahan
-if fungsi.ambil_ini(file_ini,'kasir','retail','1')='0' then
+if fungsi.ambil_ini(dm.file_ini,'kasir','retail','1')='0' then
 begin
 sb_retail.Caption:='Retail';
 retail;
@@ -377,7 +377,7 @@ sb_retail.Caption:='Grosir';
 retail;
 end;
 
-if fungsi.ambil_ini(file_ini,'kasir','tunai','1')='0' then
+if fungsi.ambil_ini(dm.file_ini,'kasir','tunai','1')='0' then
 begin
 sb_tunai.Caption:= 'Tunai';
 tunai;
@@ -387,15 +387,15 @@ sb_tunai.Caption:= 'Kredit';
 tunai;
 end;
 
-ed_tambahan.Text:= fungsi.ambil_ini(file_ini,'kasir','tambahan','100');
+ed_tambahan.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','tambahan','100');
 
 //ribbon
 rb1.ActivePage:=tb_pilihan;
 tb_transaksi.TabVisible:= False;
 
-cb_jenis_struk.ItemIndex := StrToIntDef(fungsi.ambil_ini(file_ini,'kasir','jenis_struk'),0);
-cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(fungsi.ambil_ini(file_ini,'kasir','lebar_struk','38'));
-ed_footer_struk.Text:= fungsi.ambil_ini(file_ini,'kasir','footer_struk','TERIMA KASIH ATAS KUNJUANGAN ANDA');
+cb_jenis_struk.ItemIndex := StrToIntDef(fungsi.ambil_ini(dm.file_ini,'kasir','jenis_struk'),0);
+cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(fungsi.ambil_ini(dm.file_ini,'kasir','lebar_struk','38'));
+ed_footer_struk.Text:= fungsi.ambil_ini(dm.file_ini,'kasir','footer_struk','TERIMA KASIH ATAS KUNJUANGAN ANDA');
 
 //skin
 ed_skin.Text:=dm.sm.SkinName;
@@ -410,9 +410,9 @@ begin
 with alert do
   begin
    if alert.IsVisible then alert.Hide;
-   if FileExists(AppPath+'image\'+kode+'.jpg') then
+   if FileExists(dm.AppPath+'image\'+kode+'.jpg') then
     begin
-       Background.LoadFromFile(AppPath+'image\'+kode+'.jpg');
+       Background.LoadFromFile(dm.AppPath+'image\'+kode+'.jpg');
        alert.AlertMessages[0].Text.Clear;
        alert.WindowPosition:=wpRightBottom;
        alert.AutoSize:= false;
@@ -457,7 +457,7 @@ rb1.ActivePage:=tb_pilihan;
 tb_transaksi.TabVisible:= False;
 p_keterangan.Visible:= False;
 
-macam_harga:='HETK';
+dm.macam_harga:='HETK';
 
 ed_keterangan.Clear;
 mm_nama.Lines.Clear;
@@ -490,7 +490,7 @@ sb_retail.Enabled:= true;
 ed_bayar.ReadOnly:= true;
 ed_discP.ReadOnly:=true;
 
-if fungsi.ambil_ini(file_ini,'kasir','retail')='0' then
+if fungsi.ambil_ini(dm.file_ini,'kasir','retail')='0' then
 begin
 sb_retail.Caption:='Retail';
 retail;
@@ -500,7 +500,7 @@ sb_retail.Caption:='Grosir';
 retail;
 end;
 
-if fungsi.ambil_ini(file_ini,'kasir','tunai')='0' then
+if fungsi.ambil_ini(dm.file_ini,'kasir','tunai')='0' then
 begin
 sb_tunai.Caption:= 'Tunai';
 tunai;
@@ -520,7 +520,7 @@ procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
 sb.Panels[0].Text:= 'Versi: '+fungsi.program_versi;
 
-sb.Panels[10].Text:= dm.My_conn.DatabaseName +'@'+ dm.My_conn.Host;
+sb.Panels[10].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
 
 panel_auto_width;
 
@@ -681,7 +681,7 @@ begin
 
   kode_temp:= dm.Q_temp.fieldbyname('kd_barang').AsString;
 
-  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+macam_harga+'","'+kode_temp+'","'+sb.Panels[1].Text+'")', true);
+  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+dm.macam_harga+'","'+kode_temp+'","'+sb.Panels[1].Text+'")', true);
 
   fungsi.sqlExec(dm.Q_Show,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
   'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, '+
@@ -691,7 +691,7 @@ begin
   'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2 '+
   'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang '+
   'AND tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan WHERE tb_barang.kd_barang = "'+kode_temp+'" '+
-  'AND tb_barang_harga.kd_macam_harga = "'+macam_harga+'" AND tb_barang.aktif="Y" '+
+  'AND tb_barang_harga.kd_dm.macam_harga = "'+dm.macam_harga+'" AND tb_barang.aktif="Y" '+
   'AND tb_barang.kd_perusahaan= "'+sb.Panels[1].Text+'"', true);
 
   if dm.Q_show.Eof then
@@ -706,8 +706,8 @@ begin
   begin
      if kode_barang = '' then Exit;
      if alert.IsVisible then alert.Hide;
-     if FileExists(AppPath+'image\bg.jpg') then
-       alert.Background.LoadFromFile(AppPath+'image\bg.jpg');
+     if FileExists(dm.AppPath+'image\bg.jpg') then
+       alert.Background.LoadFromFile(dm.AppPath+'image\bg.jpg');
      alert.AlertMessages[0].Text.Text:='<P align="left"><FONT size="10">'+
      'PID<IND x="60">: '+dm.Q_show.fieldbyname('kd_barang').asstring
      +'<BR>Deskripsi<IND x="60">: '+dm.Q_show.fieldbyname('n_barang').asstring
@@ -781,8 +781,8 @@ if sb_retail.Enabled<> false then
 begin
    if sb_retail.Caption='Retail' then
    begin
-   fungsi.simpan_ini(file_ini,'kasir','retail','0');
-   macam_harga:= 'HGTK';
+   fungsi.simpan_ini(dm.file_ini,'kasir','retail','0');
+   dm.macam_harga:= 'HGTK';
    sb_retail.Caption:='Grosir';
    slabel7.Visible:= true;
    ed_pelanggan.Visible:=true;
@@ -792,8 +792,8 @@ begin
    end else
    if sb_retail.Caption='Grosir' then
    begin
-   fungsi.simpan_ini(file_ini,'kasir','retail','1');
-   macam_harga:= 'HETK';
+   fungsi.simpan_ini(dm.file_ini,'kasir','retail','1');
+   dm.macam_harga:= 'HETK';
    sb_retail.Caption:='Retail';
       if sb_tunai.Caption='Tunai' then
       begin
@@ -813,7 +813,7 @@ procedure TF_transaksi.tunai;
 begin
 if sb_tunai.Caption='Tunai' then
    begin
-   fungsi.simpan_ini(file_ini,'kasir','tunai','0');
+   fungsi.simpan_ini(dm.file_ini,'kasir','tunai','0');
 
    sb_tunai.Caption:='Kredit';
    sLabel5.Visible:=false;
@@ -836,7 +836,7 @@ if sb_tunai.Caption='Tunai' then
    end else
 if sb_tunai.Caption='Kredit' then
    begin
-   fungsi.simpan_ini(file_ini,'kasir','tunai','1');
+   fungsi.simpan_ini(dm.file_ini,'kasir','tunai','1');
    sb_tunai.Caption:='Tunai';
       if sb_retail.Caption= 'Retail' then
       begin
@@ -916,7 +916,7 @@ end;
 //help
 if key=vk_f1 then
 begin
-ShellExecute(Handle,'open', PChar('hh.exe'),PChar(a_path+'tools/bantuan.chm::/Kasir_utama.htm'), nil, SW_SHOW);
+ShellExecute(Handle,'open', PChar('hh.exe'),PChar(dm.Path+'tools/bantuan.chm::/Kasir_utama.htm'), nil, SW_SHOW);
 end;
 //untuk mencari barang
 if key=vk_f2 then
@@ -1225,20 +1225,20 @@ mm_nama.Text:= isi_sql;
   end;
   delete(isi_sql,length(isi_sql),1);
 
-dm.My_Conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, '+
-'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '+
+'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_dm.macam_harga, '+
 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '+
 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '+
 'simpan_pada) VALUES ("'+sb.Panels[1].Text+'" ,"'+sb.Panels[9].Text
 +'", date(now()), time(now()), "'+ed_pelanggan.Text+'", "'+tk+'",ADDDATE(date(now()),INTERVAL '+ed_lama.Text+' DAY),"'+
-macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'", "'+ed_discRp.Text+'",'+
+dm.macam_harga+'","'+ed_sub.Text+'","'+ed_discP.Text+'", "'+ed_discRp.Text+'",'+
 QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])+',"'+ed_grand.Text
 +'","'+ed_bayar.Text+'", '+IntToStr(DebitId)+',"'+DebitKode+'","'+IntToStr(DebitRp)+'","'+
 IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","'+sb.Panels[4].Text
 +'",1,'+QUotedStr(TableView.DataController.Summary.FooterSummaryValues[9])
-+',"'+ip_kasir+'",'+quotedstr(ed_keterangan.Text)+',now())',false);
++',"'+dm.ip_kasir+'",'+quotedstr(ed_keterangan.Text)+',now())',false);
 
   fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_rinci(kd_perusahaan,no_transaksi,urut, '+
   'kd_barang,n_barang,Qty,kd_satuan,harga_pokok,harga_jual,discountP,discountRp, '+
@@ -1252,11 +1252,11 @@ IntToStr(CashOut)+'", "'+laba+'","'+ed_kembali.Text+'","'+sb.Panels[2].Text+'","
   +'","'+'0'+'","'+sb.Panels[2].Text+'")',false);
   end;
                                
-dm.My_Conn.Commit;
+dm.db_conn.Commit;
 fungsi.openCashDrawer;
 except on E:exception do
 begin
-dm.My_Conn.Rollback;
+dm.db_conn.Rollback;
 messagedlg('proses penyimpanan gagal,ulangi lagi!!! '#10#13''+e.Message, mterror, [mbOk],0);
 Exit;
 end;
@@ -1289,7 +1289,7 @@ begin
       tgl_trans:= FormatDateTime('dd mmm yyyy',dm.Q_print.fieldbyname('tgl_transaksi').AsDateTime);
       waktu:= fungsi.tulisP({days[DayOfWeek(StrToDate(tgl_trans))]+', '+}tgl_trans+' '+dm.Q_print.fieldbyname('jam_transaksi').AsString, panjang, taLeftJustify);
 
-  AssignFile(F, AppPath + 'k_struk.prn');
+  AssignFile(F, dm.AppPath + 'k_struk.prn');
   Rewrite(F);
 
   for i:=1 to panjang do write(F,'=');
@@ -1417,7 +1417,7 @@ end;
   Writeln(F, telp);
   CloseFile(F);
 
-fungsi.Cetakfile(AppPath + 'k_struk.prn');
+fungsi.Cetakfile(dm.AppPath + 'k_struk.prn');
 end;
 
 
@@ -1428,7 +1428,7 @@ begin
 
   if jenis='besar' then
    begin
-   dm.laporan.LoadFromFile(a_Path + 'laporan/k_struk_retail.fr3');
+   dm.laporan.LoadFromFile(dm.Path + 'laporan/k_struk_retail.fr3');
    dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('grand_total').AsFloat)+'Rupiah';
 {   dm.laporan.PrintOptions.ShowDialog:=false;
    dm.laporan.PrepareReport;
@@ -1439,7 +1439,7 @@ begin
    begin
    cetak_struk_kecil;
    end;
-   {dm.laporan.LoadFromFile(dm.a_Path + 'laporan/k_struk_retail_k.fr3');
+   {dm.laporan.LoadFromFile(dm.dm.Path + 'laporan/k_struk_retail_k.fr3');
    {dm.laporan.PrintOptions.ShowDialog:=false;
    dm.laporan.PrepareReport;
    dm.laporan.Print;
@@ -1614,7 +1614,7 @@ begin
 fungsi.sqlExec(dm.Q_cari,'SELECT tb_barang.kd_barang, tb_barang.n_barang, '+
 'tb_barang_harga.harga_jual3 FROM tb_barang INNER JOIN tb_barang_harga ON '+
 'tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan AND tb_barang.kd_barang = tb_barang_harga.kd_barang '+
-'where tb_barang.n_barang like "%'+ed_code.Text+'%" AND tb_barang_harga.kd_macam_harga="'+macam_harga+'" and '+
+'where tb_barang.n_barang like "%'+ed_code.Text+'%" AND tb_barang_harga.kd_dm.macam_harga="'+dm.macam_harga+'" and '+
 'tb_barang.kd_perusahaan="'+f_transaksi.sb.Panels[1].Text+'" order by tb_barang.n_barang LIMIT 0,100', true);
 
 kode_barang:= dm.Q_cari.fieldbyname('kd_barang').AsString;
@@ -1791,7 +1791,7 @@ var X:TextFile;
 begin
 if M_pesan.Modified then
 begin
-  fungsi.simpan_ini(file_ini,'kasir','pesan',m_pesan.text);
+  fungsi.simpan_ini(dm.file_ini,'kasir','pesan',m_pesan.text);
 
 pesan:=M_pesan.Text;
 if cb_aktif.ItemIndex = 1 then
@@ -1802,29 +1802,29 @@ end;
 
 procedure TF_Transaksi.cb_jenis_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(file_ini,'kasir','jenis_struk',IntToStr(cb_jenis_struk.ItemIndex));
+fungsi.simpan_ini(dm.file_ini,'kasir','jenis_struk',IntToStr(cb_jenis_struk.ItemIndex));
 end;
 
 procedure TF_Transaksi.cb_lebar_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(file_ini,'kasir','lebar_struk',cb_lebar_struk.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','lebar_struk',cb_lebar_struk.Text);
 end;
 
 procedure TF_Transaksi.ed_footer_strukExit(Sender: TObject);
 begin
-fungsi.simpan_ini(file_ini,'kasir','footer_struk',ed_footer_struk.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','footer_struk',ed_footer_struk.Text);
 end;
 
 procedure TF_Transaksi.btn1Click(Sender: TObject);
 begin
 if cb_aktif.ItemIndex = 1 then
 aktifkan_pesan;
-fungsi.simpan_ini(file_ini,'kasir','nama_font',cbFontName.Text);
-fungsi.simpan_ini(file_ini,'kasir','style_font',IntToStr(Byte(l_pesan.Font.Style)));
-fungsi.simpan_ini(file_ini,'kasir','bg_font',ColorToString(crb_bg.Selected));
-fungsi.simpan_ini(file_ini,'kasir','cl_font',ColorToString(crb_font.Selected));
-fungsi.simpan_ini(file_ini,'kasir','size_font',cbsize.Text);
-fungsi.simpan_ini(file_ini,'kasir','speed',cbspeed.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','nama_font',cbFontName.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','style_font',IntToStr(Byte(l_pesan.Font.Style)));
+fungsi.simpan_ini(dm.file_ini,'kasir','bg_font',ColorToString(crb_bg.Selected));
+fungsi.simpan_ini(dm.file_ini,'kasir','cl_font',ColorToString(crb_font.Selected));
+fungsi.simpan_ini(dm.file_ini,'kasir','size_font',cbsize.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','speed',cbspeed.Text);
 end;
 
 procedure TF_Transaksi.btn5Click(Sender: TObject);
@@ -1874,7 +1874,7 @@ end;
 
 procedure TF_Transaksi.ed_tambahanExit(Sender: TObject);
 begin
-fungsi.simpan_ini(file_ini,'kasir','tambahan',ed_tambahan.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','tambahan',ed_tambahan.Text);
 end;
 
 procedure TF_Transaksi.ac_InsertExecute(Sender: TObject);
@@ -1938,18 +1938,18 @@ if TableView.DataController.RecordCount<>0 then
   if passs=dm.Q_show.FieldByName('password').AsString then
     begin
     alasan:=inputbox('Motive','Masukkan Alasan Pembatalan','');
-    dm.My_Conn.StartTransaction;
+    dm.db_conn.StartTransaction;
     try
       fungsi.SQLExec(dm.Q_exe,'insert into tb_jual_batal(kd_perusahaan,tgl_transaksi,'+
       'jam_transaksi,user,pengawas,alasan) values ("'+sb.Panels[1].Text+'",date(now()),time(now()),"'+
       sb.Panels[2].Text+'","'+sb.Panels[4].Text+'","'+alasan+'")',false);
 
       awal;
-      dm.My_Conn.Commit;
+      dm.db_conn.Commit;
       showmessage('Transaksi Berhasil dibatalkan');
     except on e:exception do
       begin
-        dm.My_conn.Rollback;
+        dm.db_conn.Rollback;
         showmessage('proses penyimpanan transaksi gagal '#10#13'' +e.Message);
       end;
     end;
@@ -2018,11 +2018,11 @@ try
   cb_pending.Visible:= true;
   cb_pending.Items.Add(no_pending);
   cb_pending.ItemIndex:=cb_pending.Items.Count-1;
-  if not(DirectoryExists(AppPath + 'Hold')) then
-    CreateDir(AppPath + 'Hold');
-  Tb2File(TableView.DataController,AppPath + 'Hold\'+no_pending+'.pd');
-  fungsi.amankan(AppPath + 'Hold\'+no_pending+'.pd',
-      AppPath + 'Hold\'+no_pending+'.pd',753);
+  if not(DirectoryExists(dm.AppPath + 'Hold')) then
+    CreateDir(dm.AppPath + 'Hold');
+  Tb2File(TableView.DataController,dm.AppPath + 'Hold\'+no_pending+'.pd');
+  fungsi.amankan(dm.AppPath + 'Hold\'+no_pending+'.pd',
+      dm.AppPath + 'Hold\'+no_pending+'.pd',753);
   awal;
   showmessage('Transaksi berhasil ditahan');
   end;
@@ -2045,14 +2045,14 @@ try
     if messagedlg('Benarkah Anda akan mempilkan transaksi ini???', mtconfirmation, [mbyes,mbNo],0)=mryes then
     begin
 
-    if fileexists(AppPath + 'Hold\'+cb_pending.Text+'.pd') then
+    if fileexists(dm.AppPath + 'Hold\'+cb_pending.Text+'.pd') then
     begin
-    fungsi.amankan(AppPath + 'Hold\'+cb_pending.Text+'.pd',
-        AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
-    file2tb(TableView.DataController,AppPath + 'Hold\'+cb_pending.Text+'.pd');
-    fungsi.amankan(AppPath + 'Hold\'+cb_pending.Text+'.pd',
-        AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
-    deletefile(AppPath + 'Hold\'+cb_pending.Text+'.pd');
+    fungsi.amankan(dm.AppPath + 'Hold\'+cb_pending.Text+'.pd',
+        dm.AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
+    file2tb(TableView.DataController,dm.AppPath + 'Hold\'+cb_pending.Text+'.pd');
+    fungsi.amankan(dm.AppPath + 'Hold\'+cb_pending.Text+'.pd',
+        dm.AppPath + 'Hold\'+cb_pending.Text+'.pd',753);
+    deletefile(dm.AppPath + 'Hold\'+cb_pending.Text+'.pd');
     cb_pending.Items.Delete(cb_pending.ItemIndex);
 
     ed_code.SetFocus;
@@ -2100,7 +2100,7 @@ begin
 if selectskin(dm.sm) then
 begin
 ed_skin.text:= dm.sm.SkinName;
-fungsi.simpan_ini(file_ini,'kasir','nama_skin',ed_skin.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','nama_skin',ed_skin.Text);
 end;
 end;
 
@@ -2108,14 +2108,14 @@ procedure TF_Transaksi.trb_hueChange(Sender: TObject);
 begin
 dm.sm.HueOffset:= trb_hue.Position;
 l_1.Caption:= 'HUE : ' + IntToStr(trb_hue.Position);
-fungsi.simpan_ini(file_ini,'kasir','hue_skin',ed_skin.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','hue_skin',ed_skin.Text);
 end;
 
 procedure TF_Transaksi.trb_satChange(Sender: TObject);
 begin
 dm.sm.Saturation:= trb_sat.Position;
 l_6.Caption:= 'SATURATION : ' + IntToStr(trb_sat.Position);
-fungsi.simpan_ini(file_ini,'kasir','sat_skin',ed_skin.Text);
+fungsi.simpan_ini(dm.file_ini,'kasir','sat_skin',ed_skin.Text);
 end;
 
 procedure TF_Transaksi.ac_closeExecute(Sender: TObject);
@@ -2125,7 +2125,7 @@ end;
 
 procedure TF_Transaksi.cb_aktifChange(Sender: TObject);
 begin
-fungsi.simpan_ini(file_ini,'kasir','pesan_aktif',IntToStr(cb_aktif.ItemIndex));
+fungsi.simpan_ini(dm.file_ini,'kasir','pesan_aktif',IntToStr(cb_aktif.ItemIndex));
 end;
 
 procedure TF_Transaksi.ac_simpanfileExecute(Sender: TObject);
@@ -2251,7 +2251,7 @@ begin
   versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
   URLDownload       := dm.Q_Show.FieldByName('URLdownload').AsString;
   fileName          := Copy(URLDownload,LastDelimiter('/',URLDownload) + 1,Length(URLDownload));
-  UrlDownloadLocal  := 'http://'+dm.My_conn.Host + '/GainProfit/' + fileName;
+  UrlDownloadLocal  := 'http://'+dm.db_conn.Host + '/GainProfit/' + fileName;
 
   if versiAPP < versiDB then
   begin

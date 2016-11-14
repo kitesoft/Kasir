@@ -329,7 +329,7 @@ procedure Tf_returnJual.b_printClick(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_print,'select * from vw_cetak_return_jual where kd_perusahaan="'+
 F_Transaksi.sb.Panels[1].Text+'" and kd_return_jual="'+ed_no_faktur.Text+'"',true);
-dm.laporan.LoadFromFile(a_path + 'laporan\gp_return_jual_rinci.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\gp_return_jual_rinci.fr3');
 dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
 dm.laporan.ShowReport;
 end;
@@ -374,7 +374,7 @@ kd_faktur:= ed_no_faktur.Text;
   end;
   delete(isi_sql,length(isi_sql),1);
 
-dm.My_Conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_exe,'insert into tb_return_jual_global(kd_perusahaan,kd_return_jual, '+
 'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada,pengawas) values ("'+
@@ -387,7 +387,7 @@ ed_nilai_faktur.Text+'","'+F_Transaksi.sb.Panels[2].Text+'",now(),"'+F_Transaksi
   'harga_pokok,barcode,tgl_simpan) values  '+isi_sql, false);
 
 
-dm.My_Conn.Commit;
+dm.db_conn.Commit;
 
 showmessage('penyimpanan data berhasil...');
 
@@ -399,7 +399,7 @@ b_print.SetFocus;
 except
 on E:exception do
 begin
-dm.My_Conn.Rollback;
+dm.db_conn.Rollback;
 messagedlg('proses penyimpanan gagal '#10#13'' + e.Message, mterror, [mbOk],0);
 end;
 end;

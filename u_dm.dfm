@@ -5,7 +5,7 @@ object dm: Tdm
   Top = 195
   Height = 343
   Width = 397
-  object My_Conn: TmySQLDatabase
+  object db_conn: TmySQLDatabase
     DatabaseName = 'profit'
     UserName = 'root'
     UserPassword = 'server'
@@ -22,22 +22,22 @@ object dm: Tdm
     Top = 8
   end
   object Q_show: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     Left = 8
     Top = 64
   end
   object Q_exe: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     Left = 48
     Top = 64
   end
   object Q_temp: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     Left = 88
     Top = 8
   end
   object Q_print: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     SQL.Strings = (
       '')
     Left = 8
@@ -823,7 +823,7 @@ object dm: Tdm
     Top = 8
   end
   object Q_cari: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     Left = 120
     Top = 144
   end
@@ -1996,14 +1996,14 @@ object dm: Tdm
     Top = 88
   end
   object Q_jual_global: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     SQL.Strings = (
       'select * from vw_list_sales')
     Left = 240
     Top = 16
   end
   object Q_jual_rinci: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     SQL.Strings = (
       'select * from vw_jual_barang')
     Left = 312
@@ -21349,7 +21349,7 @@ object dm: Tdm
     Bitmap = {}
   end
   object QGroup: TmySQLQuery
-    Database = My_Conn
+    Database = db_conn
     Left = 176
     Top = 8
   end

@@ -3205,7 +3205,7 @@ object F_Transaksi: TF_Transaksi
     Top = 320
   end
   object Q_time: TmySQLQuery
-    Database = dm.My_Conn
+    Database = dm.db_conn
     Left = 56
     Top = 192
   end

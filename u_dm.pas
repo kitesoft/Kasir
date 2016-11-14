@@ -9,7 +9,7 @@ uses
 
 type
   Tdm = class(TDataModule)
-    My_Conn: TmySQLDatabase;
+    db_conn: TmySQLDatabase;
     Q_show: TmySQLQuery;
     Q_exe: TmySQLQuery;
     Q_temp: TmySQLQuery;
@@ -35,15 +35,13 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    kd_perusahaan, ip_kasir, macam_harga: string;
+    Path, AppPath, file_ini: string;
   end;
 
 var
   dm: Tdm;
   Mgs: TMsg;
-  kd_comp, ip_kasir, macam_harga: string;
-  a_path, AppPath, file_ini, cek_pusat: string;
-  sop: Boolean;
 
 implementation
 
@@ -80,7 +78,7 @@ var
   X: TextFile;
   appINI: TIniFile;
 begin
-  a_path := extractfilepath(application.ExeName);
+  Path := extractfilepath(application.ExeName);
   AppPath := GetAppData(CSIDL_COMMON_APPDATA);
   if not (DirectoryExists(AppPath)) then
     CreateDir(AppPath);
@@ -91,7 +89,7 @@ begin
 
   appINI := TIniFile.Create(file_ini);
   try
-    kd_comp := appINI.ReadString('kasir', 'kd_perusahaan', '');
+    kd_perusahaan := appINI.ReadString('kasir', 'kd_perusahaan', '');
 
     sm.SkinName := appINI.ReadString('kasir', 'nama_skin', 'WEB (internal)');
     sm.HueOffset := appini.ReadInteger('kasir', 'hue_skin', 0);
@@ -100,7 +98,7 @@ begin
     appINI.Free;
   end;
 
-  dm.My_Conn.Connected := False;
+  db_conn.Connected := False;
   assignfile(X, 'tools\koneksi.cbCon');
   try
     reset(X);
@@ -110,13 +108,13 @@ begin
     readln(X, nama);
     readln(X, kata);
     closefile(X);
-    dm.my_conn.Host := krupuk(pusat, 6);
-    dm.My_Conn.DatabaseName := krupuk(data, 6);
+    db_conn.Host := krupuk(pusat, 6);
+    db_conn.DatabaseName := krupuk(data, 6);
     jalur1 := krupuk(jalur2, 6);
-    dm.my_conn.Port := strtoint(jalur1);
-    dm.my_conn.UserName := krupuk(nama, 6);
-    dm.my_conn.UserPassword := krupuk(kata, 6);
-    dm.My_Conn.Connected := true;
+    db_conn.Port := strtoint(jalur1);
+    db_conn.UserName := krupuk(nama, 6);
+    db_conn.UserPassword := krupuk(kata, 6);
+    db_conn.Connected := true;
   except
     showmessage('koneksi tidak berhasil');
     application.Terminate;
@@ -129,9 +127,9 @@ var
 begin
   appINI := TIniFile.Create(file_ini);
   try
-    appINI.WriteString('kasir', 'nama_skin', dm.sm.SkinName);
-    appINI.WriteInteger('kasir', 'hue_skin', dm.sm.HueOffset);
-    appINI.WriteInteger('kasir', 'sat_skin', dm.sm.Saturation);
+    appINI.WriteString('kasir', 'nama_skin', sm.SkinName);
+    appINI.WriteInteger('kasir', 'hue_skin', sm.HueOffset);
+    appINI.WriteInteger('kasir', 'sat_skin', sm.Saturation);
   finally
     appINI.Free;
   end;
