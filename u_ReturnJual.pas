@@ -480,20 +480,6 @@ begin
     TableView.DataController.SetValue(b, 2, kode); //Qty
     TableView.DataController.SetValue(b, 4, harga * StrToFloatdef(kode, 0)); //total harga
   end;
-
-  if Key = #47 then //tanda (/)  ubah harga
-  begin
-    delete(kode, pos('/', kode), 1);
-    ed_code.Clear;
-    key := #0;
-
-    if (Length(kode) = 0) then
-      Exit;
-
-    TableView.DataController.SetValue(b, 3, kode); //harga baru
-    TableView.DataController.SetValue(b, 4, Qty * StrToFloatdef(kode, 0)); //total harga
-  end;
-
 end;
 
 procedure Tf_returnJual.ed_no_fakturKeyDown(Sender: TObject; var Key: Word;
