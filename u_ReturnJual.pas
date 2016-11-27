@@ -403,7 +403,7 @@ begin
       'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada,pengawas) values ("' +
       dm.kd_perusahaan + '","' + ed_no_faktur.Text + '","' + ed_fak_jual.Text +
       '",date(now()),"' + ed_pelanggan.Text + '","' + ed_nilai_faktur.Text +
-      '","' + dm.kd_user + '",now(),"' + dm.kd_operator + '")', false);
+      '","' + dm.kd_pengguna + '",now(),"' + dm.kd_operator + '")', false);
 
     fungsi.SQLExec(dm.Q_exe, 'insert into tb_return_jual_rinci(kd_perusahaan, '
       + 'kd_return_jual,tgl_return_jual,kd_barang,n_barang,qty_return_jual, ' +

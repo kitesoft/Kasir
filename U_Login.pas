@@ -168,7 +168,7 @@ begin
 
       F_Transaksi.Sb.Panels[1].Text := dm.kd_perusahaan;
       f_transaksi.Sb.Panels[2].Text := ed_kd_user.Text;
-      dm.kd_user := Ed_Kd_User.Text;
+      dm.kd_pengguna := Ed_Kd_User.Text;
       f_transaksi.Sb.Panels[3].Text := ed_N_User.Text;
       f_transaksi.Sb.Panels[4].Text := cb_kd_OP.Text;
       dm.kd_operator := cb_kd_OP.Text;

@@ -1293,7 +1293,7 @@ begin
       QuotedStr(_get(x, 5, 3)) + ',' + fungsi.caridanganti(QuotedStr(_get(x, 6,
       3)), ',', '.') + ',' + QuotedStr(_get(x, 7, 3)) + ',' + QuotedStr(_get(x,
       8, 3)) + ',' + QuotedStr(_get(x, 9, 3)) + ',' + QuotedStr(_get(x, 15, 3))
-      + ',' + QuotedStr(_get(x, 17, 3)) + ',' + QuotedStr(dm.kd_user) +
+      + ',' + QuotedStr(_get(x, 17, 3)) + ',' + QuotedStr(dm.kd_pengguna) +
       ',date(now()),' + QuotedStr(_get(x, 3, 3)) + ',' + QuotedStr(_get(x, 19, 3))
       + ',' + QuotedStr(_get(x, 13, 3)) + ',' + QuotedStr(_get(x, 12, 3)) +
       ',date(now())),';
@@ -1313,7 +1313,7 @@ begin
       '",' + QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])
       + ',"' + ed_grand.Text + '","' + ed_bayar.Text + '", ' + IntToStr(DebitId)
       + ',"' + DebitKode + '","' + IntToStr(DebitRp) + '","' + IntToStr(CashOut)
-      + '", "' + laba + '","' + ed_kembali.Text + '","' + dm.kd_user + '","' +
+      + '", "' + laba + '","' + ed_kembali.Text + '","' + dm.kd_pengguna + '","' +
       dm.kd_operator + '",1,' + QUotedStr(TableView.DataController.Summary.FooterSummaryValues
       [9]) + ',"' + dm.ip_kasir + '",' + quotedstr(ed_keterangan.Text) +
       ',now())', false);
@@ -1330,7 +1330,7 @@ begin
         'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, ' +
         'pelanggan,piutang_awal,dibayar,user) values ("' + dm.kd_perusahaan +
         '","' + sb.Panels[9].Text + '",date(now()),"' + ed_lama.Text + '","' +
-        ed_pelanggan.Text + '","' + ed_grand.Text + '","' + '0' + '","' + dm.kd_user
+        ed_pelanggan.Text + '","' + ed_grand.Text + '","' + '0' + '","' + dm.kd_pengguna
         + '")', false);
     end;
 
@@ -2100,7 +2100,7 @@ begin
         fungsi.SQLExec(dm.Q_exe,
           'insert into tb_jual_batal(kd_perusahaan,tgl_transaksi,' +
           'jam_transaksi,user,pengawas,alasan) values ("' + dm.kd_perusahaan +
-          '",date(now()),time(now()),"' + dm.kd_user + '","' + dm.kd_operator +
+          '",date(now()),time(now()),"' + dm.kd_pengguna + '","' + dm.kd_operator +
           '","' + alasan + '")', false);
 
         awal;
@@ -2458,7 +2458,7 @@ begin
 
   sql := Format('SELECT `status` from tb_login_kasir WHERE kd_perusahaan = "%s" '
     + ' AND kd_jaga = "%s" AND `user` = "%s" AND `status` = "online"', [dm.kd_perusahaan,
-    dm.kd_operator, dm.kd_user]);
+    dm.kd_operator, dm.kd_pengguna]);
 
   fungsi.SQLExec(dm.Q_temp, sql, True);
   if dm.Q_temp.Eof then

@@ -37,7 +37,7 @@ type
   private
     { Private declarations }
   public
-    kd_perusahaan, kd_operator, kd_user, ip_kasir, macam_harga: string;
+    kd_perusahaan, kd_operator, kd_pengguna, ip_kasir, macam_harga: string;
     Path, AppPath, file_ini: string;
   end;
 
