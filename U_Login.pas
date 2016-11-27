@@ -10,41 +10,43 @@ uses
 
 type
   TF_Login = class(TForm)
-    sGroupBox1: TsGroupBox;
-    sLabel2: TsLabel;
-    sLabel3: TsLabel;
-    Ed_N_Op: TsEdit;
-    sGroupBox2: TsGroupBox;
+    gbUser: TsGroupBox;
     sLabel4: TsLabel;
     sLabel5: TsLabel;
     sLabel6: TsLabel;
-    Ed_Kd_User: TsEdit;
-    Ed_N_User: TsEdit;
-    Ed_Password: TsEdit;
+    EdKdUser: TsEdit;
+    EdNamaUser: TsEdit;
+    EdPasswordUser: TsEdit;
     sBitBtn2: TsBitBtn;
-    sButton1: TsButton;
+    BtnLogin: TsButton;
     sb: TsStatusBar;
-    sLabel1: TsLabel;
-    cb_kd_OP: TsComboBox;
-    ed_ip: TsEdit;
     l_1: TsLabel;
+    gbServer: TsGroupBox;
+    Lbl1: TsLabel;
+    Lbl2: TsLabel;
+    Lbl3: TsLabel;
+    EdKdOperator: TsEdit;
+    EdNamaOperator: TsEdit;
+    EdPasswordOperator: TsEdit;
     procedure Pilih_Perusahaan;
     procedure Cek_Perusahaan;
     procedure FormShow(Sender: TObject);
-    procedure Ed_Kd_UserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sButton1Click(Sender: TObject);
-    procedure Ed_PasswordKeyPress(Sender: TObject; var Key: Char);
+    procedure EdKdUserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure BtnLoginClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure Ed_N_UserEnter(Sender: TObject);
     procedure sBitBtn2Click(Sender: TObject);
-    procedure cb_kd_OPChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure sbClick(Sender: TObject);
-    procedure Ed_Kd_UserChange(Sender: TObject);
+    procedure EdKdUserChange(Sender: TObject);
+    procedure EdKdOperatorChange(Sender: TObject);
+    procedure EdKdOperatorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure EdPasswordUserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure EdPasswordOperatorKeyDown(Sender: TObject; var Key: Word; Shift:
+      TShiftState);
   private
+    userPassword, operatorPassword: string;
     { Private declarations }
   public
-    userPassword, userRealName: string;
     sop: Boolean;
   end;
 
@@ -79,7 +81,7 @@ begin
   end;
 end;
 
-procedure TF_Login.Ed_Kd_UserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TF_Login.EdKdUserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   sql: string;
 begin
@@ -88,17 +90,17 @@ begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
     sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
       + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
-      'tb_user.kd_user="' + ed_kd_user.Text + '" AND tb_user_company.kasir="Y" '
-      + 'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
+      'tb_user.kd_user="' + EdKdUser.Text + '" AND tb_user_company.kasir="Y" ' +
+      'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
     fungsi.SQLExec(DM.Q_Show, sql, true);
     if dm.Q_show.Eof then
     begin
-      messagedlg('Kode ini tidak terdaftar...', mtError, [mbOk], 0);
-      ed_kd_user.SetFocus;
+      messagedlg('Kode User ' + EdKdUser.Text + ' tidak terdaftar', mtError, [mbOk], 0);
+      EdKdUser.SetFocus;
     end
     else
     begin
-      userRealName := dm.Q_show.FieldByName('n_user').AsString;
+      EdNamaUser.Text := dm.Q_show.FieldByName('n_user').AsString;
       userPassword := dm.Q_show.FieldByName('password').AsString;
 
       sql := 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="checkin"';
@@ -106,96 +108,96 @@ begin
       if dm.Q_show.FieldByName('nilai').AsBoolean then
       begin
         sql := 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
-          + 'AND user_id="' + ed_kd_user.Text + '"';
+          + 'AND user_id="' + EdKdUser.Text + '"';
         fungsi.SQLExec(DM.Q_Show, sql, true);
         if dm.Q_show.Eof then
         begin
-          messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',
-            mtError, [mbOk], 0);
-          ed_kd_user.SetFocus;
+          EdKdUser.SetFocus;
+          EdNamaUser.Clear;
+          messagedlg('Tidak Dapat Login '#10#13'USER ' + EdKdUser.Text +
+            ' Belum Check IN....', mtError, [mbOk], 0);
           Exit;
         end;
       end;
 
-      ed_password.Enabled := true;
-      Ed_Password.SetFocus;
-      Ed_N_User.Text := userRealName;
+      EdPasswordUser.Enabled := true;
+      EdPasswordUser.SetFocus;
     end;
   end;
-
-  if key = vk_escape then
-    close;
 end;
 
-procedure TF_Login.sButton1Click(Sender: TObject);
+procedure TF_Login.BtnLoginClick(Sender: TObject);
 var
-  Host, IP, Err, passs: string;
+  Host, IP, Err: string;
 begin
   if fungsi.GetIPFromHost(Host, IP, Err) then
     dm.ip_kasir := IP //masupin local IP ke edit1
   else
     MessageDlg(Err, mtError, [mbOk], 0);
 
-  if ed_n_user.Text <> '' then
+  if EdNamaUser.Text = '' then
   begin
-    fungsi.SQLExec(dm.Q_temp, 'select md5("' + ed_password.Text + '")as passs', true);
-    passs := dm.Q_temp.fieldbyname('passs').AsString;
-    if compareText(userPassword, passs) <> 0 then
-    begin
-      messagedlg('Password salah..', mtError, [mbOk], 0);
-      ed_password.Clear;
-      ed_password.SetFocus;
-    end
-    else
-    begin
-      fungsi.SQLExec(dm.Q_temp,
-        'select tanggal from tb_login_kasir where kd_perusahaan = ' + quotedStr(dm.kd_perusahaan)
-        + ' and user =' + (QuotedStr(Ed_Kd_User.Text)) + ' and kd_jaga =' +
-        QuotedStr(cb_kd_OP.Text) + ' and status = ''online''', True);
-      if dm.Q_temp.Eof then
-      begin
-        dm.db_conn.StartTransaction;
-        try
-          fungsi.SQLExec(dm.q_exe,
-            'insert into tb_login_kasir(kd_perusahaan,user,kd_jaga,tanggal,status,komp)values("' +
-            dm.kd_perusahaan + '","' + ed_kd_user.Text + '", "' + cb_kd_op.Text
-            + '",now(),''online'',"' + dm.ip_kasir + '")', false);
-          dm.db_conn.Commit;
-        except
-          dm.db_conn.Rollback;
-        end;
-      end;
+    EdKdUser.SetFocus;
+    Exit;
+  end;
 
-      F_Transaksi.Sb.Panels[1].Text := dm.kd_perusahaan;
-      f_transaksi.Sb.Panels[2].Text := ed_kd_user.Text;
-      dm.kd_pengguna := Ed_Kd_User.Text;
-      f_transaksi.Sb.Panels[3].Text := ed_N_User.Text;
-      f_transaksi.Sb.Panels[4].Text := cb_kd_OP.Text;
-      dm.kd_operator := cb_kd_OP.Text;
-      f_transaksi.Sb.Panels[5].Text := ed_N_Op.Text;
+  if EdPasswordUser.Enabled then
+  begin
+    EdPasswordUser.SetFocus;
+    Exit;
+  end;
 
-      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
-      F_Transaksi.awal;
-      F_Transaksi.kode_transaksi_terbaru;
+  if EdNamaOperator.Text = '' then
+  begin
+    EdKdOperator.SetFocus;
+    Exit;
+  end;
 
-      if F_Transaksi.cb_aktif.ItemIndex = 1 then
-        F_Transaksi.aktifkan_pesan;
+  if EdPasswordOperator.Enabled then
+  begin
+    EdPasswordOperator.SetFocus;
+    Exit;
+  end;
 
-      F_Transaksi.panel_auto_width;
-
-      sop := false;
-      close;
+  fungsi.SQLExec(dm.Q_temp,
+    'select tanggal from tb_login_kasir where kd_perusahaan = ' + quotedStr(dm.kd_perusahaan)
+    + ' and user =' + (QuotedStr(EdKdUser.Text)) + ' and kd_jaga =' + QuotedStr(EdKdOperator.Text)
+    + ' and status = "online"', True);
+  if dm.Q_temp.Eof then
+  begin
+    dm.db_conn.StartTransaction;
+    try
+      fungsi.SQLExec(dm.q_exe,
+        'insert into tb_login_kasir(kd_perusahaan,user,kd_jaga,tanggal,status,komp)values("' +
+        dm.kd_perusahaan + '","' + EdKdUser.Text + '", "' + EdKdOperator.Text +
+        '",now(),"online","' + dm.ip_kasir + '")', false);
+      dm.db_conn.Commit;
+    except
+      dm.db_conn.Rollback;
+      ShowMessage('Tidak Bisa Login Kasir');
+      Exit;
     end;
   end;
-end;
 
-procedure TF_Login.Ed_PasswordKeyPress(Sender: TObject; var Key: Char);
-begin
-  if key = #13 then
-  begin
-    key := #0;
-    sButton1Click(Sender);
-  end;
+  F_Transaksi.Sb.Panels[1].Text := dm.kd_perusahaan;
+  dm.kd_pengguna := EdKdUser.Text;
+  f_transaksi.Sb.Panels[2].Text := dm.kd_pengguna;
+  f_transaksi.Sb.Panels[3].Text := EdNamaUser.Text;
+  dm.kd_operator := EdKdOperator.Text;
+  f_transaksi.Sb.Panels[4].Text := dm.kd_operator;
+  f_transaksi.Sb.Panels[5].Text := EdNamaOperator.Text;
+
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
+  F_Transaksi.awal;
+  F_Transaksi.kode_transaksi_terbaru;
+
+  if F_Transaksi.cb_aktif.ItemIndex = 1 then
+    F_Transaksi.aktifkan_pesan;
+
+  F_Transaksi.panel_auto_width;
+
+  sop := false;
+  close;
 end;
 
 procedure TF_Login.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -204,29 +206,15 @@ begin
     close;
 
   if key = vk_f1 then
-    ed_kd_user.SetFocus;
+    EdKdUser.SetFocus;
+
   if key = vk_f2 then
     Pilih_Perusahaan;
-end;
-
-procedure TF_Login.Ed_N_UserEnter(Sender: TObject);
-begin
-  ed_kd_user.SetFocus;
 end;
 
 procedure TF_Login.sBitBtn2Click(Sender: TObject);
 begin
   close;
-end;
-
-procedure TF_Login.cb_kd_OPChange(Sender: TObject);
-begin
-  fungsi.SQLExec(dm.Q_show,
-    'select * from tb_login_jaga where `mode`="online" and kd_perusahaan="' + dm.kd_perusahaan
-    + '" and user="' + cb_kd_op.Text + '"', true);
-
-  ED_N_Op.Text := dm.Q_show.fieldbyname('nama_user').AsString;
-  ed_ip.Text := dm.Q_show.fieldbyname('komp').AsString;
 end;
 
 procedure TF_Login.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -239,7 +227,11 @@ begin
 end;
 
 procedure TF_Login.Pilih_Perusahaan;
+var
+  kd_perusahaan_temp: string;
 begin
+  kd_perusahaan_temp := dm.kd_perusahaan;
+
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
@@ -251,14 +243,16 @@ begin
       dm.kd_perusahaan := TblVal[0];
       sb.Panels[0].Text := dm.kd_perusahaan;
       sb.Panels[1].Text := tblval[1];
+      Cek_Perusahaan;
     end;
-
-    if dm.kd_perusahaan = '' then
-      Pilih_Perusahaan;
-
-    Cek_Perusahaan;
   finally
     close;
+  end;
+  if dm.kd_perusahaan <> kd_perusahaan_temp then
+  begin
+    EdKdUser.Clear;
+    EdKdOperator.Clear;
+    EdKdUser.SetFocus;
   end;
 end;
 
@@ -269,7 +263,6 @@ end;
 
 procedure TF_Login.Cek_Perusahaan;
 var
-  x: integer;
   cek_pusat: string;
 begin
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan =' +
@@ -298,44 +291,124 @@ begin
       end;
     end;
   end;
+end;
 
-  fungsi.SQLExec(dm.Q_show,
-    'select * from tb_login_jaga where mode="online" and kd_perusahaan="' + dm.kd_perusahaan
-    + '" order by user', true);
-  if dm.Q_show.Eof then
+procedure TF_Login.EdKdUserChange(Sender: TObject);
+begin
+  EdNamaUser.Clear;
+  EdPasswordUser.Clear;
+  EdPasswordUser.Enabled := False;
+end;
+
+procedure TF_Login.EdKdOperatorChange(Sender: TObject);
+begin
+  EdNamaOperator.Clear;
+  EdPasswordOperator.Clear;
+  EdPasswordOperator.Enabled := False;
+end;
+
+procedure TF_Login.EdKdOperatorKeyDown(Sender: TObject; var Key: Word; Shift:
+  TShiftState);
+var
+  sql: string;
+begin
+  if key = vk_return then
   begin
-    case MessageDlg('MD/Operator untuk ' + dm.kd_perusahaan +
-      ' belum AKTIF,'#10#13'Pilih Perusahaan Lain?', mtWarning, mbOKCancel, 0) of
-      mrOk:
+    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
+      + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
+      'tb_user.kd_user="' + EdKdOperator.Text +
+      '" AND tb_user_company.tkAdmin="Y" ' + 'AND tb_user_company.kd_perusahaan="'
+      + dm.kd_perusahaan + '"';
+    fungsi.SQLExec(DM.Q_Show, sql, true);
+    if dm.Q_show.Eof then
+    begin
+      messagedlg('Kode Operator ' + EdKdOperator.Text + ' tidak terdaftar',
+        mtError, [mbOk], 0);
+      EdKdOperator.SetFocus;
+    end
+    else
+    begin
+      EdNamaOperator.Text := dm.Q_show.FieldByName('n_user').AsString;
+      operatorPassword := dm.Q_show.FieldByName('password').AsString;
+
+      sql := 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="checkin"';
+      fungsi.SQLExec(DM.Q_Show, sql, true);
+      if dm.Q_show.FieldByName('nilai').AsBoolean then
+      begin
+        sql := 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
+          + 'AND user_id="' + EdKdOperator.Text + '"';
+        fungsi.SQLExec(DM.Q_Show, sql, true);
+        if dm.Q_show.Eof then
         begin
-          Pilih_Perusahaan;
+          EdKdOperator.SetFocus;
+          EdNamaOperator.Clear;
+          messagedlg('Tidak Dapat Login '#10#13'USER ' + EdKdOperator.Text +
+            ' Belum Check IN....', mtError, [mbOk], 0);
           Exit;
         end;
-      mrCancel:
-        begin
-          Application.Terminate;
-        end;
-    end;
-  end
-  else
-  begin
-    cb_kd_op.Clear;
-    for x := 1 to dm.Q_show.RecordCount do
-    begin
-      cb_kd_op.AddItem(dm.Q_show.fieldbyname('user').AsString, nil);
-      dm.Q_show.Next;
-    end;
+      end;
 
-    cb_kd_op.ItemIndex := dm.Q_show.RecordCount - 1;
-    ED_N_Op.Text := dm.Q_show.fieldbyname('nama_user').AsString;
-    ed_ip.Text := dm.Q_show.fieldbyname('komp').AsString;
+      EdPasswordOperator.Enabled := true;
+      EdPasswordOperator.SetFocus;
+    end;
   end;
 end;
 
-procedure TF_Login.Ed_Kd_UserChange(Sender: TObject);
+procedure TF_Login.EdPasswordUserKeyDown(Sender: TObject; var Key: Word; Shift:
+  TShiftState);
+var
+  passs: string;
 begin
-  Ed_N_User.Clear;
-  Ed_Password.Clear;
+  if key = vk_return then
+  begin
+    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    if EdNamaUser.Text <> '' then
+    begin
+      fungsi.SQLExec(dm.Q_temp, 'select md5("' + EdPasswordUser.Text +
+        '")as passs', true);
+      passs := dm.Q_temp.fieldbyname('passs').AsString;
+      if compareText(userPassword, passs) <> 0 then
+      begin
+        messagedlg('Password User salah..', mtError, [mbOk], 0);
+        EdPasswordUser.Clear;
+        EdPasswordUser.SetFocus;
+      end
+      else
+      begin
+        EdPasswordUser.Enabled := False;
+        BtnLoginClick(Sender);
+      end;
+    end;
+  end;
+end;
+
+procedure TF_Login.EdPasswordOperatorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+  passs: string;
+begin
+  if key = vk_return then
+  begin
+    PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
+    if EdNamaOperator.Text <> '' then
+    begin
+      fungsi.SQLExec(dm.Q_temp, 'select md5("' + EdPasswordOperator.Text +
+        '")as passs', true);
+      passs := dm.Q_temp.fieldbyname('passs').AsString;
+      if compareText(operatorPassword, passs) <> 0 then
+      begin
+        messagedlg('Password Operator salah..', mtError, [mbOk], 0);
+        EdPasswordOperator.Clear;
+        EdPasswordOperator.SetFocus;
+      end
+      else
+      begin
+        EdPasswordOperator.Enabled := False;
+        BtnLoginClick(Sender);
+      end;
+    end;
+  end;
 end;
 
 end.
