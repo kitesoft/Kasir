@@ -77,7 +77,6 @@ type
     tv_void: TcxGridColumn;
     tv_Qty: TcxGridColumn;
     tv_no: TcxGridColumn;
-    tmr_out: TTimer;
     ed_discP: TsCurrencyEdit;
     b_simpan: TsButton;
     rb1: TAdvToolBarPager;
@@ -204,7 +203,6 @@ type
       TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean; var AText: string);
     procedure Ed_discPExit(Sender: TObject);
     procedure Ed_discRpExit(Sender: TObject);
-    procedure tmr_outTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure input_kode;
     procedure cetak_struk_kecil;
@@ -437,6 +435,8 @@ begin
 
   application.CreateForm(tF_login, f_login);
   f_login.ShowModal;
+  
+  if not(dm.Login) then Close;
 end;
 
 procedure TF_transaksi._set(baris, kolom, tipe: Integer; _isi: variant);
@@ -1591,13 +1591,7 @@ begin
     exit;
   end;
 
-  if messagedlg('Apakah anda akan melakukan tutup kasir???...', mtconfirmation,
-    [mbYes, mbNo], 0) = mryes then
-  begin
-    Action := caFree;
-  end
-  else
-    action := caNone;
+  Action := caFree;
 end;
 
 procedure TF_Transaksi.Ed_CodeKeyPress(Sender: TObject; var Key: Char);
@@ -1821,12 +1815,6 @@ begin
     Ed_discP.Value := (Ed_DiscrP.Value * 100) / ed_sub.Value;
   Ed_Grand.Value := ed_sub.Value - ed_discRp.Value;
   Ed_Harga.Text := Ed_grand.Text;
-end;
-
-procedure TF_Transaksi.tmr_outTimer(Sender: TObject);
-begin
-  tmr_out.Enabled := false;
-  Application.Terminate;
 end;
 
 procedure TF_Transaksi.FormCreate(Sender: TObject);

@@ -2545,13 +2545,6 @@ object F_Transaksi: TF_Transaksi
     Left = 128
     Top = 272
   end
-  object tmr_out: TTimer
-    Enabled = False
-    Interval = 500
-    OnTimer = tmr_outTimer
-    Left = 16
-    Top = 328
-  end
   object advtlbrfcstylr1: TAdvToolBarOfficeStyler
     Style = bsOffice2003Classic
     AdvMenuStyler = mntransaksi

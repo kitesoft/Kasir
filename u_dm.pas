@@ -39,6 +39,7 @@ type
   public
     kd_perusahaan, kd_operator, kd_pengguna, ip_kasir, macam_harga: string;
     Path, AppPath, file_ini: string;
+    Login: Boolean;
   end;
 
 var

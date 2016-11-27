@@ -47,7 +47,6 @@ type
     userPassword, operatorPassword: string;
     { Private declarations }
   public
-    sop: Boolean;
   end;
 
 var
@@ -63,7 +62,7 @@ uses
 
 procedure TF_Login.FormShow(Sender: TObject);
 begin
-  sop := True;
+  dm.Login := False;
 
   fungsi.SQLExec(dm.Q_temp,
     'select n_perusahaan from tb_company where kd_perusahaan =' + quotedstr(dm.kd_perusahaan)
@@ -196,7 +195,7 @@ begin
 
   F_Transaksi.panel_auto_width;
 
-  sop := false;
+  dm.Login := True;
   close;
 end;
 
@@ -219,9 +218,6 @@ end;
 
 procedure TF_Login.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  if sop = true then
-    F_Transaksi.tmr_out.Enabled := true;
-
   action := caFree;
   F_Login := nil;
 end;
