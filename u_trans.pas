@@ -436,7 +436,7 @@ begin
   application.CreateForm(tF_login, f_login);
   f_login.ShowModal;
   
-  if not(dm.Login) then Close;
+  if not(dm.Login) then Application.Terminate;
 end;
 
 procedure TF_transaksi._set(baris, kolom, tipe: Integer; _isi: variant);
@@ -1591,7 +1591,13 @@ begin
     exit;
   end;
 
-  Action := caFree;
+  if messagedlg('Apakah anda MENUTUP Aplikasi Kasir ini?', mtconfirmation,
+    [mbYes, mbNo], 0) = mryes then
+  begin
+    Action := caFree;
+  end
+  else
+    Action := caNone;
 end;
 
 procedure TF_Transaksi.Ed_CodeKeyPress(Sender: TObject; var Key: Char);
