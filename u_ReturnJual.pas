@@ -93,9 +93,6 @@ begin
 end;
 
 procedure Tf_returnJual.tampil_data;
-var
-  h: Integer;
-  x_hpp: Real;
 begin
 {
 ed_pelanggan.Text:= dm.Q_list_return_kirim.fieldbyname('kd_pelanggan').AsString;
@@ -452,17 +449,14 @@ end;
 
 procedure Tf_returnJual.ed_codeKeyPress(Sender: TObject; var Key: Char);
 var
-  harga, qty: real;
+  harga: real;
   kode: string;
   b: Integer;
 begin
   if TableView.DataController.RecordCount = 0 then
     Exit;
 
-  harga := TableView.DataController.GetValue(tableview.DataController.FocusedRecordIndex,
-    3);
-  Qty := TableView.DataController.GetValue(tableview.DataController.FocusedRecordIndex,
-    2);
+  harga := TableView.DataController.GetValue(tableview.DataController.FocusedRecordIndex,3);
 
   kode := Ed_Code.Text;
 

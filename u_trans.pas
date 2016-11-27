@@ -241,8 +241,6 @@ type
     procedure Ed_PelangganChange(Sender: TObject);
     procedure ed_keteranganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Cb_lamaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    function cek_update: Boolean;
-    procedure ac_cek_updateExecute(Sender: TObject);
     function KasirOffline: Boolean;
     procedure ac_GroupExecute(Sender: TObject);
   private
@@ -250,6 +248,7 @@ type
     DebitKode: string;
     DebitRp: Integer;
     CashOut: Integer;
+    procedure cek_update;
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure UbahQty(Qty: string);
@@ -333,8 +332,6 @@ begin
 end;
 
 procedure TF_transaksi.ambil_form;
-var
-  x: TextFile;
 begin
 //untuk load form
 
@@ -1263,9 +1260,8 @@ end;
 
 procedure TF_Transaksi.simpan;
 var
-  tk, laba: string;
-  x, dicetak: integer;
-  isi_sql: string;
+  tk, laba, isi_sql: string;
+  x: integer;
 begin
   if KasirOffline then
   begin
@@ -1368,7 +1364,7 @@ procedure TF_Transaksi.cetak_struk_kecil;
 var
   toko, alamat, telp, kd_transaksi, kasir, cust, waktu, barang, barang2, satuan,
     har_sat, harga, discP, discRp, netto, discGP, discGRp, nettoG, total, bayar,
-    kembali, void, kaki1, kaki2, tgl_trans: string;
+    kembali, void, kaki1, tgl_trans: string;
   NonTunai, TarikTunai, TotalDebit: string;
   i, j, x, panjang, TotalDebitRp: integer;
   F: TextFile;
@@ -1572,7 +1568,7 @@ end;
 
 procedure TF_Transaksi.InputBoxSetPasswordChar(var Msg: TMessage);
 var
-  hInputForm, hEdit, hButton: HWND;
+  hInputForm, hEdit: HWND;
 begin
   hInputForm := Screen.Forms[0].Handle;
   if (hInputForm <> 0) then
@@ -1923,8 +1919,6 @@ begin
 end;
 
 procedure TF_Transaksi.M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
-var
-  X: TextFile;
 begin
   if M_pesan.Modified then
   begin
@@ -2407,14 +2401,11 @@ begin
 
 end;
 
-function TF_Transaksi.cek_update: Boolean;
+procedure TF_Transaksi.cek_update;
 var
   versiDB, versiAPP, URLDownload: string;
   fileName, UrlDownloadLocal: string;
-  hasil: Boolean;
 begin
-  hasil := False;
-
   versiAPP := fungsi.GetVersiApp;
 
   fungsi.SQLExec(dm.Q_Show,
@@ -2432,16 +2423,6 @@ begin
     Application.Terminate;
     Exit;
   end;
-
-  hasil := True;
-
-  Result := hasil;
-end;
-
-procedure TF_Transaksi.ac_cek_updateExecute(Sender: TObject);
-begin
-  if cek_update then
-    ShowMessage('applikasi ini adalah applikasi terbaru...');
 end;
 
 function TF_Transaksi.KasirOffline: Boolean;

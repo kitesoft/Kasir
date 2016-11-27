@@ -3174,7 +3174,6 @@ object F_Transaksi: TF_Transaksi
     end
     object ac_cek_update: TAction
       Caption = 'Cek Update'
-      OnExecute = ac_cek_updateExecute
     end
   end
   object sd: TsSaveDialog
