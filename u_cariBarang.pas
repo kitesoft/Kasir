@@ -4,10 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridLevel, cxGrid,
-  sSkinProvider, cxCurrencyEdit, UFungsi;
+  sSkinProvider, cxCurrencyEdit, UFungsi, cxCustomData, cxFilter, cxData;
 
 type
   Tf_cariBarang = class(TForm)

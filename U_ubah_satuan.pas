@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sLabel, sEdit, sGroupBox, sButton, Mask, sMaskEdit,
-  sCustomComboEdit, sCurrEdit, sCurrencyEdit, UFungsi, sSkinProvider, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxGridLevel,
+  Dialogs, sLabel, 
+  UFungsi, sSkinProvider, cxStyles,
+  cxCustomData, cxGraphics, cxDataStorage, cxEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, cxCurrencyEdit;
+  cxGridCustomView, cxGrid, cxCurrencyEdit, cxFilter, cxData, StdCtrls;
 
 type
   TF_Ubah_Satuan = class(TForm)

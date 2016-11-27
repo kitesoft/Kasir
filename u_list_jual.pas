@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
-  cxEdit, DB, cxDBData, cxCurrencyEdit, StdCtrls, sButton, ExtCtrls, sPanel,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
+  cxEdit, DB, cxDBData, cxCurrencyEdit, sButton, ExtCtrls, sPanel,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxImageComboBox, sEdit,
-  UFungsi;
+  UFungsi, cxCustomData, cxFilter, cxData, StdCtrls;
 
 type
   Tf_list_sales = class(TForm)

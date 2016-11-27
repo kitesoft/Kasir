@@ -4,17 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sEdit, Grids, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
-  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, DBGrids, UFungsi,
-  sSkinProvider, sMemo, ExtCtrls, sGroupBox, sComboBox, Buttons, sSpeedButton,
-  ImgList, acAlphaImageList, sPanel, sButton, sListBox, sSplitter, printers,
-  frxClass, sRichEdit, sScrollBox, shellapi, AdvAlertWindow, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
+  Dialogs, StdCtrls, sEdit, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
+  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, UFungsi,
+  sSkinProvider, sMemo, ExtCtrls, sComboBox, Buttons, sSpeedButton,
+  sPanel, sButton, printers,
+  frxClass, shellapi, AdvAlertWindow, cxStyles,
+  cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGrid, cxTextEdit, IniFiles, uTerbilang, cxCalc,
+  cxControls, cxGridCustomView, cxGrid, cxTextEdit, uTerbilang, cxCalc,
   AdvMenus, AdvMenuStylers, AdvPreviewMenu, AdvPreviewMenuStylers, AdvToolBar,
   AdvToolBarStylers, AdvShapeButton, AdvGlowButton, AdvOfficeSelectors, ToolWin,
-  DateUtils, ActnList, AdvTrackBar, sDialogs, mySQLDbTables;
+  DateUtils, ActnList, AdvTrackBar, sDialogs, mySQLDbTables, cxFilter,
+  cxData;
 
 const
   InputBoxMessage = WM_USER + 200;

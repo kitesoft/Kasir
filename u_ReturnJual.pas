@@ -4,12 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
-  cxEdit, cxCurrencyEdit, sDialogs, StdCtrls, sButton, sSkinProvider, sTooledit,
-  sEdit, Buttons, sSpeedButton, ExtCtrls, sBevel, sLabel, Mask, sMaskEdit,
-  sCustomComboEdit, sCurrEdit, sCurrencyEdit, sMemo, cxGridLevel,
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxDataStorage,
+  cxEdit, cxCurrencyEdit, sDialogs, StdCtrls, sButton, sSkinProvider, 
+  sEdit, Buttons, sSpeedButton, ExtCtrls, sBevel, sLabel, 
+  sCurrEdit, sCurrencyEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, uTerbilang, cxControls,
-  cxGridCustomView, cxGrid, sPanel, UFungsi;
+  cxGridCustomView, cxGrid, sPanel, UFungsi, cxFilter, cxData, Mask,
+  sMaskEdit, sCustomComboEdit;
 
 type
   Tf_returnJual = class(TForm)
@@ -78,7 +79,7 @@ var
 implementation
 
 uses
-  u_dm, u_cari, u_trans;
+  u_dm, u_cari;
 
 {$R *.dfm}
 

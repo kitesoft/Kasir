@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, sSkinManager, DB, mySQLDbTables, dialogs, forms, inifiles,
-  frxClass, frxDBSet, ScktComp, frxDesgn, ImgList, Controls, acAlphaImageList,
+  frxClass, frxDBSet, frxDesgn, ImgList, Controls, acAlphaImageList,
   SHFolder, Windows, cxStyles;
 
 type
@@ -48,8 +48,7 @@ var
 
 implementation
 
-uses
-  u_trans;
+
 
 
 {$R *.dfm}

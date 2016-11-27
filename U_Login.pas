@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sLabel, UFungsi, sEdit, sGroupBox, Buttons, sBitBtn,
-  sButton, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit, sCurrencyEdit, ComCtrls,
-  sRichEdit, sStatusBar, Winsock, sComboBox, sSkinProvider;
+  Dialogs, sLabel, UFungsi, sEdit, sGroupBox, Buttons, sBitBtn,
+  sButton, ComCtrls,
+  sStatusBar, StdCtrls;
 
 type
   TF_Login = class(TForm)
