@@ -46,7 +46,6 @@ type
     b_print: TsButton;
     b_simpan: TsButton;
     procedure bersih;
-    procedure tampil_data;
     procedure CreateRows;
     procedure ed_codeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -91,38 +90,6 @@ begin
   ed_fak_jual.Clear;
   tableview.DataController.RecordCount := 0;
   ed_nilai_faktur.Clear;
-end;
-
-procedure Tf_returnJual.tampil_data;
-begin
-{
-ed_pelanggan.Text:= dm.Q_list_return_kirim.fieldbyname('kd_pelanggan').AsString;
-l_toko.Caption:= dm.Q_list_return_kirim.fieldbyname('n_pelanggan').AsString;
-ed_no_faktur.Text:= dm.Q_list_return_kirim.fieldbyname('kd_return_kirim').AsString;
-ed_fak_kirim.Text:= dm.Q_list_return_kirim.fieldbyname('kd_kirim').AsString;
-ed_tgl.Text:= formatdatetime('dd/MM/yyyy',dm.Q_list_return_kirim.fieldbyname('tgl_return_kirim').AsDateTime);
-
-fungsi.SQLExec(dm.Q_temp,'select * from tb_return_kirim_rinci where kd_perusahaan="'+
-dm.Q_list_return_kirim.fieldbyname('kd_perusahaan').AsString+'" and kd_return_kirim="'+
-dm.Q_list_return_kirim.fieldbyname('kd_return_kirim').AsString+'"',true);
-
-if dm.Q_temp.RecordCount<>0 then
-begin
-  tableview.DataController.RecordCount:= dm.Q_temp.RecordCount;
-  for h:= 0 to dm.Q_temp.RecordCount-1 do
-  begin
-  TableView.DataController.SetValue(h, 0, dm.Q_temp.FieldByName('kd_barang').AsString);
-  TableView.DataController.SetValue(h, 1, dm.Q_temp.fieldbyname('n_barang').AsString);
-  TableView.DataController.SetValue(h, 2, dm.Q_temp.FieldByName('qty_return_kirim').AsString);
-  TableView.DataController.SetValue(h, 4, dm.Q_temp.fieldbyname('harga_pokok').AsString);
-  TableView.DataController.SetValue(h, 5, dm.Q_temp.fieldbyname('barcode').AsString);
-  x_hpp:= dm.Q_temp.fieldbyname('harga_pokok').AsFloat/dm.Q_temp.FieldByName('qty_return_kirim').AsFloat;
-  TableView.DataController.SetValue(h, 3, x_hpp);
-  dm.Q_temp.Next;
-  end;
-  tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount+1);
-end;
-}
 end;
 
 procedure Tf_returnJual.CreateRows;
