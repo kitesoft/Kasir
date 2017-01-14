@@ -1308,60 +1308,6 @@ object F_Transaksi: TF_Transaksi
     Left = 48
     Top = 328
   end
-  object alert: TAdvAlertWindow
-    AlertMessages = <
-      item
-        Text.Strings = (
-          '         ')
-        ImageIndex = 0
-        Tag = 0
-      end>
-    AlwaysOnTop = True
-    AutoHide = True
-    AutoSize = False
-    AutoDelete = False
-    BorderColor = 6050636
-    BtnHoverColor = 14483455
-    BtnHoverColorTo = 6013175
-    BtnDownColor = 557032
-    BtnDownColorTo = 8182519
-    CaptionColor = 15921648
-    CaptionColorTo = 13222589
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    GradientDirection = gdVertical
-    HintNextBtn = 'Next'
-    HintPrevBtn = 'Previous'
-    HintCloseBtn = 'Close'
-    HintDeleteBtn = 'Delete'
-    HintPopupBtn = 'Popup'
-    Hover = True
-    MarginX = 50
-    MarginY = 50
-    PersistPosition = True
-    PopupLeft = 1
-    PopupTop = 1
-    PopupWidth = 300
-    PopupHeight = 300
-    PositionFormat = '%d of %d'
-    WindowColor = 15855846
-    WindowColorTo = 13024437
-    ShowScrollers = False
-    ShowDelete = False
-    ShowPopup = False
-    AlphaEnd = 255
-    AlphaStart = 255
-    DisplayTime = 5000
-    FadeStep = 5
-    WindowPosition = wpRightBottom
-    Style = asOffice2007Obsidian
-    Version = '1.8.0.0'
-    Left = 128
-    Top = 272
-  end
   object t_pesan: TTimer
     Enabled = False
     Interval = 20

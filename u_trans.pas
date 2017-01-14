@@ -5,17 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, sEdit, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
-  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, UFungsi,
-  sSkinProvider, sMemo, ExtCtrls, sComboBox, Buttons, sSpeedButton,
-  sPanel, sButton, printers,
-  frxClass, shellapi, AdvAlertWindow, cxStyles,
-  cxCustomData, cxGraphics, cxDataStorage, cxEdit,
+  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, UFungsi, sSkinProvider,
+  sMemo, ExtCtrls, sComboBox, Buttons, sSpeedButton, sPanel, sButton, printers,
+  frxClass, cxStyles, cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, cxTextEdit, uTerbilang, cxCalc,
-  AdvMenus, AdvMenuStylers, AdvPreviewMenu, AdvPreviewMenuStylers, AdvToolBar,
-  AdvToolBarStylers, AdvShapeButton, AdvGlowButton, AdvOfficeSelectors, ToolWin,
-  DateUtils, ActnList, AdvTrackBar, sDialogs, mySQLDbTables, cxFilter,
-  cxData;
+  DateUtils, ActnList, sDialogs, mySQLDbTables, cxFilter, cxData;
 
 const
   InputBoxMessage = WM_USER + 200;
@@ -55,7 +50,6 @@ type
     Ed_Bayar: TsCurrencyEdit;
     cb_pending: TsComboBox;
     Cb_lama: TsComboBox;
-    alert: TAdvAlertWindow;
     Grid: TcxGrid;
     TableView: TcxGridTableView;
     tv_pid: TcxGridColumn;
@@ -135,7 +129,6 @@ type
     ac_setting: TAction;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
-    procedure tampil_gambar(kode: string);
     procedure awal;
     procedure FormShow(Sender: TObject);
     procedure showdata;
@@ -351,23 +344,6 @@ begin
     'footer_struk', 'TERIMA KASIH ATAS KUNJUANGAN ANDA');
 end;
 
-procedure TF_transaksi.tampil_gambar(kode: string);
-begin
-  with alert do
-  begin
-    if alert.IsVisible then
-      alert.Hide;
-    if FileExists(dm.AppPath + 'image\' + kode + '.jpg') then
-    begin
-      Background.LoadFromFile(dm.AppPath + 'image\' + kode + '.jpg');
-      alert.AlertMessages[0].Text.Clear;
-      alert.WindowPosition := wpRightBottom;
-      alert.AutoSize := false;
-      Show;
-    end;
-  end;
-end;
-
 procedure TF_transaksi.WmAfterShow(var Msg: TMessage);
 begin
   dm.sm.Active := true;
@@ -506,7 +482,6 @@ begin
   ed_bayar.ReadOnly := false;
   ed_discP.ReadOnly := false;
 
-  tampil_gambar(dm.Q_show.FieldByName('kd_barang').AsString);
   fungsi.SQLExec(dm.Q_Temp, 'select n_singkat from tb_satuan where kd_satuan=' +
     satuan + '', true);
 
@@ -598,8 +573,6 @@ begin
       begin
         if (_Get(f, 16, 3) = satuan) and (_Get(f, 17, 3) = 0) then
         begin
-          tampil_gambar(dm.Q_show.fieldbyname('kd_barang').AsString);
-
           QtyH := _Get(f, 3, 3) + 1;
           _set(f, 3, 3, QtyH);                                                   //QtyH
           _set(f, 9, 3, _Get(f, 8, 3) * QtyH);                                    //total harga
@@ -674,21 +647,12 @@ begin
   begin
     if kode_barang = '' then
       Exit;
-    if alert.IsVisible then
-      alert.Hide;
-    if FileExists(dm.AppPath + 'image\bg.jpg') then
-      alert.Background.LoadFromFile(dm.AppPath + 'image\bg.jpg');
-    alert.AlertMessages[0].Text.Text := '<P align="left"><FONT size="10">' +
-      'PID<IND x="60">: ' + dm.Q_show.fieldbyname('kd_barang').asstring +
-      '<BR>Deskripsi<IND x="60">: ' + dm.Q_show.fieldbyname('n_barang').asstring
-      + '<BR>Barcode<IND x="60">: ' + dm.Q_show.fieldbyname('barcode3').asstring
-      + '<BR>Harga 1<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual1').asstring
-      + '<BR>Harga 2<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual2').asstring
-      + '<BR>Harga 3<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual3').asstring
-      + '</FONT></P>';
-    alert.AutoSize := True;
-    alert.WindowPosition := wpCenter;
-    alert.show;
+    ShowMessage('PID' +#9+ ': ' + dm.Q_show.fieldbyname('kd_barang').asstring + sLineBreak +
+      'Deskripsi' +#9+ ': ' + dm.Q_show.fieldbyname('n_barang').asstring + sLineBreak +
+      'Barcode' +#9+ ': ' + dm.Q_show.fieldbyname('barcode3').asstring + sLineBreak +
+      'Harga 1' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual1').asstring + sLineBreak +
+      'Harga 2' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual2').asstring + sLineBreak +
+      'Harga 3' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual3').asstring);
     Exit;
   end;
 
@@ -1038,8 +1002,6 @@ begin
 
   if ed_bayar.Value <> 0 then
   begin
-    alert.CloseAlert;
-
     Ed_Bayar.SetFocus;
     L_Bayar.Caption := 'BAYAR';
     Ed_BK.Text := Ed_Bayar.Text;
@@ -1717,7 +1679,6 @@ begin
   else
   begin
     mm_nama.Text := AfocusedRecord.Values[2];
-    tampil_gambar(AFocusedRecord.Values[1]);
   end;
 end;
 
