@@ -178,13 +178,11 @@ begin
     end;
   end;
 
-  F_Transaksi.Sb.Panels[1].Text := dm.kd_perusahaan;
+  F_Transaksi.Sb.Panels[3].Text := dm.kd_perusahaan;
   dm.kd_pengguna := EdKdUser.Text;
-  f_transaksi.Sb.Panels[2].Text := dm.kd_pengguna;
-  f_transaksi.Sb.Panels[3].Text := EdNamaUser.Text;
+  f_transaksi.Sb.Panels[4].Text := dm.kd_pengguna;
   dm.kd_operator := EdKdOperator.Text;
-  f_transaksi.Sb.Panels[4].Text := dm.kd_operator;
-  f_transaksi.Sb.Panels[5].Text := EdNamaOperator.Text;
+  f_transaksi.Sb.Panels[5].Text := dm.kd_operator;
 
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'kd_perusahaan', dm.kd_perusahaan);
   F_Transaksi.awal;

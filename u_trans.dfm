@@ -29,13 +29,23 @@ object F_Transaksi: TF_Transaksi
     Height = 22
     Panels = <
       item
-        Text = 'F1: Help'
+        Text = 'F1: Pilihan'
         Width = 70
       end
       item
         Alignment = taCenter
-        Text = 'CO'
+        Text = 'VERSI'
         Width = 100
+      end
+      item
+        Alignment = taCenter
+        Text = 'KONEKSI'
+        Width = 70
+      end
+      item
+        Alignment = taCenter
+        Text = 'COMPANY'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -44,17 +54,7 @@ object F_Transaksi: TF_Transaksi
       end
       item
         Alignment = taCenter
-        Text = 'NAMA USER'
-        Width = 120
-      end
-      item
-        Alignment = taCenter
-        Text = 'OP'
-        Width = 70
-      end
-      item
-        Alignment = taCenter
-        Text = 'NAMA OP'
+        Text = 'OPERATOR'
         Width = 120
       end
       item
@@ -73,11 +73,7 @@ object F_Transaksi: TF_Transaksi
         Width = 100
       end
       item
-        Alignment = taCenter
         Width = 120
-      end
-      item
-        Width = 100
       end>
     SkinData.SkinSection = 'STATUSBAR'
   end

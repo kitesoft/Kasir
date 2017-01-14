@@ -455,9 +455,9 @@ end;
 
 procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
-  sb.Panels[0].Text := 'Versi: ' + fungsi.GetVersiApp;
+  sb.Panels[1].Text := 'Versi: ' + fungsi.GetVersiApp;
 
-  sb.Panels[10].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
 
   panel_auto_width;
 
