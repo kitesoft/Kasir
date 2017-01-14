@@ -1174,8 +1174,8 @@ begin
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
-    isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(sb.Panels
-      [9].Text) + ',' + QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
+    isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
+      QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
       3)) + ',' + QuotedStr(_get(x, 2, 3)) + ',' + QuotedStr(_get(x, 18, 3)) +
       ',' + QuotedStr(_get(x, 16, 3)) + ',' + QuotedStr(_get(x, 14, 3)) + ',' +
       QuotedStr(_get(x, 5, 3)) + ',' + StringReplace(QuotedStr(_get(x, 6,
@@ -1194,7 +1194,7 @@ begin
       'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
       + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
       + 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
-      + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + sb.Panels[9].Text
+      + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
       + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + tk +
       '",ADDDATE(date(now()),INTERVAL ' + ed_lama.Text + ' DAY),"' + dm.macam_harga
       + '","' + ed_sub.Text + '","' + ed_discP.Text + '", "' + ed_discRp.Text +
@@ -1217,7 +1217,7 @@ begin
       fungsi.SQLExec(dm.Q_exe,
         'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, ' +
         'pelanggan,piutang_awal,dibayar,user) values ("' + dm.kd_perusahaan +
-        '","' + sb.Panels[9].Text + '",date(now()),"' + ed_lama.Text + '","' +
+        '","' + KodeTransaksi + '",date(now()),"' + ed_lama.Text + '","' +
         ed_pelanggan.Text + '","' + ed_grand.Text + '","' + '0' + '","' + dm.kd_pengguna
         + '")', false);
     end;
@@ -1238,13 +1238,13 @@ begin
     mtConfirmation, [mbYes, mbNo], 0) = mryes then
   begin
     if StJenis = 1 then
-      cetak(sb.Panels[9].Text, 'besar')
+      cetak(KodeTransaksi, 'besar')
     else
-      cetak(sb.Panels[9].Text, 'kecil')
+      cetak(KodeTransaksi, 'kecil')
   end
   else
     fungsi.SQLExec(dm.Q_exe,
-      'update tb_jual_global set cetak=0 where kd_transaksi="' + sb.Panels[9].Text
+      'update tb_jual_global set cetak=0 where kd_transaksi="' + KodeTransaksi
       + '" and kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
   AWAL;
@@ -2047,11 +2047,11 @@ end;
 procedure TF_Transaksi.ac_cetakExecute(Sender: TObject);
 begin
 //cetak Ulang
-  if sb.Panels[9].Text <> '' then
+  if KodeTransaksi <> '' then
     if StJenis = 1 then
-      cetak(sb.Panels[9].Text, 'besar')
+      cetak(KodeTransaksi, 'besar')
     else
-      cetak(sb.Panels[9].Text, 'kecil')
+      cetak(KodeTransaksi, 'kecil')
 end;
 
 procedure TF_Transaksi.ac_closeExecute(Sender: TObject);
@@ -2115,13 +2115,13 @@ end;
 procedure TF_Transaksi.ac_BesarExecute(Sender: TObject);
 begin
 //cetak struk besar
-  cetak(sb.Panels[9].Text, 'besar');
+  cetak(KodeTransaksi, 'besar');
 end;
 
 procedure TF_Transaksi.ac_kecilExecute(Sender: TObject);
 begin
 //cetak struk kecil
-  cetak(sb.Panels[9].Text, 'kecil')
+  cetak(KodeTransaksi, 'kecil')
 end;
 
 procedure TF_Transaksi.ac_jual_globalExecute(Sender: TObject);
