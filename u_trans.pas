@@ -223,7 +223,7 @@ type
     tahan, batas, piutang, lebar_layar: integer;
     harga, harga_pokok, Qty_real, QtyH, diskon: Integer;
     satuan, kode_barang, inputstring, passs, alasan, no_pending,
-      harga_edit: string;
+      harga_edit, KodeTransaksi: string;
     diskonP: Real;
     days: array[1..7] of string;
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
@@ -255,26 +255,13 @@ begin
 end;
 
 procedure TF_transaksi.kode_transaksi_terbaru;
-var
-  a: integer;
-  y, tgl: string;
 begin
   // memunculkan kode transaksi terbaru...
-
-  fungsi.SQLExec(dm.Q_show,
-    'select count(*) as jumlah,date(now()) as tgl from tb_jual_global ' +
-    'where tgl_transaksi=date(now()) and kd_perusahaan="' + dm.kd_perusahaan + '"', true);
-  a := dm.Q_show.fieldbyname('jumlah').AsInteger + 1;
-  tgl := formatdatetime('yyyyMMdd', dm.Q_show.fieldbyname('tgl').AsDateTime);
-  if a < 10 then
-    y := 'PJ-' + tgl + '-000'
-  else if a < 100 then
-    y := 'PJ-' + tgl + '-00'
-  else if a < 1000 then
-    y := 'PJ-' + tgl + '-0'
-  else if a < 10000 then
-    y := 'PJ-' + tgl + '-';
-  sb.Panels[9].Text := y + inttostr(a);
+  fungsi.SQLExec(dm.Q_temp, Format('SELECT CONCAT("PJ", DATE_FORMAT(NOW(), "%%Y%%m%%d"), ' +
+  'LPAD(COUNT(kd_transaksi) + 1, 4, "0")) AS new_id FROM tb_jual_global '+
+  'WHERE DATE(tgl_transaksi) = DATE(NOW()) AND kd_perusahaan = "%s"', [dm.kd_perusahaan]),true);
+  KodeTransaksi := dm.Q_temp.FieldByName('new_id').AsString;
+  sb.Panels[9].Text := KodeTransaksi;
 end;
 
 procedure TF_transaksi.aktifkan_pesan;
