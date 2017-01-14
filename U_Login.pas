@@ -190,7 +190,7 @@ begin
   F_Transaksi.awal;
   F_Transaksi.kode_transaksi_terbaru;
 
-  if F_Transaksi.cb_aktif.ItemIndex = 1 then
+  if F_Transaksi.PesanAktif = 1 then
     F_Transaksi.aktifkan_pesan;
 
   F_Transaksi.panel_auto_width;
