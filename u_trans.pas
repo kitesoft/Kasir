@@ -23,7 +23,6 @@ type
     p_pesan: TsPanel;
     pnlKode: TsPanel;
     Ed_Code: TsEdit;
-    sb_cari_barang: TsSpeedButton;
     sb_tunai: TsSpeedButton;
     sb_retail: TsSpeedButton;
     pnlFooter: TsPanel;
@@ -115,17 +114,19 @@ type
     BtnKunci: TsButton;
     Lbl_4: TsLabel;
     mm_nama: TsMemo;
-    BtnReturn1: TsButton;
-    BtnPending1: TsButton;
-    BtnLoad1: TsButton;
+    BtnReturn: TsButton;
+    BtnPending: TsButton;
+    BtnLoad: TsButton;
     BtnGroup: TsButton;
-    BtnSatuan2: TsButton;
-    Btncetak1: TsButton;
+    BtnSatuan: TsButton;
+    Btncetak: TsButton;
     Btnkecil: TsButton;
     BtnBesar: TsButton;
     Btnjual_global: TsButton;
     Btnsetting: TsButton;
     ac_setting: TAction;
+    ac_cari_barang: TAction;
+    Btncari_barang: TsButton;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
     procedure awal;
@@ -143,7 +144,6 @@ type
     procedure tunai;
     procedure sb_retailClick(Sender: TObject);
     procedure sb_tunaiClick(Sender: TObject);
-    procedure sb_cari_barangClick(Sender: TObject);
     procedure sb_cari_pelClick(Sender: TObject);
     procedure Ed_PelangganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure simpan;
@@ -196,6 +196,7 @@ type
     function KasirOffline: Boolean;
     procedure ac_GroupExecute(Sender: TObject);
     procedure ac_settingExecute(Sender: TObject);
+    procedure ac_cari_barangExecute(Sender: TObject);
   private
     DebitId: Integer;
     DebitKode: string;
@@ -661,11 +662,6 @@ begin
     input_kode;
   end;
 
-  if key = vk_f2 then
-  begin
-    sb_cari_barangClick(Self);
-  end;
-
   if f_cariBarang <> nil then
   begin
     if key = vk_up then
@@ -829,7 +825,7 @@ begin
   // untuk mencari barang
   if key = vk_f2 then
   begin
-    ed_code.SetFocus;
+    ac_cari_barangExecute(Self);
   end;
 
   // merubah Tunai/kredit
@@ -1072,20 +1068,6 @@ end;
 procedure TF_Transaksi.sb_tunaiClick(Sender: TObject);
 begin
   tunai;
-end;
-
-procedure TF_Transaksi.sb_cari_barangClick(Sender: TObject);
-begin
-  if f_cariBarang = nil then
-  begin
-    application.CreateForm(Tf_cariBarang, f_cariBarang);
-    with f_cariBarang do
-      SetWindowPos(Handle, HWND_TOPMOST, Ed_Code.Left, pnlKode.Top + ed_code.Height,
-        Ed_Code.Width - 20, Grid.Height - 40, SWP_DRAWFRAME);
-    f_cariBarang.Show;
-    Ed_Code.Clear;
-    Ed_Code.SetFocus;
-  end;
 end;
 
 procedure TF_Transaksi.sb_cari_pelClick(Sender: TObject);
@@ -2242,6 +2224,20 @@ procedure TF_Transaksi.ac_settingExecute(Sender: TObject);
 begin
   Application.CreateForm(TFSetting, FSetting);
   FSetting.ShowModal;
+end;
+
+procedure TF_Transaksi.ac_cari_barangExecute(Sender: TObject);
+begin
+  if f_cariBarang = nil then
+  begin
+    application.CreateForm(Tf_cariBarang, f_cariBarang);
+    with f_cariBarang do
+      SetWindowPos(Handle, HWND_TOPMOST, Ed_Code.Left, pnlKode.Top + ed_code.Height,
+        Ed_Code.Width - 20, Grid.Height - 40, SWP_DRAWFRAME);
+    f_cariBarang.Show;
+    Ed_Code.Clear;
+    Ed_Code.SetFocus;
+  end;
 end;
 
 end.

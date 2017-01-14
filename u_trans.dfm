@@ -128,18 +128,6 @@ object F_Transaksi: TF_Transaksi
     Align = alTop
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
-    object sb_cari_barang: TsSpeedButton
-      Left = 193
-      Top = 1
-      Width = 35
-      Height = 36
-      Cursor = crArrow
-      OnClick = sb_cari_barangClick
-      Align = alLeft
-      SkinData.SkinSection = 'SPEEDBUTTON'
-      ImageIndex = 0
-      Images = dm.gambar
-    end
     object sb_tunai: TsSpeedButton
       Left = 97
       Top = 1
@@ -177,9 +165,9 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'SPEEDBUTTON'
     end
     object Ed_Code: TsEdit
-      Left = 228
+      Left = 193
       Top = 1
-      Width = 779
+      Width = 814
       Height = 36
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -1198,7 +1186,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 3
       SkinData.SkinSection = 'BUTTON'
     end
-    object BtnReturn1: TsButton
+    object BtnReturn: TsButton
       Left = 312
       Top = 0
       Width = 120
@@ -1207,7 +1195,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 4
       SkinData.SkinSection = 'BUTTON'
     end
-    object BtnPending1: TsButton
+    object BtnPending: TsButton
       Left = 312
       Top = 24
       Width = 120
@@ -1216,7 +1204,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 5
       SkinData.SkinSection = 'BUTTON'
     end
-    object BtnLoad1: TsButton
+    object BtnLoad: TsButton
       Left = 312
       Top = 48
       Width = 120
@@ -1234,7 +1222,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 7
       SkinData.SkinSection = 'BUTTON'
     end
-    object BtnSatuan2: TsButton
+    object BtnSatuan: TsButton
       Left = 456
       Top = 24
       Width = 120
@@ -1243,7 +1231,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 8
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btncetak1: TsButton
+    object Btncetak: TsButton
       Left = 456
       Top = 47
       Width = 120
@@ -1286,6 +1274,15 @@ object F_Transaksi: TF_Transaksi
       Height = 25
       Action = ac_setting
       TabOrder = 13
+      SkinData.SkinSection = 'BUTTON'
+    end
+    object Btncari_barang: TsButton
+      Left = 200
+      Top = 8
+      Width = 105
+      Height = 25
+      Action = ac_cari_barang
+      TabOrder = 14
       SkinData.SkinSection = 'BUTTON'
     end
   end
@@ -1400,6 +1397,10 @@ object F_Transaksi: TF_Transaksi
     object ac_setting: TAction
       Caption = 'Setting'
       OnExecute = ac_settingExecute
+    end
+    object ac_cari_barang: TAction
+      Caption = 'Cari Barang (F2)'
+      OnExecute = ac_cari_barangExecute
     end
   end
   object sd: TsSaveDialog
