@@ -1287,8 +1287,8 @@ begin
       [9].Text) + ',' + QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
       3)) + ',' + QuotedStr(_get(x, 2, 3)) + ',' + QuotedStr(_get(x, 18, 3)) +
       ',' + QuotedStr(_get(x, 16, 3)) + ',' + QuotedStr(_get(x, 14, 3)) + ',' +
-      QuotedStr(_get(x, 5, 3)) + ',' + fungsi.caridanganti(QuotedStr(_get(x, 6,
-      3)), ',', '.') + ',' + QuotedStr(_get(x, 7, 3)) + ',' + QuotedStr(_get(x,
+      QuotedStr(_get(x, 5, 3)) + ',' + StringReplace(QuotedStr(_get(x, 6,
+      3)), ',', '.', [rfReplaceAll]) + ',' + QuotedStr(_get(x, 7, 3)) + ',' + QuotedStr(_get(x,
       8, 3)) + ',' + QuotedStr(_get(x, 9, 3)) + ',' + QuotedStr(_get(x, 15, 3))
       + ',' + QuotedStr(_get(x, 17, 3)) + ',' + QuotedStr(dm.kd_pengguna) +
       ',date(now()),' + QuotedStr(_get(x, 3, 3)) + ',' + QuotedStr(_get(x, 19, 3))
@@ -1643,9 +1643,7 @@ begin
     if Key = #42 then //tanda *  diskon persen
     begin
       delete(kode, pos('*', kode), 1);
-{    if fungsi.komadesimal then
-      kode:= fungsi.caridanganti(kode,'.',',');
-}        kode := FloatToStr(StrToFloatDef(kode, 0));
+      kode := FloatToStr(StrToFloatDef(kode, 0));
       ed_code.Clear;
       key := #0;
       if (Length(kode) = 0) or (TableView.DataController.RecordCount = 0) or (_Get
