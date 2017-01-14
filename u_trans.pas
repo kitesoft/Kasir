@@ -207,7 +207,6 @@ type
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure UbahQty(Qty: string);
-    { Private declarations }
   public
     // pesan
     PesanAktif: Integer;
@@ -228,7 +227,6 @@ type
     days: array[1..7] of string;
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
     function _get(baris, kolom: Integer; tipe: Integer = 1): variant;
-    { Public declarations }
   end;
 
 var
@@ -282,9 +280,7 @@ end;
 
 procedure TF_transaksi.ambil_form;
 begin
-//untuk load form
-
-// pesan berjalan
+ // pesan berjalan
   pesan := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'pesan',
     'Promosi harus dilakukan untuk mempercepat penjualan barang...');
   p_pesan.Height := 0;
@@ -300,7 +296,7 @@ begin
 
   StylePesan := TFontStyles(Byte(StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'style_font', '1'))));
 
-//(retail grosir) (tunai kredit) dan tambahan
+  // (retail grosir) (tunai kredit) dan tambahan
   if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail', '1') = '0' then
   begin
     sb_retail.Caption := 'Retail';
@@ -375,8 +371,6 @@ procedure TF_transaksi.awal;
 begin
   tableview.DataController.RecordCount := 0;
 
-  //rb1.ActivePage := tb_pilihan;
-  //tb_transaksi.TabVisible := False;
   p_keterangan.Visible := False;
 
   dm.macam_harga := 'HETK';
@@ -456,7 +450,6 @@ procedure TF_Transaksi.isi_table(baris: Integer; kolom: array of Integer; _isi:
 var
   i: Integer;
 begin
-//
   for i := 0 to High(kolom) do
     _Set(baris, kolom[i], 3, _isi[i]);
 end;
@@ -581,8 +574,6 @@ procedure TF_Transaksi.input_kode;
 var
   kode_temp: string;
 begin
-  //if (Ed_Code.Text = '') and (f_cariBarang = nil) then kode_barang := '';
-
   if kode_barang = '' then
   begin
     Ed_Discp.SetFocus;
@@ -606,8 +597,6 @@ begin
     kode_barang + '") AND kd_perusahaan= "' + dm.kd_perusahaan + '"', true);
 
   kode_temp := dm.Q_temp.fieldbyname('kd_barang').AsString;
-
-  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+dm.macam_harga+'","'+kode_temp+'","'+dm.kd_perusahaan+'")', true);
 
   fungsi.sqlExec(dm.Q_Show, 'SELECT tb_barang.kd_barang, tb_barang.n_barang, ' +
     'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, ' +
@@ -657,8 +646,6 @@ begin
   end;
 
   showdata;
-  //tb_transaksi.TabVisible := True;
-  //rb1.ActivePage := tb_transaksi;
 
   Ed_Code.Clear;
 end;
@@ -804,7 +791,7 @@ begin
     ac_BatalExecute(Self);
   end;
 
-//untuk keluar dari form
+  // untuk keluar dari form
   if key = vk_escape then
   begin
     if f_cariBarang <> nil then
@@ -835,65 +822,61 @@ begin
     end;
   end;
 
-//help
+  // help
   if key = vk_f1 then
   begin
     pnlPilihan.Visible := not(pnlPilihan.Visible);
-
-
-//    ShellExecute(Handle, 'open', PChar('hh.exe'), PChar(dm.Path +
-//      'tools/bantuan.chm::/Kasir_utama.htm'), nil, SW_SHOW);
   end;
-//untuk mencari barang
+
+  // untuk mencari barang
   if key = vk_f2 then
   begin
     ed_code.SetFocus;
   end;
 
-//merubah Tunai/kredit
+  // merubah Tunai/kredit
   if key = vk_f3 then
     tunai;
 
-//return jual
+  // return jual
   if (key = vk_f4) then
   begin
     ac_ReturnExecute(Self);
   end;
 
-//pending transaksi
+  //  pending transaksi
   if key = vk_f5 then
   begin
     ac_PendingExecute(Self);
   end;
 
-//memunculkan pending transaksi
+  // memunculkan pending transaksi
   if key = vk_f6 then
   begin
     ac_LoadExecute(Self);
   end;
 
-//memunculkan pencarian group barang
+  // memunculkan pencarian group barang
   if key = vk_f7 then
   begin
     ac_GroupExecute(Self);
   end;
 
-//ubah satuan
+  // ubah satuan
   if key = vk_f8 then
   begin
-//sgDblClick(Sender);
     TableViewDblClick(Sender);
   end;
 
-//merubah retail dan grosir
+  // merubah retail dan grosir
   if key = vk_f9 then
     retail;
 
-//cetak ulang;
+  // cetak ulang;
   if key = vk_f11 then
     ac_cetakExecute(Self);
 
-// untuk menampilkan pembayaran kartu debit.
+  // untuk menampilkan pembayaran kartu debit.
   if key = vk_f12 then
   begin
     if Ed_Grand.Value > 0 then
@@ -923,13 +906,13 @@ begin
     end;
   end;
 
-// Ctrl + L untuk mengunci transaksi
+  // Ctrl + L untuk mengunci transaksi
   if (shift = [ssCTRL]) and (key = 76) then
   begin
     ac_KunciExecute(Self);
   end;
 
-// Ctrl + K untuk memasukkan keterangan.
+  // Ctrl + K untuk memasukkan keterangan.
   if (shift = [ssCTRL]) and (key = 75) then
   begin
     p_keterangan.Visible := not (p_keterangan.Visible);
@@ -938,11 +921,9 @@ begin
     else
       Ed_Code.SetFocus;
   end;
-
 end;
 
 procedure TF_Transaksi.Timer1Timer(Sender: TObject);
-//var  days: array[1..7] of string;
 begin
   days[1] := 'Minggu';
   days[2] := 'Senin';
@@ -1099,7 +1080,6 @@ procedure TF_Transaksi.sb_cari_barangClick(Sender: TObject);
 begin
   if f_cariBarang = nil then
   begin
-//  TableView.OptionsView.Header:= False;
     application.CreateForm(Tf_cariBarang, f_cariBarang);
     with f_cariBarang do
       SetWindowPos(Handle, HWND_TOPMOST, Ed_Code.Left, pnlKode.Top + ed_code.Height,
@@ -1441,21 +1421,12 @@ begin
     dm.laporan.LoadFromFile(dm.Path + 'laporan/k_struk_retail.fr3');
     dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('grand_total').AsFloat)
       + 'Rupiah';
-{   dm.laporan.PrintOptions.ShowDialog:=false;
-   dm.laporan.PrepareReport;
-   dm.laporan.Print;
-}      dm.laporan.ShowReport;
+    dm.laporan.ShowReport;
   end
   else if jenis = 'kecil' then
   begin
     cetak_struk_kecil;
   end;
-   {dm.laporan.LoadFromFile(dm.dm.Path + 'laporan/k_struk_retail_k.fr3');
-   {dm.laporan.PrintOptions.ShowDialog:=false;
-   dm.laporan.PrepareReport;
-   dm.laporan.Print;
-   dm.laporan.DesignReport;
-}
 end;
 
 procedure TF_Transaksi.InputBoxSetPasswordChar(var Msg: TMessage);
@@ -1494,8 +1465,6 @@ var
 begin
   if f_cariBarang = nil then
   begin
-//if not ((key>='0')and(key<='9')or(key=#8) or(key=#43) or(key=#45) or(key=#42) or (Key=#46) or (Key=#47)) then key:=#0;
-
     kode := Ed_Code.Text;
 
     if key = #43 then // tanda + (repeat)
@@ -1648,7 +1617,6 @@ procedure TF_Transaksi.Ed_CodeExit(Sender: TObject);
 begin
   if f_cariBarang <> nil then
   begin
-//TableView.OptionsView.Header:= True;
     f_cariBarang.Close;
     Ed_Code.Clear;
   end;
@@ -1744,7 +1712,7 @@ begin
     exit;
   end;
 
-// hanya untuk sementara selama proses pembuatan kartu
+  // hanya untuk sementara selama proses pembuatan kartu
   if ed_keterangan.Text = '' then
   begin
     ShowMessage('masukkan keterangan penerima barang...');
@@ -1814,7 +1782,7 @@ end;
 
 procedure TF_Transaksi.ac_InsertExecute(Sender: TObject);
 begin
-// insert uang receh
+  // insert uang receh
   if (TableView.DataController.RecordCount <> 0) and (_Get(0, 3, 1) <> 0) then
   begin
     _set(0, 6, 1, (_get(0, 7, 1) * 100) / (strtofloat(_get(0, 5, 1)) +
@@ -1829,7 +1797,7 @@ end;
 
 procedure TF_Transaksi.ac_voidExecute(Sender: TObject);
 begin
-// void
+  // void
   if TableView.DataController.RecordCount <> 0 then
   begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
@@ -1866,7 +1834,7 @@ end;
 
 procedure TF_Transaksi.ac_BatalExecute(Sender: TObject);
 begin
-//batalkan transaksi
+  // batalkan transaksi
   if TableView.DataController.RecordCount <> 0 then
   begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
@@ -1910,7 +1878,7 @@ end;
 
 procedure TF_Transaksi.ac_KunciExecute(Sender: TObject);
 begin
-//Kunci transaksi
+  // Kunci transaksi
   if MM_nama.Text <> 'TERKUNCI' then
   begin
     MM_nama.Text := 'TERKUNCI';
@@ -1930,7 +1898,7 @@ end;
 
 procedure TF_Transaksi.ac_ReturnExecute(Sender: TObject);
 begin
-//return Penjualan
+  // return Penjualan
   if KasirOffline then
   begin
     ShowMessage('TIDAK DAPAT MELAKUKAN RETURN JUAL...'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
@@ -1961,7 +1929,7 @@ end;
 
 procedure TF_Transaksi.ac_PendingExecute(Sender: TObject);
 begin
-//Pending Transaksi
+  // Pending Transaksi
   if TableView.DataController.RecordCount = 0 then
     Exit;
   try
@@ -1988,7 +1956,7 @@ end;
 
 procedure TF_Transaksi.ac_LoadExecute(Sender: TObject);
 begin
-//Load transaksi
+  // Load transaksi
   try
     if cb_pending.Visible = true then
     begin
@@ -2040,13 +2008,13 @@ end;
 
 procedure TF_Transaksi.ac_SatuanExecute(Sender: TObject);
 begin
-//Ubah Satuan
+  // Ubah Satuan
   TableViewDblClick(Sender);
 end;
 
 procedure TF_Transaksi.ac_cetakExecute(Sender: TObject);
 begin
-//cetak Ulang
+  // cetak Ulang
   if KodeTransaksi <> '' then
     if StJenis = 1 then
       cetak(KodeTransaksi, 'besar')
@@ -2061,7 +2029,7 @@ end;
 
 procedure TF_Transaksi.ac_simpanfileExecute(Sender: TObject);
 begin
-// save file
+  // save file
   if sd.Execute then
   begin
     try
@@ -2080,7 +2048,7 @@ end;
 
 procedure TF_Transaksi.ac_loadfileExecute(Sender: TObject);
 begin
-//load file
+  // load file
   if od.Execute then
   begin
     try
@@ -2101,8 +2069,6 @@ begin
 
       if TableView.DataController.RecordCount <> 0 then
       begin
-        //tb_transaksi.TabVisible := True;
-        //rb1.ActivePage := tb_transaksi;
         tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
       end;
 
@@ -2114,19 +2080,19 @@ end;
 
 procedure TF_Transaksi.ac_BesarExecute(Sender: TObject);
 begin
-//cetak struk besar
+  // cetak struk besar
   cetak(KodeTransaksi, 'besar');
 end;
 
 procedure TF_Transaksi.ac_kecilExecute(Sender: TObject);
 begin
-//cetak struk kecil
+  // cetak struk kecil
   cetak(KodeTransaksi, 'kecil')
 end;
 
 procedure TF_Transaksi.ac_jual_globalExecute(Sender: TObject);
 begin
-// lihat transaksi global
+  // lihat transaksi global
   Application.CreateForm(Tf_list_sales, f_list_sales);
   f_list_sales.ShowModal;
 end;
