@@ -17,6 +17,13 @@ object FSetting: TFSetting
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object Lbl3: TsLabel
+    Left = 8
+    Top = 208
+    Width = 162
+    Height = 13
+    Caption = 'Harga Tambahan (ex: Min. Dingin)'
+  end
   object gb1: TsGroupBox
     Left = 8
     Top = 8
@@ -240,7 +247,7 @@ object FSetting: TFSetting
   end
   object BtnSimpan: TsButton
     Left = 552
-    Top = 216
+    Top = 208
     Width = 75
     Height = 25
     Caption = 'Simpan'
@@ -332,5 +339,13 @@ object FSetting: TFSetting
         '59'
         '60')
     end
+  end
+  object ed_tambahan: TEdit
+    Left = 176
+    Top = 206
+    Width = 89
+    Height = 21
+    ParentColor = True
+    TabOrder = 4
   end
 end

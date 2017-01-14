@@ -106,7 +106,6 @@ type
     pnlHeader: TsPanel;
     ed_Harga: TsCurrencyEdit;
     pnlPilihan: TsPanel;
-    ed_tambahan: TEdit;
     Lbl_5: TsLabel;
     Lbl_2: TsLabel;
     BtnInsert: TsButton;
@@ -175,7 +174,6 @@ type
     procedure t_pesanTimer(Sender: TObject);
     procedure ambil_form;
     procedure aktifkan_pesan;
-    procedure ed_tambahanExit(Sender: TObject);
     procedure ac_InsertExecute(Sender: TObject);
     procedure ac_voidExecute(Sender: TObject);
     procedure ac_BatalExecute(Sender: TObject);
@@ -222,7 +220,7 @@ type
     tahan, batas, piutang, lebar_layar: integer;
     harga, harga_pokok, Qty_real, QtyH, diskon: Integer;
     satuan, kode_barang, inputstring, passs, alasan, no_pending,
-      harga_edit, KodeTransaksi: string;
+      harga_edit, KodeTransaksi, InsertHarga: string;
     diskonP: Real;
     days: array[1..7] of string;
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
@@ -319,7 +317,7 @@ begin
     tunai;
   end;
 
-  ed_tambahan.Text := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tambahan', '100');
+  InsertHarga := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tambahan', '100');
 
   StJenis := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'jenis_struk', '0'));
   StLebar := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'lebar_struk', '38'));
@@ -1775,19 +1773,14 @@ begin
 
 end;
 
-procedure TF_Transaksi.ed_tambahanExit(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tambahan', ed_tambahan.Text);
-end;
-
 procedure TF_Transaksi.ac_InsertExecute(Sender: TObject);
 begin
   // insert uang receh
   if (TableView.DataController.RecordCount <> 0) and (_Get(0, 3, 1) <> 0) then
   begin
     _set(0, 6, 1, (_get(0, 7, 1) * 100) / (strtofloat(_get(0, 5, 1)) +
-      strtofloatdef(ed_tambahan.Text, 0))); //diskon pr
-    _set(0, 5, 1, (strtofloat(_get(0, 5, 1)) + strtofloatdef(ed_tambahan.Text, 0)));
+      strtofloatdef(InsertHarga, 0))); //diskon pr
+    _set(0, 5, 1, (strtofloat(_get(0, 5, 1)) + strtofloatdef(InsertHarga, 0)));
       //harga baru
     _set(0, 8, 1, _Get(0, 5, 1) - _get(0, 7, 1)); //netto
     _set(0, 9, 1, _Get(0, 8, 1) * _Get(0, 3, 1)); //total harga

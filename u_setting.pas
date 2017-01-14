@@ -33,6 +33,8 @@ type
     cb_lebar_struk: TComboBox;
     Lbl1: TsLabel;
     Lbl2: TsLabel;
+    ed_tambahan: TEdit;
+    Lbl3: TsLabel;
     procedure TbHueChange(Sender: TObject);
     procedure TbSaturationChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -97,6 +99,8 @@ begin
   cb_jenis_struk.ItemIndex := F_Transaksi.StJenis;
   cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(IntToStr(F_Transaksi.StLebar));
   ed_footer_struk.Text := F_Transaksi.StPesan;
+
+  ed_tambahan.Text := F_Transaksi.InsertHarga;
 end;
 
 procedure TFSetting.Sb2Click(Sender: TObject);
@@ -196,6 +200,9 @@ begin
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'jenis_struk', IntToStr(cb_jenis_struk.ItemIndex));
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'lebar_struk', cb_lebar_struk.Text);
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'footer_struk', ed_footer_struk.Text);
+
+  F_Transaksi.InsertHarga := ed_tambahan.Text;
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tambahan', F_Transaksi.InsertHarga);
   Close;
 end;
 

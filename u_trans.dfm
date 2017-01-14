@@ -122,7 +122,7 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlKode: TsPanel
     Left = 0
-    Top = 172
+    Top = 180
     Width = 1008
     Height = 38
     Align = alTop
@@ -748,9 +748,9 @@ object F_Transaksi: TF_Transaksi
   end
   object Grid: TcxGrid
     Left = 0
-    Top = 210
+    Top = 218
     Width = 1008
-    Height = 197
+    Height = 189
     Align = alClient
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -1059,7 +1059,7 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlHeader: TsPanel
     Left = 0
-    Top = 72
+    Top = 80
     Width = 1008
     Height = 100
     Align = alTop
@@ -1125,14 +1125,14 @@ object F_Transaksi: TF_Transaksi
     Left = 0
     Top = 0
     Width = 1008
-    Height = 72
+    Height = 80
     Align = alTop
     TabOrder = 7
     Visible = False
     SkinData.SkinSection = 'PANEL'
     object Lbl_5: TsLabel
       Left = 4
-      Top = 15
+      Top = 39
       Width = 58
       Height = 26
       Alignment = taCenter
@@ -1140,7 +1140,7 @@ object F_Transaksi: TF_Transaksi
     end
     object Lbl_2: TsLabel
       Left = 72
-      Top = 15
+      Top = 39
       Width = 45
       Height = 26
       Alignment = taCenter
@@ -1148,7 +1148,7 @@ object F_Transaksi: TF_Transaksi
     end
     object Lbl_3: TsLabel
       Left = 128
-      Top = 15
+      Top = 39
       Width = 73
       Height = 26
       Alignment = taCenter
@@ -1156,56 +1156,46 @@ object F_Transaksi: TF_Transaksi
     end
     object Lbl_4: TsLabel
       Left = 216
-      Top = 15
+      Top = 39
       Width = 79
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Diskon Rp'#13#10'ex. (500-)'
     end
-    object ed_tambahan: TEdit
-      Left = 8
-      Top = 12
-      Width = 55
-      Height = 21
-      Enabled = False
-      ParentColor = True
-      TabOrder = 0
-      OnExit = ed_tambahanExit
-    end
     object BtnInsert: TsButton
-      Left = 72
+      Left = 8
       Top = 8
       Width = 41
       Height = 25
       Action = ac_Insert
-      TabOrder = 1
+      TabOrder = 0
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnvoid: TsButton
-      Left = 120
+      Left = 56
       Top = 8
       Width = 41
       Height = 25
       Action = ac_void
-      TabOrder = 2
+      TabOrder = 1
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBatal: TsButton
-      Left = 168
+      Left = 104
       Top = 8
       Width = 41
       Height = 25
       Action = ac_Batal
-      TabOrder = 3
+      TabOrder = 2
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnKunci: TsButton
-      Left = 216
+      Left = 152
       Top = 8
       Width = 41
       Height = 25
       Action = ac_Kunci
-      TabOrder = 4
+      TabOrder = 3
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnReturn1: TsButton
@@ -1214,7 +1204,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Return
-      TabOrder = 5
+      TabOrder = 4
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnPending1: TsButton
@@ -1223,7 +1213,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Pending
-      TabOrder = 6
+      TabOrder = 5
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnLoad1: TsButton
@@ -1232,7 +1222,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Load
-      TabOrder = 7
+      TabOrder = 6
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnGroup: TsButton
@@ -1241,7 +1231,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Group
-      TabOrder = 8
+      TabOrder = 7
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnSatuan2: TsButton
@@ -1250,7 +1240,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Satuan
-      TabOrder = 9
+      TabOrder = 8
       SkinData.SkinSection = 'BUTTON'
     end
     object Btncetak1: TsButton
@@ -1259,7 +1249,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_cetak
-      TabOrder = 10
+      TabOrder = 9
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnkecil: TsButton
@@ -1268,7 +1258,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_kecil
-      TabOrder = 11
+      TabOrder = 10
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBesar: TsButton
@@ -1277,7 +1267,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_Besar
-      TabOrder = 12
+      TabOrder = 11
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnjual_global: TsButton
@@ -1286,7 +1276,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_jual_global
-      TabOrder = 13
+      TabOrder = 12
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnsetting: TsButton
@@ -1295,7 +1285,7 @@ object F_Transaksi: TF_Transaksi
       Width = 75
       Height = 25
       Action = ac_setting
-      TabOrder = 14
+      TabOrder = 13
       SkinData.SkinSection = 'BUTTON'
     end
   end
