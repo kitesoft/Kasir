@@ -12,7 +12,8 @@ uses
   u_cariBarang in 'u_cariBarang.pas' {f_cariBarang},
   u_cari in 'u_cari.pas' {f_cari},
   u_returnJual in 'u_ReturnJual.pas' {f_returnJual},
-  u_bayar in 'u_bayar.pas' {F_Bayar};
+  u_bayar in 'u_bayar.pas' {F_Bayar},
+  u_setting in 'u_setting.pas' {FSetting};
 
 {$R *.res}
 
