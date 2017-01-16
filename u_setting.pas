@@ -182,7 +182,7 @@ begin
   F_Transaksi.PsSpeedPesan := StrToInt(cbspeed.Text);
   F_Transaksi.PesanAktif := cb_aktif.ItemIndex;
 
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'pesan', m_pesan.text);
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'pesan', F_Transaksi.Pesan);
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'pesan_aktif', IntToStr(F_Transaksi.PesanAktif));
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'nama_font', F_Transaksi.PsNamaFont);
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'style_font', IntToStr(Byte(F_Transaksi.StylePesan)));
@@ -191,8 +191,7 @@ begin
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'size_font', IntToStr(F_Transaksi.PsSizeFont));
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'speed', IntToStr(F_Transaksi.PsSpeedPesan));
 
-  if cb_aktif.ItemIndex = 1 then
-    F_Transaksi.aktifkan_pesan;
+  F_Transaksi.aktifkan_pesan;
 
   // Simpan Struk
   F_Transaksi.StJenis := cb_jenis_struk.ItemIndex;
