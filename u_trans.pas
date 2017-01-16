@@ -802,9 +802,11 @@ begin
     ac_cari_barangExecute(Self);
   end;
 
-  // merubah Tunai/kredit
+  // membuka form setting
   if key = vk_f3 then
-    tunai;
+  begin
+    ac_settingExecute(Self);
+  end;
 
   // return jual
   if (key = vk_f4) then
@@ -838,7 +840,15 @@ begin
 
   // merubah retail dan grosir
   if key = vk_f9 then
+  begin
     retail;
+  end;
+
+  // merubah Tunai/kredit
+  if key = vk_f10 then
+  begin
+    tunai;
+  end;
 
   // cetak ulang;
   if key = vk_f11 then

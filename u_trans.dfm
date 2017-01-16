@@ -1395,7 +1395,7 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Cek Update'
     end
     object ac_setting: TAction
-      Caption = 'Setting'
+      Caption = 'Setting (F3)'
       OnExecute = ac_settingExecute
     end
     object ac_cari_barang: TAction
