@@ -2260,6 +2260,7 @@ begin
       end;
 
       pnlFooter.Visible := True;
+      aktifkan_pesan;
     end;
 end;
 
