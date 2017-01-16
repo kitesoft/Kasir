@@ -122,7 +122,7 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlKode: TsPanel
     Left = 0
-    Top = 180
+    Top = 197
     Width = 1008
     Height = 38
     Align = alTop
@@ -736,9 +736,9 @@ object F_Transaksi: TF_Transaksi
   end
   object Grid: TcxGrid
     Left = 0
-    Top = 218
+    Top = 235
     Width = 1008
-    Height = 189
+    Height = 172
     Align = alClient
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -1047,7 +1047,7 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlHeader: TsPanel
     Left = 0
-    Top = 80
+    Top = 97
     Width = 1008
     Height = 100
     Align = alTop
@@ -1113,13 +1113,13 @@ object F_Transaksi: TF_Transaksi
     Left = 0
     Top = 0
     Width = 1008
-    Height = 80
+    Height = 97
     Align = alTop
     TabOrder = 7
     Visible = False
     SkinData.SkinSection = 'PANEL'
     object Lbl_5: TsLabel
-      Left = 4
+      Left = 844
       Top = 39
       Width = 58
       Height = 26
@@ -1127,15 +1127,15 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Ubah Harga'#13#10'ex. (1000/)'
     end
     object Lbl_2: TsLabel
-      Left = 72
-      Top = 39
+      Left = 848
+      Top = 71
       Width = 45
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Qty'#13#10'ex. (5+)'
     end
     object Lbl_3: TsLabel
-      Left = 128
+      Left = 912
       Top = 39
       Width = 73
       Height = 26
@@ -1143,16 +1143,16 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Ubah Diskon %'#13#10'ex. (2.5*)'
     end
     object Lbl_4: TsLabel
-      Left = 216
-      Top = 39
+      Left = 912
+      Top = 71
       Width = 79
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Diskon Rp'#13#10'ex. (500-)'
     end
     object BtnInsert: TsButton
-      Left = 8
-      Top = 8
+      Left = 528
+      Top = 4
       Width = 41
       Height = 25
       Action = ac_Insert
@@ -1160,8 +1160,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnvoid: TsButton
-      Left = 56
-      Top = 8
+      Left = 576
+      Top = 4
       Width = 41
       Height = 25
       Action = ac_void
@@ -1169,8 +1169,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBatal: TsButton
-      Left = 104
-      Top = 8
+      Left = 624
+      Top = 4
       Width = 41
       Height = 25
       Action = ac_Batal
@@ -1178,8 +1178,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnKunci: TsButton
-      Left = 152
-      Top = 8
+      Left = 672
+      Top = 4
       Width = 41
       Height = 25
       Action = ac_Kunci
@@ -1187,8 +1187,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnReturn: TsButton
-      Left = 312
-      Top = 0
+      Left = 4
+      Top = 60
       Width = 120
       Height = 25
       Action = ac_Return
@@ -1196,8 +1196,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnPending: TsButton
-      Left = 312
-      Top = 24
+      Left = 128
+      Top = 4
       Width = 120
       Height = 25
       Action = ac_Pending
@@ -1205,8 +1205,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnLoad: TsButton
-      Left = 312
-      Top = 48
+      Left = 128
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_Load
@@ -1214,8 +1214,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnGroup: TsButton
-      Left = 456
-      Top = 0
+      Left = 128
+      Top = 60
       Width = 120
       Height = 25
       Action = ac_Group
@@ -1223,26 +1223,26 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnSatuan: TsButton
-      Left = 456
-      Top = 24
+      Left = 256
+      Top = 4
       Width = 120
       Height = 25
       Action = ac_Satuan
       TabOrder = 8
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btncetak: TsButton
-      Left = 456
-      Top = 47
+    object BtnCetak: TsButton
+      Left = 256
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_cetak
       TabOrder = 9
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btnkecil: TsButton
-      Left = 600
-      Top = 0
+    object BtnKecil: TsButton
+      Left = 384
+      Top = 4
       Width = 120
       Height = 25
       Action = ac_kecil
@@ -1250,17 +1250,17 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBesar: TsButton
-      Left = 600
-      Top = 24
+      Left = 384
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_Besar
       TabOrder = 11
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btnjual_global: TsButton
-      Left = 600
-      Top = 47
+    object BtnPenjualanToko: TsButton
+      Left = 384
+      Top = 60
       Width = 120
       Height = 25
       Action = ac_jual_global
@@ -1268,21 +1268,30 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnsetting: TsButton
-      Left = 784
-      Top = 0
-      Width = 75
+      Left = 4
+      Top = 32
+      Width = 120
       Height = 25
       Action = ac_setting
       TabOrder = 13
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btncari_barang: TsButton
-      Left = 200
-      Top = 8
-      Width = 105
+    object BtnCariBarang: TsButton
+      Left = 4
+      Top = 4
+      Width = 120
       Height = 25
       Action = ac_cari_barang
       TabOrder = 14
+      SkinData.SkinSection = 'BUTTON'
+    end
+    object Btnkartu_kredit: TsButton
+      Left = 256
+      Top = 60
+      Width = 120
+      Height = 25
+      Action = ac_kartu_kredit
+      TabOrder = 15
       SkinData.SkinSection = 'BUTTON'
     end
   end
@@ -1401,6 +1410,10 @@ object F_Transaksi: TF_Transaksi
     object ac_cari_barang: TAction
       Caption = 'Cari Barang (F2)'
       OnExecute = ac_cari_barangExecute
+    end
+    object ac_kartu_kredit: TAction
+      Caption = 'Kartu Kredit (F12)'
+      OnExecute = ac_kartu_kreditExecute
     end
   end
   object sd: TsSaveDialog

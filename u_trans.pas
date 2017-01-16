@@ -119,14 +119,16 @@ type
     BtnLoad: TsButton;
     BtnGroup: TsButton;
     BtnSatuan: TsButton;
-    Btncetak: TsButton;
-    Btnkecil: TsButton;
+    BtnCetak: TsButton;
+    BtnKecil: TsButton;
     BtnBesar: TsButton;
-    Btnjual_global: TsButton;
+    BtnPenjualanToko: TsButton;
     Btnsetting: TsButton;
     ac_setting: TAction;
     ac_cari_barang: TAction;
-    Btncari_barang: TsButton;
+    BtnCariBarang: TsButton;
+    ac_kartu_kredit: TAction;
+    Btnkartu_kredit: TsButton;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
     procedure awal;
@@ -197,6 +199,7 @@ type
     procedure ac_GroupExecute(Sender: TObject);
     procedure ac_settingExecute(Sender: TObject);
     procedure ac_cari_barangExecute(Sender: TObject);
+    procedure ac_kartu_kreditExecute(Sender: TObject);
   private
     DebitId: Integer;
     DebitKode: string;
@@ -854,34 +857,10 @@ begin
   if key = vk_f11 then
     ac_cetakExecute(Self);
 
-  // untuk menampilkan pembayaran kartu debit.
+  // untuk menampilkan pembayaran pakai kartu (kredit / debit).
   if key = vk_f12 then
   begin
-    if Ed_Grand.Value > 0 then
-    begin
-      Application.CreateForm(TF_Bayar, F_Bayar);
-      pnlFooter.Visible := False;
-
-      with F_Bayar do
-      try
-        TotalHarga := Ed_Grand.value;
-        if F_Bayar.ShowModal = mrOk then
-        begin
-          DebitId := cbBank.ItemIndex + 1;
-          DebitKode := edNomerKartu.Text;
-          DebitRp := edDebit.AsInteger;
-          CashOut := edTarik.AsInteger;
-          Ed_Bayar.Value := edTunai.Value;
-          Ed_Kembali.Value := edKembali.Value;
-          edDebit.AsInteger;
-          simpan;
-        end;
-      finally
-        Close;
-      end;
-
-      pnlFooter.Visible := True;
-    end;
+    ac_kartu_kreditExecute(Self);
   end;
 
   // Ctrl + K untuk memasukkan keterangan.
@@ -1164,7 +1143,8 @@ begin
   dm.db_conn.StartTransaction;
   try
     fungsi.SQLExec(dm.Q_exe,
-      'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
+      'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, '+
+      'jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
       + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
       + 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
       + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
@@ -2251,6 +2231,36 @@ begin
     Ed_Code.Clear;
     Ed_Code.SetFocus;
   end;
+end;
+
+procedure TF_Transaksi.ac_kartu_kreditExecute(Sender: TObject);
+begin
+  if Ed_Grand.Value > 0 then
+    begin
+      if sb_tunai.Caption = 'Kredit' then tunai;
+      
+      Application.CreateForm(TF_Bayar, F_Bayar);
+      pnlFooter.Visible := False;
+
+      with F_Bayar do
+      try
+        TotalHarga := Ed_Grand.value;
+        if F_Bayar.ShowModal = mrOk then
+        begin
+          DebitId := cbBank.ItemIndex + 1;
+          DebitKode := edNomerKartu.Text;
+          DebitRp := edDebit.AsInteger;
+          CashOut := edTarik.AsInteger;
+          Ed_Bayar.Value := edTunai.Value;
+          Ed_Kembali.Value := edKembali.Value;
+          simpan;
+        end;
+      finally
+        Close;
+      end;
+
+      pnlFooter.Visible := True;
+    end;
 end;
 
 end.
