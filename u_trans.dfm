@@ -1119,70 +1119,74 @@ object F_Transaksi: TF_Transaksi
     Visible = False
     SkinData.SkinSection = 'PANEL'
     object Lbl_5: TsLabel
-      Left = 844
-      Top = 39
+      Left = 516
+      Top = 63
       Width = 58
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Harga'#13#10'ex. (1000/)'
     end
     object Lbl_2: TsLabel
-      Left = 848
-      Top = 71
+      Left = 584
+      Top = 63
       Width = 45
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Qty'#13#10'ex. (5+)'
     end
     object Lbl_3: TsLabel
-      Left = 912
-      Top = 39
+      Left = 640
+      Top = 63
       Width = 73
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Diskon %'#13#10'ex. (2.5*)'
     end
     object Lbl_4: TsLabel
-      Left = 912
-      Top = 71
+      Left = 720
+      Top = 63
       Width = 79
       Height = 26
       Alignment = taCenter
       Caption = 'Ubah Diskon Rp'#13#10'ex. (500-)'
     end
     object BtnInsert: TsButton
-      Left = 528
+      Left = 512
       Top = 4
-      Width = 41
+      Width = 120
       Height = 25
       Action = ac_Insert
+      Caption = 'Tambah Harga (Insert)'
       TabOrder = 0
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnvoid: TsButton
-      Left = 576
-      Top = 4
-      Width = 41
+      Left = 512
+      Top = 34
+      Width = 120
       Height = 25
       Action = ac_void
+      Caption = 'Void (Ctrl + Del)'
       TabOrder = 1
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBatal: TsButton
-      Left = 624
+      Left = 640
       Top = 4
-      Width = 41
+      Width = 120
       Height = 25
       Action = ac_Batal
+      Caption = 'Batal (Shift + Del)'
       TabOrder = 2
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnKunci: TsButton
-      Left = 672
-      Top = 4
-      Width = 41
+      Left = 640
+      Top = 34
+      Width = 120
       Height = 25
       Action = ac_Kunci
+      Caption = 'Kunci (Ctrl + L)'
       TabOrder = 3
       SkinData.SkinSection = 'BUTTON'
     end
