@@ -651,9 +651,16 @@ end;
 
 procedure TF_Transaksi.Ed_CodeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+  // untuk insert harga
   if (key = vk_insert) then
   begin
     ac_InsertExecute(Self);
+  end;
+
+  // untuk void per barang
+  if ((shift = [ssctrl]) and (key = vk_delete)) then
+  begin
+    ac_voidExecute(Self);
   end;
 
   if key = vk_return then
@@ -774,11 +781,6 @@ begin
     fungsi.OpenCashDrawer;
   end;
 
-  //berfungsi untuk void barang
-  if ((shift = [ssctrl]) and (key = vk_delete)) then
-  begin
-    ac_voidExecute(Self);
-  end;
  //berfungsi untuk membatalkan transaksi
   if ((shift = [ssshift]) and (key = vk_delete)) then
   begin
