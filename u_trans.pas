@@ -775,18 +775,6 @@ end;
 
 procedure TF_Transaksi.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  //berfungsi untuk open cash drawer ctrl + o
-  if ((shift = [ssctrl]) and (key = 79)) then
-  begin
-    fungsi.OpenCashDrawer;
-  end;
-
- //berfungsi untuk membatalkan transaksi
-  if ((shift = [ssshift]) and (key = vk_delete)) then
-  begin
-    ac_BatalExecute(Self);
-  end;
-
   // untuk keluar dari form
   if key = vk_escape then
   begin
@@ -802,23 +790,7 @@ begin
       ac_closeExecute(Self);
   end;
 
-  if f_cariBarang = nil then
-  begin
-    if (TableView.DataController.FocusedRecordIndex < TableView.DataController.RecordCount
-      - 1) and (key = vk_down) then
-    begin
-      tableview.DataController.ChangeFocusedRowIndex(TableView.DataController.FocusedRecordIndex
-        + 1);
-    end;
-
-    if (TableView.DataController.GetFocusedRecordIndex > 0) and (key = vk_up) then
-    begin
-      tableview.DataController.ChangeFocusedRowIndex(TableView.DataController.FocusedRecordIndex
-        - 1);
-    end;
-  end;
-
-  // help
+  // menampilkan pilihan
   if key = vk_f1 then
   begin
     pnlPilihan.Visible := not(pnlPilihan.Visible);
@@ -902,12 +874,6 @@ begin
     end;
   end;
 
-  // Ctrl + L untuk mengunci transaksi
-  if (shift = [ssCTRL]) and (key = 76) then
-  begin
-    ac_KunciExecute(Self);
-  end;
-
   // Ctrl + K untuk memasukkan keterangan.
   if (shift = [ssCTRL]) and (key = 75) then
   begin
@@ -916,6 +882,41 @@ begin
       ed_keterangan.SetFocus
     else
       Ed_Code.SetFocus;
+  end;
+
+  // Ctrl + L untuk mengunci transaksi
+  if (shift = [ssCTRL]) and (key = 76) then
+  begin
+    ac_KunciExecute(Self);
+  end;
+
+  // ctrl + O untuk open cash drawer
+  if ((shift = [ssctrl]) and (key = 79)) then
+  begin
+    fungsi.OpenCashDrawer;
+  end;
+
+  // shift + del untuk membatalkan transaksi
+  if ((shift = [ssshift]) and (key = vk_delete)) then
+  begin
+    ac_BatalExecute(Self);
+  end;
+
+  // untuk pindah kursor pada tabel transaksi.
+  if f_cariBarang = nil then
+  begin
+    if (TableView.DataController.FocusedRecordIndex < TableView.DataController.RecordCount
+      - 1) and (key = vk_down) then
+    begin
+      tableview.DataController.ChangeFocusedRowIndex(TableView.DataController.FocusedRecordIndex
+        + 1);
+    end;
+
+    if (TableView.DataController.GetFocusedRecordIndex > 0) and (key = vk_up) then
+    begin
+      tableview.DataController.ChangeFocusedRowIndex(TableView.DataController.FocusedRecordIndex
+        - 1);
+    end;
   end;
 end;
 
