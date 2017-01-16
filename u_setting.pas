@@ -24,8 +24,8 @@ type
     btnBold: TToolButton;
     btnItalic: TToolButton;
     btnUnderline: TToolButton;
-    Sb1: TsSpeedButton;
-    Sb2: TsSpeedButton;
+    SbPesan: TsSpeedButton;
+    SbSkin: TsSpeedButton;
     BtnSimpan: TsButton;
     gb3: TsGroupBox;
     ed_footer_struk: TEdit;
@@ -38,10 +38,12 @@ type
     procedure TbHueChange(Sender: TObject);
     procedure TbSaturationChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Sb2Click(Sender: TObject);
+    procedure SbSkinClick(Sender: TObject);
     procedure btnStyleClick(Sender: TObject);
-    procedure Sb1Click(Sender: TObject);
+    procedure SbPesanClick(Sender: TObject);
     procedure BtnSimpanClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     procedure M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
     { Private declarations }
@@ -103,7 +105,7 @@ begin
   ed_tambahan.Text := F_Transaksi.InsertHarga;
 end;
 
-procedure TFSetting.Sb2Click(Sender: TObject);
+procedure TFSetting.SbSkinClick(Sender: TObject);
 begin
   if selectskin(dm.sm) then
   begin
@@ -140,7 +142,7 @@ begin
   Action := caFree;
 end;
 
-procedure TFSetting.Sb1Click(Sender: TObject);
+procedure TFSetting.SbPesanClick(Sender: TObject);
 begin
   F_pesan := TForm.Create(Self);
   F_pesan.Position := poScreenCenter;
@@ -204,6 +206,14 @@ begin
   F_Transaksi.InsertHarga := ed_tambahan.Text;
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tambahan', F_Transaksi.InsertHarga);
   Close;
+end;
+
+procedure TFSetting.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then Close;
+  if Key = VK_F3 then SbSkinClick(Self);
+  if Key = VK_F4 then SbPesanClick(Self);
 end;
 
 end.

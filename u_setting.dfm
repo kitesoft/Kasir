@@ -12,8 +12,10 @@ object FSetting: TFSetting
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -32,19 +34,19 @@ object FSetting: TFSetting
     Caption = 'Skin'
     TabOrder = 0
     SkinData.SkinSection = 'GROUPBOX'
-    object Sb2: TsSpeedButton
+    object SbSkin: TsSpeedButton
       Left = 8
       Top = 24
-      Width = 73
+      Width = 81
       Height = 21
-      Caption = 'Ubah Skin'
-      OnClick = Sb2Click
+      Caption = 'Ubah Skin (F3)'
+      OnClick = SbSkinClick
       SkinData.SkinSection = 'SPEEDBUTTON'
     end
     object EdSkin: TsEdit
-      Left = 88
+      Left = 96
       Top = 24
-      Width = 233
+      Width = 225
       Height = 21
       Enabled = False
       TabOrder = 0
@@ -95,13 +97,13 @@ object FSetting: TFSetting
     Caption = 'Pesan'
     TabOrder = 1
     SkinData.SkinSection = 'GROUPBOX'
-    object Sb1: TsSpeedButton
+    object SbPesan: TsSpeedButton
       Left = 96
       Top = 68
       Width = 177
       Height = 21
-      Caption = 'Lihat Pesan'
-      OnClick = Sb1Click
+      Caption = 'Lihat Pesan (F4)'
+      OnClick = SbPesanClick
       SkinData.SkinSection = 'SPEEDBUTTON'
     end
     object cbFontName: TComboBox
