@@ -1151,7 +1151,7 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Ubah Diskon Rp'#13#10'ex. (500-)'
     end
     object BtnInsert: TsButton
-      Left = 512
+      Left = 640
       Top = 4
       Width = 120
       Height = 25
@@ -1161,7 +1161,7 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnVoid: TsButton
-      Left = 512
+      Left = 640
       Top = 34
       Width = 120
       Height = 25
@@ -1171,7 +1171,7 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnBatal: TsButton
-      Left = 640
+      Left = 512
       Top = 4
       Width = 120
       Height = 25
@@ -1181,7 +1181,7 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnKunci: TsButton
-      Left = 640
+      Left = 512
       Top = 34
       Width = 120
       Height = 25
@@ -1244,31 +1244,13 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 9
       SkinData.SkinSection = 'BUTTON'
     end
-    object BtnKecil: TsButton
+    object BtnPenjualanToko: TsButton
       Left = 384
       Top = 4
       Width = 120
       Height = 25
-      Action = ac_kecil
-      TabOrder = 10
-      SkinData.SkinSection = 'BUTTON'
-    end
-    object BtnBesar: TsButton
-      Left = 384
-      Top = 32
-      Width = 120
-      Height = 25
-      Action = ac_Besar
-      TabOrder = 11
-      SkinData.SkinSection = 'BUTTON'
-    end
-    object BtnPenjualanToko: TsButton
-      Left = 384
-      Top = 60
-      Width = 120
-      Height = 25
       Action = ac_jual_global
-      TabOrder = 12
+      TabOrder = 10
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnsetting: TsButton
@@ -1277,7 +1259,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_setting
-      TabOrder = 13
+      TabOrder = 11
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnCariBarang: TsButton
@@ -1286,7 +1268,7 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_cari_barang
-      TabOrder = 14
+      TabOrder = 12
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnkartu_kredit: TsButton
@@ -1295,25 +1277,25 @@ object F_Transaksi: TF_Transaksi
       Width = 120
       Height = 25
       Action = ac_kartu_kredit
-      TabOrder = 15
+      TabOrder = 13
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnDrawer: TsButton
-      Left = 768
-      Top = 4
+      Left = 384
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_drawer
-      TabOrder = 16
+      TabOrder = 14
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnKeterangan: TsButton
-      Left = 768
-      Top = 36
+      Left = 384
+      Top = 60
       Width = 120
       Height = 25
       Action = ac_keterangan
-      TabOrder = 17
+      TabOrder = 15
       SkinData.SkinSection = 'BUTTON'
     end
   end
@@ -1409,14 +1391,6 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Load dari File'
       ImageIndex = 7
       OnExecute = ac_loadfileExecute
-    end
-    object ac_Besar: TAction
-      Caption = 'Struk Besar (Ctrl + W)'
-      OnExecute = ac_BesarExecute
-    end
-    object ac_kecil: TAction
-      Caption = 'Struk Kecil (Ctrl + Q)'
-      OnExecute = ac_kecilExecute
     end
     object ac_jual_global: TAction
       Caption = 'Penjualan (Ctrl + P)'

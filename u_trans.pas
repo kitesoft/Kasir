@@ -94,8 +94,6 @@ type
     ac_loadfile: TAction;
     sd: TsSaveDialog;
     od: TsOpenDialog;
-    ac_Besar: TAction;
-    ac_kecil: TAction;
     ac_jual_global: TAction;
     p_keterangan: TsPanel;
     ed_keterangan: TsEdit;
@@ -120,8 +118,6 @@ type
     BtnGroup: TsButton;
     BtnSatuan: TsButton;
     BtnCetak: TsButton;
-    BtnKecil: TsButton;
-    BtnBesar: TsButton;
     BtnPenjualanToko: TsButton;
     Btnsetting: TsButton;
     ac_setting: TAction;
@@ -192,8 +188,6 @@ type
     procedure ac_closeExecute(Sender: TObject);
     procedure ac_simpanfileExecute(Sender: TObject);
     procedure ac_loadfileExecute(Sender: TObject);
-    procedure ac_BesarExecute(Sender: TObject);
-    procedure ac_kecilExecute(Sender: TObject);
     procedure ac_jual_globalExecute(Sender: TObject);
     procedure panel_auto_width;
     procedure Ed_PelangganChange(Sender: TObject);
@@ -2047,18 +2041,6 @@ begin
       showmessage('proses memunculkan transaksi yang ditahan gagal');
     end;
   end;
-end;
-
-procedure TF_Transaksi.ac_BesarExecute(Sender: TObject);
-begin
-  // cetak struk besar
-  cetak(KodeTransaksi, 'besar');
-end;
-
-procedure TF_Transaksi.ac_kecilExecute(Sender: TObject);
-begin
-  // cetak struk kecil
-  cetak(KodeTransaksi, 'kecil')
 end;
 
 procedure TF_Transaksi.ac_jual_globalExecute(Sender: TObject);
