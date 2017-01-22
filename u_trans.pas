@@ -666,6 +666,7 @@ begin
     ac_voidExecute(Self);
   end;
 
+  // untuk menambahkan barang ke table
   if key = vk_return then
   begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
