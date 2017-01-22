@@ -376,24 +376,8 @@ begin
   l_nm_pel.Caption := 'UMUM';
   ed_lama.Text := '0';
 
-  sLabel5.Visible := true;
-  sLabel6.Visible := true;
-  ed_bayar.Visible := true;
   ed_bayar.Value := 0;
-  ed_kembali.Visible := true;
   ed_kembali.Value := 0;
-  slabel7.Visible := false;
-  sLabel8.Visible := false;
-  sLabel9.Visible := false;
-  ed_pelanggan.Visible := false;
-  sb_cari_pel.Visible := false;
-  l_nm_pel.Visible := false;
-  ed_lama.Visible := false;
-  ed_jatuh_tempo.Visible := false;
-  cb_lama.Visible := false;
-  slabel10.Visible := false;
-  b_simpan.Visible := False;
-
   ed_bayar.ReadOnly := true;
   ed_discP.ReadOnly := true;
 
