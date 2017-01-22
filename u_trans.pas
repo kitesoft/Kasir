@@ -132,11 +132,7 @@ type
     BtnTunai: TsButton;
     ac_retail: TAction;
     ac_tunai: TAction;
-    procedure kode_transaksi_terbaru;
-    procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
-    procedure awal;
     procedure FormShow(Sender: TObject);
-    procedure showdata;
     procedure Ed_CodeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
@@ -147,14 +143,9 @@ type
     procedure Ed_LamaChange(Sender: TObject);
     procedure sb_cari_pelClick(Sender: TObject);
     procedure Ed_PelangganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure simpan;
-    procedure cetak(kd_transaksi, jenis: string);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Ed_CodeKeyPress(Sender: TObject; var Key: Char);
     procedure Ed_discPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure baru;
-    procedure File2Tb(tb: TcxGridDataController; FileName: string);
-    procedure Tb2File(tb: TcxGridDataController; FileName: string);
     procedure FormResize(Sender: TObject);
     procedure Ed_CodeChange(Sender: TObject);
     procedure Ed_CodeExit(Sender: TObject);
@@ -168,13 +159,9 @@ type
     procedure Ed_discPExit(Sender: TObject);
     procedure Ed_discRpExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure input_kode;
-    procedure cetak_struk_kecil;
     procedure Ed_discRpKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure b_simpanClick(Sender: TObject);
     procedure t_pesanTimer(Sender: TObject);
-    procedure ambil_form;
-    procedure aktifkan_pesan;
     procedure ac_InsertExecute(Sender: TObject);
     procedure ac_voidExecute(Sender: TObject);
     procedure ac_BatalExecute(Sender: TObject);
@@ -188,11 +175,9 @@ type
     procedure ac_simpanfileExecute(Sender: TObject);
     procedure ac_loadfileExecute(Sender: TObject);
     procedure ac_jual_globalExecute(Sender: TObject);
-    procedure panel_auto_width;
     procedure Ed_PelangganChange(Sender: TObject);
     procedure ed_keteranganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Cb_lamaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    function KasirOffline: Boolean;
     procedure ac_GroupExecute(Sender: TObject);
     procedure ac_settingExecute(Sender: TObject);
     procedure ac_cari_barangExecute(Sender: TObject);
@@ -206,11 +191,20 @@ type
     DebitKode: string;
     DebitRp: Integer;
     CashOut: Integer;
+    procedure baru;
+    procedure simpan;
+    procedure showdata;
+    procedure ambil_form;
     procedure cek_update;
+    procedure cetak_struk_kecil;
     procedure UpdateRetailTunai;
-    procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
-    procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    function KasirOffline: Boolean;
     procedure UbahQty(Qty: string);
+    procedure File2Tb(tb: TcxGridDataController; FileName: string);
+    procedure Tb2File(tb: TcxGridDataController; FileName: string);
+    procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
+    procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
   public
     // pesan
     PesanAktif: Integer;
@@ -232,6 +226,12 @@ type
       harga_edit, KodeTransaksi, InsertHarga: string;
     diskonP: Real;
     days: array[1..7] of string;
+    procedure awal;
+    procedure input_kode;
+    procedure aktifkan_pesan;
+    procedure panel_auto_width;
+    procedure kode_transaksi_terbaru;
+    procedure cetak(kd_transaksi, jenis: string);
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
     function _get(baris, kolom: Integer; tipe: Integer = 1): variant;
   end;
