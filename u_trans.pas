@@ -1805,8 +1805,6 @@ begin
 
           if TableView.DataController.RecordCount <> 0 then
           begin
-            //tb_transaksi.TabVisible := True;
-            //rb1.ActivePage := tb_transaksi;
             tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
           end;
 
