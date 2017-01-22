@@ -1160,7 +1160,7 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 0
       SkinData.SkinSection = 'BUTTON'
     end
-    object Btnvoid: TsButton
+    object BtnVoid: TsButton
       Left = 512
       Top = 34
       Width = 120
@@ -1298,6 +1298,24 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 15
       SkinData.SkinSection = 'BUTTON'
     end
+    object BtnDrawer: TsButton
+      Left = 768
+      Top = 4
+      Width = 120
+      Height = 25
+      Action = ac_drawer
+      TabOrder = 16
+      SkinData.SkinSection = 'BUTTON'
+    end
+    object BtnKeterangan: TsButton
+      Left = 768
+      Top = 36
+      Width = 120
+      Height = 25
+      Action = ac_keterangan
+      TabOrder = 17
+      SkinData.SkinSection = 'BUTTON'
+    end
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
@@ -1393,15 +1411,15 @@ object F_Transaksi: TF_Transaksi
       OnExecute = ac_loadfileExecute
     end
     object ac_Besar: TAction
-      Caption = 'Cetak Struk Besar'
+      Caption = 'Struk Besar (Ctrl + W)'
       OnExecute = ac_BesarExecute
     end
     object ac_kecil: TAction
-      Caption = 'Cetak Struk Kecil'
+      Caption = 'Struk Kecil (Ctrl + Q)'
       OnExecute = ac_kecilExecute
     end
     object ac_jual_global: TAction
-      Caption = 'Penjualan Toko'
+      Caption = 'Penjualan (Ctrl + P)'
       OnExecute = ac_jual_globalExecute
     end
     object ac_cek_update: TAction
@@ -1418,6 +1436,14 @@ object F_Transaksi: TF_Transaksi
     object ac_kartu_kredit: TAction
       Caption = 'Kartu Kredit (F12)'
       OnExecute = ac_kartu_kreditExecute
+    end
+    object ac_drawer: TAction
+      Caption = 'Drawer (Ctrl + O)'
+      OnExecute = ac_drawerExecute
+    end
+    object ac_keterangan: TAction
+      Caption = 'Keterangan (Ctrl + K)'
+      OnExecute = ac_keteranganExecute
     end
   end
   object sd: TsSaveDialog

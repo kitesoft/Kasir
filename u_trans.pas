@@ -108,7 +108,7 @@ type
     Lbl_5: TsLabel;
     Lbl_2: TsLabel;
     BtnInsert: TsButton;
-    Btnvoid: TsButton;
+    BtnVoid: TsButton;
     Lbl_3: TsLabel;
     BtnBatal: TsButton;
     BtnKunci: TsButton;
@@ -129,6 +129,10 @@ type
     BtnCariBarang: TsButton;
     ac_kartu_kredit: TAction;
     Btnkartu_kredit: TsButton;
+    BtnDrawer: TsButton;
+    BtnKeterangan: TsButton;
+    ac_drawer: TAction;
+    ac_keterangan: TAction;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
     procedure awal;
@@ -200,6 +204,8 @@ type
     procedure ac_settingExecute(Sender: TObject);
     procedure ac_cari_barangExecute(Sender: TObject);
     procedure ac_kartu_kreditExecute(Sender: TObject);
+    procedure ac_drawerExecute(Sender: TObject);
+    procedure ac_keteranganExecute(Sender: TObject);
   private
     DebitId: Integer;
     DebitKode: string;
@@ -867,11 +873,7 @@ begin
   // Ctrl + K untuk memasukkan keterangan.
   if (shift = [ssCTRL]) and (key = 75) then
   begin
-    p_keterangan.Visible := not (p_keterangan.Visible);
-    if p_keterangan.Visible then
-      ed_keterangan.SetFocus
-    else
-      Ed_Code.SetFocus;
+    ac_keteranganExecute(Self);
   end;
 
   // Ctrl + L untuk mengunci transaksi
@@ -883,7 +885,7 @@ begin
   // ctrl + O untuk open cash drawer
   if ((shift = [ssctrl]) and (key = 79)) then
   begin
-    fungsi.OpenCashDrawer;
+    ac_drawerExecute(Self);
   end;
 
   // shift + del untuk membatalkan transaksi
@@ -2263,6 +2265,20 @@ begin
       pnlFooter.Visible := True;
       aktifkan_pesan;
     end;
+end;
+
+procedure TF_Transaksi.ac_drawerExecute(Sender: TObject);
+begin
+  fungsi.OpenCashDrawer;
+end;
+
+procedure TF_Transaksi.ac_keteranganExecute(Sender: TObject);
+begin
+  p_keterangan.Visible := not (p_keterangan.Visible);
+  if p_keterangan.Visible then
+    ed_keterangan.SetFocus
+  else
+    Ed_Code.SetFocus;
 end;
 
 end.
