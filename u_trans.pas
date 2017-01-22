@@ -23,8 +23,6 @@ type
     p_pesan: TsPanel;
     pnlKode: TsPanel;
     Ed_Code: TsEdit;
-    sb_tunai: TsSpeedButton;
-    sb_retail: TsSpeedButton;
     pnlFooter: TsPanel;
     sLabel9: TsLabel;
     sLabel8: TsLabel;
@@ -129,6 +127,7 @@ type
     BtnKeterangan: TsButton;
     ac_drawer: TAction;
     ac_keterangan: TAction;
+    pnlRetailTunai: TPanel;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
     procedure awal;
@@ -142,10 +141,6 @@ type
     procedure Ed_SubChange(Sender: TObject);
     procedure Cb_lamaChange(Sender: TObject);
     procedure Ed_LamaChange(Sender: TObject);
-    procedure retail;
-    procedure tunai;
-    procedure sb_retailClick(Sender: TObject);
-    procedure sb_tunaiClick(Sender: TObject);
     procedure sb_cari_pelClick(Sender: TObject);
     procedure Ed_PelangganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure simpan;
@@ -206,6 +201,7 @@ type
     DebitRp: Integer;
     CashOut: Integer;
     procedure cek_update;
+    procedure UpdateRetailTunai;
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure UbahQty(Qty: string);
@@ -220,7 +216,10 @@ type
     // Struk
     StJenis, StLebar : Integer;
     StPesan: string;
-    
+
+    // retail/grosir, tunai/kredit
+    FRetail, FTunai: Boolean;
+
     tahan, batas, piutang, lebar_layar: integer;
     harga, harga_pokok, Qty_real, QtyH, diskon: Integer;
     satuan, kode_barang, inputstring, passs, alasan, no_pending,
@@ -230,6 +229,9 @@ type
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
     function _get(baris, kolom: Integer; tipe: Integer = 1): variant;
   end;
+
+const
+  Values: array[Boolean] of string = ('0', '1');
 
 var
   F_Transaksi: TF_Transaksi;
@@ -299,28 +301,10 @@ begin
   StylePesan := TFontStyles(Byte(StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'style_font', '1'))));
 
   // (retail grosir) (tunai kredit) dan tambahan
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail', '1') = '0' then
-  begin
-    sb_retail.Caption := 'Retail';
-    retail;
-  end
-  else
-  begin
-    sb_retail.Caption := 'Grosir';
-    retail;
-  end;
-
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai', '1') = '0' then
-  begin
-    sb_tunai.Caption := 'Tunai';
-    tunai;
-  end
-  else
-  begin
-    sb_tunai.Caption := 'Kredit';
-    tunai;
-  end;
-
+  FRetail:= fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail', '1') <> '0';
+  FTunai:= fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai', '1') <> '0';
+  UpdateRetailTunai;
+  
   InsertHarga := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tambahan', '100');
 
   StJenis := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'jenis_struk', '0'));
@@ -404,31 +388,8 @@ begin
   slabel10.Visible := false;
   b_simpan.Visible := False;
 
-  sb_retail.Enabled := true;
   ed_bayar.ReadOnly := true;
   ed_discP.ReadOnly := true;
-
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail') = '0' then
-  begin
-    sb_retail.Caption := 'Retail';
-    retail;
-  end
-  else
-  begin
-    sb_retail.Caption := 'Grosir';
-    retail;
-  end;
-
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai') = '0' then
-  begin
-    sb_tunai.Caption := 'Tunai';
-    tunai;
-  end
-  else
-  begin
-    sb_tunai.Caption := 'Kredit';
-    tunai;
-  end;
 
   DebitId := 0;
   DebitKode := '';
@@ -460,7 +421,6 @@ procedure TF_Transaksi.baru;
 var
   baris_baru: Integer;
 begin
-  sb_retail.Enabled := false;
   ed_bayar.ReadOnly := false;
   ed_discP.ReadOnly := false;
 
@@ -690,93 +650,6 @@ begin
   end;
 end;
 
-procedure TF_transaksi.retail;
-begin
-  if sb_retail.Enabled <> false then
-  begin
-    if sb_retail.Caption = 'Retail' then
-    begin
-      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', '0');
-      dm.macam_harga := 'HGTK';
-      sb_retail.Caption := 'Grosir';
-      slabel7.Visible := true;
-      ed_pelanggan.Visible := true;
-      sb_cari_pel.Visible := true;
-      l_nm_pel.Visible := true;
-      b_simpan.Visible := True;
-    end
-    else if sb_retail.Caption = 'Grosir' then
-    begin
-      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', '1');
-      dm.macam_harga := 'HETK';
-      sb_retail.Caption := 'Retail';
-      if sb_tunai.Caption = 'Tunai' then
-      begin
-        slabel7.Visible := false;
-        ed_pelanggan.Visible := false;
-        ed_pelanggan.Text := 'CU-0001';
-        sb_cari_pel.Visible := false;
-        l_nm_pel.Caption := 'UMUM';
-        l_nm_pel.Visible := false;
-        b_simpan.Visible := False;
-      end;
-    end;
-  end;
-end;
-
-procedure TF_transaksi.tunai;
-begin
-  if sb_tunai.Caption = 'Tunai' then
-  begin
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', '0');
-
-    sb_tunai.Caption := 'Kredit';
-    sLabel5.Visible := false;
-    sLabel6.Visible := false;
-    Ed_bayar.Value := 0;
-    ed_Kembali.Value := 0;
-    ed_bayar.Visible := false;
-    ed_kembali.Visible := false;
-    sLabel7.Visible := true;
-    sLabel8.Visible := true;
-    sLabel9.Visible := true;
-    ed_pelanggan.Visible := true;
-    sb_cari_pel.Visible := true;
-    l_nm_pel.Visible := true;
-    cb_lama.Visible := true;
-    cb_lama.Text := '1 Minggu';
-    ed_lama.Text := '7';
-    ed_jatuh_tempo.Visible := true;
-    b_simpan.Visible := True;
-  end
-  else if sb_tunai.Caption = 'Kredit' then
-  begin
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', '1');
-    sb_tunai.Caption := 'Tunai';
-    if sb_retail.Caption = 'Retail' then
-    begin
-      sLabel7.Visible := false;
-      ed_pelanggan.Visible := false;
-      sb_cari_pel.Visible := false;
-      l_nm_pel.Visible := false;
-      ed_pelanggan.Text := 'CU-0001';
-      l_nm_pel.Caption := 'UMUM';
-      b_simpan.Visible := False;
-    end;
-    sLabel5.Visible := true;
-    sLabel6.Visible := true;
-    ed_bayar.Visible := true;
-    ed_kembali.Visible := true;
-    sLabel8.Visible := false;
-    sLabel9.Visible := false;
-    ed_lama.Text := '0';
-    ed_lama.Visible := false;
-    ed_jatuh_tempo.Visible := false;
-    cb_lama.Visible := false;
-    slabel10.Visible := false;
-  end;
-end;
-
 procedure TF_Transaksi.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   // untuk keluar dari form
@@ -845,13 +718,13 @@ begin
   // merubah retail dan grosir
   if key = vk_f9 then
   begin
-    retail;
+    // retail;
   end;
 
   // merubah Tunai/kredit
   if key = vk_f10 then
   begin
-    tunai;
+    // tunai;
   end;
 
   // cetak ulang;
@@ -886,6 +759,20 @@ begin
   if ((shift = [ssctrl]) and (key = 80)) then
   begin
     ac_jual_globalExecute(Self);
+  end;
+
+  // ctrl + R untuk pindah Retail/Grosir
+  if ((shift = [ssctrl]) and (key = 82)) then
+  begin
+    FRetail:= not(FRetail);
+    UpdateRetailTunai;
+  end;
+
+  // ctrl + T untuk pindah Tunai/Kredit
+  if ((shift = [ssctrl]) and (key = 84)) then
+  begin
+    FTunai:= not(FTunai);
+    UpdateRetailTunai;
   end;
 
   // shift + del untuk membatalkan transaksi
@@ -1000,7 +887,7 @@ begin
       end
       else
       begin
-        if (sb_retail.Caption <> 'Retail') then
+        if not(FRetail) then
         begin
           Ed_Pelanggan.SetFocus;
         end
@@ -1023,14 +910,12 @@ procedure TF_Transaksi.Cb_lamaChange(Sender: TObject);
 begin
   if cb_lama.Text = 'Custom...' then
   begin
-    ed_lama.Visible := true;
-    slabel10.Visible := true;
+    Ed_Lama.Enabled:= True;
     ed_Lama.SetFocus;
   end
   else
   begin
-    ed_lama.Visible := false;
-    slabel10.Visible := false;
+    Ed_Lama.Enabled:= False;
     if cb_lama.Text = '1 Minggu' then
       ed_Lama.Text := '7';
     if cb_lama.Text = '2 Minggu' then
@@ -1053,16 +938,6 @@ begin
     ed_Lama.SetFocus;
   end;
   Ed_jatuh_tempo.Text := formatdatetime('dd/MM/yyyy', now() + strtofloat(ed_lama.Text));
-end;
-
-procedure TF_Transaksi.sb_retailClick(Sender: TObject);
-begin
-  retail;
-end;
-
-procedure TF_Transaksi.sb_tunaiClick(Sender: TObject);
-begin
-  tunai;
 end;
 
 procedure TF_Transaksi.sb_cari_pelClick(Sender: TObject);
@@ -1107,7 +982,7 @@ end;
 
 procedure TF_Transaksi.simpan;
 var
-  tk, laba, isi_sql: string;
+  laba, isi_sql: string;
   x: integer;
 begin
   if KasirOffline then
@@ -1118,10 +993,6 @@ begin
 
   kode_transaksi_terbaru;
 
-  if sb_tunai.Caption = 'Tunai' then
-    tk := '1'
-  else
-    tk := '0';
   laba := floattostr(ed_grand.Value - TableView.DataController.Summary.FooterSummaryValues
     [8]);
 
@@ -1151,7 +1022,7 @@ begin
       + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
       + 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
       + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
-      + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + tk +
+      + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + Values[FTunai] +
       '",ADDDATE(date(now()),INTERVAL ' + ed_lama.Text + ' DAY),"' + dm.macam_harga
       + '","' + ed_sub.Text + '","' + ed_discP.Text + '", "' + ed_discRp.Text +
       '",' + QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])
@@ -1168,7 +1039,7 @@ begin
       'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp,barcode,tgl_simpan) values ' +
       isi_sql, false);
 
-    if tk = '0' then
+    if not(FTunai) then
     begin
       fungsi.SQLExec(dm.Q_exe,
         'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, ' +
@@ -1697,7 +1568,7 @@ begin
     exit;
   end;
 
-  if sb_tunai.Caption = 'Kredit' then
+  if not(FTunai) then
   begin
     fungsi.SQLExec(dm.Q_temp, 'select * from vw_pelanggan where kd_pelanggan="'
       + ed_pelanggan.Text + '" and kd_perusahaan="' + dm.kd_perusahaan + '"', true);
@@ -1953,7 +1824,6 @@ begin
 
           ed_code.SetFocus;
           cb_pending.ItemIndex := cb_pending.Items.Count - 1;
-          sb_retail.Enabled := false;
           ed_bayar.ReadOnly := false;
           ed_discP.ReadOnly := false;
 
@@ -2034,7 +1904,6 @@ begin
       fungsi.amankan(od.FileName, od.FileName, 753);
 
       ed_code.SetFocus;
-      sb_retail.Enabled := false;
       ed_bayar.ReadOnly := false;
       ed_discP.ReadOnly := false;
 
@@ -2228,8 +2097,11 @@ procedure TF_Transaksi.ac_kartu_kreditExecute(Sender: TObject);
 begin
   if Ed_Grand.Value > 0 then
     begin
-      if sb_tunai.Caption = 'Kredit' then tunai;
-      
+      if not(FTunai) then
+      begin
+        FTunai:= True;
+        UpdateRetailTunai;
+      end;
       Application.CreateForm(TF_Bayar, F_Bayar);
       pnlFooter.Visible := False;
 
@@ -2267,6 +2139,64 @@ begin
     ed_keterangan.SetFocus
   else
     Ed_Code.SetFocus;
+end;
+
+procedure TF_Transaksi.UpdateRetailTunai;
+var
+  Jenis: string;
+begin
+  sLabel5.Visible := FTunai;
+  sLabel6.Visible := FTunai;
+  Ed_bayar.Value := 0;
+  ed_Kembali.Value := 0;
+  ed_bayar.Visible := FTunai;
+  ed_kembali.Visible := FTunai;
+
+  sLabel7.Visible := not(FTunai);
+  ed_pelanggan.Visible := not(FTunai);
+  sb_cari_pel.Visible := not(FTunai);
+  l_nm_pel.Visible := not(FTunai);
+
+  sLabel8.Visible := not(FTunai);
+  cb_lama.Visible := not(FTunai);
+  ed_lama.Visible := not(FTunai);
+  sLabel9.Visible := not(FTunai);
+  ed_jatuh_tempo.Visible := not(FTunai);
+  slabel10.Visible := not(FTunai);
+
+  b_simpan.Visible := not(FTunai);
+
+  if FTunai then
+  begin
+    cb_lama.ItemIndex:= 5;
+    ed_lama.Text := '0';
+  end else
+  begin
+    cb_lama.ItemIndex:= 0;
+    ed_lama.Text := '7';
+  end;
+
+  if FRetail then
+  begin
+    dm.macam_harga := 'HETK';
+    ed_pelanggan.Text := 'CU-0001';
+    l_nm_pel.Caption := 'UMUM';
+  end else
+  begin
+    dm.macam_harga := 'HGTK';
+    sLabel7.Visible := not(FRetail);
+    ed_pelanggan.Visible := not(FRetail);
+    sb_cari_pel.Visible := not(FRetail);
+    l_nm_pel.Visible := not(FRetail);
+    b_simpan.Visible := not(FRetail);
+  end;
+
+  if FRetail then Jenis:= 'Retail | ' else Jenis:= 'Grosir | ';
+  if FTunai then Jenis:= Jenis + 'Tunai' else Jenis:= Jenis + 'Kredit';
+  pnlRetailTunai.Caption:= Jenis;
+
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', Values[FRetail]);
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', Values[FTunai]);
 end;
 
 end.

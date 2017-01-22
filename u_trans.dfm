@@ -128,46 +128,10 @@ object F_Transaksi: TF_Transaksi
     Align = alTop
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
-    object sb_tunai: TsSpeedButton
-      Left = 97
-      Top = 1
-      Width = 96
-      Height = 36
-      Cursor = crHandPoint
-      Caption = '&Tunai'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -24
-      Font.Name = 'Rockwell'
-      Font.Style = []
-      ParentFont = False
-      OnClick = sb_tunaiClick
-      Align = alLeft
-      AnimatEvents = [aeMouseEnter, aeMouseLeave, aeMouseDown, aeMouseUp, aeGlobalDef]
-      SkinData.SkinSection = 'SPEEDBUTTON'
-    end
-    object sb_retail: TsSpeedButton
-      Left = 1
-      Top = 1
-      Width = 96
-      Height = 36
-      Cursor = crHandPoint
-      Caption = '&Retail'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -24
-      Font.Name = 'Rockwell'
-      Font.Style = []
-      ParentFont = False
-      OnClick = sb_retailClick
-      Align = alLeft
-      AnimatEvents = [aeMouseEnter, aeMouseLeave, aeMouseDown, aeMouseUp, aeGlobalDef]
-      SkinData.SkinSection = 'SPEEDBUTTON'
-    end
     object Ed_Code: TsEdit
-      Left = 193
+      Left = 186
       Top = 1
-      Width = 814
+      Width = 821
       Height = 36
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -191,6 +155,21 @@ object F_Transaksi: TF_Transaksi
       BoundLabel.Layout = sclLeft
       BoundLabel.MaxWidth = 0
       BoundLabel.UseSkinColor = True
+    end
+    object pnlRetailTunai: TPanel
+      Left = 1
+      Top = 1
+      Width = 185
+      Height = 36
+      Align = alLeft
+      Caption = 'Retail | Tunai'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'Rockwell'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
     end
   end
   object pnlFooter: TsPanel
