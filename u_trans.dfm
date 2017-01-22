@@ -1215,8 +1215,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnCetak: TsButton
-      Left = 256
-      Top = 32
+      Left = 384
+      Top = 4
       Width = 120
       Height = 25
       Action = ac_cetak
@@ -1224,8 +1224,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnPenjualanToko: TsButton
-      Left = 384
-      Top = 4
+      Left = 256
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_jual_global
@@ -1251,8 +1251,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object Btnkartu_kredit: TsButton
-      Left = 256
-      Top = 60
+      Left = 384
+      Top = 32
       Width = 120
       Height = 25
       Action = ac_kartu_kredit
@@ -1260,8 +1260,8 @@ object F_Transaksi: TF_Transaksi
       SkinData.SkinSection = 'BUTTON'
     end
     object BtnDrawer: TsButton
-      Left = 384
-      Top = 32
+      Left = 256
+      Top = 60
       Width = 120
       Height = 25
       Action = ac_drawer
@@ -1275,6 +1275,24 @@ object F_Transaksi: TF_Transaksi
       Height = 25
       Action = ac_keterangan
       TabOrder = 15
+      SkinData.SkinSection = 'BUTTON'
+    end
+    object BtnRetail: TsButton
+      Left = 768
+      Top = 4
+      Width = 161
+      Height = 25
+      Action = ac_retail
+      TabOrder = 16
+      SkinData.SkinSection = 'BUTTON'
+    end
+    object BtnTunai: TsButton
+      Left = 768
+      Top = 34
+      Width = 161
+      Height = 25
+      Action = ac_tunai
+      TabOrder = 17
       SkinData.SkinSection = 'BUTTON'
     end
   end
@@ -1372,7 +1390,7 @@ object F_Transaksi: TF_Transaksi
       OnExecute = ac_loadfileExecute
     end
     object ac_jual_global: TAction
-      Caption = 'Penjualan (Ctrl + P)'
+      Caption = 'Penjualan (F9)'
       OnExecute = ac_jual_globalExecute
     end
     object ac_cek_update: TAction
@@ -1391,12 +1409,20 @@ object F_Transaksi: TF_Transaksi
       OnExecute = ac_kartu_kreditExecute
     end
     object ac_drawer: TAction
-      Caption = 'Drawer (Ctrl + O)'
+      Caption = 'Drawer (F10)'
       OnExecute = ac_drawerExecute
     end
     object ac_keterangan: TAction
       Caption = 'Keterangan (Ctrl + K)'
       OnExecute = ac_keteranganExecute
+    end
+    object ac_retail: TAction
+      Caption = 'Ganti Retail/Grosir (Ctrl + R)'
+      OnExecute = ac_retailExecute
+    end
+    object ac_tunai: TAction
+      Caption = 'Ganti Tunai/Kredit (Ctrl + T)'
+      OnExecute = ac_tunaiExecute
     end
   end
   object sd: TsSaveDialog

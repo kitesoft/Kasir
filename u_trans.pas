@@ -128,6 +128,10 @@ type
     ac_drawer: TAction;
     ac_keterangan: TAction;
     pnlRetailTunai: TPanel;
+    BtnRetail: TsButton;
+    BtnTunai: TsButton;
+    ac_retail: TAction;
+    ac_tunai: TAction;
     procedure kode_transaksi_terbaru;
     procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
     procedure awal;
@@ -195,6 +199,8 @@ type
     procedure ac_kartu_kreditExecute(Sender: TObject);
     procedure ac_drawerExecute(Sender: TObject);
     procedure ac_keteranganExecute(Sender: TObject);
+    procedure ac_tunaiExecute(Sender: TObject);
+    procedure ac_retailExecute(Sender: TObject);
   private
     DebitId: Integer;
     DebitKode: string;
@@ -715,16 +721,16 @@ begin
     TableViewDblClick(Sender);
   end;
 
-  // merubah retail dan grosir
+  // F9 untuk buka form penjualan
   if key = vk_f9 then
   begin
-    // retail;
+    ac_jual_globalExecute(Self);
   end;
 
-  // merubah Tunai/kredit
+  // F10 untuk open cash drawer
   if key = vk_f10 then
   begin
-    // tunai;
+    ac_drawerExecute(Self);
   end;
 
   // cetak ulang;
@@ -749,30 +755,16 @@ begin
     ac_KunciExecute(Self);
   end;
 
-  // ctrl + O untuk open cash drawer
-  if ((shift = [ssctrl]) and (key = 79)) then
-  begin
-    ac_drawerExecute(Self);
-  end;
-
-  // ctrl + P untuk open cash drawer
-  if ((shift = [ssctrl]) and (key = 80)) then
-  begin
-    ac_jual_globalExecute(Self);
-  end;
-
   // ctrl + R untuk pindah Retail/Grosir
   if ((shift = [ssctrl]) and (key = 82)) then
   begin
-    FRetail:= not(FRetail);
-    UpdateRetailTunai;
+    ac_retailExecute(Self);
   end;
 
   // ctrl + T untuk pindah Tunai/Kredit
   if ((shift = [ssctrl]) and (key = 84)) then
   begin
-    FTunai:= not(FTunai);
-    UpdateRetailTunai;
+    ac_tunaiExecute(Self);
   end;
 
   // shift + del untuk membatalkan transaksi
@@ -2197,6 +2189,18 @@ begin
 
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', Values[FRetail]);
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', Values[FTunai]);
+end;
+
+procedure TF_Transaksi.ac_tunaiExecute(Sender: TObject);
+begin
+  FTunai:= not(FTunai);
+  UpdateRetailTunai;
+end;
+
+procedure TF_Transaksi.ac_retailExecute(Sender: TObject);
+begin
+  FRetail:= not(FRetail);
+  UpdateRetailTunai;
 end;
 
 end.
