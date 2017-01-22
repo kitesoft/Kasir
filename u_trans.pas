@@ -2183,6 +2183,12 @@ end;
 
 procedure TF_Transaksi.ac_retailExecute(Sender: TObject);
 begin
+  if TableView.DataController.RecordCount <> 0 then
+  begin
+    ShowMessage('Tidak Bisa merubah Retail/Grosir ketika ada data yang di transaksikan');
+    Exit;
+  end;
+
   FRetail:= not(FRetail);
   UpdateRetailTunai;
 end;
