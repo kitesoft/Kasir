@@ -882,6 +882,12 @@ begin
     ac_drawerExecute(Self);
   end;
 
+  // ctrl + P untuk open cash drawer
+  if ((shift = [ssctrl]) and (key = 80)) then
+  begin
+    ac_jual_globalExecute(Self);
+  end;
+
   // shift + del untuk membatalkan transaksi
   if ((shift = [ssshift]) and (key = vk_delete)) then
   begin
