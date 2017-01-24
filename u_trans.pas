@@ -215,7 +215,7 @@ type
 
     // Struk
     StJenis, StLebar : Integer;
-    StPesan: string;
+    StPesan: TStrings;
 
     // retail/grosir, tunai/kredit
     FRetail, FTunai: Boolean;
@@ -315,7 +315,7 @@ begin
 
   StJenis := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'jenis_struk', '0'));
   StLebar := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'lebar_struk', '38'));
-  StPesan := fungsi.AmbilIniFile(dm.file_ini, 'kasir',
+  StPesan.DelimitedText := fungsi.AmbilIniFile(dm.file_ini, 'kasir',
     'footer_struk', 'TERIMA KASIH ATAS KUNJUANGAN ANDA');
 end;
 
@@ -1059,7 +1059,7 @@ procedure TF_Transaksi.cetak_struk_kecil;
 var
   toko, alamat, telp, kd_transaksi, kasir, cust, waktu, barang, barang2, satuan,
     har_sat, harga, discP, discRp, netto, discGP, discGRp, nettoG, total, bayar,
-    kembali, void, kaki1, tgl_trans: string;
+    kembali, void, kaki, tgl_trans: string;
   NonTunai, TarikTunai, TotalDebit: string;
   i, j, x, panjang, TotalDebitRp: integer;
   F: TextFile;
@@ -1222,8 +1222,12 @@ begin
   telp := fungsi.TulisFormat('Telp. ' + dm.Q_print.fieldbyname('telp').AsString,
     panjang, tacenter);
 
-  kaki1 := fungsi.TulisFormat(StPesan, panjang, tacenter);
-  Writeln(F, kaki1);
+  for i:=0 to StPesan.Count - 1 do
+  begin
+    kaki := fungsi.TulisFormat(StPesan.Strings[i], panjang, tacenter);
+    Writeln(F, kaki);
+  end;
+  
   for i := 1 to 10 do
     writeln(F, '');
   Writeln(F, toko);
@@ -1507,6 +1511,8 @@ begin
   F_Transaksi.BorderStyle := bsNone;
   F_Transaksi.WindowState := wsMaximized;
   cek_update;
+  StPesan:= TStringList.Create;
+  StPesan.QuoteChar:= '#';
 end;
 
 procedure TF_Transaksi.Ed_discRpKeyDown(Sender: TObject; var Key: Word; Shift:

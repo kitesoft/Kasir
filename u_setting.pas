@@ -28,13 +28,13 @@ type
     SbSkin: TsSpeedButton;
     BtnSimpan: TsButton;
     gb3: TsGroupBox;
-    ed_footer_struk: TEdit;
     cb_jenis_struk: TComboBox;
     cb_lebar_struk: TComboBox;
     Lbl1: TsLabel;
     Lbl2: TsLabel;
     ed_tambahan: TEdit;
     Lbl3: TsLabel;
+    MmFooterStruk: TMemo;
     procedure TbHueChange(Sender: TObject);
     procedure TbSaturationChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -100,7 +100,7 @@ begin
   // Struk
   cb_jenis_struk.ItemIndex := F_Transaksi.StJenis;
   cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(IntToStr(F_Transaksi.StLebar));
-  ed_footer_struk.Text := F_Transaksi.StPesan;
+  MmFooterStruk.Lines := F_Transaksi.StPesan;
 
   ed_tambahan.Text := F_Transaksi.InsertHarga;
 end;
@@ -196,11 +196,11 @@ begin
   // Simpan Struk
   F_Transaksi.StJenis := cb_jenis_struk.ItemIndex;
   F_Transaksi.StLebar := StrToIntDef(cb_lebar_struk.Text, 38);
-  F_Transaksi.StPesan := ed_footer_struk.Text;
+  F_Transaksi.StPesan := MmFooterStruk.Lines;
 
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'jenis_struk', IntToStr(cb_jenis_struk.ItemIndex));
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'lebar_struk', cb_lebar_struk.Text);
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'footer_struk', ed_footer_struk.Text);
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'jenis_struk', IntToStr(F_Transaksi.StJenis));
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'lebar_struk', IntToStr(F_Transaksi.StLebar));
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'footer_struk', F_Transaksi.StPesan.DelimitedText);
 
   F_Transaksi.InsertHarga := ed_tambahan.Text;
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tambahan', F_Transaksi.InsertHarga);

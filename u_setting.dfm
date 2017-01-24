@@ -4,7 +4,7 @@ object FSetting: TFSetting
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Pengaturan'
-  ClientHeight = 249
+  ClientHeight = 291
   ClientWidth = 636
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object FSetting: TFSetting
   TextHeight = 13
   object Lbl3: TsLabel
     Left = 8
-    Top = 208
+    Top = 256
     Width = 162
     Height = 13
     Caption = 'Harga Tambahan (ex: Min. Dingin)'
@@ -249,7 +249,7 @@ object FSetting: TFSetting
   end
   object BtnSimpan: TsButton
     Left = 552
-    Top = 208
+    Top = 256
     Width = 75
     Height = 25
     Caption = 'Simpan'
@@ -261,7 +261,7 @@ object FSetting: TFSetting
     Left = 8
     Top = 120
     Width = 617
-    Height = 81
+    Height = 129
     Caption = 'Struk'
     TabOrder = 3
     SkinData.SkinSection = 'GROUPBOX'
@@ -279,14 +279,6 @@ object FSetting: TFSetting
       Height = 13
       Caption = 'Pesan Dalam Struk'
     end
-    object ed_footer_struk: TEdit
-      Left = 130
-      Top = 48
-      Width = 481
-      Height = 21
-      ParentColor = True
-      TabOrder = 0
-    end
     object cb_jenis_struk: TComboBox
       Left = 130
       Top = 14
@@ -295,7 +287,7 @@ object FSetting: TFSetting
       Style = csDropDownList
       Color = 14672870
       ItemHeight = 13
-      TabOrder = 1
+      TabOrder = 0
       Items.Strings = (
         'Struk Kecil'
         'Struk Besar')
@@ -307,7 +299,7 @@ object FSetting: TFSetting
       Height = 21
       Color = 14672870
       ItemHeight = 13
-      TabOrder = 2
+      TabOrder = 1
       Items.Strings = (
         '30'
         '31'
@@ -341,10 +333,18 @@ object FSetting: TFSetting
         '59'
         '60')
     end
+    object MmFooterStruk: TMemo
+      Left = 130
+      Top = 48
+      Width = 479
+      Height = 73
+      ParentColor = True
+      TabOrder = 2
+    end
   end
   object ed_tambahan: TEdit
     Left = 176
-    Top = 206
+    Top = 254
     Width = 89
     Height = 21
     ParentColor = True
