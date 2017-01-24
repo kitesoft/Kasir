@@ -1382,12 +1382,10 @@ object F_Transaksi: TF_Transaksi
     object ac_simpanfile: TAction
       Caption = 'Simpan ke File'
       ImageIndex = 6
-      OnExecute = ac_simpanfileExecute
     end
     object ac_loadfile: TAction
       Caption = 'Load dari File'
       ImageIndex = 7
-      OnExecute = ac_loadfileExecute
     end
     object ac_jual_global: TAction
       Caption = 'Penjualan (F9)'
@@ -1424,18 +1422,6 @@ object F_Transaksi: TF_Transaksi
       Caption = 'Ganti Tunai/Kredit (Ctrl + T)'
       OnExecute = ac_tunaiExecute
     end
-  end
-  object sd: TsSaveDialog
-    DefaultExt = '.trs'
-    Filter = 'File Transasksi|*.trs'
-    Left = 179
-    Top = 320
-  end
-  object od: TsOpenDialog
-    DefaultExt = '.trs'
-    Filter = 'File Transasksi|*.trs'
-    Left = 211
-    Top = 320
   end
   object Q_time: TmySQLQuery
     Database = dm.db_conn

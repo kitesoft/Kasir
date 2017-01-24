@@ -90,8 +90,6 @@ type
     ac_close: TAction;
     ac_simpanfile: TAction;
     ac_loadfile: TAction;
-    sd: TsSaveDialog;
-    od: TsOpenDialog;
     ac_jual_global: TAction;
     p_keterangan: TsPanel;
     ed_keterangan: TsEdit;
@@ -172,8 +170,6 @@ type
     procedure ac_SatuanExecute(Sender: TObject);
     procedure ac_cetakExecute(Sender: TObject);
     procedure ac_closeExecute(Sender: TObject);
-    procedure ac_simpanfileExecute(Sender: TObject);
-    procedure ac_loadfileExecute(Sender: TObject);
     procedure ac_jual_globalExecute(Sender: TObject);
     procedure Ed_PelangganChange(Sender: TObject);
     procedure ed_keteranganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1846,56 +1842,6 @@ end;
 procedure TF_Transaksi.ac_closeExecute(Sender: TObject);
 begin
   close;
-end;
-
-procedure TF_Transaksi.ac_simpanfileExecute(Sender: TObject);
-begin
-  // save file
-  if sd.Execute then
-  begin
-    try
-      if TableView.DataController.RecordCount = 0 then
-        Exit;
-
-      Tb2File(TableView.DataController, sd.FileName);
-      fungsi.amankan(sd.FileName, sd.FileName, 753);
-      awal;
-      showmessage('Transaksi berhasil disimpan');
-    except
-      showmessage('proses tahan transaksi gagal...')
-    end;
-  end;
-end;
-
-procedure TF_Transaksi.ac_loadfileExecute(Sender: TObject);
-begin
-  // load file
-  if od.Execute then
-  begin
-    try
-      if TableView.DataController.RecordCount <> 0 then
-      begin
-        showmessage('data yang ditahan tidak bisa load '#10#13'Karena masih ada barang yang belum ditransaksikan');
-        exit;
-      end;
-
-      fungsi.amankan(od.FileName, od.FileName, 753);
-      file2tb(TableView.DataController, od.FileName);
-      fungsi.amankan(od.FileName, od.FileName, 753);
-
-      ed_code.SetFocus;
-      ed_bayar.ReadOnly := false;
-      ed_discP.ReadOnly := false;
-
-      if TableView.DataController.RecordCount <> 0 then
-      begin
-        tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
-      end;
-
-    except
-      showmessage('proses memunculkan transaksi yang ditahan gagal');
-    end;
-  end;
 end;
 
 procedure TF_Transaksi.ac_jual_globalExecute(Sender: TObject);
