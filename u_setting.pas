@@ -46,6 +46,7 @@ type
       Shift: TShiftState);
   private
     procedure M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
+    function MemoValid(var over: string): Boolean;
     { Private declarations }
   public
     F_pesan: TForm;
@@ -168,7 +169,16 @@ begin
 end;
 
 procedure TFSetting.BtnSimpanClick(Sender: TObject);
+var
+  pesan: string;
 begin
+  // cek jika panjang memo valid maka bisa disimpan
+  if not(MemoValid(pesan)) then
+  begin
+    ShowMessage(Format('Panjang Footer Struk melebihi lebar struk: %s%s%s',
+    [sLineBreak, sLineBreak, pesan]));
+    Exit;
+  end;  
   // Simpan Skin
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'hue_skin', IntToStr(TbHue.Position));
   fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'sat_skin', IntToStr(TbSaturation.Position));
@@ -213,6 +223,24 @@ begin
   if Key = VK_ESCAPE then Close;
   if Key = VK_F3 then SbSkinClick(Self);
   if Key = VK_F4 then SbPesanClick(Self);
+end;
+
+function TFSetting.MemoValid(var over: string): Boolean;
+var
+  i, LebarStruk: Integer;
+begin
+  Result:= True;
+  LebarStruk:= StrToIntDef(cb_lebar_struk.Text, 38);
+  for i:= 0 To MmFooterStruk.Lines.Count - 1 do
+  begin
+    if Length(MmFooterStruk.Lines.Strings[i]) > LebarStruk then
+    begin
+      Result:= False;
+      over:= over + Format('Baris %s Kelebihan %s Karakter %s',
+      [IntToStr(i+1), IntToStr(Length(MmFooterStruk.Lines.Strings[i]) - LebarStruk),
+      sLineBreak]);
+    end;
+  end;
 end;
 
 end.

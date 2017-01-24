@@ -338,7 +338,14 @@ object FSetting: TFSetting
       Top = 48
       Width = 479
       Height = 73
+      Alignment = taCenter
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Courier'
+      Font.Style = []
       ParentColor = True
+      ParentFont = False
       TabOrder = 2
     end
   end
