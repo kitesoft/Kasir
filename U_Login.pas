@@ -64,9 +64,8 @@ procedure TF_Login.FormShow(Sender: TObject);
 begin
   dm.Login := False;
 
-  fungsi.SQLExec(dm.Q_temp,
-    'select n_perusahaan from tb_company where kd_perusahaan =' + quotedstr(dm.kd_perusahaan)
-    + '', true);
+  fungsi.SQLExec(dm.Q_temp, Format('select n_perusahaan from tb_company '+
+    'where kd_perusahaan ="%s"', [dm.kd_perusahaan]), true);
 
   if not (dm.Q_temp.Eof) then
   begin
@@ -89,9 +88,9 @@ begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
     sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
       + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
-      'tb_user.kd_user="' + EdKdUser.Text + '" AND tb_user_company.kasir="Y" ' +
-      'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
-    fungsi.SQLExec(DM.Q_Show, sql, true);
+      'tb_user.kd_user="%s" AND tb_user_company.kasir="Y" ' +
+      'AND tb_user_company.kd_perusahaan="%s"';
+    fungsi.SQLExec(DM.Q_Show, Format(sql,[EdKdUser.Text, dm.kd_perusahaan]), true);
     if dm.Q_show.Eof then
     begin
       messagedlg('Kode User ' + EdKdUser.Text + ' tidak terdaftar', mtError, [mbOk], 0);
@@ -107,8 +106,8 @@ begin
       if dm.Q_show.FieldByName('nilai').AsBoolean then
       begin
         sql := 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
-          + 'AND user_id="' + EdKdUser.Text + '"';
-        fungsi.SQLExec(DM.Q_Show, sql, true);
+          + 'AND user_id="%s"';
+        fungsi.SQLExec(DM.Q_Show, Format(sql, [EdKdUser.Text]), true);
         if dm.Q_show.Eof then
         begin
           EdKdUser.SetFocus;
@@ -158,18 +157,16 @@ begin
     Exit;
   end;
 
-  fungsi.SQLExec(dm.Q_temp,
-    'select tanggal from tb_login_kasir where kd_perusahaan = ' + quotedStr(dm.kd_perusahaan)
-    + ' and user =' + (QuotedStr(EdKdUser.Text)) + ' and kd_jaga =' + QuotedStr(EdKdOperator.Text)
-    + ' and status = "online"', True);
+  fungsi.SQLExec(dm.Q_temp, Format('select tanggal from tb_login_kasir '+
+    'where kd_perusahaan = "%s" and user ="%s" and kd_jaga ="%s" and '+
+    'status = "online"', [dm.kd_perusahaan, EdKdUser.Text, EdKdOperator.Text]), True);
   if dm.Q_temp.Eof then
   begin
     dm.db_conn.StartTransaction;
     try
-      fungsi.SQLExec(dm.q_exe,
-        'insert into tb_login_kasir(kd_perusahaan,user,kd_jaga,tanggal,status,komp)values("' +
-        dm.kd_perusahaan + '","' + EdKdUser.Text + '", "' + EdKdOperator.Text +
-        '",now(),"online","' + dm.ip_kasir + '")', false);
+      fungsi.SQLExec(dm.q_exe, Format('insert into tb_login_kasir(kd_perusahaan, '+
+        'user,kd_jaga,tanggal,status,komp)values("%s","%s", "%s",now(),"online","%s")',
+        [dm.kd_perusahaan, EdKdUser.Text, EdKdOperator.Text, dm.ip_kasir]), false);
       dm.db_conn.Commit;
     except
       dm.db_conn.Rollback;
