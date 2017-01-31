@@ -5,17 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, sEdit, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit,
-  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, UFungsi,
-  sSkinProvider, sMemo, ExtCtrls, sComboBox, Buttons, sSpeedButton,
-  sPanel, sButton, printers,
-  frxClass, shellapi, AdvAlertWindow, cxStyles,
-  cxCustomData, cxGraphics, cxDataStorage, cxEdit,
+  sCurrencyEdit, sLabel, ComCtrls, sStatusBar, DB, UFungsi, sSkinProvider,
+  sMemo, ExtCtrls, sComboBox, Buttons, sSpeedButton, sPanel, sButton, printers,
+  frxClass, cxStyles, cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, cxTextEdit, uTerbilang, cxCalc,
-  AdvMenus, AdvMenuStylers, AdvPreviewMenu, AdvPreviewMenuStylers, AdvToolBar,
-  AdvToolBarStylers, AdvShapeButton, AdvGlowButton, AdvOfficeSelectors, ToolWin,
-  DateUtils, ActnList, AdvTrackBar, sDialogs, mySQLDbTables, cxFilter,
-  cxData;
+  DateUtils, ActnList, sDialogs, mySQLDbTables, cxFilter, cxData;
 
 const
   InputBoxMessage = WM_USER + 200;
@@ -26,12 +21,9 @@ type
     Timer1: TTimer;
     Sb: TsStatusBar;
     p_pesan: TsPanel;
-    sPanel3: TsPanel;
+    pnlKode: TsPanel;
     Ed_Code: TsEdit;
-    sb_cari_barang: TsSpeedButton;
-    sb_tunai: TsSpeedButton;
-    sb_retail: TsSpeedButton;
-    p4: TsPanel;
+    pnlFooter: TsPanel;
     sLabel9: TsLabel;
     sLabel8: TsLabel;
     sLabel7: TsLabel;
@@ -55,7 +47,6 @@ type
     Ed_Bayar: TsCurrencyEdit;
     cb_pending: TsComboBox;
     Cb_lama: TsComboBox;
-    alert: TAdvAlertWindow;
     Grid: TcxGrid;
     TableView: TcxGridTableView;
     tv_pid: TcxGridColumn;
@@ -80,52 +71,10 @@ type
     tv_no: TcxGridColumn;
     ed_discP: TsCurrencyEdit;
     b_simpan: TsButton;
-    rb1: TAdvToolBarPager;
-    tb_transaksi: TAdvPage;
-    tb_pengaturan: TAdvPage;
-    tb_pilihan: TAdvPage;
-    advtlbrfcstylr1: TAdvToolBarOfficeStyler;
-    advprvwmn1: TAdvPreviewMenu;
-    advprvwmnfcstylr1: TAdvPreviewMenuOfficeStyler;
-    mntransaksi: TAdvMenuOfficeStyler;
-    sb1: TAdvShapeButton;
-    mm_nama: TsMemo;
-    ed_Harga: TsCurrencyEdit;
     l_pesan: TsLabel;
     t_pesan: TTimer;
-    advtlbr1: TAdvToolBar;
-    advtlbr2: TAdvToolBar;
-    cb_lebar_struk: TComboBox;
-    ed_footer_struk: TEdit;
-    cb_jenis_struk: TComboBox;
-    crb_font: TColorBox;
-    cbsize: TComboBox;
-    crb_bg: TColorBox;
-    cbFontName: TComboBox;
-    cbspeed: TComboBox;
-    btn1: TAdvGlowButton;
-    tlb1: TToolBar;
-    btn2: TToolButton;
-    btn3: TToolButton;
-    btn4: TToolButton;
-    btn5: TAdvGlowButton;
     sknprvdr1: TsSkinProvider;
-    advtlbr3: TAdvToolBar;
     tv_ket: TcxGridColumn;
-    tbp_pilihan: TAdvToolBar;
-    l_2: TsLabel;
-    l_3: TsLabel;
-    l_4: TsLabel;
-    l_5: TsLabel;
-    btnvoid: TAdvGlowButton;
-    btnBatal: TAdvGlowButton;
-    btnReturn: TAdvGlowButton;
-    btnPending: TAdvGlowButton;
-    btnLoad: TAdvGlowButton;
-    btnPenjualan: TAdvGlowButton;
-    btnSatuan: TAdvGlowButton;
-    btncetak: TAdvGlowButton;
-    btnKunci: TAdvGlowButton;
     actlst1: TActionList;
     ac_void: TAction;
     ac_Insert: TAction;
@@ -137,38 +86,51 @@ type
     ac_Group: TAction;
     ac_Satuan: TAction;
     ac_cetak: TAction;
-    btnInsert: TAdvGlowButton;
-    ed_tambahan: TEdit;
-    trb_sat: TAdvTrackBar;
-    trb_hue: TAdvTrackBar;
-    l_1: TsLabel;
-    l_6: TsLabel;
-    btnInsert1: TAdvGlowButton;
     ac_skin: TAction;
-    ed_skin: TEdit;
     ac_close: TAction;
-    cb_aktif: TComboBox;
     ac_simpanfile: TAction;
     ac_loadfile: TAction;
-    sd: TsSaveDialog;
-    od: TsOpenDialog;
-    ac_Besar: TAction;
-    ac_kecil: TAction;
-    btnPenjualan1: TAdvGlowButton;
-    btnSatuan1: TAdvGlowButton;
-    btnPenjualan2: TAdvGlowButton;
     ac_jual_global: TAction;
     p_keterangan: TsPanel;
     ed_keterangan: TsEdit;
     l_7: TsLabel;
     Q_time: TmySQLQuery;
     ac_cek_update: TAction;
-    procedure kode_transaksi_terbaru;
-    procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
-    procedure tampil_gambar(kode: string);
-    procedure awal;
+    pnlHeader: TsPanel;
+    ed_Harga: TsCurrencyEdit;
+    pnlPilihan: TsPanel;
+    Lbl_5: TsLabel;
+    Lbl_2: TsLabel;
+    BtnInsert: TsButton;
+    BtnVoid: TsButton;
+    Lbl_3: TsLabel;
+    BtnBatal: TsButton;
+    BtnKunci: TsButton;
+    Lbl_4: TsLabel;
+    mm_nama: TsMemo;
+    BtnReturn: TsButton;
+    BtnPending: TsButton;
+    BtnLoad: TsButton;
+    BtnGroup: TsButton;
+    BtnSatuan: TsButton;
+    BtnCetak: TsButton;
+    BtnPenjualanToko: TsButton;
+    Btnsetting: TsButton;
+    ac_setting: TAction;
+    ac_cari_barang: TAction;
+    BtnCariBarang: TsButton;
+    ac_kartu_kredit: TAction;
+    Btnkartu_kredit: TsButton;
+    BtnDrawer: TsButton;
+    BtnKeterangan: TsButton;
+    ac_drawer: TAction;
+    ac_keterangan: TAction;
+    pnlRetailTunai: TPanel;
+    BtnRetail: TsButton;
+    BtnTunai: TsButton;
+    ac_retail: TAction;
+    ac_tunai: TAction;
     procedure FormShow(Sender: TObject);
-    procedure showdata;
     procedure Ed_CodeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
@@ -177,21 +139,11 @@ type
     procedure Ed_SubChange(Sender: TObject);
     procedure Cb_lamaChange(Sender: TObject);
     procedure Ed_LamaChange(Sender: TObject);
-    procedure retail;
-    procedure tunai;
-    procedure sb_retailClick(Sender: TObject);
-    procedure sb_tunaiClick(Sender: TObject);
-    procedure sb_cari_barangClick(Sender: TObject);
     procedure sb_cari_pelClick(Sender: TObject);
     procedure Ed_PelangganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure simpan;
-    procedure cetak(kd_transaksi, jenis: string);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Ed_CodeKeyPress(Sender: TObject; var Key: Char);
     procedure Ed_discPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure baru;
-    procedure File2Tb(tb: TcxGridDataController; FileName: string);
-    procedure Tb2File(tb: TcxGridDataController; FileName: string);
     procedure FormResize(Sender: TObject);
     procedure Ed_CodeChange(Sender: TObject);
     procedure Ed_CodeExit(Sender: TObject);
@@ -205,20 +157,9 @@ type
     procedure Ed_discPExit(Sender: TObject);
     procedure Ed_discRpExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure input_kode;
-    procedure cetak_struk_kecil;
     procedure Ed_discRpKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure b_simpanClick(Sender: TObject);
     procedure t_pesanTimer(Sender: TObject);
-    procedure ambil_form;
-    procedure cb_jenis_strukExit(Sender: TObject);
-    procedure cb_lebar_strukExit(Sender: TObject);
-    procedure ed_footer_strukExit(Sender: TObject);
-    procedure aktifkan_pesan;
-    procedure btn1Click(Sender: TObject);
-    procedure btn5Click(Sender: TObject);
-    procedure btn2Click(Sender: TObject);
-    procedure ed_tambahanExit(Sender: TObject);
     procedure ac_InsertExecute(Sender: TObject);
     procedure ac_voidExecute(Sender: TObject);
     procedure ac_BatalExecute(Sender: TObject);
@@ -228,47 +169,71 @@ type
     procedure ac_LoadExecute(Sender: TObject);
     procedure ac_SatuanExecute(Sender: TObject);
     procedure ac_cetakExecute(Sender: TObject);
-    procedure ac_skinExecute(Sender: TObject);
-    procedure trb_hueChange(Sender: TObject);
-    procedure trb_satChange(Sender: TObject);
     procedure ac_closeExecute(Sender: TObject);
-    procedure cb_aktifChange(Sender: TObject);
-    procedure ac_simpanfileExecute(Sender: TObject);
-    procedure ac_loadfileExecute(Sender: TObject);
-    procedure ac_BesarExecute(Sender: TObject);
-    procedure ac_kecilExecute(Sender: TObject);
     procedure ac_jual_globalExecute(Sender: TObject);
-    procedure panel_auto_width;
     procedure Ed_PelangganChange(Sender: TObject);
     procedure ed_keteranganKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Cb_lamaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    function KasirOffline: Boolean;
     procedure ac_GroupExecute(Sender: TObject);
+    procedure ac_settingExecute(Sender: TObject);
+    procedure ac_cari_barangExecute(Sender: TObject);
+    procedure ac_kartu_kreditExecute(Sender: TObject);
+    procedure ac_drawerExecute(Sender: TObject);
+    procedure ac_keteranganExecute(Sender: TObject);
+    procedure ac_tunaiExecute(Sender: TObject);
+    procedure ac_retailExecute(Sender: TObject);
   private
     DebitId: Integer;
     DebitKode: string;
     DebitRp: Integer;
     CashOut: Integer;
+    procedure baru;
+    procedure simpan;
+    procedure showdata;
+    procedure ambil_form;
     procedure cek_update;
-    procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
-    procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    procedure cetak_struk_kecil;
+    procedure UpdateRetailTunai;
+    function KasirOffline: Boolean;
     procedure UbahQty(Qty: string);
-    { Private declarations }
+    procedure File2Tb(tb: TcxGridDataController; FileName: string);
+    procedure Tb2File(tb: TcxGridDataController; FileName: string);
+    procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
+    procedure isi_table(baris: Integer; kolom: array of Integer; _isi: array of Variant);
   public
+    // pesan
+    PesanAktif: Integer;
+    StylePesan: TFontStyles;
+    PsBgColor, PsTextColor : TColor;
+    Pesan, PsNamaFont : string;
+    PsSizeFont, PsSpeedPesan: Integer;
+
+    // Struk
+    StJenis, StLebar : Integer;
+    StPesan: TStrings;
+
+    // retail/grosir, tunai/kredit
+    FRetail, FTunai: Boolean;
+
     tahan, batas, piutang, lebar_layar: integer;
     harga, harga_pokok, Qty_real, QtyH, diskon: Integer;
-    pesan, satuan, kode_barang, inputstring, passs, alasan, no_pending,
-      harga_edit: string;
+    satuan, kode_barang, inputstring, passs, alasan, no_pending,
+      harga_edit, KodeTransaksi, InsertHarga: string;
     diskonP: Real;
-    F_pesan: TForm;
-    M_pesan: TMemo;
-    Style_pesan: TFontStyles;
     days: array[1..7] of string;
+    procedure awal;
+    procedure input_kode;
+    procedure aktifkan_pesan;
+    procedure panel_auto_width;
+    procedure kode_transaksi_terbaru;
+    procedure cetak(kd_transaksi, jenis: string);
     procedure _set(baris, kolom, tipe: Integer; _isi: variant);
     function _get(baris, kolom: Integer; tipe: Integer = 1): variant;
-    procedure M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
-    { Public declarations }
   end;
+
+const
+  Values: array[Boolean] of string = ('0', '1');
 
 var
   F_Transaksi: TF_Transaksi;
@@ -276,8 +241,8 @@ var
 implementation
 
 uses
-  u_dm, acselectskin, U_ubah_satuan, U_Login, u_cariBarang, u_list_jual, u_hari,
-  u_returnJual, u_cari, u_bayar;
+  u_dm, U_ubah_satuan, U_Login, u_cariBarang, u_list_jual, u_hari,
+  u_returnJual, u_cari, u_bayar, u_setting;
 
 {$R *.dfm}
 
@@ -294,135 +259,60 @@ begin
 end;
 
 procedure TF_transaksi.kode_transaksi_terbaru;
-var
-  a: integer;
-  y, tgl: string;
 begin
   // memunculkan kode transaksi terbaru...
-
-  fungsi.SQLExec(dm.Q_show,
-    'select count(*) as jumlah,date(now()) as tgl from tb_jual_global ' +
-    'where tgl_transaksi=date(now()) and kd_perusahaan="' + dm.kd_perusahaan + '"', true);
-  a := dm.Q_show.fieldbyname('jumlah').AsInteger + 1;
-  tgl := formatdatetime('yyyyMMdd', dm.Q_show.fieldbyname('tgl').AsDateTime);
-  if a < 10 then
-    y := 'PJ-' + tgl + '-000'
-  else if a < 100 then
-    y := 'PJ-' + tgl + '-00'
-  else if a < 1000 then
-    y := 'PJ-' + tgl + '-0'
-  else if a < 10000 then
-    y := 'PJ-' + tgl + '-';
-  sb.Panels[9].Text := y + inttostr(a);
+  fungsi.SQLExec(dm.Q_temp, Format('SELECT CONCAT("PJ", DATE_FORMAT(NOW(), "%%Y%%m%%d"), ' +
+  'LPAD(COUNT(kd_transaksi) + 1, 4, "0")) AS new_id FROM tb_jual_global '+
+  'WHERE DATE(tgl_transaksi) = DATE(NOW()) AND kd_perusahaan = "%s"', [dm.kd_perusahaan]),true);
+  KodeTransaksi := dm.Q_temp.FieldByName('new_id').AsString;
+  sb.Panels[9].Text := KodeTransaksi;
 end;
 
 procedure TF_transaksi.aktifkan_pesan;
 begin
   lebar_layar := p_pesan.Width;
   p_pesan.Height := 0;
-  p_pesan.Color := crb_bg.Selected;
-  l_pesan.Font.Name := cbFontName.Text;
-  l_pesan.Font.Color := crb_font.Selected;
-  l_pesan.Font.Size := StrToIntDef(cbsize.Text, 18);
-  l_pesan.Font.Style := style_pesan;
+  p_pesan.Color := PsBgColor;
+  l_pesan.Font.Name := PsNamaFont;
+  l_pesan.Font.Color := PsTextColor;
+  l_pesan.Font.Size := PsSizeFont;
+  l_pesan.Font.Style := StylePesan;
   l_pesan.Left := lebar_layar;
   l_pesan.Caption := pesan;
 
-  t_pesan.Interval := StrToIntDef(cbspeed.Text, 20);
+  t_pesan.Interval := PsSpeedPesan;
   t_pesan.Enabled := True;
 end;
 
 procedure TF_transaksi.ambil_form;
 begin
-//untuk load form
-
-// pesan berjalan
+ // pesan berjalan
   pesan := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'pesan',
     'Promosi harus dilakukan untuk mempercepat penjualan barang...');
   p_pesan.Height := 0;
 
-  cbFontName.Items.Assign(Screen.Fonts);
-  CBFontName.Sorted := True;
-
-  CBFontName.ItemIndex := CBFontName.Items.IndexOf(fungsi.AmbilIniFile(dm.file_ini,
-    'kasir', 'nama_font', 'Arial'));
-  crb_bg.selected := StringToColor(fungsi.AmbilIniFile(dm.file_ini, 'kasir',
+  PsNamaFont :=fungsi.AmbilIniFile(dm.file_ini,'kasir', 'nama_font', 'Arial');
+  PsBgColor := StringToColor(fungsi.AmbilIniFile(dm.file_ini, 'kasir',
     'bg_font', 'clBlue'));
-  crb_font.selected := StringToColor(fungsi.AmbilIniFile(dm.file_ini, 'kasir',
+  PsTextColor := StringToColor(fungsi.AmbilIniFile(dm.file_ini, 'kasir',
     'cl_font', 'clWhite'));
-  cbsize.Text := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'size_font', '20');
-  cbspeed.Text := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'speed', '20');
-  cb_aktif.ItemIndex := StrToIntDef(fungsi.AmbilIniFile(dm.file_ini, 'kasir',
-    'pesan_aktif'), 0);
+  PsSizeFont := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'size_font', '20'));
+  PsSpeedPesan := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'speed', '20'));
+  PesanAktif := StrToIntDef(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'pesan_aktif'), 0);
 
-  Style_pesan := TFontStyles(Byte(StrToInt(fungsi.AmbilIniFile(dm.file_ini,
-    'kasir', 'style_font', '1'))));
-  if fsbold in Style_pesan then
-    btn2.Down := True;
-  if fsitalic in Style_pesan then
-    btn3.Down := True;
-  if fsunderline in Style_pesan then
-    btn4.Down := True;
+  StylePesan := TFontStyles(Byte(StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'style_font', '1'))));
 
-//(retail grosir) (tunai kredit) dan tambahan
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail', '1') = '0' then
-  begin
-    sb_retail.Caption := 'Retail';
-    retail;
-  end
-  else
-  begin
-    sb_retail.Caption := 'Grosir';
-    retail;
-  end;
+  // (retail grosir) (tunai kredit) dan tambahan
+  FRetail:= fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail', '1') <> '0';
+  FTunai:= fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai', '1') <> '0';
+  UpdateRetailTunai;
+  
+  InsertHarga := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tambahan', '100');
 
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai', '1') = '0' then
-  begin
-    sb_tunai.Caption := 'Tunai';
-    tunai;
-  end
-  else
-  begin
-    sb_tunai.Caption := 'Kredit';
-    tunai;
-  end;
-
-  ed_tambahan.Text := fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tambahan', '100');
-
-//ribbon
-  rb1.ActivePage := tb_pilihan;
-  tb_transaksi.TabVisible := False;
-
-  cb_jenis_struk.ItemIndex := StrToIntDef(fungsi.AmbilIniFile(dm.file_ini,
-    'kasir', 'jenis_struk'), 0);
-  cb_lebar_struk.ItemIndex := cb_lebar_struk.Items.IndexOf(fungsi.AmbilIniFile(dm.file_ini,
-    'kasir', 'lebar_struk', '38'));
-  ed_footer_struk.Text := fungsi.AmbilIniFile(dm.file_ini, 'kasir',
+  StJenis := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'jenis_struk', '0'));
+  StLebar := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'lebar_struk', '38'));
+  StPesan.DelimitedText := fungsi.AmbilIniFile(dm.file_ini, 'kasir',
     'footer_struk', 'TERIMA KASIH ATAS KUNJUANGAN ANDA');
-
-//skin
-  ed_skin.Text := dm.sm.SkinName;
-  trb_hue.Position := dm.sm.HueOffset;
-  l_1.Caption := 'HUE : ' + IntToStr(trb_hue.Position);
-  trb_sat.Position := dm.sm.Saturation;
-  l_6.Caption := 'SATURATION : ' + IntToStr(trb_sat.Position);
-end;
-
-procedure TF_transaksi.tampil_gambar(kode: string);
-begin
-  with alert do
-  begin
-    if alert.IsVisible then
-      alert.Hide;
-    if FileExists(dm.AppPath + 'image\' + kode + '.jpg') then
-    begin
-      Background.LoadFromFile(dm.AppPath + 'image\' + kode + '.jpg');
-      alert.AlertMessages[0].Text.Clear;
-      alert.WindowPosition := wpRightBottom;
-      alert.AutoSize := false;
-      Show;
-    end;
-  end;
 end;
 
 procedure TF_transaksi.WmAfterShow(var Msg: TMessage);
@@ -469,8 +359,6 @@ procedure TF_transaksi.awal;
 begin
   tableview.DataController.RecordCount := 0;
 
-  rb1.ActivePage := tb_pilihan;
-  tb_transaksi.TabVisible := False;
   p_keterangan.Visible := False;
 
   dm.macam_harga := 'HETK';
@@ -484,49 +372,10 @@ begin
   l_nm_pel.Caption := 'UMUM';
   ed_lama.Text := '0';
 
-  sLabel5.Visible := true;
-  sLabel6.Visible := true;
-  ed_bayar.Visible := true;
   ed_bayar.Value := 0;
-  ed_kembali.Visible := true;
   ed_kembali.Value := 0;
-  slabel7.Visible := false;
-  sLabel8.Visible := false;
-  sLabel9.Visible := false;
-  ed_pelanggan.Visible := false;
-  sb_cari_pel.Visible := false;
-  l_nm_pel.Visible := false;
-  ed_lama.Visible := false;
-  ed_jatuh_tempo.Visible := false;
-  cb_lama.Visible := false;
-  slabel10.Visible := false;
-  b_simpan.Visible := False;
-
-  sb_retail.Enabled := true;
   ed_bayar.ReadOnly := true;
   ed_discP.ReadOnly := true;
-
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'retail') = '0' then
-  begin
-    sb_retail.Caption := 'Retail';
-    retail;
-  end
-  else
-  begin
-    sb_retail.Caption := 'Grosir';
-    retail;
-  end;
-
-  if fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'tunai') = '0' then
-  begin
-    sb_tunai.Caption := 'Tunai';
-    tunai;
-  end
-  else
-  begin
-    sb_tunai.Caption := 'Kredit';
-    tunai;
-  end;
 
   DebitId := 0;
   DebitKode := '';
@@ -536,9 +385,9 @@ end;
 
 procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
-  sb.Panels[0].Text := 'Versi: ' + fungsi.GetVersiApp;
+  sb.Panels[1].Text := 'Versi: ' + fungsi.GetVersiApp;
 
-  sb.Panels[10].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
 
   panel_auto_width;
 
@@ -550,7 +399,6 @@ procedure TF_Transaksi.isi_table(baris: Integer; kolom: array of Integer; _isi:
 var
   i: Integer;
 begin
-//
   for i := 0 to High(kolom) do
     _Set(baris, kolom[i], 3, _isi[i]);
 end;
@@ -559,11 +407,9 @@ procedure TF_Transaksi.baru;
 var
   baris_baru: Integer;
 begin
-  sb_retail.Enabled := false;
   ed_bayar.ReadOnly := false;
   ed_discP.ReadOnly := false;
 
-  tampil_gambar(dm.Q_show.FieldByName('kd_barang').AsString);
   fungsi.SQLExec(dm.Q_Temp, 'select n_singkat from tb_satuan where kd_satuan=' +
     satuan + '', true);
 
@@ -655,8 +501,6 @@ begin
       begin
         if (_Get(f, 16, 3) = satuan) and (_Get(f, 17, 3) = 0) then
         begin
-          tampil_gambar(dm.Q_show.fieldbyname('kd_barang').AsString);
-
           QtyH := _Get(f, 3, 3) + 1;
           _set(f, 3, 3, QtyH);                                                   //QtyH
           _set(f, 9, 3, _Get(f, 8, 3) * QtyH);                                    //total harga
@@ -678,8 +522,6 @@ procedure TF_Transaksi.input_kode;
 var
   kode_temp: string;
 begin
-  //if (Ed_Code.Text = '') and (f_cariBarang = nil) then kode_barang := '';
-
   if kode_barang = '' then
   begin
     Ed_Discp.SetFocus;
@@ -703,8 +545,6 @@ begin
     kode_barang + '") AND kd_perusahaan= "' + dm.kd_perusahaan + '"', true);
 
   kode_temp := dm.Q_temp.fieldbyname('kd_barang').AsString;
-
-  //fungsi.sqlExec(dm.Q_Show,'CALL tampil_barang("'+dm.macam_harga+'","'+kode_temp+'","'+dm.kd_perusahaan+'")', true);
 
   fungsi.sqlExec(dm.Q_Show, 'SELECT tb_barang.kd_barang, tb_barang.n_barang, ' +
     'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, ' +
@@ -731,21 +571,12 @@ begin
   begin
     if kode_barang = '' then
       Exit;
-    if alert.IsVisible then
-      alert.Hide;
-    if FileExists(dm.AppPath + 'image\bg.jpg') then
-      alert.Background.LoadFromFile(dm.AppPath + 'image\bg.jpg');
-    alert.AlertMessages[0].Text.Text := '<P align="left"><FONT size="10">' +
-      'PID<IND x="60">: ' + dm.Q_show.fieldbyname('kd_barang').asstring +
-      '<BR>Deskripsi<IND x="60">: ' + dm.Q_show.fieldbyname('n_barang').asstring
-      + '<BR>Barcode<IND x="60">: ' + dm.Q_show.fieldbyname('barcode3').asstring
-      + '<BR>Harga 1<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual1').asstring
-      + '<BR>Harga 2<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual2').asstring
-      + '<BR>Harga 3<IND x="60">: ' + dm.Q_show.fieldbyname('harga_jual3').asstring
-      + '</FONT></P>';
-    alert.AutoSize := True;
-    alert.WindowPosition := wpCenter;
-    alert.show;
+    ShowMessage('PID' +#9+ ': ' + dm.Q_show.fieldbyname('kd_barang').asstring + sLineBreak +
+      'Deskripsi' +#9+ ': ' + dm.Q_show.fieldbyname('n_barang').asstring + sLineBreak +
+      'Barcode' +#9+ ': ' + dm.Q_show.fieldbyname('barcode3').asstring + sLineBreak +
+      'Harga 1' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual1').asstring + sLineBreak +
+      'Harga 2' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual2').asstring + sLineBreak +
+      'Harga 3' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual3').asstring);
     Exit;
   end;
 
@@ -763,28 +594,29 @@ begin
   end;
 
   showdata;
-  tb_transaksi.TabVisible := True;
-  rb1.ActivePage := tb_transaksi;
 
   Ed_Code.Clear;
 end;
 
 procedure TF_Transaksi.Ed_CodeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+  // untuk insert harga
   if (key = vk_insert) then
   begin
     ac_InsertExecute(Self);
   end;
 
+  // untuk void per barang
+  if ((shift = [ssctrl]) and (key = vk_delete)) then
+  begin
+    ac_voidExecute(Self);
+  end;
+
+  // untuk menambahkan barang ke table
   if key = vk_return then
   begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
     input_kode;
-  end;
-
-  if key = vk_f2 then
-  begin
-    sb_cari_barangClick(Self);
   end;
 
   if f_cariBarang <> nil then
@@ -804,117 +636,9 @@ begin
   end;
 end;
 
-procedure TF_transaksi.retail;
-begin
-  if sb_retail.Enabled <> false then
-  begin
-    if sb_retail.Caption = 'Retail' then
-    begin
-      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', '0');
-      dm.macam_harga := 'HGTK';
-      sb_retail.Caption := 'Grosir';
-      slabel7.Visible := true;
-      ed_pelanggan.Visible := true;
-      sb_cari_pel.Visible := true;
-      l_nm_pel.Visible := true;
-      b_simpan.Visible := True;
-    end
-    else if sb_retail.Caption = 'Grosir' then
-    begin
-      fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', '1');
-      dm.macam_harga := 'HETK';
-      sb_retail.Caption := 'Retail';
-      if sb_tunai.Caption = 'Tunai' then
-      begin
-        slabel7.Visible := false;
-        ed_pelanggan.Visible := false;
-        ed_pelanggan.Text := 'CU-0001';
-        sb_cari_pel.Visible := false;
-        l_nm_pel.Caption := 'UMUM';
-        l_nm_pel.Visible := false;
-        b_simpan.Visible := False;
-      end;
-    end;
-  end;
-end;
-
-procedure TF_transaksi.tunai;
-begin
-  if sb_tunai.Caption = 'Tunai' then
-  begin
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', '0');
-
-    sb_tunai.Caption := 'Kredit';
-    sLabel5.Visible := false;
-    sLabel6.Visible := false;
-    Ed_bayar.Value := 0;
-    ed_Kembali.Value := 0;
-    ed_bayar.Visible := false;
-    ed_kembali.Visible := false;
-    sLabel7.Visible := true;
-    sLabel8.Visible := true;
-    sLabel9.Visible := true;
-    ed_pelanggan.Visible := true;
-    sb_cari_pel.Visible := true;
-    l_nm_pel.Visible := true;
-    cb_lama.Visible := true;
-    cb_lama.Text := '1 Minggu';
-    ed_lama.Text := '7';
-    ed_jatuh_tempo.Visible := true;
-    b_simpan.Visible := True;
-  end
-  else if sb_tunai.Caption = 'Kredit' then
-  begin
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', '1');
-    sb_tunai.Caption := 'Tunai';
-    if sb_retail.Caption = 'Retail' then
-    begin
-      sLabel7.Visible := false;
-      ed_pelanggan.Visible := false;
-      sb_cari_pel.Visible := false;
-      l_nm_pel.Visible := false;
-      ed_pelanggan.Text := 'CU-0001';
-      l_nm_pel.Caption := 'UMUM';
-      b_simpan.Visible := False;
-    end;
-    sLabel5.Visible := true;
-    sLabel6.Visible := true;
-    ed_bayar.Visible := true;
-    ed_kembali.Visible := true;
-    sLabel8.Visible := false;
-    sLabel9.Visible := false;
-    ed_lama.Text := '0';
-    ed_lama.Visible := false;
-    ed_jatuh_tempo.Visible := false;
-    cb_lama.Visible := false;
-    slabel10.Visible := false;
-  end;
-end;
-
 procedure TF_Transaksi.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  //berfungsi untuk open cash drawer ctrl + o
-  if ((shift = [ssctrl]) and (key = 79)) then
-  begin
-    fungsi.OpenCashDrawer;
-  end;
-
-  //berfungsi untuk void barang
-  if ((shift = [ssctrl]) and (key = vk_delete)) then
-  begin
-    ac_voidExecute(Self);
-  end;
- //berfungsi untuk membatalkan transaksi
-  if ((shift = [ssshift]) and (key = vk_delete)) then
-  begin
-    ac_BatalExecute(Self);
-  end;
-
-//ubah skin
-  if (shift = [ssctrl]) and (key = vk_home) then
-    ac_skinExecute(Self);
-
-//untuk keluar dari form
+  // untuk keluar dari form
   if key = vk_escape then
   begin
     if f_cariBarang <> nil then
@@ -929,6 +653,107 @@ begin
       ac_closeExecute(Self);
   end;
 
+  // menampilkan pilihan
+  if key = vk_f1 then
+  begin
+    pnlPilihan.Visible := not(pnlPilihan.Visible);
+  end;
+
+  // untuk mencari barang
+  if key = vk_f2 then
+  begin
+    ac_cari_barangExecute(Self);
+  end;
+
+  // membuka form setting
+  if key = vk_f3 then
+  begin
+    ac_settingExecute(Self);
+  end;
+
+  // return jual
+  if (key = vk_f4) then
+  begin
+    ac_ReturnExecute(Self);
+  end;
+
+  //  pending transaksi
+  if key = vk_f5 then
+  begin
+    ac_PendingExecute(Self);
+  end;
+
+  // memunculkan pending transaksi
+  if key = vk_f6 then
+  begin
+    ac_LoadExecute(Self);
+  end;
+
+  // memunculkan pencarian group barang
+  if key = vk_f7 then
+  begin
+    ac_GroupExecute(Self);
+  end;
+
+  // ubah satuan
+  if key = vk_f8 then
+  begin
+    TableViewDblClick(Sender);
+  end;
+
+  // F9 untuk buka form penjualan
+  if key = vk_f9 then
+  begin
+    ac_jual_globalExecute(Self);
+  end;
+
+  // F10 untuk open cash drawer
+  if key = vk_f10 then
+  begin
+    ac_drawerExecute(Self);
+  end;
+
+  // cetak ulang;
+  if key = vk_f11 then
+    ac_cetakExecute(Self);
+
+  // untuk menampilkan pembayaran pakai kartu (kredit / debit).
+  if key = vk_f12 then
+  begin
+    ac_kartu_kreditExecute(Self);
+  end;
+
+  // Ctrl + K untuk memasukkan keterangan.
+  if (shift = [ssCTRL]) and (key = 75) then
+  begin
+    ac_keteranganExecute(Self);
+  end;
+
+  // Ctrl + L untuk mengunci transaksi
+  if (shift = [ssCTRL]) and (key = 76) then
+  begin
+    ac_KunciExecute(Self);
+  end;
+
+  // ctrl + R untuk pindah Retail/Grosir
+  if ((shift = [ssctrl]) and (key = 82)) then
+  begin
+    ac_retailExecute(Self);
+  end;
+
+  // ctrl + T untuk pindah Tunai/Kredit
+  if ((shift = [ssctrl]) and (key = 84)) then
+  begin
+    ac_tunaiExecute(Self);
+  end;
+
+  // shift + del untuk membatalkan transaksi
+  if ((shift = [ssshift]) and (key = vk_delete)) then
+  begin
+    ac_BatalExecute(Self);
+  end;
+
+  // untuk pindah kursor pada tabel transaksi.
   if f_cariBarang = nil then
   begin
     if (TableView.DataController.FocusedRecordIndex < TableView.DataController.RecordCount
@@ -944,112 +769,9 @@ begin
         - 1);
     end;
   end;
-
-//help
-  if key = vk_f1 then
-  begin
-    ShellExecute(Handle, 'open', PChar('hh.exe'), PChar(dm.Path +
-      'tools/bantuan.chm::/Kasir_utama.htm'), nil, SW_SHOW);
-  end;
-//untuk mencari barang
-  if key = vk_f2 then
-  begin
-    ed_code.SetFocus;
-  end;
-
-//merubah Tunai/kredit
-  if key = vk_f3 then
-    tunai;
-
-//return jual
-  if (key = vk_f4) then
-  begin
-    ac_ReturnExecute(Self);
-  end;
-
-//pending transaksi
-  if key = vk_f5 then
-  begin
-    ac_PendingExecute(Self);
-  end;
-
-//memunculkan pending transaksi
-  if key = vk_f6 then
-  begin
-    ac_LoadExecute(Self);
-  end;
-
-//memunculkan pencarian group barang
-  if key = vk_f7 then
-  begin
-    ac_GroupExecute(Self);
-  end;
-
-//ubah satuan
-  if key = vk_f8 then
-  begin
-//sgDblClick(Sender);
-    TableViewDblClick(Sender);
-  end;
-
-//merubah retail dan grosir
-  if key = vk_f9 then
-    retail;
-
-//cetak ulang;
-  if key = vk_f11 then
-    ac_cetakExecute(Self);
-
-// untuk menampilkan pembayaran kartu debit.
-  if key = vk_f12 then
-  begin
-    if Ed_Grand.Value > 0 then
-    begin
-      Application.CreateForm(TF_Bayar, F_Bayar);
-      p4.Visible := False;
-
-      with F_Bayar do
-      try
-        TotalHarga := Ed_Grand.value;
-        if F_Bayar.ShowModal = mrOk then
-        begin
-          DebitId := cbBank.ItemIndex + 1;
-          DebitKode := edNomerKartu.Text;
-          DebitRp := edDebit.AsInteger;
-          CashOut := edTarik.AsInteger;
-          Ed_Bayar.Value := edTunai.Value;
-          Ed_Kembali.Value := edKembali.Value;
-          edDebit.AsInteger;
-          simpan;
-        end;
-      finally
-        Close;
-      end;
-
-      p4.Visible := True;
-    end;
-  end;
-
-// Ctrl + L untuk mengunci transaksi
-  if (shift = [ssCTRL]) and (key = 76) then
-  begin
-    ac_KunciExecute(Self);
-  end;
-
-// Ctrl + K untuk memasukkan keterangan.
-  if (shift = [ssCTRL]) and (key = 75) then
-  begin
-    p_keterangan.Visible := not (p_keterangan.Visible);
-    if p_keterangan.Visible then
-      ed_keterangan.SetFocus
-    else
-      Ed_Code.SetFocus;
-  end;
-
 end;
 
 procedure TF_Transaksi.Timer1Timer(Sender: TObject);
-//var  days: array[1..7] of string;
 begin
   days[1] := 'Minggu';
   days[2] := 'Senin';
@@ -1091,13 +813,11 @@ end;
 
 procedure TF_Transaksi.Ed_BayarChange(Sender: TObject);
 begin
-  if p4.Visible = False then
+  if pnlFooter.Visible = False then
     Exit;
 
   if ed_bayar.Value <> 0 then
   begin
-    alert.CloseAlert;
-
     Ed_Bayar.SetFocus;
     L_Bayar.Caption := 'BAYAR';
     Ed_BK.Text := Ed_Bayar.Text;
@@ -1139,7 +859,7 @@ begin
       end
       else
       begin
-        if (sb_retail.Caption <> 'Retail') then
+        if not(FRetail) then
         begin
           Ed_Pelanggan.SetFocus;
         end
@@ -1162,14 +882,12 @@ procedure TF_Transaksi.Cb_lamaChange(Sender: TObject);
 begin
   if cb_lama.Text = 'Custom...' then
   begin
-    ed_lama.Visible := true;
-    slabel10.Visible := true;
+    Ed_Lama.Enabled:= True;
     ed_Lama.SetFocus;
   end
   else
   begin
-    ed_lama.Visible := false;
-    slabel10.Visible := false;
+    Ed_Lama.Enabled:= False;
     if cb_lama.Text = '1 Minggu' then
       ed_Lama.Text := '7';
     if cb_lama.Text = '2 Minggu' then
@@ -1192,31 +910,6 @@ begin
     ed_Lama.SetFocus;
   end;
   Ed_jatuh_tempo.Text := formatdatetime('dd/MM/yyyy', now() + strtofloat(ed_lama.Text));
-end;
-
-procedure TF_Transaksi.sb_retailClick(Sender: TObject);
-begin
-  retail;
-end;
-
-procedure TF_Transaksi.sb_tunaiClick(Sender: TObject);
-begin
-  tunai;
-end;
-
-procedure TF_Transaksi.sb_cari_barangClick(Sender: TObject);
-begin
-  if f_cariBarang = nil then
-  begin
-//  TableView.OptionsView.Header:= False;
-    application.CreateForm(Tf_cariBarang, f_cariBarang);
-    with f_cariBarang do
-      SetWindowPos(Handle, HWND_TOPMOST, Ed_Code.Left, rb1.Height + ed_code.Height,
-        Ed_Code.Width - tv_total_harga.Width, Grid.Height - 40, SWP_DRAWFRAME);
-    f_cariBarang.Show;
-    Ed_Code.Clear;
-    Ed_Code.SetFocus;
-  end;
 end;
 
 procedure TF_Transaksi.sb_cari_pelClick(Sender: TObject);
@@ -1261,7 +954,7 @@ end;
 
 procedure TF_Transaksi.simpan;
 var
-  tk, laba, isi_sql: string;
+  laba, isi_sql: string;
   x: integer;
 begin
   if KasirOffline then
@@ -1272,10 +965,6 @@ begin
 
   kode_transaksi_terbaru;
 
-  if sb_tunai.Caption = 'Tunai' then
-    tk := '1'
-  else
-    tk := '0';
   laba := floattostr(ed_grand.Value - TableView.DataController.Summary.FooterSummaryValues
     [8]);
 
@@ -1283,8 +972,8 @@ begin
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
-    isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(sb.Panels
-      [9].Text) + ',' + QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
+    isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
+      QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
       3)) + ',' + QuotedStr(_get(x, 2, 3)) + ',' + QuotedStr(_get(x, 18, 3)) +
       ',' + QuotedStr(_get(x, 16, 3)) + ',' + QuotedStr(_get(x, 14, 3)) + ',' +
       QuotedStr(_get(x, 5, 3)) + ',' + StringReplace(QuotedStr(_get(x, 6,
@@ -1300,11 +989,12 @@ begin
   dm.db_conn.StartTransaction;
   try
     fungsi.SQLExec(dm.Q_exe,
-      'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
+      'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, '+
+      'jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
       + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
       + 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
-      + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + sb.Panels[9].Text
-      + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + tk +
+      + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
+      + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + Values[FTunai] +
       '",ADDDATE(date(now()),INTERVAL ' + ed_lama.Text + ' DAY),"' + dm.macam_harga
       + '","' + ed_sub.Text + '","' + ed_discP.Text + '", "' + ed_discRp.Text +
       '",' + QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])
@@ -1321,12 +1011,12 @@ begin
       'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp,barcode,tgl_simpan) values ' +
       isi_sql, false);
 
-    if tk = '0' then
+    if not(FTunai) then
     begin
       fungsi.SQLExec(dm.Q_exe,
         'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, ' +
         'pelanggan,piutang_awal,dibayar,user) values ("' + dm.kd_perusahaan +
-        '","' + sb.Panels[9].Text + '",date(now()),"' + ed_lama.Text + '","' +
+        '","' + KodeTransaksi + '",date(now()),"' + ed_lama.Text + '","' +
         ed_pelanggan.Text + '","' + ed_grand.Text + '","' + '0' + '","' + dm.kd_pengguna
         + '")', false);
     end;
@@ -1346,14 +1036,14 @@ begin
   if messagedlg('Data berhasil disimpan...'#10#13'Apakah transaksi akan dicetak?',
     mtConfirmation, [mbYes, mbNo], 0) = mryes then
   begin
-    if cb_jenis_struk.ItemIndex = 1 then
-      cetak(sb.Panels[9].Text, 'besar')
+    if StJenis = 1 then
+      cetak(KodeTransaksi, 'besar')
     else
-      cetak(sb.Panels[9].Text, 'kecil')
+      cetak(KodeTransaksi, 'kecil')
   end
   else
     fungsi.SQLExec(dm.Q_exe,
-      'update tb_jual_global set cetak=0 where kd_transaksi="' + sb.Panels[9].Text
+      'update tb_jual_global set cetak=0 where kd_transaksi="' + KodeTransaksi
       + '" and kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
   AWAL;
@@ -1365,12 +1055,12 @@ procedure TF_Transaksi.cetak_struk_kecil;
 var
   toko, alamat, telp, kd_transaksi, kasir, cust, waktu, barang, barang2, satuan,
     har_sat, harga, discP, discRp, netto, discGP, discGRp, nettoG, total, bayar,
-    kembali, void, kaki1, tgl_trans: string;
+    kembali, void, kaki, tgl_trans: string;
   NonTunai, TarikTunai, TotalDebit: string;
   i, j, x, panjang, TotalDebitRp: integer;
   F: TextFile;
 begin
-  panjang := StrToIntDef(cb_lebar_struk.Text, 36);
+  panjang := StLebar;
 
   kd_transaksi := fungsi.TulisFormat(dm.Q_print.fieldbyname('no_transaksi').AsString,
     panjang, taLeftJustify);
@@ -1528,8 +1218,12 @@ begin
   telp := fungsi.TulisFormat('Telp. ' + dm.Q_print.fieldbyname('telp').AsString,
     panjang, tacenter);
 
-  kaki1 := fungsi.TulisFormat(ed_footer_struk.Text, panjang, tacenter);
-  Writeln(F, kaki1);
+  for i:=0 to StPesan.Count - 1 do
+  begin
+    kaki := fungsi.TulisFormat(StPesan.Strings[i], panjang, tacenter);
+    Writeln(F, kaki);
+  end;
+  
   for i := 1 to 10 do
     writeln(F, '');
   Writeln(F, toko);
@@ -1550,21 +1244,12 @@ begin
     dm.laporan.LoadFromFile(dm.Path + 'laporan/k_struk_retail.fr3');
     dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_print.fieldbyname('grand_total').AsFloat)
       + 'Rupiah';
-{   dm.laporan.PrintOptions.ShowDialog:=false;
-   dm.laporan.PrepareReport;
-   dm.laporan.Print;
-}      dm.laporan.ShowReport;
+    dm.laporan.ShowReport;
   end
   else if jenis = 'kecil' then
   begin
     cetak_struk_kecil;
   end;
-   {dm.laporan.LoadFromFile(dm.dm.Path + 'laporan/k_struk_retail_k.fr3');
-   {dm.laporan.PrintOptions.ShowDialog:=false;
-   dm.laporan.PrepareReport;
-   dm.laporan.Print;
-   dm.laporan.DesignReport;
-}
 end;
 
 procedure TF_Transaksi.InputBoxSetPasswordChar(var Msg: TMessage);
@@ -1603,8 +1288,6 @@ var
 begin
   if f_cariBarang = nil then
   begin
-//if not ((key>='0')and(key<='9')or(key=#8) or(key=#43) or(key=#45) or(key=#42) or (Key=#46) or (Key=#47)) then key:=#0;
-
     kode := Ed_Code.Text;
 
     if key = #43 then // tanda + (repeat)
@@ -1726,9 +1409,9 @@ end;
 procedure TF_Transaksi.FormResize(Sender: TObject);
 begin
   f_transaksi.WindowState := wsMaximized;
-  cb_pending.Left := p4.Width - (cb_pending.Width + 8);
-  Ed_BK.Left := p4.Width - (Ed_BK.Width + 8);
-  L_Bayar.Left := p4.Width - (L_Bayar.Width + Ed_BK.Width + 12);
+  cb_pending.Left := pnlFooter.Width - (cb_pending.Width + 8);
+  Ed_BK.Left := pnlFooter.Width - (Ed_BK.Width + 8);
+  L_Bayar.Left := pnlFooter.Width - (L_Bayar.Width + Ed_BK.Width + 12);
 end;
 
 procedure TF_Transaksi.Ed_CodeChange(Sender: TObject);
@@ -1757,7 +1440,6 @@ procedure TF_Transaksi.Ed_CodeExit(Sender: TObject);
 begin
   if f_cariBarang <> nil then
   begin
-//TableView.OptionsView.Header:= True;
     f_cariBarang.Close;
     Ed_Code.Clear;
   end;
@@ -1775,7 +1457,6 @@ begin
   else
   begin
     mm_nama.Text := AfocusedRecord.Values[2];
-    tampil_gambar(AFocusedRecord.Values[1]);
   end;
 end;
 
@@ -1826,6 +1507,8 @@ begin
   F_Transaksi.BorderStyle := bsNone;
   F_Transaksi.WindowState := wsMaximized;
   cek_update;
+  StPesan:= TStringList.Create;
+  StPesan.QuoteChar:= '#';
 end;
 
 procedure TF_Transaksi.Ed_discRpKeyDown(Sender: TObject; var Key: Word; Shift:
@@ -1854,7 +1537,7 @@ begin
     exit;
   end;
 
-// hanya untuk sementara selama proses pembuatan kartu
+  // hanya untuk sementara selama proses pembuatan kartu
   if ed_keterangan.Text = '' then
   begin
     ShowMessage('masukkan keterangan penerima barang...');
@@ -1863,7 +1546,7 @@ begin
     exit;
   end;
 
-  if sb_tunai.Caption = 'Kredit' then
+  if not(FTunai) then
   begin
     fungsi.SQLExec(dm.Q_temp, 'select * from vw_pelanggan where kd_pelanggan="'
       + ed_pelanggan.Text + '" and kd_perusahaan="' + dm.kd_perusahaan + '"', true);
@@ -1889,7 +1572,7 @@ procedure TF_Transaksi.t_pesanTimer(Sender: TObject);
 var
   lebar_pesan: Integer;
 begin
-  if (cb_aktif.ItemIndex = 0) then
+  if (PesanAktif = 0) then
   begin
     if p_pesan.Height <> 0 then
       p_pesan.Height := p_pesan.Height - 1
@@ -1917,110 +1600,14 @@ begin
 
 end;
 
-procedure TF_Transaksi.M_pesanOnChange(Sender: TObject; var Action: TCloseAction);
-begin
-  if M_pesan.Modified then
-  begin
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'pesan', m_pesan.text);
-
-    pesan := M_pesan.Text;
-    if cb_aktif.ItemIndex = 1 then
-      aktifkan_pesan;
-  end;
-  Action := caFree;
-end;
-
-procedure TF_Transaksi.cb_jenis_strukExit(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'jenis_struk', IntToStr(cb_jenis_struk.ItemIndex));
-end;
-
-procedure TF_Transaksi.cb_lebar_strukExit(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'lebar_struk', cb_lebar_struk.Text);
-end;
-
-procedure TF_Transaksi.ed_footer_strukExit(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'footer_struk', ed_footer_struk.Text);
-end;
-
-procedure TF_Transaksi.btn1Click(Sender: TObject);
-begin
-  if cb_aktif.ItemIndex = 1 then
-    aktifkan_pesan;
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'nama_font', cbFontName.Text);
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'style_font', IntToStr(Byte(l_pesan.Font.Style)));
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'bg_font', ColorToString(crb_bg.Selected));
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'cl_font', ColorToString(crb_font.Selected));
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'size_font', cbsize.Text);
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'speed', cbspeed.Text);
-end;
-
-procedure TF_Transaksi.btn5Click(Sender: TObject);
-begin
-  F_pesan := TForm.Create(Self);
-  F_pesan.Position := poScreenCenter;
-  F_pesan.Caption := 'Pesan dari Text berjalan';
-  M_Pesan := TMemo.Create(F_pesan);
-  M_pesan.Parent := F_pesan;
-  M_pesan.Align := alClient;
-  M_pesan.Name := 'M_pesan';
-  M_pesan.Clear;
-  M_pesan.Text := pesan;
-  M_pesan.ParentFont := False;
-  M_pesan.ParentColor := False;
-  M_pesan.ScrollBars := ssVertical;
-  M_pesan.Font.Name := cbFontName.Text;
-  M_pesan.Font.Style := Style_pesan;
-  M_pesan.Color := crb_bg.Selected;
-  M_pesan.Font.Color := crb_font.Selected;
-  M_pesan.Font.Size := strtoint(cbsize.text);
-
-  M_pesan.Visible := True;
-  F_pesan.OnClose := M_pesanonChange;
-  F_pesan.ShowModal;
-end;
-
-procedure TF_Transaksi.btn2Click(Sender: TObject);
-begin
-  if (Sender as TToolButton).Down then
-  begin
-    case (Sender as TToolButton).Tag of
-      1:
-        Style_pesan := Style_pesan + [fsBold];
-      2:
-        Style_pesan := Style_pesan + [fsItalic];
-      3:
-        Style_pesan := Style_pesan + [fsUnderline];
-    end
-  end
-  else
-  begin
-    case (Sender as TToolButton).Tag of
-      1:
-        Style_pesan := Style_pesan - [fsBold];
-      2:
-        Style_pesan := Style_pesan - [fsItalic];
-      3:
-        Style_pesan := Style_pesan - [fsUnderline];
-    end;
-  end;
-end;
-
-procedure TF_Transaksi.ed_tambahanExit(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tambahan', ed_tambahan.Text);
-end;
-
 procedure TF_Transaksi.ac_InsertExecute(Sender: TObject);
 begin
-// insert uang receh
+  // insert uang receh
   if (TableView.DataController.RecordCount <> 0) and (_Get(0, 3, 1) <> 0) then
   begin
     _set(0, 6, 1, (_get(0, 7, 1) * 100) / (strtofloat(_get(0, 5, 1)) +
-      strtofloatdef(ed_tambahan.Text, 0))); //diskon pr
-    _set(0, 5, 1, (strtofloat(_get(0, 5, 1)) + strtofloatdef(ed_tambahan.Text, 0)));
+      strtofloatdef(InsertHarga, 0))); //diskon pr
+    _set(0, 5, 1, (strtofloat(_get(0, 5, 1)) + strtofloatdef(InsertHarga, 0)));
       //harga baru
     _set(0, 8, 1, _Get(0, 5, 1) - _get(0, 7, 1)); //netto
     _set(0, 9, 1, _Get(0, 8, 1) * _Get(0, 3, 1)); //total harga
@@ -2030,7 +1617,7 @@ end;
 
 procedure TF_Transaksi.ac_voidExecute(Sender: TObject);
 begin
-// void
+  // void
   if TableView.DataController.RecordCount <> 0 then
   begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
@@ -2067,7 +1654,7 @@ end;
 
 procedure TF_Transaksi.ac_BatalExecute(Sender: TObject);
 begin
-//batalkan transaksi
+  // batalkan transaksi
   if TableView.DataController.RecordCount <> 0 then
   begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
@@ -2111,15 +1698,15 @@ end;
 
 procedure TF_Transaksi.ac_KunciExecute(Sender: TObject);
 begin
-//Kunci transaksi
+  // Kunci transaksi
   if MM_nama.Text <> 'TERKUNCI' then
   begin
     MM_nama.Text := 'TERKUNCI';
-    tbp_pilihan.Caption := 'TRANSAKSI TERKUNCI';
+    //tbp_pilihan.Caption := 'TRANSAKSI TERKUNCI';
   end
   else
   begin
-    tbp_pilihan.Caption := 'Pilihan Transaksi';
+    //tbp_pilihan.Caption := 'Pilihan Transaksi';
     if TableView.DataController.RecordCount = 0 then
     begin
       mm_nama.Text := '';
@@ -2131,7 +1718,7 @@ end;
 
 procedure TF_Transaksi.ac_ReturnExecute(Sender: TObject);
 begin
-//return Penjualan
+  // return Penjualan
   if KasirOffline then
   begin
     ShowMessage('TIDAK DAPAT MELAKUKAN RETURN JUAL...'#10#13'Kasir Sudah Melakukan TUTUP KASIR....');
@@ -2162,7 +1749,7 @@ end;
 
 procedure TF_Transaksi.ac_PendingExecute(Sender: TObject);
 begin
-//Pending Transaksi
+  // Pending Transaksi
   if TableView.DataController.RecordCount = 0 then
     Exit;
   try
@@ -2189,7 +1776,7 @@ end;
 
 procedure TF_Transaksi.ac_LoadExecute(Sender: TObject);
 begin
-//Load transaksi
+  // Load transaksi
   try
     if cb_pending.Visible = true then
     begin
@@ -2215,14 +1802,11 @@ begin
 
           ed_code.SetFocus;
           cb_pending.ItemIndex := cb_pending.Items.Count - 1;
-          sb_retail.Enabled := false;
           ed_bayar.ReadOnly := false;
           ed_discP.ReadOnly := false;
 
           if TableView.DataController.RecordCount <> 0 then
           begin
-            tb_transaksi.TabVisible := True;
-            rb1.ActivePage := tb_transaksi;
             tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
           end;
 
@@ -2241,42 +1825,18 @@ end;
 
 procedure TF_Transaksi.ac_SatuanExecute(Sender: TObject);
 begin
-//Ubah Satuan
+  // Ubah Satuan
   TableViewDblClick(Sender);
 end;
 
 procedure TF_Transaksi.ac_cetakExecute(Sender: TObject);
 begin
-//cetak Ulang
-  if sb.Panels[9].Text <> '' then
-    if cb_jenis_struk.ItemIndex = 1 then
-      cetak(sb.Panels[9].Text, 'besar')
+  // cetak Ulang
+  if KodeTransaksi <> '' then
+    if StJenis = 1 then
+      cetak(KodeTransaksi, 'besar')
     else
-      cetak(sb.Panels[9].Text, 'kecil')
-end;
-
-procedure TF_Transaksi.ac_skinExecute(Sender: TObject);
-begin
-// ubah skin
-  if selectskin(dm.sm) then
-  begin
-    ed_skin.text := dm.sm.SkinName;
-    fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'nama_skin', ed_skin.Text);
-  end;
-end;
-
-procedure TF_Transaksi.trb_hueChange(Sender: TObject);
-begin
-  dm.sm.HueOffset := trb_hue.Position;
-  l_1.Caption := 'HUE : ' + IntToStr(trb_hue.Position);
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'hue_skin', ed_skin.Text);
-end;
-
-procedure TF_Transaksi.trb_satChange(Sender: TObject);
-begin
-  dm.sm.Saturation := trb_sat.Position;
-  l_6.Caption := 'SATURATION : ' + IntToStr(trb_sat.Position);
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'sat_skin', ed_skin.Text);
+      cetak(KodeTransaksi, 'kecil')
 end;
 
 procedure TF_Transaksi.ac_closeExecute(Sender: TObject);
@@ -2284,79 +1844,9 @@ begin
   close;
 end;
 
-procedure TF_Transaksi.cb_aktifChange(Sender: TObject);
-begin
-  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'pesan_aktif', IntToStr(cb_aktif.ItemIndex));
-end;
-
-procedure TF_Transaksi.ac_simpanfileExecute(Sender: TObject);
-begin
-// save file
-  if sd.Execute then
-  begin
-    try
-      if TableView.DataController.RecordCount = 0 then
-        Exit;
-
-      Tb2File(TableView.DataController, sd.FileName);
-      fungsi.amankan(sd.FileName, sd.FileName, 753);
-      awal;
-      showmessage('Transaksi berhasil disimpan');
-    except
-      showmessage('proses tahan transaksi gagal...')
-    end;
-  end;
-end;
-
-procedure TF_Transaksi.ac_loadfileExecute(Sender: TObject);
-begin
-//load file
-  if od.Execute then
-  begin
-    try
-      if TableView.DataController.RecordCount <> 0 then
-      begin
-        showmessage('data yang ditahan tidak bisa load '#10#13'Karena masih ada barang yang belum ditransaksikan');
-        exit;
-      end;
-
-      fungsi.amankan(od.FileName, od.FileName, 753);
-      file2tb(TableView.DataController, od.FileName);
-      fungsi.amankan(od.FileName, od.FileName, 753);
-
-      ed_code.SetFocus;
-      sb_retail.Enabled := false;
-      ed_bayar.ReadOnly := false;
-      ed_discP.ReadOnly := false;
-
-      if TableView.DataController.RecordCount <> 0 then
-      begin
-        tb_transaksi.TabVisible := True;
-        rb1.ActivePage := tb_transaksi;
-        tableview.DataController.ChangeFocusedRowIndex(tableview.DataController.RecordCount);
-      end;
-
-    except
-      showmessage('proses memunculkan transaksi yang ditahan gagal');
-    end;
-  end;
-end;
-
-procedure TF_Transaksi.ac_BesarExecute(Sender: TObject);
-begin
-//cetak struk besar
-  cetak(sb.Panels[9].Text, 'besar');
-end;
-
-procedure TF_Transaksi.ac_kecilExecute(Sender: TObject);
-begin
-//cetak struk kecil
-  cetak(sb.Panels[9].Text, 'kecil')
-end;
-
 procedure TF_Transaksi.ac_jual_globalExecute(Sender: TObject);
 begin
-// lihat transaksi global
+  // lihat transaksi global
   Application.CreateForm(Tf_list_sales, f_list_sales);
   f_list_sales.ShowModal;
 end;
@@ -2507,6 +1997,150 @@ begin
   _Set(0, 14, 1, _Get(0, 13) * Qty_asli * StrToInt(Qty)); //total harga pokok
   _Set(0, 15, 1, _Get(0, 9) - _Get(0, 14)); //total laba
   _Set(0, 18, 1, Qty_asli * StrToInt(Qty)); //Qty_real
+end;
+
+procedure TF_Transaksi.ac_settingExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFSetting, FSetting);
+  FSetting.ShowModal;
+end;
+
+procedure TF_Transaksi.ac_cari_barangExecute(Sender: TObject);
+begin
+  if f_cariBarang = nil then
+  begin
+    application.CreateForm(Tf_cariBarang, f_cariBarang);
+    with f_cariBarang do
+      SetWindowPos(Handle, HWND_TOPMOST, Ed_Code.Left, pnlKode.Top + ed_code.Height,
+        Ed_Code.Width - 20, Grid.Height - 40, SWP_DRAWFRAME);
+    f_cariBarang.Show;
+    Ed_Code.Clear;
+    Ed_Code.SetFocus;
+  end;
+end;
+
+procedure TF_Transaksi.ac_kartu_kreditExecute(Sender: TObject);
+begin
+  if Ed_Grand.Value > 0 then
+    begin
+      if not(FTunai) then
+      begin
+        FTunai:= True;
+        UpdateRetailTunai;
+      end;
+      Application.CreateForm(TF_Bayar, F_Bayar);
+      pnlFooter.Visible := False;
+
+      with F_Bayar do
+      try
+        TotalHarga := Ed_Grand.value;
+        if F_Bayar.ShowModal = mrOk then
+        begin
+          DebitId := cbBank.ItemIndex + 1;
+          DebitKode := edNomerKartu.Text;
+          DebitRp := edDebit.AsInteger;
+          CashOut := edTarik.AsInteger;
+          Ed_Bayar.Value := edTunai.Value;
+          Ed_Kembali.Value := edKembali.Value;
+          simpan;
+        end;
+      finally
+        Close;
+      end;
+
+      pnlFooter.Visible := True;
+      aktifkan_pesan;
+    end;
+end;
+
+procedure TF_Transaksi.ac_drawerExecute(Sender: TObject);
+begin
+  fungsi.OpenCashDrawer;
+end;
+
+procedure TF_Transaksi.ac_keteranganExecute(Sender: TObject);
+begin
+  p_keterangan.Visible := not (p_keterangan.Visible);
+  if p_keterangan.Visible then
+    ed_keterangan.SetFocus
+  else
+    Ed_Code.SetFocus;
+end;
+
+procedure TF_Transaksi.UpdateRetailTunai;
+var
+  Jenis: string;
+begin
+  sLabel5.Visible := FTunai;
+  sLabel6.Visible := FTunai;
+  Ed_bayar.Value := 0;
+  ed_Kembali.Value := 0;
+  ed_bayar.Visible := FTunai;
+  ed_kembali.Visible := FTunai;
+
+  sLabel7.Visible := not(FTunai);
+  ed_pelanggan.Visible := not(FTunai);
+  sb_cari_pel.Visible := not(FTunai);
+  l_nm_pel.Visible := not(FTunai);
+
+  sLabel8.Visible := not(FTunai);
+  cb_lama.Visible := not(FTunai);
+  ed_lama.Visible := not(FTunai);
+  sLabel9.Visible := not(FTunai);
+  ed_jatuh_tempo.Visible := not(FTunai);
+  slabel10.Visible := not(FTunai);
+
+  b_simpan.Visible := not(FTunai);
+
+  if FTunai then
+  begin
+    cb_lama.ItemIndex:= 5;
+    ed_lama.Text := '0';
+  end else
+  begin
+    cb_lama.ItemIndex:= 0;
+    ed_lama.Text := '7';
+  end;
+
+  if FRetail then
+  begin
+    dm.macam_harga := 'HETK';
+    ed_pelanggan.Text := 'CU-0001';
+    l_nm_pel.Caption := 'UMUM';
+  end else
+  begin
+    dm.macam_harga := 'HGTK';
+    sLabel7.Visible := not(FRetail);
+    ed_pelanggan.Visible := not(FRetail);
+    sb_cari_pel.Visible := not(FRetail);
+    l_nm_pel.Visible := not(FRetail);
+    b_simpan.Visible := not(FRetail);
+  end;
+
+  if FRetail then Jenis:= 'Retail | ' else Jenis:= 'Grosir | ';
+  if FTunai then Jenis:= Jenis + 'Tunai' else Jenis:= Jenis + 'Kredit';
+  pnlRetailTunai.Caption:= Jenis;
+
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'retail', Values[FRetail]);
+  fungsi.SimpanIniFile(dm.file_ini, 'kasir', 'tunai', Values[FTunai]);
+end;
+
+procedure TF_Transaksi.ac_tunaiExecute(Sender: TObject);
+begin
+  FTunai:= not(FTunai);
+  UpdateRetailTunai;
+end;
+
+procedure TF_Transaksi.ac_retailExecute(Sender: TObject);
+begin
+  if TableView.DataController.RecordCount <> 0 then
+  begin
+    ShowMessage('Tidak Bisa merubah Retail/Grosir ketika ada data yang di transaksikan');
+    Exit;
+  end;
+
+  FRetail:= not(FRetail);
+  UpdateRetailTunai;
 end;
 
 end.

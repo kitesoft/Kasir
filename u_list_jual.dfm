@@ -14,6 +14,7 @@ object f_list_sales: Tf_list_sales
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

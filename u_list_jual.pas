@@ -39,6 +39,8 @@ type
     procedure t_data1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo:
       TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState;
       var AHandled: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -89,6 +91,12 @@ procedure Tf_list_sales.t_data1CellDblClick(Sender: TcxCustomGridTableView;
   TShiftState; var AHandled: Boolean);
 begin
   F_Transaksi.cetak(dm.Q_jual_global.fieldbyname('kd_transaksi').AsString, 'besar');
+end;
+
+procedure Tf_list_sales.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = vk_escape then Close;
 end;
 
 end.

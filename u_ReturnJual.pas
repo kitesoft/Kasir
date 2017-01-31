@@ -176,6 +176,8 @@ begin
       [mbYes, mbNo], 0) = mrYes) then
       TableView.DataController.DeleteFocused;
 
+  if Key = vk_escape then
+    Close;
   if key = vk_f2 then
     ed_code.SetFocus;
   if key = vk_f3 then
