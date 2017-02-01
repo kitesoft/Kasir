@@ -361,8 +361,6 @@ begin
 
   p_keterangan.Visible := False;
 
-  dm.macam_harga := 'HETK';
-
   ed_keterangan.Clear;
   mm_nama.Lines.Clear;
   ed_code.Clear;
