@@ -1423,8 +1423,8 @@ object F_Transaksi: TF_Transaksi
       OnExecute = ac_tunaiExecute
     end
   end
-  object Q_time: TmySQLQuery
-    Database = dm.db_conn
+  object Q_time: TMyQuery
+    Connection = dm.db_conn
     Left = 16
     Top = 328
   end

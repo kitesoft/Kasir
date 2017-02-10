@@ -3,31 +3,31 @@ unit u_dm;
 interface
 
 uses
-  SysUtils, Classes, sSkinManager, DB, mySQLDbTables, dialogs, forms, inifiles,
+  SysUtils, Classes, sSkinManager, DB, dialogs, forms, inifiles,
   frxClass, frxDBSet, frxDesgn, ImgList, Controls, acAlphaImageList,
-  SHFolder, Windows, cxStyles;
+  SHFolder, Windows, cxStyles, MemDS, DBAccess, MyAccess;
 
 type
   Tdm = class(TDataModule)
-    db_conn: TmySQLDatabase;
-    Q_show: TmySQLQuery;
-    Q_exe: TmySQLQuery;
-    Q_temp: TmySQLQuery;
-    Q_print: TmySQLQuery;
+    db_conn: TMyConnection;
+    Q_show: TMyQuery;
+    Q_exe: TMyQuery;
+    Q_temp: TMyQuery;
+    Q_print: TMyQuery;
     db_laporan: TfrxDBDataset;
     laporan: TfrxReport;
     ds_Show: TDataSource;
     ds_temp: TDataSource;
-    Q_cari: TmySQLQuery;
+    Q_cari: TMyQuery;
     ds_cari: TDataSource;
     sm: TsSkinManager;
     frxdsgnr1: TfrxDesigner;
-    Q_jual_global: TmySQLQuery;
-    Q_jual_rinci: TmySQLQuery;
+    Q_jual_global: TMyQuery;
+    Q_jual_rinci: TMyQuery;
     ds_jual_global: TDataSource;
     ds_jual_rinci: TDataSource;
     gambar: TsAlphaImageList;
-    QGroup: TmySQLQuery;
+    QGroup: TMyQuery;
     Style: TcxStyleRepository;
     cxstyl1: TcxStyle;
     procedure DataModuleCreate(Sender: TObject);
@@ -110,13 +110,12 @@ begin
     readln(X, nama);
     readln(X, kata);
     closefile(X);
-    db_conn.Host := krupuk(pusat, 6);
-    db_conn.DatabaseName := krupuk(data, 6);
+    db_conn.Server := krupuk(pusat, 6);
+    db_conn.Database := krupuk(data, 6);
     jalur1 := krupuk(jalur2, 6);
     db_conn.Port := strtoint(jalur1);
     db_conn.UserName := krupuk(nama, 6);
-    db_conn.UserPassword := krupuk(kata, 6);
-    db_conn.Connected := true;
+    db_conn.Password := krupuk(kata, 6);
   except
     showmessage('koneksi tidak berhasil');
     application.Terminate;

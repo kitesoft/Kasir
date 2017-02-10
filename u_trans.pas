@@ -10,7 +10,8 @@ uses
   frxClass, cxStyles, cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, cxTextEdit, uTerbilang, cxCalc,
-  DateUtils, ActnList, sDialogs, mySQLDbTables, cxFilter, cxData;
+  DateUtils, ActnList, sDialogs, MemDS,
+  DBAccess, MyAccess, cxFilter, cxData;
 
 const
   InputBoxMessage = WM_USER + 200;
@@ -94,7 +95,7 @@ type
     p_keterangan: TsPanel;
     ed_keterangan: TsEdit;
     l_7: TsLabel;
-    Q_time: TmySQLQuery;
+    Q_time: TMyQuery;
     ac_cek_update: TAction;
     pnlHeader: TsPanel;
     ed_Harga: TsCurrencyEdit;
@@ -385,7 +386,7 @@ procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
   sb.Panels[1].Text := 'Versi: ' + fungsi.GetVersiApp;
 
-  sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
 
   panel_auto_width;
 
@@ -1900,7 +1901,7 @@ begin
   versiDB := dm.Q_Show.FieldByName('versi_terbaru').AsString;
   URLDownload := dm.Q_Show.FieldByName('URLdownload').AsString;
   fileName := Copy(URLDownload, LastDelimiter('/', URLDownload) + 1, Length(URLDownload));
-  UrlDownloadLocal := 'http://' + dm.db_conn.Host + '/GainProfit/' + fileName;
+  UrlDownloadLocal := 'http://' + dm.db_conn.Server + '/GainProfit/' + fileName;
 
   if versiAPP < versiDB then
   begin

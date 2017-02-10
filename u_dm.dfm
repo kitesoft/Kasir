@@ -5,39 +5,28 @@ object dm: Tdm
   Top = 195
   Height = 343
   Width = 397
-  object db_conn: TmySQLDatabase
-    DatabaseName = 'profit'
-    UserName = 'root'
-    UserPassword = 'server'
-    Host = 'localhost'
-    ConnectOptions = []
-    Params.Strings = (
-      'Port=3306'
-      'TIMEOUT=30'
-      'DatabaseName=profit'
-      'Host=localhost'
-      'UID=root'
-      'PWD=server')
+  object db_conn: TMyConnection
+    Username = 'root'
     Left = 8
     Top = 8
   end
-  object Q_show: TmySQLQuery
-    Database = db_conn
+  object Q_show: TMyQuery
+    Connection = db_conn
     Left = 8
     Top = 64
   end
-  object Q_exe: TmySQLQuery
-    Database = db_conn
+  object Q_exe: TMyQuery
+    Connection = db_conn
     Left = 48
     Top = 64
   end
-  object Q_temp: TmySQLQuery
-    Database = db_conn
+  object Q_temp: TMyQuery
+    Connection = db_conn
     Left = 88
     Top = 8
   end
-  object Q_print: TmySQLQuery
-    Database = db_conn
+  object Q_print: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       '')
     Left = 8
@@ -822,8 +811,8 @@ object dm: Tdm
     Left = 128
     Top = 8
   end
-  object Q_cari: TmySQLQuery
-    Database = db_conn
+  object Q_cari: TMyQuery
+    Connection = db_conn
     Left = 120
     Top = 144
   end
@@ -1995,15 +1984,15 @@ object dm: Tdm
     Left = 168
     Top = 88
   end
-  object Q_jual_global: TmySQLQuery
-    Database = db_conn
+  object Q_jual_global: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       'select * from vw_list_sales')
     Left = 240
     Top = 16
   end
-  object Q_jual_rinci: TmySQLQuery
-    Database = db_conn
+  object Q_jual_rinci: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       'select * from vw_jual_barang')
     Left = 312
@@ -21348,8 +21337,8 @@ object dm: Tdm
     Top = 208
     Bitmap = {}
   end
-  object QGroup: TmySQLQuery
-    Database = db_conn
+  object QGroup: TMyQuery
+    Connection = db_conn
     Left = 176
     Top = 8
   end

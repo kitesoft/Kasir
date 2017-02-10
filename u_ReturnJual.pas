@@ -9,8 +9,8 @@ uses
   sEdit, Buttons, sSpeedButton, ExtCtrls, sBevel, sLabel, 
   sCurrEdit, sCurrencyEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, uTerbilang, cxControls,
-  cxGridCustomView, cxGrid, sPanel, UFungsi, cxFilter, cxData, Mask,
-  sMaskEdit, sCustomComboEdit;
+  cxGridCustomView, cxGrid, sPanel, UFungsi, Mask,
+  sMaskEdit, sCustomComboEdit, cxFilter, cxData;
 
 type
   Tf_returnJual = class(TForm)
