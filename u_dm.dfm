@@ -894,7 +894,7 @@ object dm: Tdm
   object Q_jual_rinci: TMyQuery
     Connection = db_conn
     SQL.Strings = (
-      'select * from vw_jual_barang')
+      '')
     Left = 312
     Top = 16
   end
