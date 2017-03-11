@@ -968,17 +968,12 @@ begin
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
-    LJualRinci := LJualRinci + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
-      QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
-      3)) + ',' + QuotedStr(_get(x, 2, 3)) + ',' + QuotedStr(_get(x, 18, 3)) +
-      ',' + QuotedStr(_get(x, 16, 3)) + ',' + QuotedStr(_get(x, 14, 3)) + ',' +
-      QuotedStr(_get(x, 5, 3)) + ',' + StringReplace(QuotedStr(_get(x, 6,
-      3)), ',', '.', [rfReplaceAll]) + ',' + QuotedStr(_get(x, 7, 3)) + ',' + QuotedStr(_get(x,
-      8, 3)) + ',' + QuotedStr(_get(x, 9, 3)) + ',' + QuotedStr(_get(x, 15, 3))
-      + ',' + QuotedStr(_get(x, 17, 3)) + ',' + QuotedStr(dm.kd_pengguna) +
-      ',date(now()),' + QuotedStr(_get(x, 3, 3)) + ',' + QuotedStr(_get(x, 19, 3))
-      + ',' + QuotedStr(_get(x, 13, 3)) + ',' + QuotedStr(_get(x, 12, 3)) +
-      ',date(now())), ';
+    LJualRinci := LJualRinci + Format('("%s", "%s", %d, "%s", "%s", %d, "%s", '+
+      '%g, "%g", "%g", "%d", "%d", "%s", CURDATE()), ', [dm.kd_perusahaan, KodeTransaksi,
+      (x + 1), _get(x, 1, 3), _get(x, 2, 3), Integer(_get(x, 18, 3)), _get(x, 16, 3),
+      Currency(_get(x, 14, 3)), Currency(_get(x, 5, 3)), Currency(_get(x, 7, 3)),
+      Integer(_get(x, 17, 3)), Integer(_get(x, 3, 3)), _get(x, 19, 3)]);
+
   end;
   SetLength(LJualRinci, length(LJualRinci) - 2);
 
@@ -1001,11 +996,12 @@ begin
       [9]) + ',"' + dm.ip_kasir + '",' + quotedstr(ed_keterangan.Text) +
       ',now())', false);
 
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_jual_rinci(kd_perusahaan,no_transaksi,urut, ' +
-      'kd_barang,n_barang,Qty,kd_satuan,harga_pokok,harga_jual,discountP,discountRp, ' +
-      'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp,barcode,tgl_simpan) values ' +
-      LJualRinci, false);
+    LSQL := Format('INSERT INTO tb_jual_rinci (kd_perusahaan, no_transaksi, urut, ' +
+      'kd_barang, n_barang, Qty, kd_satuan, harga_pokok, harga_jual, discountRp, ' +
+      'void_barang, QtyH, ket, tgl_simpan) '+
+      'VALUES %s', [LJualRinci]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, False);
 
     if not(FTunai) then
     begin
