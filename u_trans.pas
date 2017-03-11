@@ -957,7 +957,6 @@ procedure TF_Transaksi.simpan;
 var
   x: integer;
   LSQL, LJualRinci: string;
-  laba, : string;
 begin
   if KasirOffline then
   begin
@@ -966,9 +965,6 @@ begin
   end;
 
   kode_transaksi_terbaru;
-
-  laba := floattostr(ed_grand.Value - TableView.DataController.Summary.FooterSummaryValues
-    [8]);
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
@@ -992,7 +988,7 @@ begin
       'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, '+
       'jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
       + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
-      + 'debit, cash_out, Laba, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
+      + 'debit, cash_out, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
       + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
       + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + Values[FTunai] +
       '",ADDDATE(date(now()),INTERVAL ' + ed_lama.Text + ' DAY),"' + dm.macam_harga
@@ -1000,7 +996,7 @@ begin
       '",' + QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])
       + ',"' + ed_grand.Text + '","' + ed_bayar.Text + '", ' + IntToStr(DebitId)
       + ',"' + DebitKode + '","' + IntToStr(DebitRp) + '","' + IntToStr(CashOut)
-      + '", "' + laba + '","' + ed_kembali.Text + '","' + dm.kd_pengguna + '","' +
+      + '","' + ed_kembali.Text + '","' + dm.kd_pengguna + '","' +
       dm.kd_operator + '",1,' + QUotedStr(TableView.DataController.Summary.FooterSummaryValues
       [9]) + ',"' + dm.ip_kasir + '",' + quotedstr(ed_keterangan.Text) +
       ',now())', false);
