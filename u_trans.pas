@@ -186,8 +186,7 @@ type
   private
     DebitId: Integer;
     DebitKode: string;
-    DebitRp: Integer;
-    CashOut: Integer;
+    DebitRp, CashOut: Currency;
     procedure baru;
     procedure simpan;
     procedure showdata;
@@ -979,22 +978,21 @@ begin
 
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_exe,
-      'INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, ' + 'tgl_transaksi, '+
-      'jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
-      + 'sub_total,discountGP, discountGRP, HPP,grand_total,bayar, debit_id, debit_code, '
+    LSQL := Format('INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, '
+      + 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
+      + 'sub_total,discountGP, discountGRP, HPP, grand_total, bayar, debit_id, debit_code, '
       + 'debit, cash_out, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
-      + 'simpan_pada) VALUES ("' + dm.kd_perusahaan + '" ,"' + KodeTransaksi
-      + '", date(now()), time(now()), "' + ed_pelanggan.Text + '", "' + Values[FTunai] +
-      '",ADDDATE(date(now()),INTERVAL ' + ed_lama.Text + ' DAY),"' + dm.macam_harga
-      + '","' + ed_sub.Text + '","' + ed_discP.Text + '", "' + ed_discRp.Text +
-      '",' + QuotedStr(TableView.DataController.Summary.FooterSummaryValues[8])
-      + ',"' + ed_grand.Text + '","' + ed_bayar.Text + '", ' + IntToStr(DebitId)
-      + ',"' + DebitKode + '","' + IntToStr(DebitRp) + '","' + IntToStr(CashOut)
-      + '","' + ed_kembali.Text + '","' + dm.kd_pengguna + '","' +
-      dm.kd_operator + '",1,' + QUotedStr(TableView.DataController.Summary.FooterSummaryValues
-      [9]) + ',"' + dm.ip_kasir + '",' + quotedstr(ed_keterangan.Text) +
-      ',now())', false);
+      + 'simpan_pada) VALUES ("%s", "%s", CURDATE(), CURTIME(), "%s", "%s", '
+      + 'ADDDATE(date(now()),INTERVAL %s DAY), "%s", %g, %g, %g, %g, %g, %g, %d, "%s", '+
+      '%g, %g, %g, "%s", "%s", 1, %d, "%s", "%s", NOW())',
+      [dm.kd_perusahaan, KodeTransaksi, ed_pelanggan.Text, Values[FTunai], ed_lama.Text,
+      dm.macam_harga, ed_sub.Value, ed_discP.Value, ed_discRp.Value,
+      Currency(TableView.DataController.Summary.FooterSummaryValues[8]), ed_grand.Value,
+      ed_bayar.Value, DebitId, DebitKode, DebitRp, CashOut, ed_kembali.Value, dm.kd_pengguna,
+      dm.kd_operator, Integer(TableView.DataController.Summary.FooterSummaryValues[9]), dm.ip_kasir,
+      ed_keterangan.Text]);
+      
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
     LSQL := Format('INSERT INTO tb_jual_rinci (kd_perusahaan, no_transaksi, urut, ' +
       'kd_barang, n_barang, Qty, kd_satuan, harga_pokok, harga_jual, discountRp, ' +
