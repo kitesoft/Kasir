@@ -85,7 +85,7 @@ begin
   if not (DirectoryExists(AppPath)) then
     CreateDir(AppPath);
 
-  sm.SkinDirectory := AppPath + 'skins';
+  sm.SkinDirectory := Path + 'Tools\Skins';
 
   file_ini := AppPath + 'gain.ini';
 
