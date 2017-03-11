@@ -146,15 +146,6 @@ object F_Transaksi: TF_Transaksi
       OnKeyPress = Ed_CodeKeyPress
       Align = alClient
       SkinData.SkinSection = 'PANEL'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object pnlRetailTunai: TPanel
       Left = 1
@@ -314,8 +305,8 @@ object F_Transaksi: TF_Transaksi
       Visible = False
       OnClick = sb_cari_pelClick
       SkinData.SkinSection = 'SPEEDBUTTON'
-      ImageIndex = 0
       Images = dm.gambar
+      ImageIndex = 0
     end
     object L_nm_pel: TsLabel
       Left = 392
@@ -364,15 +355,6 @@ object F_Transaksi: TF_Transaksi
       ReadOnly = True
       TabOrder = 0
       OnChange = Ed_SubChange
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -395,15 +377,6 @@ object F_Transaksi: TF_Transaksi
       OnChange = Ed_PelangganChange
       OnKeyDown = Ed_PelangganKeyDown
       SkinData.SkinSection = 'PANEL'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object Ed_Lama: TsEdit
       Left = 528
@@ -422,15 +395,6 @@ object F_Transaksi: TF_Transaksi
       Visible = False
       OnChange = Ed_LamaChange
       SkinData.SkinSection = 'PANEL'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object Ed_Kembali: TsCurrencyEdit
       Left = 136
@@ -447,15 +411,6 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       ReadOnly = True
       TabOrder = 5
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -476,15 +431,6 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 9
       Visible = False
       SkinData.SkinSection = 'PANEL'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object Ed_Grand: TsCurrencyEdit
       Left = 136
@@ -501,15 +447,6 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       ReadOnly = True
       TabOrder = 3
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -530,15 +467,6 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 2
       OnExit = Ed_discRpExit
       OnKeyDown = Ed_discRpKeyDown
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -560,15 +488,6 @@ object F_Transaksi: TF_Transaksi
       ReadOnly = True
       TabOrder = 12
       Visible = False
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -589,15 +508,6 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 4
       OnChange = Ed_BayarChange
       OnKeyDown = Ed_BayarKeyDown
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -607,26 +517,18 @@ object F_Transaksi: TF_Transaksi
       Left = 860
       Top = 12
       Width = 145
-      Height = 24
+      Height = 27
       Anchors = [akRight, akBottom]
       Alignment = taLeftJustify
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
+      VerticalAlignment = taAlignTop
       Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
-      ItemHeight = 18
+      ItemHeight = 19
       ItemIndex = -1
       ParentFont = False
       Sorted = True
@@ -637,25 +539,17 @@ object F_Transaksi: TF_Transaksi
       Left = 392
       Top = 64
       Width = 137
-      Height = 22
+      Height = 21
       Alignment = taLeftJustify
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
+      VerticalAlignment = taAlignTop
       Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      ItemHeight = 16
+      ItemHeight = 13
       ItemIndex = 0
       ParentFont = False
       TabOrder = 7
@@ -686,15 +580,6 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 1
       OnExit = Ed_discPExit
       OnKeyDown = Ed_discPKeyDown
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -1013,15 +898,6 @@ object F_Transaksi: TF_Transaksi
       OnKeyDown = ed_keteranganKeyDown
       Align = alClient
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
   object pnlHeader: TsPanel
@@ -1047,15 +923,6 @@ object F_Transaksi: TF_Transaksi
       ReadOnly = True
       TabOrder = 0
       Align = alRight
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -1076,15 +943,6 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       ReadOnly = True
       TabOrder = 1
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'EDIT'
     end
   end
@@ -1309,22 +1167,17 @@ object F_Transaksi: TF_Transaksi
     Top = 408
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
-    AddedTitle.ShowMainCaption = False
     AllowAnimation = False
     AllowExtBorders = False
     AllowBlendOnMoving = False
     DrawNonClientArea = False
+    ShowAppIcon = False
+    UseGlobalColor = False
+    AddedTitle.ShowMainCaption = False
     SkinData.CustomColor = True
     SkinData.CustomFont = True
     SkinData.SkinSection = 'FORM'
-    ShowAppIcon = False
     TitleButtons = <>
-    UseGlobalColor = False
     Left = 19
     Top = 365
   end
