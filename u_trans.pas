@@ -955,8 +955,9 @@ end;
 
 procedure TF_Transaksi.simpan;
 var
-  laba, isi_sql: string;
   x: integer;
+  LSQL, LJualRinci: string;
+  laba, : string;
 begin
   if KasirOffline then
   begin
@@ -971,7 +972,7 @@ begin
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
-    isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
+    LJualRinci := LJualRinci + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
       QuotedStr(inttostr(x + 1)) + ',' + QuotedStr(_get(x, 1,
       3)) + ',' + QuotedStr(_get(x, 2, 3)) + ',' + QuotedStr(_get(x, 18, 3)) +
       ',' + QuotedStr(_get(x, 16, 3)) + ',' + QuotedStr(_get(x, 14, 3)) + ',' +
@@ -981,9 +982,9 @@ begin
       + ',' + QuotedStr(_get(x, 17, 3)) + ',' + QuotedStr(dm.kd_pengguna) +
       ',date(now()),' + QuotedStr(_get(x, 3, 3)) + ',' + QuotedStr(_get(x, 19, 3))
       + ',' + QuotedStr(_get(x, 13, 3)) + ',' + QuotedStr(_get(x, 12, 3)) +
-      ',date(now())),';
+      ',date(now())), ';
   end;
-  delete(isi_sql, length(isi_sql), 1);
+  SetLength(LJualRinci, length(LJualRinci) - 2);
 
   dm.db_conn.StartTransaction;
   try
@@ -1008,7 +1009,7 @@ begin
       'insert into tb_jual_rinci(kd_perusahaan,no_transaksi,urut, ' +
       'kd_barang,n_barang,Qty,kd_satuan,harga_pokok,harga_jual,discountP,discountRp, ' +
       'harga_netto,total_harga,laba,void_barang,user,tgl,QtyH,ket,hpp,barcode,tgl_simpan) values ' +
-      isi_sql, false);
+      LJualRinci, false);
 
     if not(FTunai) then
     begin
