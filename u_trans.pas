@@ -218,7 +218,8 @@ type
     FRetail, FTunai: Boolean;
 
     tahan, batas, piutang, lebar_layar: integer;
-    harga, harga_pokok, Qty_real, QtyH, diskon: Integer;
+    Qty_real, QtyH: Integer;
+    harga, harga_pokok, diskon: Currency;
     satuan, kode_barang, inputstring, passs, alasan, no_pending,
       harga_edit, KodeTransaksi, InsertHarga: string;
     diskonP: Real;
@@ -441,8 +442,9 @@ end;
 
 procedure TF_Transaksi.showdata;
 var
-  x, banyak, f, diskon_tmp: integer;
+  x, banyak, f: integer;
   tanggal, awal, ahir: TDate;
+  LDiskonRp : Currency;
 begin
   awal := dm.Q_show.FieldByName('awal').AsDateTime;
   ahir := dm.Q_show.FieldByName('ahir').AsDateTime;
@@ -454,13 +456,13 @@ begin
     tanggal := tanggal + 1;
     if FormatDateTime('dd/MM/yyyy', Date()) = FormatDateTime('dd/MM/yyyy', tanggal) then
     begin
-      diskon_tmp := dm.Q_show.FieldByName('diskon').AsInteger;
-      diskonp := dm.Q_show.fieldbyname('diskonP').AsFloat;
+      LDiskonRp := dm.Q_show.FieldByName('diskon').AsCurrency;
+      diskonP := ((LDiskonRp * 100) / dm.Q_show.FieldByName('harga_jual3').AsCurrency);
       Break;
     end
     else
     begin
-      diskon_tmp := 0;
+      LDiskonRp := 0;
       diskonP := 0;
     end;
   end;
@@ -470,21 +472,21 @@ begin
   begin
     harga := dm.Q_show.FieldByName('harga_jual3').AsInteger;
     Qty_real := 1;
-    diskon := diskon_tmp;
+    diskon := LDiskonRp;
     satuan := dm.Q_show.FieldByName('kd_sat3').AsString;
   end
   else if kode_barang = dm.Q_show.FieldByName('barcode2').AsString then
   begin
     harga := dm.Q_show.FieldByName('harga_jual2').AsInteger;
     Qty_real := dm.Q_show.FieldByName('Qty2').AsInteger;
-    diskon := diskon_tmp * Qty_real;
+    diskon := LDiskonRp * Qty_real;
     satuan := dm.Q_show.FieldByName('kd_sat2').AsString;
   end
   else if kode_barang = dm.Q_show.FieldByName('barcode1').AsString then
   begin
     harga := dm.Q_show.FieldByName('harga_jual1').AsInteger;
     Qty_real := dm.Q_show.FieldByName('Qty2').AsInteger * dm.Q_show.FieldByName('Qty1').AsInteger;
-    diskon := diskon_tmp * Qty_real;
+    diskon := LDiskonRp * Qty_real;
     satuan := dm.Q_show.FieldByName('kd_sat1').AsString;
   end;
 
@@ -548,7 +550,7 @@ begin
   fungsi.sqlExec(dm.Q_Show, 'SELECT tb_barang.kd_barang, tb_barang.n_barang, ' +
     'tb_barang.barcode1,tb_barang.barcode2,tb_barang.barcode3,tb_barang.hpp_aktif as harga_pokok, ' +
     'tb_barang_harga.harga_jual1,tb_barang_harga.harga_jual2,tb_barang_harga.harga_jual3, ' +
-    'tb_barang_harga.diskon,tb_barang_harga.diskonP,tb_barang_harga.awal, ' +
+    'tb_barang_harga.diskon,tb_barang_harga.awal, ' +
     'tb_barang_harga.ahir,tb_barang.kd_sat1,tb_barang.kd_sat2, ' +
     'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2 ' +
     'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang ' +
