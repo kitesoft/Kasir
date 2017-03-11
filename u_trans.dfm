@@ -737,7 +737,7 @@ object F_Transaksi: TF_Transaksi
       end
       object tv_harga: TcxGridColumn
         Caption = 'Harga'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
@@ -762,7 +762,7 @@ object F_Transaksi: TF_Transaksi
       end
       object tv_diskon: TcxGridColumn
         Caption = 'Diskon (Rp)'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
@@ -775,7 +775,7 @@ object F_Transaksi: TF_Transaksi
       end
       object tv_netto: TcxGridColumn
         Caption = 'Netto'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
@@ -788,7 +788,7 @@ object F_Transaksi: TF_Transaksi
       end
       object tv_total_harga: TcxGridColumn
         Caption = 'Total Harga'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
@@ -816,19 +816,19 @@ object F_Transaksi: TF_Transaksi
       end
       object tv_hpp: TcxGridColumn
         Caption = 'hpp'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         Visible = False
         Width = 38
       end
       object tv_total_hpp: TcxGridColumn
         Caption = 'total hpp'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         Visible = False
         Width = 33
       end
       object tv_total_laba: TcxGridColumn
         Caption = 'total laba'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         Visible = False
         Width = 31
       end
