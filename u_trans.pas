@@ -969,8 +969,6 @@ begin
   laba := floattostr(ed_grand.Value - TableView.DataController.Summary.FooterSummaryValues
     [8]);
 
-  mm_nama.Text := isi_sql;
-
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
     isi_sql := isi_sql + '(' + QuotedStr(dm.kd_perusahaan) + ',' + QuotedStr(KodeTransaksi) + ',' +
