@@ -665,6 +665,7 @@ object F_Transaksi: TF_Transaksi
           Column = tv_diskonp
         end
         item
+          Format = '###,###,##0.000;(###,###,##0.000);0.000'
           Kind = skSum
           Column = tv_total_hpp
         end
@@ -824,6 +825,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DecimalPlaces = 3
+        Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Visible = False
         Width = 38
       end
@@ -832,6 +834,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DecimalPlaces = 3
+        Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Visible = False
         Width = 33
       end
