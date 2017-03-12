@@ -954,8 +954,8 @@ end;
 
 procedure TF_Transaksi.simpan;
 var
-  x: integer;
-  LSQL, LJualRinci: string;
+  x, LQty: integer;
+  LSQL, LJualRinci, LKdBarang, LKdBarangs, LIsiStokOHMin: string;
 begin
   if KasirOffline then
   begin
@@ -967,14 +967,22 @@ begin
 
   for x := 0 to TableView.DataController.RecordCount - 1 do
   begin
+    LKdBarang := _get(x, 1, 3);
+    LQty := _get(x, 18, 3);
+
     LJualRinci := LJualRinci + Format('("%s", "%s", %d, "%s", "%s", %d, "%s", '+
       '%g, "%g", "%g", "%d", "%d", "%s", CURDATE()), ', [dm.kd_perusahaan, KodeTransaksi,
-      (x + 1), _get(x, 1, 3), _get(x, 2, 3), Integer(_get(x, 18, 3)), _get(x, 16, 3),
+      (x + 1), LKdBarang, _get(x, 2, 3), LQty, _get(x, 16, 3),
       Currency(_get(x, 14, 3)), Currency(_get(x, 5, 3)), Currency(_get(x, 7, 3)),
       Integer(_get(x, 17, 3)), Integer(_get(x, 3, 3)), _get(x, 19, 3)]);
 
+    LIsiStokOHMin := LIsiStokOHMin + Format('WHEN "%s" THEN (stok_OH - %d) ', [LKdBarang,
+      LQty]);
+
+    LKdBarangs := LKdBarangs + Format('"%s", ', [LKdBarang]);
   end;
   SetLength(LJualRinci, length(LJualRinci) - 2);
+  SetLength(LKdBarangs, Length(LKdBarangs) - 2);
 
   dm.db_conn.StartTransaction;
   try
@@ -1000,6 +1008,13 @@ begin
       'VALUES %s', [LJualRinci]);
 
     fungsi.SQLExec(dm.Q_exe, LSQL, False);
+
+    LSQL := Format('UPDATE tb_barang SET stok_OH = (CASE kd_barang %s END), '
+      + 'Tr_Akhir = CURDATE() ' +
+      'WHERE kd_perusahaan = "%s" AND kd_barang IN (%s)', [LIsiStokOHMin,
+      dm.kd_perusahaan, LKdBarangs]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
     if not(FTunai) then
     begin
