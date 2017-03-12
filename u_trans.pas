@@ -1003,12 +1003,12 @@ begin
 
     if not(FTunai) then
     begin
-      fungsi.SQLExec(dm.Q_exe,
-        'insert into tb_piutang(kd_perusahaan,faktur,tanggal,jatuh_tempo, ' +
-        'pelanggan,piutang_awal,dibayar,user) values ("' + dm.kd_perusahaan +
-        '","' + KodeTransaksi + '",date(now()),"' + ed_lama.Text + '","' +
-        ed_pelanggan.Text + '","' + ed_grand.Text + '","' + '0' + '","' + dm.kd_pengguna
-        + '")', false);
+      LSQL := Format('INSERT INTO tb_piutang(kd_perusahaan, faktur, tanggal, jatuh_tempo, ' +
+        'pelanggan, piutang_awal, user) values ("%s", "%s", CURDATE(), "%s", "%s", %g, "%s"), ',
+        [dm.kd_perusahaan, KodeTransaksi, ed_lama.Text, ed_pelanggan.Text,
+        ed_grand.Text, dm.kd_pengguna]);
+
+      fungsi.SQLExec(dm.Q_exe, LSQL, False);
     end;
 
     dm.db_conn.Commit;
