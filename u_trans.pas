@@ -469,27 +469,27 @@ begin
   if (kode_barang = dm.Q_show.FieldByName('kd_barang').AsString) or (kode_barang
     = dm.Q_show.FieldByName('barcode3').AsString) then
   begin
-    harga := dm.Q_show.FieldByName('harga_jual3').AsInteger;
+    harga := dm.Q_show.FieldByName('harga_jual3').AsCurrency;
     Qty_real := 1;
     diskon := LDiskonRp;
     satuan := dm.Q_show.FieldByName('kd_sat3').AsString;
   end
   else if kode_barang = dm.Q_show.FieldByName('barcode2').AsString then
   begin
-    harga := dm.Q_show.FieldByName('harga_jual2').AsInteger;
+    harga := dm.Q_show.FieldByName('harga_jual2').AsCurrency;
     Qty_real := dm.Q_show.FieldByName('Qty2').AsInteger;
     diskon := LDiskonRp * Qty_real;
     satuan := dm.Q_show.FieldByName('kd_sat2').AsString;
   end
   else if kode_barang = dm.Q_show.FieldByName('barcode1').AsString then
   begin
-    harga := dm.Q_show.FieldByName('harga_jual1').AsInteger;
+    harga := dm.Q_show.FieldByName('harga_jual1').AsCurrency;
     Qty_real := dm.Q_show.FieldByName('Qty2').AsInteger * dm.Q_show.FieldByName('Qty1').AsInteger;
     diskon := LDiskonRp * Qty_real;
     satuan := dm.Q_show.FieldByName('kd_sat1').AsString;
   end;
 
-  harga_pokok := dm.Q_show.FieldByName('harga_pokok').AsInteger; // harga pokok barang
+  harga_pokok := dm.Q_show.FieldByName('harga_pokok').AsCurrency; // harga pokok barang
 
   if tableview.DataController.RecordCount <> 0 then
   begin
