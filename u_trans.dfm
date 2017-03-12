@@ -740,6 +740,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
@@ -753,6 +754,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Float'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '##0.00;(##0.00);0.00'
         Properties.EditFormat = '##0.00;(##0.00);0.00'
         FooterAlignmentHorz = taRightJustify
@@ -765,6 +767,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
@@ -778,6 +781,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
@@ -791,6 +795,7 @@ object F_Transaksi: TF_Transaksi
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
@@ -817,18 +822,24 @@ object F_Transaksi: TF_Transaksi
       object tv_hpp: TcxGridColumn
         Caption = 'hpp'
         DataBinding.ValueType = 'Currency'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Properties.DecimalPlaces = 3
         Visible = False
         Width = 38
       end
       object tv_total_hpp: TcxGridColumn
         Caption = 'total hpp'
         DataBinding.ValueType = 'Currency'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Properties.DecimalPlaces = 3
         Visible = False
         Width = 33
       end
       object tv_total_laba: TcxGridColumn
         Caption = 'total laba'
         DataBinding.ValueType = 'Currency'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Properties.DecimalPlaces = 3
         Visible = False
         Width = 31
       end
