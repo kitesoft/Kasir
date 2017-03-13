@@ -325,7 +325,7 @@ end;
 procedure Tf_returnJual.b_simpanClick(Sender: TObject);
 var
   x: integer;
-  isi_sql, kd_faktur: string;
+  LReturnJualRinci, kd_faktur: string;
 begin
   if (ed_pelanggan.Text = '') or (ed_no_faktur.Text = '') or (ed_fak_jual.Text = '') then
   begin
@@ -355,13 +355,13 @@ begin
 
   for x := 0 to tableview.DataController.RecordCount - 1 do
   begin
-    isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + ed_no_faktur.Text +
+    LReturnJualRinci := LReturnJualRinci + '("' + dm.kd_perusahaan + '","' + ed_no_faktur.Text +
       '",date(now()),"' + TableView.DataController.GetDisplayText(x, 0) + '","'
       + TableView.DataController.GetDisplayText(x, 1) + '","' + floattostr(TableView.DataController.GetValue
       (x, 2)) + '","' + floattostr(TableView.DataController.GetValue(x, 4)) +
-      '","' + TableView.DataController.GetDisplayText(x, 5) + '",date(now())),';
+      '","' + TableView.DataController.GetDisplayText(x, 5) + '",date(now())), ';
   end;
-  delete(isi_sql, length(isi_sql), 1);
+  SetLength(LReturnJualRinci, length(LReturnJualRinci) - 2);
 
   dm.db_conn.StartTransaction;
   try
@@ -374,7 +374,7 @@ begin
 
     fungsi.SQLExec(dm.Q_exe, 'insert into tb_return_jual_rinci(kd_perusahaan, '
       + 'kd_return_jual,tgl_return_jual,kd_barang,n_barang,qty_return_jual, ' +
-      'harga_pokok,barcode,tgl_simpan) values  ' + isi_sql, false);
+      'harga_pokok,barcode,tgl_simpan) values  ' + LReturnJualRinci, false);
 
     dm.db_conn.Commit;
 
