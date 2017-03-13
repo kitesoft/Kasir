@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, sSkinManager, DB, dialogs, forms, inifiles,
-  frxClass, frxDBSet, frxDesgn, ImgList, Controls, acAlphaImageList,
+  frxClass, frxDBSet, ImgList, Controls, acAlphaImageList,
   SHFolder, Windows, cxStyles, MemDS, DBAccess, MyAccess;
 
 type
@@ -21,7 +21,6 @@ type
     Q_cari: TMyQuery;
     ds_cari: TDataSource;
     sm: TsSkinManager;
-    frxdsgnr1: TfrxDesigner;
     Q_jual_global: TMyQuery;
     Q_jual_rinci: TMyQuery;
     ds_jual_global: TDataSource;
@@ -32,14 +31,14 @@ type
     cxstyl1: TcxStyle;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
-    function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;
-    function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
   private
     { Private declarations }
   public
     kd_perusahaan, kd_operator, kd_pengguna, ip_kasir, macam_harga: string;
     Path, AppPath, file_ini: string;
     Login: Boolean;
+    function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;
+    function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
   end;
 
 var
