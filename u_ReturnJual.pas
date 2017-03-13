@@ -68,7 +68,6 @@ type
   private
     { Private declarations }
   public
-    sub_sub_total, diskon: integer;
     { Public declarations }
   end;
 
@@ -122,8 +121,8 @@ begin
   TableView.DataController.SetValue(baris_baru - 1, 0, dm.Q_temp.fieldbyname('kd_barang').AsString);
   TableView.DataController.SetValue(baris_baru - 1, 1, dm.Q_temp.fieldbyname('n_barang').AsString);
   TableView.DataController.SetValue(baris_baru - 1, 2, 1);
-  TableView.DataController.SetValue(baris_baru - 1, 3, dm.Q_temp.fieldbyname('hpp_aktif').AsString);
-  TableView.DataController.SetValue(baris_baru - 1, 4, dm.Q_temp.fieldbyname('hpp_aktif').AsString);
+  TableView.DataController.SetValue(baris_baru - 1, 3, dm.Q_temp.fieldbyname('hpp_aktif').AsCurrency);
+  TableView.DataController.SetValue(baris_baru - 1, 4, dm.Q_temp.fieldbyname('hpp_aktif').AsCurrency);
   TableView.DataController.SetValue(baris_baru - 1, 5, dm.Q_temp.fieldbyname('barcode3').AsString);
   tableview.DataController.ChangeFocusedRowIndex(baris_baru);
 end;
@@ -231,7 +230,7 @@ begin
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
-    _SQLi := 'select kd_barang, n_barang from tb_barang where kd_perusahaan="' +
+    _SQLi := 'select kd_barang, n_barang, hpp_aktif from tb_barang where kd_perusahaan="' +
       dm.kd_perusahaan + '"';
     tblcap[0] := 'PID';
     tblCap[1] := 'Deskripsi Barang';
@@ -255,33 +254,11 @@ begin
 end;
 
 procedure Tf_returnJual.b_autoClick(Sender: TObject);
-var
-  a: integer;
-  kd_return, tgl, y: string;
 begin
-  if ed_pelanggan.Text = '' then
-  begin
-    ShowMessage('untuk auto kode, data pelanggan harus diisi terlebih dahulu');
-    ed_pelanggan.SetFocus;
-    Exit;
-  end;
-
-  tgl := formatdatetime('yyyyMMdd', date());
-  fungsi.SQLExec(dm.Q_temp, 'select count(kd_return_jual) as jumlah from ' +
-    'tb_return_jual_global where tgl_return_jual=date(now()) and kd_perusahaan="' +
-    dm.kd_perusahaan + '"', true);
-  a := dm.Q_temp.fieldbyname('jumlah').AsInteger + 1;
-
-  if a < 10 then
-    y := 'RT-' + tgl + '-00'
-  else if a < 100 then
-    y := 'RT-' + tgl + '-0'
-  else if a < 1000 then
-    y := 'RT-' + tgl + '-';
-  kd_return := y + inttostr(a);
-
-  ed_no_faktur.Text := kd_return;
-
+  fungsi.SQLExec(dm.Q_temp, Format('SELECT CONCAT("RT", DATE_FORMAT(NOW(), "%%Y%%m%%d"), ' +
+  'LPAD(COUNT(kd_return_jual) + 1, 4, "0")) AS new_id FROM tb_return_jual_global '+
+  'WHERE DATE(tgl_return_jual) = CURDATE() AND kd_perusahaan = "%s"', [dm.kd_perusahaan]),true);
+  ed_no_faktur.Text := dm.Q_temp.FieldByName('new_id').AsString;
 end;
 
 procedure Tf_returnJual.ed_no_fakturChange(Sender: TObject);
@@ -324,8 +301,11 @@ end;
 
 procedure Tf_returnJual.b_simpanClick(Sender: TObject);
 var
-  x: integer;
+  x, LQty: integer;
   LReturnJualRinci, kd_faktur: string;
+  LSQL, LIsiHppAktif, LIsiStokOH: string;
+  LKdBarang, LKdBarangs: string;
+  LHppAktif: Currency;
 begin
   if (ed_pelanggan.Text = '') or (ed_no_faktur.Text = '') or (ed_fak_jual.Text = '') then
   begin
@@ -355,26 +335,54 @@ begin
 
   for x := 0 to tableview.DataController.RecordCount - 1 do
   begin
-    LReturnJualRinci := LReturnJualRinci + '("' + dm.kd_perusahaan + '","' + ed_no_faktur.Text +
-      '",date(now()),"' + TableView.DataController.GetDisplayText(x, 0) + '","'
-      + TableView.DataController.GetDisplayText(x, 1) + '","' + floattostr(TableView.DataController.GetValue
-      (x, 2)) + '","' + floattostr(TableView.DataController.GetValue(x, 4)) +
-      '","' + TableView.DataController.GetDisplayText(x, 5) + '",date(now())), ';
+    LKdBarang := TableView.DataController.GetDisplayText(x, 0);
+    LQty := TableView.DataController.GetValue(x,2);
+    LHppAktif := TableView.DataController.GetValue(x, 3);
+
+    LReturnJualRinci := LReturnJualRinci + Format('("%s", "%s", "%s", '+
+      '"%s", %d, %g, "%s", CURDATE()), ', [dm.kd_perusahaan, kd_faktur, LKdBarang,
+      TableView.DataController.GetDisplayText(x, 1), LQty, Currency(TableView.DataController.GetValue(x, 4)),
+      TableView.DataController.GetDisplayText(x, 5)]);
+
+    LIsiHppAktif := LIsiHppAktif + Format('WHEN "%s" THEN (IFNULL(((hpp_aktif * stok_OH) + (%g * %d))/(stok_OH + %d),0)) ',
+      [LKdBarang, LHppAktif, LQty, LQty]);
+
+    LIsiStokOH := LIsiStokOH + Format('WHEN "%s" THEN (stok_OH + %d) ', [LKdBarang,
+      LQty]);
+
+    LKdBarangs := LKdBarangs + Format('"%s", ', [LKdBarang]);
   end;
   SetLength(LReturnJualRinci, length(LReturnJualRinci) - 2);
+  SetLength(LKdBarangs, length(LKdBarangs) - 2);
 
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_return_jual_global(kd_perusahaan,kd_return_jual, ' +
-      'kd_transaksi,tgl_return_jual,kd_pelanggan,nilai_faktur,pengguna,simpan_pada,pengawas) values ("' +
-      dm.kd_perusahaan + '","' + ed_no_faktur.Text + '","' + ed_fak_jual.Text +
-      '",date(now()),"' + ed_pelanggan.Text + '","' + ed_nilai_faktur.Text +
-      '","' + dm.kd_pengguna + '",now(),"' + dm.kd_operator + '")', false);
+    LSQL := Format('INSERT INTO tb_return_jual_global(kd_perusahaan, kd_return_jual, ' +
+      'kd_transaksi, tgl_return_jual, kd_pelanggan, nilai_faktur, pengguna, simpan_pada, '+
+      'pengawas) VALUES ("%s", "%s", "%s", CURDATE(), "%s", %g, "%s", NOW(), "%s")',
+      [dm.kd_perusahaan, ed_no_faktur.Text, ed_fak_jual.Text, ed_pelanggan.Text,
+      ed_nilai_faktur.Value, dm.kd_pengguna, dm.kd_operator]);
 
-    fungsi.SQLExec(dm.Q_exe, 'insert into tb_return_jual_rinci(kd_perusahaan, '
-      + 'kd_return_jual,tgl_return_jual,kd_barang,n_barang,qty_return_jual, ' +
-      'harga_pokok,barcode,tgl_simpan) values  ' + LReturnJualRinci, false);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
+
+    LSQL := Format('INSERT INTO tb_return_jual_rinci(kd_perusahaan, '
+      + 'kd_return_jual, kd_barang, n_barang, qty_return_jual, ' +
+      'harga_pokok, barcode, tgl_simpan) VALUES %s', [LReturnJualRinci]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
+
+    LSQL := Format('UPDATE tb_barang SET hpp_aktif = (CASE kd_barang %s END), '
+      + 'stok_OH = (CASE kd_barang %s END), Tr_Akhir = date(now()) ' +
+      'WHERE kd_perusahaan = "%s" AND kd_barang IN (%s)', [LIsiHppAktif,
+      LIsiStokOH, dm.kd_perusahaan, LKdBarangs]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
+
+    LSQL := Format('UPDATE tb_piutang SET return_jual = return_jual + %g, `update`=CURDATE() '
+      + 'WHERE kd_perusahaan = "%s" and faktur = "%s"', [ed_nilai_faktur.Value,
+      dm.kd_perusahaan, ed_fak_jual.Text]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
     dm.db_conn.Commit;
 
