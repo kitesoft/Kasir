@@ -209,9 +209,9 @@ object f_returnJual: Tf_returnJual
       TabOrder = 2
       SkinData.SkinSection = 'PANEL'
       object ed_nilai_faktur: TsCurrencyEdit
-        Left = 312
+        Left = 221
         Top = 1
-        Width = 309
+        Width = 400
         Height = 64
         AutoSize = False
         BevelInner = bvLowered
@@ -232,8 +232,8 @@ object f_returnJual: Tf_returnJual
         SkinData.SkinSection = 'PANEL'
         GlyphMode.Blend = 0
         GlyphMode.Grayed = False
-        DecimalPlaces = 0
-        DisplayFormat = '###,###,##0;-###,###,##0;0'
+        DecimalPlaces = 3
+        DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
       end
       object spnl1: TsPanel
         Left = 1
@@ -296,12 +296,12 @@ object f_returnJual: Tf_returnJual
             Column = t_view_Qty
           end
           item
-            Format = '###,###,##0;(###,###,##0);0'
+            Format = '###,###,##0.00;(###,###,##0.00);0.00'
             Kind = skSum
             Column = t_view_harga
           end
           item
-            Format = '###,###,##0;(###,###,##0);0'
+            Format = '###,###,##0.00;(###,###,##0.00);0.00'
             Kind = skSum
             OnGetText = TableViewTcxGridDataControllerTcxDataSummaryFooterSummaryItems4GetText
             Column = t_view_total
@@ -352,10 +352,11 @@ object f_returnJual: Tf_returnJual
         end
         object t_view_harga: TcxGridColumn
           Caption = 'Harga'
-          DataBinding.ValueType = 'Integer'
+          DataBinding.ValueType = 'Currency'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.Alignment.Horz = taRightJustify
-          Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
           Properties.EditFormat = '###,###,##0;(###,###,##0);0'
           GroupSummaryAlignment = taRightJustify
           HeaderAlignmentHorz = taRightJustify
@@ -364,10 +365,11 @@ object f_returnJual: Tf_returnJual
         end
         object t_view_total: TcxGridColumn
           Caption = 'Total Harga'
-          DataBinding.ValueType = 'Integer'
+          DataBinding.ValueType = 'Currency'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.Alignment.Horz = taRightJustify
-          Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
           Properties.EditFormat = '###,###,##0;(###,###,##0);0'
           GroupSummaryAlignment = taRightJustify
           HeaderAlignmentHorz = taRightJustify
