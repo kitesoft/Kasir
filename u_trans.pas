@@ -988,15 +988,14 @@ begin
   try
     LSQL := Format('INSERT INTO tb_jual_global (kd_perusahaan, kd_transaksi, '
       + 'tgl_transaksi, jam_transaksi, kd_customers, tunai, jatuh_tempo, kd_macam_harga, '
-      + 'sub_total,discountGP, discountGRP, HPP, grand_total, bayar, debit_id, debit_code, '
-      + 'debit, cash_out, kembali, kd_user, kd_pengawas, cetak, void, komp, ket, '
+      + 'discountGRP, HPP, grand_total, bayar, debit_id, debit_code, '
+      + 'debit, cash_out, kd_user, kd_pengawas, cetak, void, komp, ket, '
       + 'simpan_pada) VALUES ("%s", "%s", CURDATE(), CURTIME(), "%s", "%s", '
-      + 'ADDDATE(date(now()),INTERVAL %s DAY), "%s", %g, %g, %g, %g, %g, %g, %d, "%s", '+
-      '%g, %g, %g, "%s", "%s", 1, %d, "%s", "%s", NOW())',
+      + 'ADDDATE(date(now()),INTERVAL %s DAY), "%s", %g, %g, %g, %g, %d, "%s", '+
+      '%g, %g, "%s", "%s", 1, %d, "%s", "%s", NOW())',
       [dm.kd_perusahaan, KodeTransaksi, ed_pelanggan.Text, Values[FTunai], ed_lama.Text,
-      dm.macam_harga, ed_sub.Value, ed_discP.Value, ed_discRp.Value,
-      Currency(TableView.DataController.Summary.FooterSummaryValues[8]), ed_grand.Value,
-      ed_bayar.Value, DebitId, DebitKode, DebitRp, CashOut, ed_kembali.Value, dm.kd_pengguna,
+      dm.macam_harga, ed_discRp.Value, Currency(TableView.DataController.Summary.FooterSummaryValues[8]),
+      ed_grand.Value, ed_bayar.Value, DebitId, DebitKode, DebitRp, CashOut, dm.kd_pengguna,
       dm.kd_operator, Integer(TableView.DataController.Summary.FooterSummaryValues[9]), dm.ip_kasir,
       ed_keterangan.Text]);
       
