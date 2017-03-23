@@ -276,8 +276,8 @@ object f_returnJual: Tf_returnJual
       LookAndFeel.Kind = lfOffice11
       LookAndFeel.NativeStyle = False
       object TableView: TcxGridTableView
-        NavigatorButtons.ConfirmDelete = False
-        NavigatorButtons.Append.Visible = False
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.Append.Visible = False
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <
           item

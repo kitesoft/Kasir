@@ -11,7 +11,9 @@ uses
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, cxTextEdit, uTerbilang, cxCalc,
   DateUtils, ActnList, sDialogs, MemDS,
-  DBAccess, MyAccess, cxFilter, cxData;
+  DBAccess, MyAccess, cxFilter, cxData, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 const
   InputBoxMessage = WM_USER + 200;

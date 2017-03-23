@@ -8,7 +8,9 @@ uses
   UFungsi, sSkinProvider, cxStyles,
   cxCustomData, cxGraphics, cxDataStorage, cxEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, cxCurrencyEdit, StdCtrls, cxFilter, cxData;
+  cxGridCustomView, cxGrid, cxCurrencyEdit, StdCtrls, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   TF_Ubah_Satuan = class(TForm)

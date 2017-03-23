@@ -28,7 +28,7 @@ object f_list_sales: Tf_list_sales
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object t_data1: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       OnCellDblClick = t_data1CellDblClick
       DataController.DataSource = dm.ds_jual_global
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -157,15 +157,6 @@ object f_list_sales: Tf_list_sales
     OnKeyDown = ed_cariKeyDown
     Align = alTop
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object p1: TsPanel
     Left = 0

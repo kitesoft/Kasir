@@ -10,7 +10,9 @@ uses
   sCurrEdit, sCurrencyEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, uTerbilang, cxControls,
   cxGridCustomView, cxGrid, sPanel, UFungsi, Mask,
-  sMaskEdit, sCustomComboEdit, cxFilter, cxData;
+  sMaskEdit, sCustomComboEdit, cxFilter, cxData, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_returnJual = class(TForm)

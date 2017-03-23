@@ -21,7 +21,7 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
   object sLabel1: TsLabel
     Left = 8
     Top = 8
-    Width = 30
+    Width = 27
     Height = 19
     Caption = 'PID'
     ParentFont = False
@@ -34,7 +34,7 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
   object sLabel2: TsLabel
     Left = 8
     Top = 32
-    Width = 107
+    Width = 104
     Height = 19
     Caption = 'Nama Barang'
     ParentFont = False
@@ -47,8 +47,8 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
   object L_kode: TsLabel
     Left = 120
     Top = 8
-    Width = 95
-    Height = 19
+    Width = 110
+    Height = 18
     Caption = 'Kode Barang'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
@@ -62,8 +62,8 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
   object L_nama: TsLabel
     Left = 120
     Top = 32
-    Width = 101
-    Height = 19
+    Width = 110
+    Height = 18
     Caption = 'Nama Barang'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
@@ -94,8 +94,8 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
     LookAndFeel.NativeStyle = False
     object tableview: TcxGridTableView
       OnDblClick = tableviewDblClick
-      NavigatorButtons.ConfirmDelete = False
-      NavigatorButtons.Append.Visible = False
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.Append.Visible = False
       FilterBox.CustomizeDialog = False
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -152,11 +152,6 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
     end
   end
   object sSkinProvider1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 968

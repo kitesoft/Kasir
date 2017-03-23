@@ -35,7 +35,7 @@ object f_cariBarang: Tf_cariBarang
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object tableview: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       OnCellDblClick = tableviewCellDblClick
       DataController.DataSource = dm.ds_cari
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -75,21 +75,16 @@ object f_cariBarang: Tf_cariBarang
     end
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
-    AddedTitle.ShowMainCaption = False
     AllowAnimation = False
     AllowExtBorders = False
     AllowBlendOnMoving = False
     DrawNonClientArea = False
+    ShowAppIcon = False
+    UseGlobalColor = False
+    AddedTitle.ShowMainCaption = False
     SkinData.SkinSection = 'FORM'
     ResizeMode = rmBorder
-    ShowAppIcon = False
     TitleButtons = <>
-    UseGlobalColor = False
     Left = 8
     Top = 8
   end
