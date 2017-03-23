@@ -92,7 +92,7 @@ begin
   try
     kd_perusahaan := appINI.ReadString('kasir', 'kd_perusahaan', '');
 
-    sm.SkinName := appINI.ReadString('kasir', 'nama_skin', 'WEB (internal)');
+    sm.SkinName := appINI.ReadString('kasir', 'nama_skin', 'WEB2');
     sm.HueOffset := appini.ReadInteger('kasir', 'hue_skin', 0);
     sm.Saturation := appini.ReadInteger('kasir', 'sat_skin', 0);
   finally
