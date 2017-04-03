@@ -522,7 +522,7 @@ end;
 
 procedure TF_Transaksi.input_kode;
 var
-  kode_temp: string;
+  kode_temp, LSql: string;
 begin
   if kode_barang = '' then
   begin
@@ -553,7 +553,7 @@ begin
     'tb_barang_harga.harga_jual1,tb_barang_harga.harga_jual2,tb_barang_harga.harga_jual3, ' +
     'tb_barang_harga.diskon,tb_barang_harga.awal, ' +
     'tb_barang_harga.ahir,tb_barang.kd_sat1,tb_barang.kd_sat2, ' +
-    'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2 ' +
+    'tb_barang.kd_sat3,tb_barang.qty1,tb_barang.qty2, tb_barang.stok_OH ' +
     'FROM tb_barang INNER JOIN tb_barang_harga ON tb_barang.kd_barang=tb_barang_harga.kd_barang ' +
     'AND tb_barang_harga.kd_perusahaan = tb_barang.kd_perusahaan WHERE tb_barang.kd_barang = "' +
     kode_temp + '" ' + 'AND tb_barang_harga.kd_macam_harga = "' + dm.macam_harga
@@ -595,8 +595,22 @@ begin
     Exit;
   end;
 
-  showdata;
+  LSql := 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="canoutonstockout"';
+  fungsi.SQLExec(DM.Q_temp, LSql, true);
+  if not(dm.Q_temp.FieldByName('nilai').AsBoolean) then
+  begin
+    if (dm.Q_Show.FieldByName('stok_OH').AsInteger <= 0) then
+    begin
+      Ed_Code.Clear;
+      
+      MessageBox(0, 'BARANG INI TIDAK BISA DI TRANSAKSIKAN, ' + #13 + #10 +
+        'karena Stok pada Komputer Tidak Mencukupi' + #13 + #10 + '', '',
+        MB_ICONERROR or MB_OK);
+      Exit;
+    end;
+  end;
 
+  showdata;  
   Ed_Code.Clear;
 end;
 
