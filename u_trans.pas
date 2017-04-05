@@ -186,6 +186,7 @@ type
     procedure ac_tunaiExecute(Sender: TObject);
     procedure ac_retailExecute(Sender: TObject);
   private
+    FVersion : TVersion;
     DebitId: Integer;
     DebitKode: string;
     DebitRp, CashOut: Currency;
@@ -386,7 +387,7 @@ end;
 
 procedure TF_Transaksi.FormShow(Sender: TObject);
 begin
-  sb.Panels[1].Text := 'Versi: ' + fungsi.GetVersiApp;
+  sb.Panels[1].Text := 'Versi: ' + FVersion.AsString;
 
   sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
 
@@ -1296,6 +1297,7 @@ begin
   if messagedlg('Apakah anda MENUTUP Aplikasi Kasir ini?', mtconfirmation,
     [mbYes, mbNo], 0) = mryes then
   begin
+    FVersion.Free;
     Action := caFree;
   end
   else
@@ -1526,6 +1528,7 @@ begin
 
   F_Transaksi.BorderStyle := bsNone;
   F_Transaksi.WindowState := wsMaximized;
+  FVersion := TAppVersion.Create(Application.ExeName);
   cek_update;
   StPesan:= TStringList.Create;
   StPesan.QuoteChar:= '#';
@@ -1912,26 +1915,22 @@ end;
 
 procedure TF_Transaksi.cek_update;
 var
-  versiDB, versiAPP, URLDownload: string;
-  fileName, UrlDownloadLocal: string;
+  LVersiDB, LVersiAPP: TVersion;
+  LSql :string;
 begin
-  versiAPP := fungsi.GetVersiApp;
+  LVersiAPP := FVersion;
+  LSql := 'SELECT versi_terbaru FROM app_versi WHERE kode="kasir.exe"';
+  fungsi.SQLExec(dm.Q_Show, LSql, true);
+  LVersiDB := TVersion.Create(dm.Q_Show.FieldByName('versi_terbaru').AsString);
 
-  fungsi.SQLExec(dm.Q_Show,
-    'select versi_terbaru, URLdownload from  app_versi where kode="kasir.exe"', true);
-  versiDB := dm.Q_Show.FieldByName('versi_terbaru').AsString;
-  URLDownload := dm.Q_Show.FieldByName('URLdownload').AsString;
-  fileName := Copy(URLDownload, LastDelimiter('/', URLDownload) + 1, Length(URLDownload));
-  UrlDownloadLocal := 'http://' + dm.db_conn.Server + '/GainProfit/' + fileName;
-
-  if versiAPP < versiDB then
+  if CompareVersion(LVersiDB, LVersiAPP) = vHigher then
   begin
     ShowMessage('APLIKASI KASIR TIDAK DAPAT DIJALANKAN' + #13#10 +
-      'aplikasi terbaru dengan versi : ' + versiDB + #13#10 + 'SUDAH DIRILIS...');
+      'aplikasi terbaru dengan versi : ' + LVersiDB.AsString + #13#10 + 'SUDAH DIRILIS...');
 
     Application.Terminate;
-    Exit;
   end;
+  LVersiDB.Free;
 end;
 
 function TF_Transaksi.KasirOffline: Boolean;
