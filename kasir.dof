@@ -114,7 +114,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=17
 MinorVer=4
-Release=13
+Release=18
 Build=0
 Debug=0
 PreRelease=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Gain-Profit
 FileDescription=
-FileVersion=17.4.13.0
+FileVersion=17.4.18.0
 InternalName=Kasir
 LegalCopyright=
 LegalTrademarks=
