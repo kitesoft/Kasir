@@ -51,15 +51,6 @@ object FSetting: TFSetting
       Enabled = False
       TabOrder = 0
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object TbHue: TsTrackBar
       Left = 8
@@ -73,6 +64,8 @@ object FSetting: TFSetting
       TabOrder = 1
       OnChange = TbHueChange
       SkinData.SkinSection = 'TRACKBAR'
+      BarOffsetV = 0
+      BarOffsetH = 0
     end
     object TbSaturation: TsTrackBar
       Left = 168
@@ -87,6 +80,8 @@ object FSetting: TFSetting
       TabOrder = 2
       OnChange = TbSaturationChange
       SkinData.SkinSection = 'TRACKBAR'
+      BarOffsetV = 0
+      BarOffsetH = 0
     end
   end
   object gb2: TsGroupBox
@@ -347,6 +342,14 @@ object FSetting: TFSetting
       ParentColor = True
       ParentFont = False
       TabOrder = 2
+    end
+    object ChkDesign: TCheckBox
+      Left = 376
+      Top = 16
+      Width = 121
+      Height = 17
+      Caption = 'Design Struk Kecil'
+      TabOrder = 3
     end
   end
   object ed_tambahan: TEdit
