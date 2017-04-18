@@ -195,7 +195,7 @@ type
     procedure showdata;
     procedure ambil_form;
     procedure cek_update;
-    procedure cetak_struk_kecil;
+    procedure cetak_struk_kecil(ADesign: Boolean);
     procedure UpdateRetailTunai;
     function KasirOffline: Boolean;
     procedure UbahQty(Qty: string);
@@ -213,6 +213,7 @@ type
     PsSizeFont, PsSpeedPesan: Integer;
 
     // Struk
+    StDesign : Boolean;
     StJenis, StLebar : Integer;
     StPesan: TStrings;
 
@@ -315,6 +316,7 @@ begin
 
   StJenis := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'jenis_struk', '0'));
   StLebar := StrToInt(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'lebar_struk', '38'));
+  StDesign := StrToBool(fungsi.AmbilIniFile(dm.file_ini, 'kasir', 'design_struk', '0'));
   StPesan.DelimitedText := fungsi.AmbilIniFile(dm.file_ini, 'kasir',
     'footer_struk', 'TERIMA KASIH ATAS KUNJUANGAN ANDA');
 end;
@@ -1072,7 +1074,7 @@ begin
   ed_code.SetFocus;
 end;
 
-procedure TF_Transaksi.cetak_struk_kecil;
+procedure TF_Transaksi.cetak_struk_kecil(ADesign: Boolean);
 var
   toko, alamat, telp, kd_transaksi, kasir, cust, waktu, barang, barang2, satuan,
     har_sat, harga, discP, discRp, netto, discGP, discGRp, nettoG, total, bayar,
@@ -1081,6 +1083,16 @@ var
   i, j, x, panjang, TotalDebitRp: integer;
   F: TextFile;
 begin
+  if ADesign then
+  begin
+    dm.laporan.LoadFromFile(dm.Path + 'laporan/k_struk_retail_k.fr3');
+    dm.FRMemo(dm.laporan, 'MMBerita').Text := StPesan.Text;
+    dm.laporan.PrepareReport;
+    dm.laporan.PrintOptions.ShowDialog := False;
+    dm.laporan.Print;
+    Exit;
+  end;
+  
   panjang := StLebar;
 
   kd_transaksi := fungsi.TulisFormat(dm.Q_print.fieldbyname('no_transaksi').AsString,
@@ -1269,7 +1281,7 @@ begin
   end
   else if jenis = 'kecil' then
   begin
-    cetak_struk_kecil;
+    cetak_struk_kecil(StDesign);
   end;
 end;
 

@@ -101,7 +101,7 @@ object F_Transaksi: TF_Transaksi
     object l_pesan: TsLabel
       Left = 64
       Top = 2
-      Width = 37
+      Width = 34
       Height = 16
       Anchors = [akTop]
       BiDiMode = bdLeftToRight
@@ -177,8 +177,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel9: TsLabel
       Left = 272
       Top = 88
-      Width = 109
-      Height = 22
+      Width = 110
+      Height = 21
       Caption = 'Jatuh Tempo'
       ParentFont = False
       Visible = False
@@ -191,8 +191,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel8: TsLabel
       Left = 272
       Top = 64
-      Width = 47
-      Height = 22
+      Width = 46
+      Height = 21
       Caption = 'Lama'
       ParentFont = False
       Visible = False
@@ -205,8 +205,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel7: TsLabel
       Left = 272
       Top = 16
-      Width = 58
-      Height = 22
+      Width = 59
+      Height = 21
       Caption = 'ID Pel.'
       ParentFont = False
       Visible = False
@@ -219,8 +219,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel6: TsLabel
       Left = 8
       Top = 112
-      Width = 69
-      Height = 22
+      Width = 73
+      Height = 21
       Caption = 'Kembali'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
@@ -232,8 +232,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel5: TsLabel
       Left = 8
       Top = 88
-      Width = 48
-      Height = 22
+      Width = 50
+      Height = 21
       Caption = 'Bayar'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
@@ -245,8 +245,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel4: TsLabel
       Left = 8
       Top = 64
-      Width = 97
-      Height = 22
+      Width = 105
+      Height = 21
       Caption = 'Grand Total'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
@@ -258,8 +258,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel3: TsLabel
       Left = 8
       Top = 16
-      Width = 79
-      Height = 22
+      Width = 82
+      Height = 21
       Caption = 'Sub Total'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
@@ -271,8 +271,8 @@ object F_Transaksi: TF_Transaksi
     object sLabel2: TsLabel
       Left = 8
       Top = 40
-      Width = 74
-      Height = 22
+      Width = 78
+      Height = 21
       Caption = 'Discount'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
@@ -311,8 +311,8 @@ object F_Transaksi: TF_Transaksi
     object L_nm_pel: TsLabel
       Left = 392
       Top = 40
-      Width = 55
-      Height = 22
+      Width = 56
+      Height = 21
       Caption = 'Umum'
       ParentFont = False
       Visible = False
@@ -517,7 +517,7 @@ object F_Transaksi: TF_Transaksi
       Left = 860
       Top = 12
       Width = 145
-      Height = 26
+      Height = 27
       Anchors = [akRight, akBottom]
       Alignment = taLeftJustify
       SkinData.SkinSection = 'PANEL'
@@ -528,7 +528,7 @@ object F_Transaksi: TF_Transaksi
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
-      ItemHeight = 18
+      ItemHeight = 19
       ItemIndex = -1
       ParentFont = False
       Sorted = True
