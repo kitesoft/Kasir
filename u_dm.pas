@@ -38,7 +38,7 @@ type
     Path, AppPath, file_ini: string;
     Login: Boolean;
     function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;
-    function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
+    function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxCustomMemoView;
   end;
 
 var
@@ -156,9 +156,9 @@ begin
   end;
 end;
 
-function Tdm.FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
+function Tdm.FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxCustomMemoView;
 begin
-  Result := TfrxMemoView(FRObject(FastReport, ObjectName));
+  Result := TfrxCustomMemoView(FRObject(FastReport, ObjectName));
 end;
 
 end.
