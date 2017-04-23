@@ -13,7 +13,7 @@ uses
   DateUtils, ActnList, sDialogs, MemDS,
   DBAccess, MyAccess, cxFilter, cxData, cxLookAndFeels,
   cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, cxNavigator;
+  dxSkinscxPCPainter, cxNavigator{, System.Actions};
 
 const
   InputBoxMessage = WM_USER + 200;
@@ -1535,8 +1535,17 @@ end;
 
 procedure TF_Transaksi.FormCreate(Sender: TObject);
 begin
-  DecimalSeparator := '.';
-  ThousandSeparator := ',';
+  {$IFDEF VER150}
+    DecimalSeparator := '.';
+    ThousandSeparator := ',';
+    ShortDateFormat := 'dd/mm/yyyy';
+    ShortTimeFormat := 'hh:nn:ss';
+  {$ELSE}
+    FormatSettings.DecimalSeparator := '.';
+    FormatSettings.ThousandSeparator := ',';
+    FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
+    FormatSettings.ShortTimeFormat := 'hh:nn:ss';
+  {$ENDIF}
 
   F_Transaksi.BorderStyle := bsNone;
   F_Transaksi.WindowState := wsMaximized;

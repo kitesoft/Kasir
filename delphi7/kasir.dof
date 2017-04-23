@@ -90,8 +90,8 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=TscExcelExport run-time package
 [Directories]
-OutputDir=../GAIN PROFIT
-UnitOutputDir=
+OutputDir=..\..\GAIN PROFIT
+UnitOutputDir=output
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -134,3 +134,12 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=output
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=..\..\GAIN PROFIT

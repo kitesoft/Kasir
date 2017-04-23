@@ -1,8 +1,8 @@
 object F_Transaksi: TF_Transaksi
-  Left = 181
-  Top = 31
-  Width = 1024
-  Height = 666
+  Left = 0
+  Top = 0
+  Width = 136
+  Height = 240
   Caption = 'transaksi'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,7 +12,6 @@ object F_Transaksi: TF_Transaksi
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = True
-  Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
@@ -24,8 +23,8 @@ object F_Transaksi: TF_Transaksi
   TextHeight = 13
   object Sb: TsStatusBar
     Left = 0
-    Top = 605
-    Width = 1008
+    Top = 403
+    Width = 103
     Height = 22
     Panels = <
       item
@@ -79,8 +78,8 @@ object F_Transaksi: TF_Transaksi
   end
   object p_pesan: TsPanel
     Left = 0
-    Top = 437
-    Width = 1008
+    Top = 235
+    Width = 103
     Height = 22
     Align = alBottom
     BevelOuter = bvNone
@@ -96,10 +95,10 @@ object F_Transaksi: TF_Transaksi
     SkinData.CustomFont = True
     SkinData.SkinSection = 'LABEL'
     DesignSize = (
-      1008
+      103
       22)
     object l_pesan: TsLabel
-      Left = 64
+      Left = -7
       Top = 2
       Width = 34
       Height = 16
@@ -123,7 +122,7 @@ object F_Transaksi: TF_Transaksi
   object pnlKode: TsPanel
     Left = 0
     Top = 197
-    Width = 1008
+    Width = 103
     Height = 38
     Align = alTop
     TabOrder = 0
@@ -165,14 +164,14 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlFooter: TsPanel
     Left = 0
-    Top = 459
-    Width = 1008
+    Top = 257
+    Width = 103
     Height = 146
     Align = alBottom
     TabOrder = 3
     SkinData.SkinSection = 'PANEL'
     DesignSize = (
-      1008
+      103
       146)
     object sLabel9: TsLabel
       Left = 272
@@ -323,7 +322,7 @@ object F_Transaksi: TF_Transaksi
       Font.Style = []
     end
     object L_Bayar: TsLabel
-      Left = 356
+      Left = -532
       Top = 88
       Width = 242
       Height = 59
@@ -473,7 +472,7 @@ object F_Transaksi: TF_Transaksi
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
     object Ed_BK: TsCurrencyEdit
-      Left = 604
+      Left = -284
       Top = 41
       Width = 401
       Height = 96
@@ -514,7 +513,7 @@ object F_Transaksi: TF_Transaksi
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
     object cb_pending: TsComboBox
-      Left = 860
+      Left = -28
       Top = 12
       Width = 145
       Height = 27
@@ -601,7 +600,7 @@ object F_Transaksi: TF_Transaksi
   object Grid: TcxGrid
     Left = 0
     Top = 235
-    Width = 1008
+    Width = 103
     Height = 172
     Align = alClient
     BevelInner = bvNone
@@ -871,8 +870,8 @@ object F_Transaksi: TF_Transaksi
   end
   object p_keterangan: TsPanel
     Left = 0
-    Top = 407
-    Width = 1008
+    Top = 205
+    Width = 103
     Height = 30
     Align = alBottom
     TabOrder = 5
@@ -914,13 +913,13 @@ object F_Transaksi: TF_Transaksi
   object pnlHeader: TsPanel
     Left = 0
     Top = 97
-    Width = 1008
+    Width = 103
     Height = 100
     Align = alTop
     TabOrder = 6
     SkinData.SkinSection = 'PANEL'
     object ed_Harga: TsCurrencyEdit
-      Left = 606
+      Left = -299
       Top = 1
       Width = 401
       Height = 98
@@ -960,7 +959,7 @@ object F_Transaksi: TF_Transaksi
   object pnlPilihan: TsPanel
     Left = 0
     Top = 0
-    Width = 1008
+    Width = 103
     Height = 97
     Align = alTop
     TabOrder = 7
