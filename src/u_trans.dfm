@@ -3,6 +3,7 @@ object F_Transaksi: TF_Transaksi
   Top = 0
   Width = 136
   Height = 240
+  BorderStyle = bsNone
   Caption = 'transaksi'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
