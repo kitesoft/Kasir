@@ -1,8 +1,6 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 324
-  Top = 195
   Height = 343
   Width = 397
   object db_conn: TMyConnection
@@ -41,7 +39,7 @@ object dm: Tdm
     Top = 112
   end
   object laporan: TfrxReport
-    Version = '4.9.35'
+    Version = '5.3.14'
     DotMatrixReport = True
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -77,6 +75,7 @@ object dm: Tdm
       TopMargin = 5.000000000000000000
       BottomMargin = 5.000000000000000000
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 18.897650000000000000
         Top = 181.417440000000000000
         Width = 755.906000000000000000
@@ -87,7 +86,6 @@ object dm: Tdm
           Left = 102.047310000000000000
           Width = 389.291590000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -95,7 +93,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' [db_laporan."n_barang"]')
           ParentFont = False
         end
@@ -103,7 +101,6 @@ object dm: Tdm
           Left = 491.338900000000000000
           Width = 52.913420000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -112,7 +109,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."Qty_purchase"]')
           ParentFont = False
         end
@@ -120,7 +117,6 @@ object dm: Tdm
           Left = 650.079160000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0'
@@ -131,7 +127,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."harga_pokok"] ')
           ParentFont = False
         end
@@ -139,7 +135,6 @@ object dm: Tdm
           Left = 34.015770000000000000
           Width = 68.031540000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -147,7 +142,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' [db_laporan."kd_barang"]')
           ParentFont = False
         end
@@ -155,7 +150,6 @@ object dm: Tdm
           Left = 544.252320000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0'
@@ -166,7 +160,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             
               '[StrToFloat(<db_laporan."harga_pokok">) / StrToFloat(<db_laporan' +
               '."qty_purchase">)]')
@@ -175,25 +169,24 @@ object dm: Tdm
         object Memo10: TfrxMemoView
           Width = 34.015770000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' [Line]')
           ParentFont = False
         end
       end
       object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
         Height = 102.047310000000000000
         Top = 18.897650000000000000
         Width = 755.906000000000000000
         object db_laporann_perusahaan: TfrxMemoView
           Width = 377.953000000000000000
           Height = 18.897637800000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -201,7 +194,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = [fsBold]
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."kd_perusahaan"] - [db_laporan."n_perusahaan"]')
           ParentFont = False
         end
@@ -209,7 +202,6 @@ object dm: Tdm
           Top = 18.897650000000000000
           Width = 377.953000000000000000
           Height = 18.897637800000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -217,7 +209,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."alamat"] [db_laporan."telp"]')
           ParentFont = False
         end
@@ -226,7 +218,6 @@ object dm: Tdm
           Top = 60.472480000000000000
           Width = 185.196970000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -234,7 +225,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ': [db_laporan."kd_purchase"]')
           ParentFont = False
         end
@@ -243,7 +234,6 @@ object dm: Tdm
           Top = 60.472480000000000000
           Width = 147.401670000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = 'dd mmmm yyyy'
@@ -254,7 +244,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ': [<db_laporan."tgl_purchase">]')
           ParentFont = False
         end
@@ -263,7 +253,6 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 389.291590000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -272,7 +261,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' Deskripsi Barang')
           ParentFont = False
         end
@@ -281,7 +270,6 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 52.913420000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -291,7 +279,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Qty')
           ParentFont = False
         end
@@ -300,7 +288,6 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0'
@@ -312,7 +299,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Jumlah ')
           ParentFont = False
         end
@@ -321,7 +308,6 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 68.031540000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -330,7 +316,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' PID')
           ParentFont = False
         end
@@ -339,7 +325,6 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -349,7 +334,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Harga Sat ')
           ParentFont = False
         end
@@ -357,14 +342,13 @@ object dm: Tdm
           Top = 83.149660000000000000
           Width = 34.015770000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' No')
           ParentFont = False
         end
@@ -372,7 +356,6 @@ object dm: Tdm
           Left = 377.953000000000000000
           Width = 377.953000000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -381,7 +364,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = [fsBold]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Supplier : ([db_laporan."kd_suplier"]) [db_laporan."n_supp"] ')
           ParentFont = False
         end
@@ -389,7 +372,6 @@ object dm: Tdm
           Top = 37.795300000000000000
           Width = 302.362400000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -397,7 +379,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'NPWP : [db_laporan."NPWP"]')
           ParentFont = False
         end
@@ -406,7 +388,6 @@ object dm: Tdm
           Top = 18.897650000000000000
           Width = 377.953000000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -415,7 +396,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."alamat_supplier"]')
           ParentFont = False
         end
@@ -423,7 +404,6 @@ object dm: Tdm
           Top = 60.472480000000000000
           Width = 68.031540000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -431,7 +411,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'KODE PO')
           ParentFont = False
         end
@@ -440,7 +420,6 @@ object dm: Tdm
           Top = 60.472480000000000000
           Width = 86.929190000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -448,7 +427,7 @@ object dm: Tdm
           Font.Height = -13
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'TGL. FAKTUR')
           ParentFont = False
         end
@@ -456,7 +435,6 @@ object dm: Tdm
           Top = 37.795260940000000000
           Width = 755.906000000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -465,19 +443,19 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = [fsBold]
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'FORM PURCHASE ORDER')
           ParentFont = False
         end
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
         Height = 17.000000000000000000
         Top = 400.630180000000000000
         Width = 755.906000000000000000
         object Memo13: TfrxMemoView
           Width = 574.488560000000000000
           Height = 15.118120000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -485,7 +463,7 @@ object dm: Tdm
           Font.Height = -11
           Font.Name = 'tahoma'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Print out pada : [Date] / [Time] oleh : [db_laporan."n_user"] ')
           ParentFont = False
         end
@@ -493,7 +471,6 @@ object dm: Tdm
           Left = 574.488560000000000000
           Width = 181.417440000000000000
           Height = 15.118120000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -502,12 +479,13 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Halaman [Page] dari [TotalPages#]')
           ParentFont = False
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 117.165430000000000000
         Top = 222.992270000000000000
         Width = 755.906000000000000000
@@ -515,7 +493,6 @@ object dm: Tdm
           Left = 650.079160000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0'
@@ -528,14 +505,13 @@ object dm: Tdm
           Frame.Style = fsDouble
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."harga_pokok">)] ')
           ParentFont = False
         end
         object Memo2: TfrxMemoView
           Width = 491.338900000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -544,7 +520,7 @@ object dm: Tdm
           Frame.Style = fsDouble
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'TOTAL')
           ParentFont = False
         end
@@ -553,7 +529,6 @@ object dm: Tdm
           Top = 22.677180000000000000
           Width = 668.976810000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -568,7 +543,6 @@ object dm: Tdm
           Top = 22.677180000000000000
           Width = 86.929190000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -577,7 +551,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' Terbilang    :')
           ParentFont = False
         end
@@ -585,7 +559,6 @@ object dm: Tdm
           Left = 544.252320000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -601,7 +574,6 @@ object dm: Tdm
           Left = 491.338900000000000000
           Width = 52.913420000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -612,7 +584,7 @@ object dm: Tdm
           Frame.Style = fsDouble
           Frame.Typ = [ftTop, ftBottom]
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."Qty_purchase">)]')
           ParentFont = False
         end
@@ -620,7 +592,6 @@ object dm: Tdm
           Top = 41.574830000000000000
           Width = 86.929190000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -629,7 +600,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' Keterangan :')
           ParentFont = False
         end
@@ -637,7 +608,6 @@ object dm: Tdm
           Top = 60.472480000000000000
           Width = 389.291590000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -646,7 +616,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' 1. Order dianggap sah bila ada ttd dan stempel pemesan')
           ParentFont = False
         end
@@ -654,7 +624,6 @@ object dm: Tdm
           Top = 79.370130000000000000
           Width = 389.291590000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -663,7 +632,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' 2. Pengiriman Barang wajib melampirkan FPO')
           ParentFont = False
         end
@@ -671,7 +640,6 @@ object dm: Tdm
           Top = 98.267780000000000000
           Width = 389.291590000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -680,7 +648,7 @@ object dm: Tdm
           Font.Name = 'tahoma'
           Font.Style = []
           Frame.Style = fsDot
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             ' 3. Jika terjadi perbedaan, maka yang menjadi acuan adalah FPO')
           ParentFont = False
         end
@@ -689,7 +657,6 @@ object dm: Tdm
           Top = 41.574830000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -699,7 +666,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Sales')
           ParentFont = False
         end
@@ -708,7 +675,6 @@ object dm: Tdm
           Top = 41.574830000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -718,7 +684,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Pengirim')
           ParentFont = False
         end
@@ -727,7 +693,6 @@ object dm: Tdm
           Top = 41.574830000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -737,7 +702,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Pemesan')
           ParentFont = False
         end
@@ -746,7 +711,6 @@ object dm: Tdm
           Top = 98.267780000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -756,7 +720,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '(......................)')
           ParentFont = False
         end
@@ -765,7 +729,6 @@ object dm: Tdm
           Top = 98.267780000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -775,7 +738,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '(......................)')
           ParentFont = False
         end
@@ -784,7 +747,6 @@ object dm: Tdm
           Top = 98.267780000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -794,7 +756,7 @@ object dm: Tdm
           Font.Style = []
           Frame.Style = fsDot
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '(......................)')
           ParentFont = False
         end
@@ -20215,7 +20177,12 @@ object dm: Tdm
       end>
     Left = 88
     Top = 208
-    Bitmap = {}
+    Bitmap = {
+      494C010100000800080001000100FFFFFFFF0400FFFFFFFFFFFFFFFF424D7600
+      0000000000007600000028000000040000000100000001000400000000000400
+      0000000000000000000000000000000000000000000000008000008000000080
+      8000800000008000800080800000C0C0C000808080000000FF0000FF000000FF
+      FF00FF000000FF00FF00FFFF0000FFFFFF0000000000}
   end
   object QGroup: TMyQuery
     Connection = db_conn
