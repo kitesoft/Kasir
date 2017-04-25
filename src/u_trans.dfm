@@ -1,10 +1,10 @@
 object F_Transaksi: TF_Transaksi
   Left = 0
   Top = 0
-  Width = 136
-  Height = 240
   BorderStyle = bsNone
   Caption = 'transaksi'
+  ClientHeight = 571
+  ClientWidth = 1018
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,8 +24,8 @@ object F_Transaksi: TF_Transaksi
   TextHeight = 13
   object Sb: TsStatusBar
     Left = 0
-    Top = 403
-    Width = 103
+    Top = 549
+    Width = 1018
     Height = 22
     Panels = <
       item
@@ -76,11 +76,13 @@ object F_Transaksi: TF_Transaksi
         Width = 120
       end>
     SkinData.SkinSection = 'STATUSBAR'
+    ExplicitTop = -22
+    ExplicitWidth = 0
   end
   object p_pesan: TsPanel
     Left = 0
-    Top = 235
-    Width = 103
+    Top = 381
+    Width = 1018
     Height = 22
     Align = alBottom
     BevelOuter = bvNone
@@ -95,11 +97,13 @@ object F_Transaksi: TF_Transaksi
     SkinData.CustomColor = True
     SkinData.CustomFont = True
     SkinData.SkinSection = 'LABEL'
+    ExplicitTop = -190
+    ExplicitWidth = 0
     DesignSize = (
-      103
+      1018
       22)
     object l_pesan: TsLabel
-      Left = -7
+      Left = -17
       Top = 2
       Width = 34
       Height = 16
@@ -118,21 +122,24 @@ object F_Transaksi: TF_Transaksi
       Font.Name = 'Rockwell'
       Font.Style = []
       UseSkinColor = False
+      ExplicitLeft = -7
     end
   end
   object pnlKode: TsPanel
     Left = 0
     Top = 197
-    Width = 103
+    Width = 1018
     Height = 38
     Align = alTop
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
+    ExplicitWidth = 0
     object Ed_Code: TsEdit
       Left = 186
       Top = 1
-      Width = 821
+      Width = 831
       Height = 36
+      Align = alClient
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -24
@@ -144,8 +151,9 @@ object F_Transaksi: TF_Transaksi
       OnExit = Ed_CodeExit
       OnKeyDown = Ed_CodeKeyDown
       OnKeyPress = Ed_CodeKeyPress
-      Align = alClient
       SkinData.SkinSection = 'PANEL'
+      ExplicitWidth = 821
+      ExplicitHeight = 35
     end
     object pnlRetailTunai: TPanel
       Left = 1
@@ -165,14 +173,16 @@ object F_Transaksi: TF_Transaksi
   end
   object pnlFooter: TsPanel
     Left = 0
-    Top = 257
-    Width = 103
+    Top = 403
+    Width = 1018
     Height = 146
     Align = alBottom
     TabOrder = 3
     SkinData.SkinSection = 'PANEL'
+    ExplicitTop = -168
+    ExplicitWidth = 0
     DesignSize = (
-      103
+      1018
       146)
     object sLabel9: TsLabel
       Left = 272
@@ -323,7 +333,7 @@ object F_Transaksi: TF_Transaksi
       Font.Style = []
     end
     object L_Bayar: TsLabel
-      Left = -532
+      Left = -668
       Top = 88
       Width = 242
       Height = 59
@@ -338,6 +348,7 @@ object F_Transaksi: TF_Transaksi
       Font.Height = -53
       Font.Name = 'Rockwell'
       Font.Style = []
+      ExplicitLeft = -532
     end
     object Ed_Sub: TsCurrencyEdit
       Left = 136
@@ -473,7 +484,7 @@ object F_Transaksi: TF_Transaksi
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
     object Ed_BK: TsCurrencyEdit
-      Left = -284
+      Left = -420
       Top = 41
       Width = 401
       Height = 96
@@ -514,7 +525,7 @@ object F_Transaksi: TF_Transaksi
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
     object cb_pending: TsComboBox
-      Left = -28
+      Left = -164
       Top = 12
       Width = 145
       Height = 27
@@ -528,7 +539,6 @@ object F_Transaksi: TF_Transaksi
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
-      ItemHeight = 19
       ItemIndex = -1
       ParentFont = False
       Sorted = True
@@ -549,7 +559,6 @@ object F_Transaksi: TF_Transaksi
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      ItemHeight = 13
       ItemIndex = 0
       ParentFont = False
       TabOrder = 7
@@ -601,8 +610,8 @@ object F_Transaksi: TF_Transaksi
   object Grid: TcxGrid
     Left = 0
     Top = 235
-    Width = 103
-    Height = 172
+    Width = 1018
+    Height = 116
     Align = alClient
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -616,6 +625,8 @@ object F_Transaksi: TF_Transaksi
     TabOrder = 4
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
+    ExplicitWidth = 0
+    ExplicitHeight = 172
     object TableView: TcxGridTableView
       OnDblClick = TableViewDblClick
       Navigator.Buttons.CustomButtons = <>
@@ -871,13 +882,15 @@ object F_Transaksi: TF_Transaksi
   end
   object p_keterangan: TsPanel
     Left = 0
-    Top = 205
-    Width = 103
+    Top = 351
+    Width = 1018
     Height = 30
     Align = alBottom
     TabOrder = 5
     Visible = False
     SkinData.SkinSection = 'PANEL'
+    ExplicitTop = -220
+    ExplicitWidth = 0
     object l_7: TsLabel
       Left = 1
       Top = 1
@@ -892,12 +905,14 @@ object F_Transaksi: TF_Transaksi
       Font.Height = -19
       Font.Name = 'Comic Sans MS'
       Font.Style = []
+      ExplicitHeight = 26
     end
     object ed_keterangan: TsEdit
       Left = 224
       Top = 1
-      Width = 783
+      Width = 793
       Height = 28
+      Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
@@ -907,23 +922,26 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 0
       Text = 'sarimi duo'
       OnKeyDown = ed_keteranganKeyDown
-      Align = alClient
       SkinData.SkinSection = 'EDIT'
+      ExplicitWidth = 783
+      ExplicitHeight = 34
     end
   end
   object pnlHeader: TsPanel
     Left = 0
     Top = 97
-    Width = 103
+    Width = 1018
     Height = 100
     Align = alTop
     TabOrder = 6
     SkinData.SkinSection = 'PANEL'
+    ExplicitWidth = 0
     object ed_Harga: TsCurrencyEdit
-      Left = -299
+      Left = 616
       Top = 1
       Width = 401
       Height = 98
+      Align = alRight
       AutoSize = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -933,16 +951,16 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      Align = alRight
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
+      ExplicitLeft = -402
     end
     object mm_nama: TsMemo
       Left = 1
       Top = 1
-      Width = 605
+      Width = 615
       Height = 98
       Align = alClient
       Alignment = taCenter
@@ -955,17 +973,19 @@ object F_Transaksi: TF_Transaksi
       ReadOnly = True
       TabOrder = 1
       SkinData.SkinSection = 'EDIT'
+      ExplicitWidth = 605
     end
   end
   object pnlPilihan: TsPanel
     Left = 0
     Top = 0
-    Width = 103
+    Width = 1018
     Height = 97
     Align = alTop
     TabOrder = 7
     Visible = False
     SkinData.SkinSection = 'PANEL'
+    ExplicitWidth = 0
     object Lbl_5: TsLabel
       Left = 516
       Top = 63

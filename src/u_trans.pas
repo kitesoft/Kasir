@@ -13,7 +13,7 @@ uses
   DateUtils, ActnList, sDialogs, MemDS,
   DBAccess, MyAccess, cxFilter, cxData, cxLookAndFeels,
   cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, cxNavigator{, System.Actions};
+  dxSkinscxPCPainter, cxNavigator, System.Actions;
 
 const
   InputBoxMessage = WM_USER + 200;
