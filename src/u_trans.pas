@@ -1667,8 +1667,7 @@ begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
       + '"', true);
     PostMessage(Handle, InputBoxMessage, 0, 0);
-    InputString := InputBox('Void Barang',
-      'Masukkan Password Operator SERVER untuk memvoid barang ini', '');
+    InputString := InputBox('Password Operator untuk Void Barang', 'Password', '');
 
     fungsi.SQLExec(dm.Q_temp, 'select md5("' + inputstring + '")as passs', true);
     passs := dm.Q_temp.fieldbyname('passs').AsString;
@@ -1704,15 +1703,14 @@ begin
     fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
       + '"', true);
     PostMessage(Handle, InputBoxMessage, 0, 0);
-    InputString := InputBox('Batalkan Transaksi',
-      'Masukkan Password Operator SERVER untuk membatalkan transaksi ini', '');
+    InputString := InputBox('Password Operator untuk Batal Transaksi', 'Password', '');
 
     fungsi.SQLExec(dm.Q_temp, 'select md5("' + inputstring + '")as passs', true);
     passs := dm.Q_temp.fieldbyname('passs').AsString;
 
     if passs = dm.Q_show.FieldByName('password').AsString then
     begin
-      alasan := inputbox('Motive', 'Masukkan Alasan Pembatalan', '');
+      alasan := inputbox('Motive', 'Alasan', '');
       dm.db_conn.StartTransaction;
       try
         fungsi.SQLExec(dm.Q_exe,
@@ -1772,8 +1770,7 @@ begin
   fungsi.SQLExec(dm.Q_show, 'select * from tb_user where kd_user="' + dm.kd_operator
     + '"', true);
   PostMessage(Handle, InputBoxMessage, 0, 0);
-  InputString := InputBox('Return Jual',
-    'Masukkan Password Operator SERVER untuk melakukan return jual', '');
+  InputString := InputBox('Password Operator untuk Return Jual', 'Password', '');
 
   fungsi.SQLExec(dm.Q_temp, 'select md5("' + inputstring + '")as passs', true);
   passs := dm.Q_temp.fieldbyname('passs').AsString;
