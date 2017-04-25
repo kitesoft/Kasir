@@ -148,25 +148,23 @@ object f_list_sales: Tf_list_sales
       GridView = t_data1
     end
   end
-  object ed_cari: TsEdit
+  object ed_cari: TEdit
     Left = 0
     Top = 0
     Width = 1008
     Height = 21
+    Align = alTop
     TabOrder = 1
     OnKeyDown = ed_cariKeyDown
-    Align = alTop
-    SkinData.SkinSection = 'EDIT'
   end
-  object p1: TsPanel
+  object p1: TPanel
     Left = 0
     Top = 488
     Width = 1008
     Height = 36
     Align = alBottom
     TabOrder = 2
-    SkinData.SkinSection = 'PANEL'
-    object b_kecil: TsButton
+    object b_kecil: TButton
       Left = 888
       Top = 4
       Width = 113
@@ -174,9 +172,8 @@ object f_list_sales: Tf_list_sales
       Caption = 'Cetak Struk &Kecil'
       TabOrder = 0
       OnClick = b_kecilClick
-      SkinData.SkinSection = 'BUTTON'
     end
-    object b_besar: TsButton
+    object b_besar: TButton
       Left = 784
       Top = 4
       Width = 97
@@ -184,7 +181,6 @@ object f_list_sales: Tf_list_sales
       Caption = 'Cetak Struk &Besar'
       TabOrder = 1
       OnClick = b_besarClick
-      SkinData.SkinSection = 'BUTTON'
     end
   end
 end

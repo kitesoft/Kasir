@@ -21,7 +21,7 @@ object F_Bayar: TF_Bayar
     306)
   PixelsPerInch = 96
   TextHeight = 13
-  object sLabel1: TsLabel
+  object sLabel1: TLabel
     Left = 70
     Top = 8
     Width = 95
@@ -29,14 +29,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Kartu Bank'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel2: TsLabel
+  object sLabel2: TLabel
     Left = 53
     Top = 32
     Width = 112
@@ -44,14 +44,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Nomer Kartu'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel3: TsLabel
+  object sLabel3: TLabel
     Left = 33
     Top = 56
     Width = 132
@@ -59,14 +59,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Non Tunai (Rp)'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel4: TsLabel
+  object sLabel4: TLabel
     Left = 23
     Top = 80
     Width = 142
@@ -74,14 +74,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Tarik Tunai (Rp)'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel5: TsLabel
+  object sLabel5: TLabel
     Left = 26
     Top = 104
     Width = 139
@@ -89,14 +89,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Total Debit (RP)'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel6: TsLabel
+  object sLabel6: TLabel
     Left = 74
     Top = 128
     Width = 91
@@ -104,14 +104,14 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Tunai (Rp)'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
-  object sLabel7: TsLabel
+  object sLabel7: TLabel
     Left = 50
     Top = 152
     Width = 115
@@ -119,12 +119,12 @@ object F_Bayar: TF_Bayar
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Kembali (Rp)'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 2171169
     Font.Height = -19
     Font.Name = 'Rockwell'
     Font.Style = []
+    ParentFont = False
   end
   object edKembali: TsCurrencyEdit
     Left = 168
@@ -142,51 +142,35 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     ReadOnly = True
     TabOrder = 7
-    BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
     BoundLabel.Font.Height = -11
     BoundLabel.Font.Name = 'MS Sans Serif'
     BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
+    BoundLabel.ParentFont = False
     SkinData.SkinSection = 'PANEL'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False
     DisplayFormat = '###,###,##0;-###,###,##0;0'
   end
-  object cbBank: TsComboBox
+  object cbBank: TComboBox
     Left = 168
     Top = 8
     Width = 265
-    Height = 24
-    Anchors = [akTop, akRight]
-    Alignment = taLeftJustify
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
-    SkinData.SkinSection = 'PANEL'
+    Height = 23
     Style = csDropDownList
+    Anchors = [akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
-    ItemHeight = 18
-    ItemIndex = -1
     ParentFont = False
     Sorted = True
     TabOrder = 1
     OnEnter = CompEnter
   end
-  object edNomerKartu: TsEdit
+  object edNomerKartu: TEdit
     Left = 168
     Top = 32
     Width = 265
@@ -200,16 +184,6 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     TabOrder = 2
     OnEnter = CompEnter
-    SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object edDebit: TsCurrencyEdit
     Left = 168
@@ -227,15 +201,12 @@ object F_Bayar: TF_Bayar
     TabOrder = 3
     OnChange = EditChange
     OnEnter = CompEnter
-    BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
     BoundLabel.Font.Height = -11
     BoundLabel.Font.Name = 'MS Sans Serif'
     BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
+    BoundLabel.ParentFont = False
     SkinData.SkinSection = 'PANEL'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False
@@ -257,15 +228,12 @@ object F_Bayar: TF_Bayar
     TabOrder = 4
     OnChange = EditChange
     OnEnter = CompEnter
-    BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
     BoundLabel.Font.Height = -11
     BoundLabel.Font.Name = 'MS Sans Serif'
     BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
+    BoundLabel.ParentFont = False
     SkinData.SkinSection = 'PANEL'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False
@@ -287,21 +255,18 @@ object F_Bayar: TF_Bayar
     TabOrder = 6
     OnChange = EditChange
     OnEnter = CompEnter
-    BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
     BoundLabel.Font.Height = -11
     BoundLabel.Font.Name = 'MS Sans Serif'
     BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
+    BoundLabel.ParentFont = False
     SkinData.SkinSection = 'PANEL'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False
     DisplayFormat = '###,###,##0;-###,###,##0;0'
   end
-  object pnlAtas: TsPanel
+  object pnlAtas: TPanel
     Left = 0
     Top = 184
     Width = 441
@@ -309,11 +274,10 @@ object F_Bayar: TF_Bayar
     Align = alBottom
     Enabled = False
     TabOrder = 0
-    SkinData.SkinSection = 'PANEL'
     DesignSize = (
       441
       81)
-    object sLabel0: TsLabel
+    object sLabel0: TLabel
       Left = 71
       Top = 20
       Width = 94
@@ -321,12 +285,12 @@ object F_Bayar: TF_Bayar
       Alignment = taRightJustify
       Anchors = [akRight, akBottom]
       Caption = 'Debit'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -37
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
     object edBesar: TsCurrencyEdit
       Left = 168
@@ -342,30 +306,26 @@ object F_Bayar: TF_Bayar
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      BoundLabel.Indent = 0
       BoundLabel.Font.Charset = DEFAULT_CHARSET
       BoundLabel.Font.Color = clWindowText
       BoundLabel.Font.Height = -11
       BoundLabel.Font.Name = 'MS Sans Serif'
       BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
+      BoundLabel.ParentFont = False
       SkinData.SkinSection = 'PANEL'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
   end
-  object pnlBawah: TsPanel
+  object pnlBawah: TPanel
     Left = 0
     Top = 265
     Width = 441
     Height = 41
     Align = alBottom
     TabOrder = 8
-    SkinData.SkinSection = 'PANEL'
-    object btnSimpan: TsButton
+    object btnSimpan: TButton
       Left = 280
       Top = 8
       Width = 75
@@ -375,9 +335,8 @@ object F_Bayar: TF_Bayar
       ModalResult = 1
       TabOrder = 0
       OnEnter = CompEnter
-      SkinData.SkinSection = 'BUTTON'
     end
-    object btnBatal: TsButton
+    object btnBatal: TButton
       Left = 360
       Top = 8
       Width = 75
@@ -386,7 +345,6 @@ object F_Bayar: TF_Bayar
       ModalResult = 2
       TabOrder = 1
       OnEnter = CompEnter
-      SkinData.SkinSection = 'BUTTON'
     end
   end
   object edTotalDebit: TsCurrencyEdit
@@ -405,15 +363,12 @@ object F_Bayar: TF_Bayar
     ParentFont = False
     ReadOnly = True
     TabOrder = 5
-    BoundLabel.Indent = 0
     BoundLabel.Font.Charset = DEFAULT_CHARSET
     BoundLabel.Font.Color = clWindowText
     BoundLabel.Font.Height = -11
     BoundLabel.Font.Name = 'MS Sans Serif'
     BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
+    BoundLabel.ParentFont = False
     SkinData.SkinSection = 'PANEL'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False

@@ -22,7 +22,7 @@ object F_Transaksi: TF_Transaksi
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Sb: TsStatusBar
+  object Sb: TStatusBar
     Left = 0
     Top = 549
     Width = 1018
@@ -75,11 +75,8 @@ object F_Transaksi: TF_Transaksi
       item
         Width = 120
       end>
-    SkinData.SkinSection = 'STATUSBAR'
-    ExplicitTop = -22
-    ExplicitWidth = 0
   end
-  object p_pesan: TsPanel
+  object p_pesan: TPanel
     Left = 0
     Top = 381
     Width = 1018
@@ -94,15 +91,10 @@ object F_Transaksi: TF_Transaksi
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    SkinData.CustomColor = True
-    SkinData.CustomFont = True
-    SkinData.SkinSection = 'LABEL'
-    ExplicitTop = -190
-    ExplicitWidth = 0
     DesignSize = (
       1018
       22)
-    object l_pesan: TsLabel
+    object l_pesan: TLabel
       Left = -17
       Top = 2
       Width = 34
@@ -111,30 +103,27 @@ object F_Transaksi: TF_Transaksi
       BiDiMode = bdLeftToRight
       Caption = 'Pesan'
       Color = clWhite
-      ParentBiDiMode = False
-      ParentColor = False
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clYellow
       Font.Height = -13
       Font.Name = 'Rockwell'
       Font.Style = []
-      UseSkinColor = False
+      ParentBiDiMode = False
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       ExplicitLeft = -7
     end
   end
-  object pnlKode: TsPanel
+  object pnlKode: TPanel
     Left = 0
     Top = 197
     Width = 1018
     Height = 38
     Align = alTop
     TabOrder = 0
-    SkinData.SkinSection = 'PANEL'
-    ExplicitWidth = 0
-    object Ed_Code: TsEdit
+    object Ed_Code: TEdit
       Left = 186
       Top = 1
       Width = 831
@@ -151,8 +140,6 @@ object F_Transaksi: TF_Transaksi
       OnExit = Ed_CodeExit
       OnKeyDown = Ed_CodeKeyDown
       OnKeyPress = Ed_CodeKeyPress
-      SkinData.SkinSection = 'PANEL'
-      ExplicitWidth = 821
       ExplicitHeight = 35
     end
     object pnlRetailTunai: TPanel
@@ -171,127 +158,124 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 1
     end
   end
-  object pnlFooter: TsPanel
+  object pnlFooter: TPanel
     Left = 0
     Top = 403
     Width = 1018
     Height = 146
     Align = alBottom
     TabOrder = 3
-    SkinData.SkinSection = 'PANEL'
-    ExplicitTop = -168
-    ExplicitWidth = 0
     DesignSize = (
       1018
       146)
-    object sLabel9: TsLabel
+    object sLabel9: TLabel
       Left = 272
       Top = 88
       Width = 110
       Height = 21
       Caption = 'Jatuh Tempo'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
     end
-    object sLabel8: TsLabel
+    object sLabel8: TLabel
       Left = 272
       Top = 64
       Width = 46
       Height = 21
       Caption = 'Lama'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
     end
-    object sLabel7: TsLabel
+    object sLabel7: TLabel
       Left = 272
       Top = 16
       Width = 59
       Height = 21
       Caption = 'ID Pel.'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
     end
-    object sLabel6: TsLabel
+    object sLabel6: TLabel
       Left = 8
       Top = 112
       Width = 73
       Height = 21
       Caption = 'Kembali'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel5: TsLabel
+    object sLabel5: TLabel
       Left = 8
       Top = 88
       Width = 50
       Height = 21
       Caption = 'Bayar'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel4: TsLabel
+    object sLabel4: TLabel
       Left = 8
       Top = 64
       Width = 105
       Height = 21
       Caption = 'Grand Total'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel3: TsLabel
+    object sLabel3: TLabel
       Left = 8
       Top = 16
       Width = 82
       Height = 21
       Caption = 'Sub Total'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel2: TsLabel
+    object sLabel2: TLabel
       Left = 8
       Top = 40
       Width = 78
       Height = 21
       Caption = 'Discount'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel10: TsLabel
+    object sLabel10: TLabel
       Left = 528
       Top = 88
       Width = 49
@@ -299,13 +283,13 @@ object F_Transaksi: TF_Transaksi
       Alignment = taCenter
       AutoSize = False
       Caption = 'Hari'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
     end
     object sb_cari_pel: TsSpeedButton
       Left = 528
@@ -318,21 +302,21 @@ object F_Transaksi: TF_Transaksi
       Images = dm.gambar
       ImageIndex = 0
     end
-    object L_nm_pel: TsLabel
+    object L_nm_pel: TLabel
       Left = 392
       Top = 40
       Width = 56
       Height = 21
       Caption = 'Umum'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -19
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
     end
-    object L_Bayar: TsLabel
+    object L_Bayar: TLabel
       Left = -668
       Top = 88
       Width = 242
@@ -341,13 +325,13 @@ object F_Transaksi: TF_Transaksi
       Anchors = [akRight, akBottom]
       AutoSize = False
       Caption = 'KEMBALI'
-      ParentFont = False
-      Visible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 2171169
       Font.Height = -53
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
+      Visible = False
       ExplicitLeft = -532
     end
     object Ed_Sub: TsCurrencyEdit
@@ -371,7 +355,7 @@ object F_Transaksi: TF_Transaksi
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
-    object Ed_Pelanggan: TsEdit
+    object Ed_Pelanggan: TEdit
       Left = 392
       Top = 16
       Width = 137
@@ -387,9 +371,8 @@ object F_Transaksi: TF_Transaksi
       Visible = False
       OnChange = Ed_PelangganChange
       OnKeyDown = Ed_PelangganKeyDown
-      SkinData.SkinSection = 'PANEL'
     end
-    object Ed_Lama: TsEdit
+    object Ed_Lama: TEdit
       Left = 528
       Top = 64
       Width = 49
@@ -405,7 +388,6 @@ object F_Transaksi: TF_Transaksi
       Text = '0'
       Visible = False
       OnChange = Ed_LamaChange
-      SkinData.SkinSection = 'PANEL'
     end
     object Ed_Kembali: TsCurrencyEdit
       Left = 136
@@ -427,7 +409,7 @@ object F_Transaksi: TF_Transaksi
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
-    object Ed_jatuh_tempo: TsEdit
+    object Ed_jatuh_tempo: TEdit
       Left = 392
       Top = 87
       Width = 137
@@ -441,7 +423,6 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       TabOrder = 9
       Visible = False
-      SkinData.SkinSection = 'PANEL'
     end
     object Ed_Grand: TsCurrencyEdit
       Left = 136
@@ -524,35 +505,28 @@ object F_Transaksi: TF_Transaksi
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
     end
-    object cb_pending: TsComboBox
+    object cb_pending: TComboBox
       Left = -164
       Top = 12
       Width = 145
       Height = 27
-      Anchors = [akRight, akBottom]
-      Alignment = taLeftJustify
-      SkinData.SkinSection = 'PANEL'
-      VerticalAlignment = taAlignTop
       Style = csDropDownList
+      Anchors = [akRight, akBottom]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
-      ItemIndex = -1
       ParentFont = False
       Sorted = True
       TabOrder = 11
       Visible = False
     end
-    object Cb_lama: TsComboBox
+    object Cb_lama: TComboBox
       Left = 392
       Top = 64
       Width = 137
       Height = 21
-      Alignment = taLeftJustify
-      SkinData.SkinSection = 'PANEL'
-      VerticalAlignment = taAlignTop
       Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -595,7 +569,7 @@ object F_Transaksi: TF_Transaksi
       DisplayFormat = '##0.00;(##0.00);0.00'
       MaxValue = 100.000000000000000000
     end
-    object b_simpan: TsButton
+    object b_simpan: TButton
       Left = 392
       Top = 112
       Width = 137
@@ -604,7 +578,6 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 10
       Visible = False
       OnClick = b_simpanClick
-      SkinData.SkinSection = 'BUTTON'
     end
   end
   object Grid: TcxGrid
@@ -625,8 +598,6 @@ object F_Transaksi: TF_Transaksi
     TabOrder = 4
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
-    ExplicitWidth = 0
-    ExplicitHeight = 172
     object TableView: TcxGridTableView
       OnDblClick = TableViewDblClick
       Navigator.Buttons.CustomButtons = <>
@@ -880,7 +851,7 @@ object F_Transaksi: TF_Transaksi
       GridView = TableView
     end
   end
-  object p_keterangan: TsPanel
+  object p_keterangan: TPanel
     Left = 0
     Top = 351
     Width = 1018
@@ -888,10 +859,7 @@ object F_Transaksi: TF_Transaksi
     Align = alBottom
     TabOrder = 5
     Visible = False
-    SkinData.SkinSection = 'PANEL'
-    ExplicitTop = -220
-    ExplicitWidth = 0
-    object l_7: TsLabel
+    object l_7: TLabel
       Left = 1
       Top = 1
       Width = 223
@@ -899,15 +867,15 @@ object F_Transaksi: TF_Transaksi
       Align = alLeft
       Alignment = taCenter
       Caption = 'Isi Keterangan di sini -->  '
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
       Font.Name = 'Comic Sans MS'
       Font.Style = []
+      ParentFont = False
       ExplicitHeight = 26
     end
-    object ed_keterangan: TsEdit
+    object ed_keterangan: TEdit
       Left = 224
       Top = 1
       Width = 793
@@ -922,20 +890,16 @@ object F_Transaksi: TF_Transaksi
       TabOrder = 0
       Text = 'sarimi duo'
       OnKeyDown = ed_keteranganKeyDown
-      SkinData.SkinSection = 'EDIT'
-      ExplicitWidth = 783
       ExplicitHeight = 34
     end
   end
-  object pnlHeader: TsPanel
+  object pnlHeader: TPanel
     Left = 0
     Top = 97
     Width = 1018
     Height = 100
     Align = alTop
     TabOrder = 6
-    SkinData.SkinSection = 'PANEL'
-    ExplicitWidth = 0
     object ed_Harga: TsCurrencyEdit
       Left = 616
       Top = 1
@@ -955,9 +919,8 @@ object F_Transaksi: TF_Transaksi
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
       DisplayFormat = '###,###,##0;-###,###,##0;0'
-      ExplicitLeft = -402
     end
-    object mm_nama: TsMemo
+    object mm_nama: TMemo
       Left = 1
       Top = 1
       Width = 615
@@ -972,11 +935,9 @@ object F_Transaksi: TF_Transaksi
       ParentFont = False
       ReadOnly = True
       TabOrder = 1
-      SkinData.SkinSection = 'EDIT'
-      ExplicitWidth = 605
     end
   end
-  object pnlPilihan: TsPanel
+  object pnlPilihan: TPanel
     Left = 0
     Top = 0
     Width = 1018
@@ -984,9 +945,7 @@ object F_Transaksi: TF_Transaksi
     Align = alTop
     TabOrder = 7
     Visible = False
-    SkinData.SkinSection = 'PANEL'
-    ExplicitWidth = 0
-    object Lbl_5: TsLabel
+    object Lbl_5: TLabel
       Left = 516
       Top = 63
       Width = 58
@@ -994,7 +953,7 @@ object F_Transaksi: TF_Transaksi
       Alignment = taCenter
       Caption = 'Ubah Harga'#13#10'ex. (1000/)'
     end
-    object Lbl_2: TsLabel
+    object Lbl_2: TLabel
       Left = 584
       Top = 63
       Width = 45
@@ -1002,7 +961,7 @@ object F_Transaksi: TF_Transaksi
       Alignment = taCenter
       Caption = 'Ubah Qty'#13#10'ex. (5+)'
     end
-    object Lbl_3: TsLabel
+    object Lbl_3: TLabel
       Left = 640
       Top = 63
       Width = 73
@@ -1010,7 +969,7 @@ object F_Transaksi: TF_Transaksi
       Alignment = taCenter
       Caption = 'Ubah Diskon %'#13#10'ex. (2.5*)'
     end
-    object Lbl_4: TsLabel
+    object Lbl_4: TLabel
       Left = 720
       Top = 63
       Width = 79
@@ -1018,7 +977,7 @@ object F_Transaksi: TF_Transaksi
       Alignment = taCenter
       Caption = 'Ubah Diskon Rp'#13#10'ex. (500-)'
     end
-    object BtnInsert: TsButton
+    object BtnInsert: TButton
       Left = 640
       Top = 4
       Width = 120
@@ -1026,9 +985,8 @@ object F_Transaksi: TF_Transaksi
       Action = ac_Insert
       Caption = 'Tambah Harga (Insert)'
       TabOrder = 0
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnVoid: TsButton
+    object BtnVoid: TButton
       Left = 640
       Top = 34
       Width = 120
@@ -1036,9 +994,8 @@ object F_Transaksi: TF_Transaksi
       Action = ac_void
       Caption = 'Void (Ctrl + Del)'
       TabOrder = 1
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnBatal: TsButton
+    object BtnBatal: TButton
       Left = 512
       Top = 4
       Width = 120
@@ -1046,9 +1003,8 @@ object F_Transaksi: TF_Transaksi
       Action = ac_Batal
       Caption = 'Batal (Shift + Del)'
       TabOrder = 2
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnKunci: TsButton
+    object BtnKunci: TButton
       Left = 512
       Top = 34
       Width = 120
@@ -1056,133 +1012,118 @@ object F_Transaksi: TF_Transaksi
       Action = ac_Kunci
       Caption = 'Kunci (Ctrl + L)'
       TabOrder = 3
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnReturn: TsButton
+    object BtnReturn: TButton
       Left = 4
       Top = 60
       Width = 120
       Height = 25
       Action = ac_Return
       TabOrder = 4
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnPending: TsButton
+    object BtnPending: TButton
       Left = 128
       Top = 4
       Width = 120
       Height = 25
       Action = ac_Pending
       TabOrder = 5
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnLoad: TsButton
+    object BtnLoad: TButton
       Left = 128
       Top = 32
       Width = 120
       Height = 25
       Action = ac_Load
       TabOrder = 6
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnGroup: TsButton
+    object BtnGroup: TButton
       Left = 128
       Top = 60
       Width = 120
       Height = 25
       Action = ac_Group
       TabOrder = 7
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnSatuan: TsButton
+    object BtnSatuan: TButton
       Left = 256
       Top = 4
       Width = 120
       Height = 25
       Action = ac_Satuan
       TabOrder = 8
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnCetak: TsButton
+    object BtnCetak: TButton
       Left = 384
       Top = 4
       Width = 120
       Height = 25
       Action = ac_cetak
       TabOrder = 9
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnPenjualanToko: TsButton
+    object BtnPenjualanToko: TButton
       Left = 256
       Top = 32
       Width = 120
       Height = 25
       Action = ac_jual_global
       TabOrder = 10
-      SkinData.SkinSection = 'BUTTON'
     end
-    object Btnsetting: TsButton
+    object Btnsetting: TButton
       Left = 4
       Top = 32
       Width = 120
       Height = 25
       Action = ac_setting
       TabOrder = 11
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnCariBarang: TsButton
+    object BtnCariBarang: TButton
       Left = 4
       Top = 4
       Width = 120
       Height = 25
       Action = ac_cari_barang
       TabOrder = 12
-      SkinData.SkinSection = 'BUTTON'
     end
-    object Btnkartu_kredit: TsButton
+    object Btnkartu_kredit: TButton
       Left = 384
       Top = 32
       Width = 120
       Height = 25
       Action = ac_kartu_kredit
       TabOrder = 13
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnDrawer: TsButton
+    object BtnDrawer: TButton
       Left = 256
       Top = 60
       Width = 120
       Height = 25
       Action = ac_drawer
       TabOrder = 14
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnKeterangan: TsButton
+    object BtnKeterangan: TButton
       Left = 384
       Top = 60
       Width = 120
       Height = 25
       Action = ac_keterangan
       TabOrder = 15
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnRetail: TsButton
+    object BtnRetail: TButton
       Left = 768
       Top = 4
       Width = 161
       Height = 25
       Action = ac_retail
       TabOrder = 16
-      SkinData.SkinSection = 'BUTTON'
     end
-    object BtnTunai: TsButton
+    object BtnTunai: TButton
       Left = 768
       Top = 34
       Width = 161
       Height = 25
       Action = ac_tunai
       TabOrder = 17
-      SkinData.SkinSection = 'BUTTON'
     end
   end
   object Timer1: TTimer

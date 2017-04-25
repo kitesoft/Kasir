@@ -17,14 +17,14 @@ type
 
   Tf_cari = class(TForm)
     sSkinProvider1: TsSkinProvider;
-    Ed_cari: TsEdit;
+    Ed_cari: TEdit;
     grid: TcxGrid;
     t_data: TcxGridDBTableView;
     l_data: TcxGridLevel;
-    BtnPilih: TsButton;
+    BtnPilih: TButton;
     ds_cari: TDataSource;
     Q_cari: TMyQuery;
-    BtnKeluar: TsButton;
+    BtnKeluar: TButton;
     procedure Ed_cariChange(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);

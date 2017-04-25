@@ -10,25 +10,25 @@ uses
 
 type
   TF_Bayar = class(TForm)
-    sLabel0: TsLabel;
+    sLabel0: TLabel;
     edBesar: TsCurrencyEdit;
-    sLabel1: TsLabel;
-    sLabel2: TsLabel;
-    sLabel3: TsLabel;
-    sLabel4: TsLabel;
-    sLabel5: TsLabel;
-    sLabel6: TsLabel;
+    sLabel1: TLabel;
+    sLabel2: TLabel;
+    sLabel3: TLabel;
+    sLabel4: TLabel;
+    sLabel5: TLabel;
+    sLabel6: TLabel;
     edKembali: TsCurrencyEdit;
-    cbBank: TsComboBox;
-    edNomerKartu: TsEdit;
+    cbBank: TComboBox;
+    edNomerKartu: TEdit;
     edDebit: TsCurrencyEdit;
     edTarik: TsCurrencyEdit;
     edTunai: TsCurrencyEdit;
-    pnlAtas: TsPanel;
-    pnlBawah: TsPanel;
-    btnSimpan: TsButton;
-    btnBatal: TsButton;
-    sLabel7: TsLabel;
+    pnlAtas: TPanel;
+    pnlBawah: TPanel;
+    btnSimpan: TButton;
+    btnBatal: TButton;
+    sLabel7: TLabel;
     edTotalDebit: TsCurrencyEdit;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure EditChange(Sender: TObject);
@@ -96,7 +96,7 @@ begin
     sLabel0.Caption := StringReplace(TsCurrencyEdit(Sender).Name, 'ed', '', [rfReplaceAll]);
     edBesar.Value := TsCurrencyEdit(Sender).Value;
   end
-  else if TsButton(Sender) = btnSimpan then
+  else if TButton(Sender) = btnSimpan then
   begin
     pnlAtas.Visible := True;
     edBesar.Value := edKembali.Value;

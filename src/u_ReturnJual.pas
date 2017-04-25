@@ -16,23 +16,23 @@ uses
 
 type
   Tf_returnJual = class(TForm)
-    sPanel1: TsPanel;
-    panel2: TsPanel;
-    sBevel1: TsBevel;
-    sLabel1: TsLabel;
-    sLabel4: TsLabel;
+    sPanel1: TPanel;
+    panel2: TPanel;
+    sBevel1: TBevel;
+    sLabel1: TLabel;
+    sLabel4: TLabel;
     sb_pelanggan: TsSpeedButton;
     sb_cari: TsSpeedButton;
-    l_toko: TsLabel;
-    sLabel5: TsLabel;
-    ed_no_faktur: TsEdit;
-    ed_pelanggan: TsEdit;
-    ed_code: TsEdit;
-    ed_fak_jual: TsEdit;
-    panel3: TsPanel;
+    l_toko: TLabel;
+    sLabel5: TLabel;
+    ed_no_faktur: TEdit;
+    ed_pelanggan: TEdit;
+    ed_code: TEdit;
+    ed_fak_jual: TEdit;
+    panel3: TPanel;
     ed_nilai_faktur: TsCurrencyEdit;
-    od: TsOpenDialog;
-    sd: TsSaveDialog;
+    od: TOpenDialog;
+    sd: TSaveDialog;
     sSkinProvider1: TsSkinProvider;
     Grid: TcxGrid;
     TableView: TcxGridTableView;
@@ -42,11 +42,11 @@ type
     t_view_harga: TcxGridColumn;
     t_view_total: TcxGridColumn;
     Level: TcxGridLevel;
-    b_auto: TsButton;
+    b_auto: TButton;
     t_view_barcode: TcxGridColumn;
-    spnl1: TsPanel;
-    b_print: TsButton;
-    b_simpan: TsButton;
+    spnl1: TPanel;
+    b_print: TButton;
+    b_simpan: TButton;
     procedure bersih;
     procedure CreateRows;
     procedure ed_codeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

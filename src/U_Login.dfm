@@ -19,20 +19,20 @@ object F_Login: TF_Login
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object l_1: TsLabel
+  object l_1: TLabel
     Left = 8
     Top = 256
     Width = 216
     Height = 16
     Caption = 'Tekan F2 untuk merubah Perusahaan'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = []
+    ParentFont = False
   end
-  object gbUser: TsGroupBox
+  object gbUser: TGroupBox
     Left = 8
     Top = 8
     Width = 241
@@ -45,47 +45,46 @@ object F_Login: TF_Login
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    SkinData.SkinSection = 'GROUPBOX'
-    object sLabel4: TsLabel
+    object sLabel4: TLabel
       Left = 8
       Top = 40
       Width = 76
       Height = 19
       Caption = 'Kode User'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel5: TsLabel
+    object sLabel5: TLabel
       Left = 8
       Top = 96
       Width = 82
       Height = 19
       Caption = 'Nama User'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object sLabel6: TsLabel
+    object sLabel6: TLabel
       Left = 8
       Top = 152
       Width = 108
       Height = 19
       Caption = 'Password User'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object EdKdUser: TsEdit
+    object EdKdUser: TEdit
       Left = 32
       Top = 64
       Width = 201
@@ -100,18 +99,8 @@ object F_Login: TF_Login
       TabOrder = 0
       OnChange = EdKdUserChange
       OnKeyDown = EdKdUserKeyDown
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
-    object EdNamaUser: TsEdit
+    object EdNamaUser: TEdit
       Left = 32
       Top = 120
       Width = 201
@@ -124,18 +113,8 @@ object F_Login: TF_Login
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
-    object EdPasswordUser: TsEdit
+    object EdPasswordUser: TEdit
       Left = 32
       Top = 176
       Width = 201
@@ -150,19 +129,9 @@ object F_Login: TF_Login
       PasswordChar = '@'
       TabOrder = 1
       OnKeyDown = EdPasswordUserKeyDown
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
-  object sBitBtn2: TsBitBtn
+  object sBitBtn2: TBitBtn
     Left = 400
     Top = 240
     Width = 81
@@ -175,13 +144,12 @@ object F_Login: TF_Login
     Font.Name = 'Rockwell'
     Font.Style = []
     ModalResult = 2
+    NumGlyphs = 2
     ParentFont = False
     TabOrder = 2
     OnClick = sBitBtn2Click
-    NumGlyphs = 2
-    SkinData.SkinSection = 'BUTTON'
   end
-  object BtnLogin: TsButton
+  object BtnLogin: TButton
     Left = 288
     Top = 240
     Width = 75
@@ -195,9 +163,8 @@ object F_Login: TF_Login
     ParentFont = False
     TabOrder = 1
     OnClick = BtnLoginClick
-    SkinData.SkinSection = 'BUTTON'
   end
-  object sb: TsStatusBar
+  object sb: TStatusBar
     Left = 0
     Top = 277
     Width = 506
@@ -211,9 +178,8 @@ object F_Login: TF_Login
         Width = 50
       end>
     OnClick = sbClick
-    SkinData.SkinSection = 'STATUSBAR'
   end
-  object gbServer: TsGroupBox
+  object gbServer: TGroupBox
     Left = 256
     Top = 8
     Width = 241
@@ -226,47 +192,46 @@ object F_Login: TF_Login
     Font.Style = []
     ParentFont = False
     TabOrder = 4
-    SkinData.SkinSection = 'GROUPBOX'
-    object Lbl1: TsLabel
+    object Lbl1: TLabel
       Left = 8
       Top = 40
       Width = 111
       Height = 19
       Caption = 'Kode Operator'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object Lbl2: TsLabel
+    object Lbl2: TLabel
       Left = 8
       Top = 96
       Width = 117
       Height = 19
       Caption = 'Nama Operator'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object Lbl3: TsLabel
+    object Lbl3: TLabel
       Left = 8
       Top = 152
       Width = 143
       Height = 19
       Caption = 'Password Operator'
-      ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -16
       Font.Name = 'Rockwell'
       Font.Style = []
+      ParentFont = False
     end
-    object EdKdOperator: TsEdit
+    object EdKdOperator: TEdit
       Left = 32
       Top = 64
       Width = 201
@@ -281,18 +246,8 @@ object F_Login: TF_Login
       TabOrder = 0
       OnChange = EdKdOperatorChange
       OnKeyDown = EdKdOperatorKeyDown
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
-    object EdNamaOperator: TsEdit
+    object EdNamaOperator: TEdit
       Left = 32
       Top = 120
       Width = 201
@@ -305,18 +260,8 @@ object F_Login: TF_Login
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
-    object EdPasswordOperator: TsEdit
+    object EdPasswordOperator: TEdit
       Left = 32
       Top = 176
       Width = 201
@@ -331,16 +276,6 @@ object F_Login: TF_Login
       PasswordChar = '@'
       TabOrder = 1
       OnKeyDown = EdPasswordOperatorKeyDown
-      SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
 end

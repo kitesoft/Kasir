@@ -30,10 +30,10 @@ type
     clmn_data1KD_pengawas: TcxGridDBColumn;
     clmn_data1void: TcxGridDBColumn;
     clmn_data1komp: TcxGridDBColumn;
-    ed_cari: TsEdit;
-    p1: TsPanel;
-    b_kecil: TsButton;
-    b_besar: TsButton;
+    ed_cari: TEdit;
+    p1: TPanel;
+    b_kecil: TButton;
+    b_besar: TButton;
     procedure FormShow(Sender: TObject);
     procedure b_besarClick(Sender: TObject);
     procedure b_kecilClick(Sender: TObject);

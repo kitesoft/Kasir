@@ -17,54 +17,52 @@ object f_returnJual: Tf_returnJual
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
-  object sPanel1: TsPanel
+  object sPanel1: TPanel
     Left = 0
     Top = 0
     Width = 624
     Height = 433
     Align = alClient
     TabOrder = 0
-    SkinData.SkinSection = 'PANEL'
-    object panel2: TsPanel
+    object panel2: TPanel
       Left = 1
       Top = 1
       Width = 622
       Height = 88
       Align = alTop
       TabOrder = 0
-      SkinData.SkinSection = 'PANEL'
-      object sBevel1: TsBevel
+      object sBevel1: TBevel
         Left = 1
         Top = 56
         Width = 620
         Height = 31
         Align = alBottom
       end
-      object sLabel1: TsLabel
+      object sLabel1: TLabel
         Left = 240
         Top = 8
         Width = 65
         Height = 13
         Caption = 'Faktur Return'
-        ParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
       end
-      object sLabel4: TsLabel
+      object sLabel4: TLabel
         Left = 8
         Top = 8
         Width = 51
         Height = 13
         Caption = 'Pelanggan'
-        ParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
       end
       object sb_pelanggan: TsSpeedButton
         Tag = 9
@@ -88,33 +86,33 @@ object f_returnJual: Tf_returnJual
         Images = dm.gambar
         ImageIndex = 0
       end
-      object l_toko: TsLabel
+      object l_toko: TLabel
         Left = 64
         Top = 30
         Width = 82
         Height = 13
         Caption = 'Nama Pelanggan'
-        ParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
       end
-      object sLabel5: TsLabel
+      object sLabel5: TLabel
         Left = 240
         Top = 32
         Width = 52
         Height = 13
         Caption = 'Faktur Jual'
-        ParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
       end
-      object ed_no_faktur: TsEdit
+      object ed_no_faktur: TEdit
         Left = 328
         Top = 8
         Width = 201
@@ -130,10 +128,8 @@ object f_returnJual: Tf_returnJual
         TabOrder = 1
         OnChange = ed_no_fakturChange
         OnKeyDown = ed_no_fakturKeyDown
-        SkinData.CustomColor = True
-        SkinData.SkinSection = 'EDIT'
       end
-      object ed_pelanggan: TsEdit
+      object ed_pelanggan: TEdit
         Left = 64
         Top = 6
         Width = 145
@@ -149,10 +145,8 @@ object f_returnJual: Tf_returnJual
         TabOrder = 0
         OnChange = ed_pelangganChange
         OnKeyDown = ed_pelangganKeyDown
-        SkinData.CustomColor = True
-        SkinData.SkinSection = 'EDIT'
       end
-      object ed_code: TsEdit
+      object ed_code: TEdit
         Left = 32
         Top = 62
         Width = 585
@@ -167,10 +161,8 @@ object f_returnJual: Tf_returnJual
         TabOrder = 4
         OnKeyDown = ed_codeKeyDown
         OnKeyPress = ed_codeKeyPress
-        SkinData.CustomColor = True
-        SkinData.SkinSection = 'EDIT'
       end
-      object ed_fak_jual: TsEdit
+      object ed_fak_jual: TEdit
         Left = 328
         Top = 32
         Width = 201
@@ -186,10 +178,8 @@ object f_returnJual: Tf_returnJual
         TabOrder = 3
         OnChange = ed_fak_jualChange
         OnKeyPress = ed_fak_jualKeyPress
-        SkinData.CustomColor = True
-        SkinData.SkinSection = 'EDIT'
       end
-      object b_auto: TsButton
+      object b_auto: TButton
         Left = 540
         Top = 8
         Width = 73
@@ -197,22 +187,21 @@ object f_returnJual: Tf_returnJual
         Caption = '&Auto Kode'
         TabOrder = 2
         OnClick = b_autoClick
-        SkinData.SkinSection = 'BUTTON'
       end
     end
-    object panel3: TsPanel
+    object panel3: TPanel
       Left = 1
       Top = 366
       Width = 622
       Height = 66
       Align = alBottom
       TabOrder = 2
-      SkinData.SkinSection = 'PANEL'
       object ed_nilai_faktur: TsCurrencyEdit
         Left = 221
         Top = 1
         Width = 400
         Height = 64
+        Align = alRight
         AutoSize = False
         BevelInner = bvLowered
         BevelKind = bkFlat
@@ -226,7 +215,6 @@ object f_returnJual: Tf_returnJual
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
-        Align = alRight
         SkinData.CustomColor = True
         SkinData.CustomFont = True
         SkinData.SkinSection = 'PANEL'
@@ -235,15 +223,14 @@ object f_returnJual: Tf_returnJual
         DecimalPlaces = 3
         DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
       end
-      object spnl1: TsPanel
+      object spnl1: TPanel
         Left = 1
         Top = 1
         Width = 144
         Height = 64
         Align = alLeft
         TabOrder = 1
-        SkinData.SkinSection = 'PANEL'
-        object b_print: TsButton
+        object b_print: TButton
           Left = 8
           Top = 32
           Width = 129
@@ -252,9 +239,8 @@ object f_returnJual: Tf_returnJual
           Enabled = False
           TabOrder = 1
           OnClick = b_printClick
-          SkinData.SkinSection = 'BUTTON'
         end
-        object b_simpan: TsButton
+        object b_simpan: TButton
           Left = 8
           Top = 4
           Width = 129
@@ -262,7 +248,6 @@ object f_returnJual: Tf_returnJual
           Caption = '&Simpan'
           TabOrder = 0
           OnClick = b_simpanClick
-          SkinData.SkinSection = 'BUTTON'
         end
       end
     end
@@ -388,13 +373,13 @@ object f_returnJual: Tf_returnJual
       end
     end
   end
-  object od: TsOpenDialog
+  object od: TOpenDialog
     DefaultExt = '.srk'
     Filter = 'RK File|*.srk'
     Left = 883
     Top = 240
   end
-  object sd: TsSaveDialog
+  object sd: TSaveDialog
     DefaultExt = '.srk'
     Filter = 'RK File|*.srk'
     Left = 851

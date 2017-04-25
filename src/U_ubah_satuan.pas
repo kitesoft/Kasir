@@ -14,10 +14,10 @@ uses
 
 type
   TF_Ubah_Satuan = class(TForm)
-    sLabel1: TsLabel;
-    sLabel2: TsLabel;
-    L_kode: TsLabel;
-    L_nama: TsLabel;
+    sLabel1: TLabel;
+    sLabel2: TLabel;
+    L_kode: TLabel;
+    L_nama: TLabel;
     sSkinProvider1: TsSkinProvider;
     Grid: TcxGrid;
     tableview: TcxGridTableView;

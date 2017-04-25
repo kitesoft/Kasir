@@ -10,24 +10,24 @@ uses
 
 type
   TF_Login = class(TForm)
-    gbUser: TsGroupBox;
-    sLabel4: TsLabel;
-    sLabel5: TsLabel;
-    sLabel6: TsLabel;
-    EdKdUser: TsEdit;
-    EdNamaUser: TsEdit;
-    EdPasswordUser: TsEdit;
-    sBitBtn2: TsBitBtn;
-    BtnLogin: TsButton;
-    sb: TsStatusBar;
-    l_1: TsLabel;
-    gbServer: TsGroupBox;
-    Lbl1: TsLabel;
-    Lbl2: TsLabel;
-    Lbl3: TsLabel;
-    EdKdOperator: TsEdit;
-    EdNamaOperator: TsEdit;
-    EdPasswordOperator: TsEdit;
+    gbUser: TGroupBox;
+    sLabel4: TLabel;
+    sLabel5: TLabel;
+    sLabel6: TLabel;
+    EdKdUser: TEdit;
+    EdNamaUser: TEdit;
+    EdPasswordUser: TEdit;
+    sBitBtn2: TBitBtn;
+    BtnLogin: TButton;
+    sb: TStatusBar;
+    l_1: TLabel;
+    gbServer: TGroupBox;
+    Lbl1: TLabel;
+    Lbl2: TLabel;
+    Lbl3: TLabel;
+    EdKdOperator: TEdit;
+    EdNamaOperator: TEdit;
+    EdPasswordOperator: TEdit;
     procedure Pilih_Perusahaan;
     procedure Cek_Perusahaan;
     procedure FormShow(Sender: TObject);

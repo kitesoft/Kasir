@@ -1,10 +1,10 @@
 object f_cari: Tf_cari
   Left = 306
   Top = 134
-  Width = 600
-  Height = 494
   BorderIcons = [biSystemMenu]
   Caption = 'Pencarian'
+  ClientHeight = 455
+  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,10 +21,10 @@ object f_cari: Tf_cari
     455)
   PixelsPerInch = 96
   TextHeight = 13
-  object Ed_cari: TsEdit
+  object Ed_cari: TEdit
     Left = 4
     Top = 8
-    Width = 573
+    Width = 557
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     Color = clWhite
@@ -36,14 +36,12 @@ object f_cari: Tf_cari
     ParentFont = False
     TabOrder = 0
     OnChange = Ed_cariChange
-    SkinData.CustomColor = True
-    SkinData.SkinSection = 'EDIT'
   end
   object grid: TcxGrid
     Left = 4
     Top = 32
-    Width = 573
-    Height = 385
+    Width = 557
+    Height = 346
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     LookAndFeel.Kind = lfOffice11
@@ -72,20 +70,19 @@ object f_cari: Tf_cari
       GridView = t_data
     end
   end
-  object BtnKeluar: TsButton
-    Left = 501
-    Top = 424
+  object BtnKeluar: TButton
+    Left = 485
+    Top = 385
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Keluar'
     ModalResult = 2
     TabOrder = 2
-    SkinData.SkinSection = 'BUTTON'
   end
-  object BtnPilih: TsButton
-    Left = 416
-    Top = 424
+  object BtnPilih: TButton
+    Left = 400
+    Top = 385
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -93,7 +90,6 @@ object f_cari: Tf_cari
     ModalResult = 1
     TabOrder = 3
     OnClick = BtnPilihClick
-    SkinData.SkinSection = 'BUTTON'
   end
   object sSkinProvider1: TsSkinProvider
     SkinData.SkinSection = 'FORM'

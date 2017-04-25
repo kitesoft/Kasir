@@ -18,61 +18,59 @@ object F_Ubah_Satuan: TF_Ubah_Satuan
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object sLabel1: TsLabel
+  object sLabel1: TLabel
     Left = 8
     Top = 8
-    Width = 27
+    Width = 30
     Height = 19
     Caption = 'PID'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
+    ParentFont = False
   end
-  object sLabel2: TsLabel
+  object sLabel2: TLabel
     Left = 8
     Top = 32
-    Width = 104
+    Width = 107
     Height = 19
     Caption = 'Nama Barang'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
+    ParentFont = False
   end
-  object L_kode: TsLabel
+  object L_kode: TLabel
     Left = 120
     Top = 8
-    Width = 110
-    Height = 18
+    Width = 95
+    Height = 19
     Caption = 'Kode Barang'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -16
     Font.Name = 'Rockwell'
     Font.Pitch = fpFixed
     Font.Style = []
-    UseSkinColor = False
+    ParentFont = False
   end
-  object L_nama: TsLabel
+  object L_nama: TLabel
     Left = 120
     Top = 32
-    Width = 110
-    Height = 18
+    Width = 101
+    Height = 19
     Caption = 'Nama Barang'
-    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -16
     Font.Name = 'Rockwell'
     Font.Pitch = fpFixed
     Font.Style = []
-    UseSkinColor = False
+    ParentFont = False
   end
   object Grid: TcxGrid
     Left = 0

@@ -19,21 +19,20 @@ object FSetting: TFSetting
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Lbl3: TsLabel
+  object Lbl3: TLabel
     Left = 8
     Top = 256
     Width = 162
     Height = 13
     Caption = 'Harga Tambahan (ex: Min. Dingin)'
   end
-  object gb1: TsGroupBox
+  object gb1: TGroupBox
     Left = 8
     Top = 8
     Width = 329
     Height = 105
     Caption = 'Skin'
     TabOrder = 0
-    SkinData.SkinSection = 'GROUPBOX'
     object SbSkin: TsSpeedButton
       Left = 8
       Top = 24
@@ -43,16 +42,15 @@ object FSetting: TFSetting
       OnClick = SbSkinClick
       SkinData.SkinSection = 'SPEEDBUTTON'
     end
-    object EdSkin: TsEdit
+    object EdSkin: TEdit
       Left = 96
       Top = 24
       Width = 225
       Height = 21
       Enabled = False
       TabOrder = 0
-      SkinData.SkinSection = 'EDIT'
     end
-    object TbHue: TsTrackBar
+    object TbHue: TTrackBar
       Left = 8
       Top = 56
       Width = 150
@@ -63,11 +61,8 @@ object FSetting: TFSetting
       ShowHint = True
       TabOrder = 1
       OnChange = TbHueChange
-      SkinData.SkinSection = 'TRACKBAR'
-      BarOffsetV = 0
-      BarOffsetH = 0
     end
-    object TbSaturation: TsTrackBar
+    object TbSaturation: TTrackBar
       Left = 168
       Top = 56
       Width = 150
@@ -79,19 +74,15 @@ object FSetting: TFSetting
       ShowHint = True
       TabOrder = 2
       OnChange = TbSaturationChange
-      SkinData.SkinSection = 'TRACKBAR'
-      BarOffsetV = 0
-      BarOffsetH = 0
     end
   end
-  object gb2: TsGroupBox
+  object gb2: TGroupBox
     Left = 344
     Top = 8
     Width = 281
     Height = 105
     Caption = 'Pesan'
     TabOrder = 1
-    SkinData.SkinSection = 'GROUPBOX'
     object SbPesan: TsSpeedButton
       Left = 96
       Top = 68
@@ -107,7 +98,6 @@ object FSetting: TFSetting
       Width = 180
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       ParentColor = True
       Sorted = True
       TabOrder = 0
@@ -118,7 +108,6 @@ object FSetting: TFSetting
       Width = 90
       Height = 22
       Selected = clRed
-      ItemHeight = 16
       ParentColor = True
       TabOrder = 1
     end
@@ -128,7 +117,6 @@ object FSetting: TFSetting
       Width = 44
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       ItemIndex = 2
       ParentColor = True
       TabOrder = 2
@@ -150,7 +138,6 @@ object FSetting: TFSetting
       Width = 44
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       ParentColor = True
       TabOrder = 3
       Items.Strings = (
@@ -186,7 +173,6 @@ object FSetting: TFSetting
       Width = 90
       Height = 22
       Selected = clYellow
-      ItemHeight = 16
       ParentColor = True
       TabOrder = 4
     end
@@ -197,7 +183,6 @@ object FSetting: TFSetting
       Height = 21
       Style = csDropDownList
       Color = 14672870
-      ItemHeight = 13
       TabOrder = 5
       Items.Strings = (
         'Mati'
@@ -216,7 +201,7 @@ object FSetting: TFSetting
       object btnBold: TToolButton
         Tag = 1
         Left = 0
-        Top = 2
+        Top = 0
         Caption = 'B'
         ImageIndex = 3
         Style = tbsCheck
@@ -225,7 +210,7 @@ object FSetting: TFSetting
       object btnItalic: TToolButton
         Tag = 2
         Left = 25
-        Top = 2
+        Top = 0
         Caption = 'Italic'
         ImageIndex = 4
         Style = tbsCheck
@@ -234,7 +219,7 @@ object FSetting: TFSetting
       object btnUnderline: TToolButton
         Tag = 3
         Left = 50
-        Top = 2
+        Top = 0
         Caption = 'Underline'
         ImageIndex = 5
         Style = tbsCheck
@@ -242,7 +227,7 @@ object FSetting: TFSetting
       end
     end
   end
-  object BtnSimpan: TsButton
+  object BtnSimpan: TButton
     Left = 552
     Top = 256
     Width = 75
@@ -250,24 +235,22 @@ object FSetting: TFSetting
     Caption = 'Simpan'
     TabOrder = 2
     OnClick = BtnSimpanClick
-    SkinData.SkinSection = 'BUTTON'
   end
-  object gb3: TsGroupBox
+  object gb3: TGroupBox
     Left = 8
     Top = 120
     Width = 617
     Height = 129
     Caption = 'Struk'
     TabOrder = 3
-    SkinData.SkinSection = 'GROUPBOX'
-    object Lbl1: TsLabel
+    object Lbl1: TLabel
       Left = 16
       Top = 16
       Width = 105
       Height = 13
       Caption = 'Jenis Dan Lebar Struk'
     end
-    object Lbl2: TsLabel
+    object Lbl2: TLabel
       Left = 16
       Top = 48
       Width = 91
@@ -281,7 +264,6 @@ object FSetting: TFSetting
       Height = 21
       Style = csDropDownList
       Color = 14672870
-      ItemHeight = 13
       TabOrder = 0
       Items.Strings = (
         'Struk Kecil'
@@ -293,7 +275,6 @@ object FSetting: TFSetting
       Width = 41
       Height = 21
       Color = 14672870
-      ItemHeight = 13
       TabOrder = 1
       Items.Strings = (
         '30'

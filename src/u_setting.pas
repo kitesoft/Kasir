@@ -9,11 +9,11 @@ uses
 
 type
   TFSetting = class(TForm)
-    gb1: TsGroupBox;
-    EdSkin: TsEdit;
-    TbHue: TsTrackBar;
-    TbSaturation: TsTrackBar;
-    gb2: TsGroupBox;
+    gb1: TGroupBox;
+    EdSkin: TEdit;
+    TbHue: TTrackBar;
+    TbSaturation: TTrackBar;
+    gb2: TGroupBox;
     cbFontName: TComboBox;
     crb_bg: TColorBox;
     cbsize: TComboBox;
@@ -26,14 +26,14 @@ type
     btnUnderline: TToolButton;
     SbPesan: TsSpeedButton;
     SbSkin: TsSpeedButton;
-    BtnSimpan: TsButton;
-    gb3: TsGroupBox;
+    BtnSimpan: TButton;
+    gb3: TGroupBox;
     cb_jenis_struk: TComboBox;
     cb_lebar_struk: TComboBox;
-    Lbl1: TsLabel;
-    Lbl2: TsLabel;
+    Lbl1: TLabel;
+    Lbl2: TLabel;
     ed_tambahan: TEdit;
-    Lbl3: TsLabel;
+    Lbl3: TLabel;
     MmFooterStruk: TMemo;
     ChkDesign: TCheckBox;
     procedure TbHueChange(Sender: TObject);
