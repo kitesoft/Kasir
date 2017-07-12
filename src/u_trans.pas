@@ -526,6 +526,7 @@ end;
 procedure TF_Transaksi.input_kode;
 var
   kode_temp, LSql: string;
+  hpp_jual, harga_jual, laba: Currency;
 begin
   if kode_barang = '' then
   begin
@@ -582,6 +583,19 @@ begin
       'Harga 1' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual1').asstring + sLineBreak +
       'Harga 2' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual2').asstring + sLineBreak +
       'Harga 3' +#9+ ': ' + dm.Q_show.fieldbyname('harga_jual3').asstring);
+    Exit;
+  end;
+  hpp_jual := dm.Q_show.FieldByName('harga_pokok').AsCurrency;
+  harga_jual := dm.Q_show.FieldByName('harga_jual3').AsCurrency;
+  laba := harga_jual - hpp_jual;
+
+  if (laba < 0) then
+  begin
+    Ed_Code.Clear;
+
+    MessageBox(0, 'LABA BARANG MINUS, ' + #13 + #10 +
+      'Hubungi Admin Barang untuk Memperbaiki Barang ini!!!' + #13 + #10 + '', '',
+      MB_ICONWARNING or MB_OK);
     Exit;
   end;
 
