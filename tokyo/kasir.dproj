@@ -46,15 +46,16 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Build>1</VerInfo_Build>
         <SanitizedProjectName>kasir</SanitizedProjectName>
-        <VerInfo_Keys>CompanyName=Gain-Profit;FileDescription=$(MSBuildProjectName);FileVersion=17.4.23.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Release>23</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=Gain-Profit;FileDescription=$(MSBuildProjectName);FileVersion=17.7.13.1;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Release>13</VerInfo_Release>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>17</VerInfo_MajorVer>
-        <VerInfo_MinorVer>4</VerInfo_MinorVer>
+        <VerInfo_MinorVer>7</VerInfo_MinorVer>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
@@ -84,6 +85,7 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Icon_MainIcon>..\img\icon.ico</Icon_MainIcon>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -95,6 +97,7 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Icon_MainIcon>..\img\icon.ico</Icon_MainIcon>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
@@ -102,50 +105,40 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="..\..\tools\pascal\UTerbilang.pas"/>
         <DCCReference Include="..\src\u_bayar.pas">
             <Form>F_Bayar</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_cari.pas">
             <Form>f_cari</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_cariBarang.pas">
             <Form>f_cariBarang</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_dm.pas">
             <Form>dm</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\src\u_hari.pas">
             <Form>f_hari</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_list_jual.pas">
             <Form>f_list_sales</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\U_Login.pas">
             <Form>F_Login</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_ReturnJual.pas">
             <Form>f_returnJual</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_setting.pas">
             <Form>FSetting</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\u_trans.pas">
             <Form>F_Transaksi</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\U_ubah_satuan.pas">
             <Form>F_Ubah_Satuan</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\tools\pascal\UFungsi.pas"/>
         <BuildConfiguration Include="Release">
