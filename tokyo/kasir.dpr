@@ -2,6 +2,7 @@ program kasir;
 
 uses
   Vcl.Forms,
+  UTerbilang in '..\..\tools\pascal\UTerbilang.pas',
   u_bayar in '..\src\u_bayar.pas' {F_Bayar},
   u_cari in '..\src\u_cari.pas' {f_cari},
   u_cariBarang in '..\src\u_cariBarang.pas' {f_cariBarang},
